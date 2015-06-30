@@ -3,9 +3,19 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 @import "hover";
+@import "simple-line-icons.min";
+@import "uniform.default";
+@import "login";
+@import "components";
+@import "plugins";
+@import "layout";
+@import "darkblue";
+@import "custom";
+
 
 // Variables
 $lato: 'Lato', sans-serif;
+$navy: #154067;
 
 // Table of Contents
 // 1. Global
@@ -29,6 +39,7 @@ $lato: 'Lato', sans-serif;
 
 // 1. Global
 
+body {background-color: #f7f7f7;}
 h1, h2, h3, h4, h5, h6, p, a {font-family: $lato;}
 
 .vertical-align {
@@ -60,6 +71,7 @@ h1, h2, h3, h4, h5, h6, p, a {font-family: $lato;}
   border-width: inherit;
   position: inherit;
   width: inherit;
+  background-color: white;
   .navi-links {
     color: #363636;
     text-transform: uppercase;
@@ -133,3 +145,6 @@ h1, h2, h3, h4, h5, h6, p, a {font-family: $lato;}
 .setup {
   background: #f7f7f7;
 }
+.login .content h3 {color:#154067;}
+.login .btn-success, .btn-success:active:hover, .btn-success.active:hover {color: #fff;background-color: #154067;border-color: #154067;}
+.login .content .form-actions .btn-default:hover {background-color: #fafaff;color: $navy;}

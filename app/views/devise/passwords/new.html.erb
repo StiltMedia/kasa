@@ -1,16 +1,27 @@
-<h2>Forgot your password?</h2>
+<% navigation render 'navigation/interior' %>
+<% body_class 'login' %>
 
-<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
-  <%= devise_error_messages! %>
+<div class="logo">
+  <%= link_to (image_tag 'https://s3-us-west-2.amazonaws.com/kasa-dev/images/Kasa.svg', class: 'img-responsive', alt: 'Kasa'), root_path %>
+</div>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true %>
-  </div>
+<div class="content">
+  <h3>Forget Password ?</h3>
+  <p>Enter your e-mail address below to reset your password.</p>
+  <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+    <% unless devise_error_messages!.empty? %>
+      <div class="alert alert-danger">
+        <span><%= devise_error_messages! %></span>
+      </div>
+    <% end %>
 
-  <div class="actions">
-    <%= f.submit "Send me reset password instructions" %>
-  </div>
-<% end %>
+    <div class="form-group">
+      <%= f.email_field :email, class: 'form-control placeholder-no-fix', placeholder: 'Email' %>
+    </div>
 
-<%= render "devise/shared/links" %>
+    <div class="form-actions">
+      <%= link_to 'Back', new_user_session_path, class: 'btn btn-default' %>
+      <%= f.submit "Submit", class: 'btn btn-success uppercase pull-right' %>
+    </div>
+  <% end %>
+</div>
