@@ -1,2 +1,135 @@
+@import url(http://fonts.googleapis.com/css?family=Lato:100,300,400,700);
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,600,700,300);
 @import "bootstrap-sprockets";
-@import "bootstrap"
+@import "bootstrap";
+@import "hover";
+
+// Variables
+$lato: 'Lato', sans-serif;
+
+// Table of Contents
+// 1. Global
+// 2. Navigation
+// 3. Home
+// 4. Sign up | Login
+
+
+// Where the fun Starts!!!!!
+//         *****
+//         *****
+//         *****
+//         *****
+//         *****
+//         *****
+//       *********
+//         *****
+//          ***
+//           *
+
+
+// 1. Global
+
+h1, h2, h3, h4, h5, h6, p, a {font-family: $lato;}
+
+.vertical-align {
+  display: flex;
+  flex-direction: row;
+}
+
+.vertical-align > [class^="col-"],
+.vertical-align > [class*=" col-"] {
+  display: flex;
+  align-items: center;     /* Align the flex-items vertically */
+  // justify-content: center;
+  /* Optional, to align inner flex-items
+                              horizontally within the column  */
+}
+
+// 2. Navigation
+
+.navbar-brand {
+  height: auto;
+  width:200px;
+}
+.navbar-static-top {
+  border-width: 0;
+  position: absolute;
+  width: 100%;
+}
+.interior.navbar-static-top {
+  border-width: inherit;
+  position: inherit;
+  width: inherit;
+  .navi-links {
+    color: #363636;
+    text-transform: uppercase;
+    margin: 0 10px;
+    font-weight: 300;
+    font-size: 18px;
+    // &:hover, &:active, &:focus {text-decoration: none; color:white;}
+  }
+  .activo {
+    background: #154067;
+    padding: 3px 15px;
+    color: white;
+  }
+}
+.navi-links {
+  color: white;
+  text-transform: uppercase;
+  margin: 0 10px;
+  font-weight: 300;
+  font-size: 18px;
+  &:hover, &:active, &:focus {text-decoration: none; color:white;}
+}
+
+.navbar {
+  margin-bottom: 0px;
+  .pull-right {width:100%;text-align:right;}
+}
+
+// 3. Home
+
+.home-intro {
+  height: 100vh;
+  width: 100%;
+  position: relative;
+  background: url('https://s3-us-west-2.amazonaws.com/kasa-dev/images/kasa-home.jpg');
+  background-position: center center;
+  background-size: cover;
+  h1 {
+    color: white;
+    font-weight: 400;
+    text-align: center;
+    font-size: 60px;
+  }
+  p {text-align: center;color:white;font-weight: 300;font-size: 20px;}
+  .get-started-btn {margin: 40px auto 0; width:100%; text-align: center;}
+  .btn-center {width: 100%;border: solid 1px white;padding: 10px 0;text-transform: uppercase;text-decoration: none;color: white;}
+  .hvr-sweep-to-bottom:hover, .hvr-sweep-to-bottom:focus, .hvr-sweep-to-bottom:active {color: black !important;}
+  .hvr-sweep-to-bottom:before {background: white;}
+  .v-center {position: absolute;top:0;bottom: 0;left: 0;right: 0;margin: auto;height: 40%;}
+  @media (max-width: 767px) {.btn-center{margin: 5px 0;}}
+  @media (max-width: 767px) {
+    .v-center{height: 60%;}
+    h1 {font-size: 40px;}
+    p {font-size: 15px;}
+  }
+}
+@media (max-width: 736px) {
+  .home-intro {
+    height: auto;
+    min-height: 100vh;
+  }
+}
+@media (max-height: 320px) {
+  .home-intro {
+    min-height: 120vh;
+  }
+}
+
+// 4. Sign up | Login
+
+.setup {
+  background: #f7f7f7;
+}
