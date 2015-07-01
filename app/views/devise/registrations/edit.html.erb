@@ -1,39 +1,71 @@
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
+<% navigation render 'navigation/interior' %>
+<% body_class 'login' %>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-  <%= devise_error_messages! %>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true %>
-  </div>
+<div class="logo">
+  <%= link_to (image_tag 'https://s3-us-west-2.amazonaws.com/kasa-dev/images/Kasa.svg', class: 'img-responsive', alt: 'Kasa'), root_path %>
+</div>
 
-  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+<div class="content">
+  <h3>Hello!</h3>
+  <p class="hint" style="text-align:center;">
+     Contact us if you need any special assistance
+  </p>
+  <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+    <% if notice %>
+      <p class="alert alert-success"><%= notice %></p>
+    <% end %>
+    <% unless devise_error_messages!.empty? %>
+      <div class="alert alert-danger">
+        <span><%= devise_error_messages! %></span>
+      </div>
+    <% end %>
+    <div class="form-group">
+      <label class="control-label visible-ie8 visible-ie9">Full Name</label>
+      <%= f.text_field :name, class: 'form-control placeholder-no-fix', placeholder: 'Full Name' %>
+    </div>
+    <div class="form-group">
+      <!--ie8, ie9 does not support html5 placeholder, so we just show field title for that-->
+      <label class="control-label visible-ie8 visible-ie9">Email</label>
+      <%= f.email_field :email, class: 'form-control placeholder-no-fix', placeholder: 'Email' %>
+    </div>
+    <div class="form-group">
+      <!--ie8, ie9 does not support html5 placeholder, so we just show field title for that-->
+      <label class="control-label visible-ie8 visible-ie9">Your Phone Number</label>
+      <%= f.text_field :phone, class: 'form-control placeholder-no-fix', placeholder: 'Your Phone Number' %>
+    </div>
+
+    <div class="form-group">
+      <label class="control-label visible-ie8 visible-ie9">Password</label>
+      <%= f.password_field :password, class: 'form-control placeholder-no-fix', placeholder: 'Password' %>
+    </div>
+    <div class="form-group">
+      <label class="control-label visible-ie8 visible-ie9">Re-type Your Password</label>
+      <%= f.password_field :password_confirmation, class: 'form-control placeholder-no-fix', placeholder: 'Re-type Your Password' %>
+    </div>
+    <p class="hint" style="text-align:center;">
+       Must confirm your current password to change password
+    </p>
+    <div class="form-group">
+      <label class="control-label visible-ie8 visible-ie9">Current Password?</label>
+      <%= f.password_field :current_password, class: 'form-control placeholder-no-fix', placeholder: 'Current Password?' %>
+    </div>
+
+    <div class="form-actions">
+      <%= link_to "Back", root_path, class: 'btn btn-default' %>
+      <%= f.submit "Update", class: 'btn btn-success uppercase pull-right' %>
+    </div>
+
   <% end %>
 
-  <div class="field">
-    <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
-    <%= f.password_field :password, autocomplete: "off" %>
-  </div>
+</div>
+<div class="copyright">
+	 2015 © Kasa.
+</div>
 
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "off" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
-    <%= f.password_field :current_password, autocomplete: "off" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Update" %>
-  </div>
-<% end %>
-
-<h3>Cancel my account</h3>
+<%#h3>Cancel my account</h3>
 
 <p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
 
-<%= link_to "Back", :back %>
+<%# link_to "Back", :back %>
+<%# link_to "Logout", destroy_user_session_path, method: :delete, class: 'btn btn-default' %>
