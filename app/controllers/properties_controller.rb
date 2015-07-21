@@ -51,6 +51,14 @@ class PropertiesController < ApplicationController
   def update
     respond_to do |format|
       if @property.update(property_params)
+
+        if params[:images]
+          #===== The magic is here ;)
+          params[:images].each { |image|
+            @property.images.create(image: image)
+          }
+        end
+
         format.html { redirect_to @property, notice: 'Property was successfully updated.' }
         format.json { render :show, status: :ok, location: @property }
       else

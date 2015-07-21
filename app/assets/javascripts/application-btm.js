@@ -8,4 +8,3 @@
 //= require layout
 //= require demo
 //= require login
-//= require owl.carousel.min.js
