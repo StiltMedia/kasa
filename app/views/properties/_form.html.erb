@@ -61,7 +61,7 @@
   </div>
   <div class="field">
     <%= f.label :property_type %><br>
-    <%= f.text_field :property_type %>
+    <%= f.select :property_type, collection: ["Home","Multi-Family","Apartment","Land"] %>
   </div>
   <div class="field">
     <%= f.label :last_update_description %><br>

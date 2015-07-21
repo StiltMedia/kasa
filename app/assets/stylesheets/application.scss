@@ -24,6 +24,7 @@ $navy: #154067;
 // 2. Navigation
 // 3. Home
 // 4. Sign up | Login
+// Property Show Page
 
 
 // Where the fun Starts!!!!!
@@ -150,3 +151,17 @@ h1, h2, h3, h4, h5, h6, p, a {font-family: $lato;}
 .login .content h3 {color:#154067;}
 .login .btn-success, .btn-success:active:hover, .btn-success.active:hover {color: #fff;background-color: #154067;border-color: #154067;}
 .login .content .form-actions .btn-default:hover {background-color: #fafaff;color: $navy;}
+
+
+// Property Show Page
+
+.property-show-page {
+  background: white;
+
+  h3 {
+    margin-top: 15px;
+    margin-bottom: 15px;
+    font-weight: 400;
+  }
+
+}

@@ -1,3 +1,17 @@
+<% navigation render 'navigation/interior' %>
+<% body_class 'property-show-page' %>
+
+<section class="full-address">
+  <div class="contianer-fluid">
+    <div class="row">
+      <div class="col-sm-10 col-sm-offset-1">
+        <h3><%= @property.street_number %> <%= @property.street_name %>, <%= @property.city %>, FL <%= @property.zip %></h3>
+      </div>
+    </div>
+  </div>  
+</section>
+
+
 <div class="container-fluid">
   <div class="row">
     <div class="col-sm-12" style="padding:0;">
