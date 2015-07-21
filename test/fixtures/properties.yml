@@ -1,0 +1,63 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  mls_listing_number: MyString
+  mls_name: MyString
+  mls_sources: MyString
+  mls_date_added: 2015-07-21
+  mls_date_modified: 2015-07-21
+  street_number: 1
+  street_name: MyString
+  unit_number: MyString
+  city: MyString
+  zip: 1
+  location: MyString
+  full_address: MyString
+  property_type: MyString
+  last_update_description: MyText
+  short_last_update_description: MyText
+  status: MyString
+  current_list_price: 9.99
+  sold_price: 9.99
+  sqft: 9.99
+  sqft_price: 9.99
+  lot_sqft: 9.99
+  year_built: 1
+  listing_office: MyString
+  condition: MyString
+  bedrooms: 1
+  half_bathrooms: 9.99
+  full_bathrooms: 1
+  favorited: 1
+  fake_favorited: 1
+
+two:
+  mls_listing_number: MyString
+  mls_name: MyString
+  mls_sources: MyString
+  mls_date_added: 2015-07-21
+  mls_date_modified: 2015-07-21
+  street_number: 1
+  street_name: MyString
+  unit_number: MyString
+  city: MyString
+  zip: 1
+  location: MyString
+  full_address: MyString
+  property_type: MyString
+  last_update_description: MyText
+  short_last_update_description: MyText
+  status: MyString
+  current_list_price: 9.99
+  sold_price: 9.99
+  sqft: 9.99
+  sqft_price: 9.99
+  lot_sqft: 9.99
+  year_built: 1
+  listing_office: MyString
+  condition: MyString
+  bedrooms: 1
+  half_bathrooms: 9.99
+  full_bathrooms: 1
+  favorited: 1
+  fake_favorited: 1

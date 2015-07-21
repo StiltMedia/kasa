@@ -1,0 +1,133 @@
+<%= form_for(@property) do |f| %>
+  <% if @property.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@property.errors.count, "error") %> prohibited this property from being saved:</h2>
+
+      <ul>
+      <% @property.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :mls_listing_number %><br>
+    <%= f.text_field :mls_listing_number %>
+  </div>
+  <div class="field">
+    <%= f.label :mls_name %><br>
+    <%= f.text_field :mls_name %>
+  </div>
+  <div class="field">
+    <%= f.label :mls_sources %><br>
+    <%= f.text_field :mls_sources %>
+  </div>
+  <div class="field">
+    <%= f.label :mls_date_added %><br>
+    <%= f.date_select :mls_date_added %>
+  </div>
+  <div class="field">
+    <%= f.label :mls_date_modified %><br>
+    <%= f.date_select :mls_date_modified %>
+  </div>
+  <div class="field">
+    <%= f.label :street_number %><br>
+    <%= f.number_field :street_number %>
+  </div>
+  <div class="field">
+    <%= f.label :street_name %><br>
+    <%= f.text_field :street_name %>
+  </div>
+  <div class="field">
+    <%= f.label :unit_number %><br>
+    <%= f.text_field :unit_number %>
+  </div>
+  <div class="field">
+    <%= f.label :city %><br>
+    <%= f.text_field :city %>
+  </div>
+  <div class="field">
+    <%= f.label :zip %><br>
+    <%= f.number_field :zip %>
+  </div>
+  <div class="field">
+    <%= f.label :location %><br>
+    <%= f.text_field :location %>
+  </div>
+  <div class="field">
+    <%= f.label :full_address %><br>
+    <%= f.text_field :full_address %>
+  </div>
+  <div class="field">
+    <%= f.label :property_type %><br>
+    <%= f.text_field :property_type %>
+  </div>
+  <div class="field">
+    <%= f.label :last_update_description %><br>
+    <%= f.text_area :last_update_description %>
+  </div>
+  <div class="field">
+    <%= f.label :short_last_update_description %><br>
+    <%= f.text_area :short_last_update_description %>
+  </div>
+  <div class="field">
+    <%= f.label :status %><br>
+    <%= f.text_field :status %>
+  </div>
+  <div class="field">
+    <%= f.label :current_list_price %><br>
+    <%= f.text_field :current_list_price %>
+  </div>
+  <div class="field">
+    <%= f.label :sold_price %><br>
+    <%= f.text_field :sold_price %>
+  </div>
+  <div class="field">
+    <%= f.label :sqft %><br>
+    <%= f.text_field :sqft %>
+  </div>
+  <div class="field">
+    <%= f.label :sqft_price %><br>
+    <%= f.text_field :sqft_price %>
+  </div>
+  <div class="field">
+    <%= f.label :lot_sqft %><br>
+    <%= f.text_field :lot_sqft %>
+  </div>
+  <div class="field">
+    <%= f.label :year_built %><br>
+    <%= f.number_field :year_built %>
+  </div>
+  <div class="field">
+    <%= f.label :listing_office %><br>
+    <%= f.text_field :listing_office %>
+  </div>
+  <div class="field">
+    <%= f.label :condition %><br>
+    <%= f.text_field :condition %>
+  </div>
+  <div class="field">
+    <%= f.label :bedrooms %><br>
+    <%= f.number_field :bedrooms %>
+  </div>
+  <div class="field">
+    <%= f.label :half_bathrooms %><br>
+    <%= f.text_field :half_bathrooms %>
+  </div>
+  <div class="field">
+    <%= f.label :full_bathrooms %><br>
+    <%= f.number_field :full_bathrooms %>
+  </div>
+  <div class="field">
+    <%= f.label :favorited %><br>
+    <%= f.number_field :favorited %>
+  </div>
+  <div class="field">
+    <%= f.label :fake_favorited %><br>
+    <%= f.number_field :fake_favorited %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
