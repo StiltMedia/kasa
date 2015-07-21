@@ -164,4 +164,15 @@ h1, h2, h3, h4, h5, h6, p, a {font-family: $lato;}
     font-weight: 400;
   }
 
+  .navbar {border-bottom: #e0e0e0 solid 1px;}
+
+  .property-features {
+    padding: 20px;
+
+    .features {
+      background-color: white;
+    }
+  }
+
+
 }

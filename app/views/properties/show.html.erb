@@ -1,6 +1,6 @@
 <% navigation render 'navigation/interior' %>
 <% body_class 'property-show-page' %>
-
+<!-- <p id="notice"><%= notice %></p> -->
 <section class="full-address">
   <div class="contianer-fluid">
     <div class="row">
@@ -8,7 +8,7 @@
         <h3><%= @property.street_number %> <%= @property.street_name %>, <%= @property.city %>, FL <%= @property.zip %></h3>
       </div>
     </div>
-  </div>  
+  </div>
 </section>
 
 
@@ -25,7 +25,6 @@
 </div>
 
 <script type="text/javascript">
-
     $(".owl-carousel").owlCarousel({
         afterUpdate: function () {
             updateSize();
@@ -49,50 +48,48 @@
         });
         $('.owl-wrapper-outer').css('height',minHeight+'px');
     }
-
 </script>
 
 
-<p id="notice"><%= notice %></p>
-<p>
-  <strong>Mls listing number:</strong>
-  <%= @property.mls_listing_number %>
-</p>
+<section class="property-info">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-10 col-sm-offset-1">
+        <div class="col-sm-8">
+          <div class="address">
+            <h2><%= @property.full_address %>
+              <% unless @property.unit_number.blank? %>
+                , Unit#<%= @property.unit_number %>
+              <% end %>
+              <br>
+              <%= @property.city %>, FL <%= @property.zip %></h2>
+          </div>
+          <div class="property-description">
+            <p><%= raw @property.description %></p>
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <div class="property-box" style="background:#f7f7f7;">
+            <div class="property-type">
+              <p><strong>Property type:</strong> <span><i class="fa fa-home"></i></span> <%= @property.property_type %></p>
+            </div>
+            <div class="property-features">
+              <div class="features">
+                <ul>
+                  <li><img src="https://s3-us-west-2.amazonaws.com/kasa-dev/images/property-icons/bedroom.png" alt="Bedrooms" /></li>
+                  <li><img src="https://s3-us-west-2.amazonaws.com/kasa-dev/images/property-icons/bathroom.png" alt="Bathroom" /></li>
+                  <li><img src="https://s3-us-west-2.amazonaws.com/kasa-dev/images/property-icons/garage.png" alt="Garage" /></li>
+                </ul>
+              </div>
+            </div>
 
-<p>
-  <strong>Mls name:</strong>
-  <%= @property.mls_name %>
-</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-<p>
-  <strong>Mls sources:</strong>
-  <%= @property.mls_sources %>
-</p>
-
-<p>
-  <strong>Mls date added:</strong>
-  <%= @property.mls_date_added %>
-</p>
-
-<p>
-  <strong>Mls date modified:</strong>
-  <%= @property.mls_date_modified %>
-</p>
-
-<p>
-  <strong>Street number:</strong>
-  <%= @property.street_number %>
-</p>
-
-<p>
-  <strong>Street name:</strong>
-  <%= @property.street_name %>
-</p>
-
-<p>
-  <strong>Unit number:</strong>
-  <%= @property.unit_number %>
-</p>
 
 <p>
   <strong>City:</strong>
@@ -109,25 +106,11 @@
   <%= @property.location %>
 </p>
 
-<p>
-  <strong>Full address:</strong>
-  <%= @property.full_address %>
-</p>
 
-<p>
-  <strong>Property type:</strong>
-  <%= @property.property_type %>
-</p>
 
-<p>
-  <strong>Last update description:</strong>
-  <%= @property.last_update_description %>
-</p>
 
-<p>
-  <strong>Short last update description:</strong>
-  <%= @property.short_last_update_description %>
-</p>
+
+
 
 <p>
   <strong>Status:</strong>

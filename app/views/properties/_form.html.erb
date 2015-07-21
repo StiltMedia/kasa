@@ -12,26 +12,6 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :mls_listing_number %><br>
-    <%= f.text_field :mls_listing_number %>
-  </div>
-  <div class="field">
-    <%= f.label :mls_name %><br>
-    <%= f.text_field :mls_name %>
-  </div>
-  <div class="field">
-    <%= f.label :mls_sources %><br>
-    <%= f.text_field :mls_sources %>
-  </div>
-  <div class="field">
-    <%= f.label :mls_date_added %><br>
-    <%= f.date_select :mls_date_added %>
-  </div>
-  <div class="field">
-    <%= f.label :mls_date_modified %><br>
-    <%= f.date_select :mls_date_modified %>
-  </div>
-  <div class="field">
     <%= f.label :street_number %><br>
     <%= f.number_field :street_number %>
   </div>
@@ -64,12 +44,12 @@
     <%= f.select :property_type, collection: ["Home","Multi-Family","Apartment","Land"] %>
   </div>
   <div class="field">
-    <%= f.label :last_update_description %><br>
-    <%= f.text_area :last_update_description %>
+    <%= f.label :short_description %><br>
+    <%= f.text_area :short_description %>
   </div>
   <div class="field">
-    <%= f.label :short_last_update_description %><br>
-    <%= f.text_area :short_last_update_description %>
+    <%= f.label :description %><br>
+    <%= f.text_area :description %>
   </div>
   <div class="field">
     <%= f.label :status %><br>
