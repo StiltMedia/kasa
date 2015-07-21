@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150721145727) do
+ActiveRecord::Schema.define(version: 20150721153727) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -48,6 +48,14 @@ ActiveRecord::Schema.define(version: 20150721145727) do
     t.integer  "fake_favorited"
     t.datetime "created_at",                    null: false
     t.datetime "updated_at",                    null: false
+    t.string   "featured_file_name"
+    t.string   "featured_content_type"
+    t.integer  "featured_file_size"
+    t.datetime "featured_updated_at"
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
   end
 
   add_index "properties", ["full_address"], name: "index_properties_on_full_address", unique: true, using: :btree
