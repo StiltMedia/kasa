@@ -26,6 +26,8 @@ class Image < ActiveRecord::Base
 
   validates_attachment_content_type :image, :content_type => ["image/jpg", "image/jpeg", "image/png", "image/gif"]
 
+  process_in_background :image
+
 
 
   def s3_credentials

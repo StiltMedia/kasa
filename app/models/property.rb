@@ -26,6 +26,14 @@ class Property < ActiveRecord::Base
 
   validates_attachment_content_type :featured, :content_type => ["image/jpg", "image/jpeg", "image/png", "image/gif"]
 
+  process_in_background :featured
+
+
+  def url
+    {:url => ':s3_domain_url'}
+  end
+
+
 
 
   def s3_credentials

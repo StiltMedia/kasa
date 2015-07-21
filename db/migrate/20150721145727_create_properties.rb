@@ -33,7 +33,7 @@ class CreateProperties < ActiveRecord::Migration
 
       t.timestamps null: false
     end
-    add_index :properties, :mls_listing_number, unique: true
+    # add_index :properties, :mls_listing_number, unique: true
     add_index :properties, :full_address, unique: true
   end
 end

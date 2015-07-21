@@ -48,6 +48,7 @@ gem 'sidekiq'
 gem 'awesome_print', '~> 1.6.1'
 gem "rack-timeout"
 gem 'paperclip', '~> 4.2.1'
+gem 'delayed_paperclip'
 gem 'aws-sdk', '< 2.0'
 gem "figaro"
 

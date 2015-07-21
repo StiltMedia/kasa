@@ -1,5 +1,4 @@
 <p id="notice"><%= notice %></p>
-
 <p>
   <strong>Mls listing number:</strong>
   <%= @property.mls_listing_number %>
@@ -144,6 +143,17 @@
   <strong>Fake favorited:</strong>
   <%= @property.fake_favorited %>
 </p>
+
+<%= @property.images.each do |img| %>
+  <%= image_tag img.image(:original) %>
+<% end %>
+
+
+<%= image_tag @property.featured.url(:original) %>
+
+
+
+
 
 <%= link_to 'Edit', edit_property_path(@property) %> |
 <%= link_to 'Back', properties_path %>

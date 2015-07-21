@@ -66,7 +66,6 @@ ActiveRecord::Schema.define(version: 20150721171114) do
   end
 
   add_index "properties", ["full_address"], name: "index_properties_on_full_address", unique: true, using: :btree
-  add_index "properties", ["mls_listing_number"], name: "index_properties_on_mls_listing_number", unique: true, using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
