@@ -11,10 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150721153727) do
+ActiveRecord::Schema.define(version: 20150721171114) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "images", force: :cascade do |t|
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
+    t.integer  "property_id"
+  end
 
   create_table "properties", force: :cascade do |t|
     t.string   "mls_listing_number"
@@ -52,10 +62,7 @@ ActiveRecord::Schema.define(version: 20150721153727) do
     t.string   "featured_content_type"
     t.integer  "featured_file_size"
     t.datetime "featured_updated_at"
-    t.string   "image_file_name"
-    t.string   "image_content_type"
-    t.integer  "image_file_size"
-    t.datetime "image_updated_at"
+    t.integer  "image_id"
   end
 
   add_index "properties", ["full_address"], name: "index_properties_on_full_address", unique: true, using: :btree

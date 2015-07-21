@@ -1,7 +1,7 @@
-class Property < ActiveRecord::Base
-  has_many :images, :dependent => :destroy
+class Image < ActiveRecord::Base
+  belongs_to :property
 
-  has_attached_file :featured,
+  has_attached_file :image,
   :storage => :s3,
   :s3_credentials => Proc.new{|a| a.instance.s3_credentials },
   # :path => ":rails_root/public/system/:attachment/:id/:basename_:style.:extension",
@@ -24,7 +24,7 @@ class Property < ActiveRecord::Base
     :retina   => '-set colorspace sRGB -strip -sharpen 0x0.5'
   }
 
-  validates_attachment_content_type :featured, :content_type => ["image/jpg", "image/jpeg", "image/png", "image/gif"]
+  validates_attachment_content_type :image, :content_type => ["image/jpg", "image/jpeg", "image/png", "image/gif"]
 
 
 

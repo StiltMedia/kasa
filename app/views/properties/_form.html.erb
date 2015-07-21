@@ -127,6 +127,16 @@
     <%= f.label :fake_favorited %><br>
     <%= f.number_field :fake_favorited %>
   </div>
+  <div class="field">
+    <%= f.label :featured %><br>
+    <%= f.file_field :featured %>
+  </div>
+  <br>
+  <p>
+    tu madre
+  </p>
+  <%= file_field_tag "images[]", type: :file, multiple: true %>
+
   <div class="actions">
     <%= f.submit %>
   </div>
