@@ -99,6 +99,25 @@
     <%= f.label :full_bathrooms %><br>
     <%= f.number_field :full_bathrooms %>
   </div>
+  <div class="">
+    <%= f.label :has_garage %><br>
+    <%= f.check_box :has_garage %><br>
+  </div>
+
+  <script type="text/javascript">
+    $(document).ready(function(){
+        $('input[name="property[has_garage]"]').click(function(){
+            if($(this).attr("value")=="1"){
+                $("#property_garage_size").toggle();
+            }
+        });
+    });
+  </script>
+  
+  <div class="field" id="property_garage_size" style="display:none;">
+    <%= f.label :garage_size %><br>
+    <%= f.number_field :garage_size %>
+  </div>
   <div class="field">
     <%= f.label :favorited %><br>
     <%= f.number_field :favorited %>

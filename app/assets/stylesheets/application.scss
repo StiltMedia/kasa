@@ -157,20 +157,46 @@ h1, h2, h3, h4, h5, h6, p, a {font-family: $lato;}
 
 .property-show-page {
   background: white;
+  overflow-x: hidden;
 
   h3 {
     margin-top: 15px;
     margin-bottom: 15px;
     font-weight: 400;
   }
-
   .navbar {border-bottom: #e0e0e0 solid 1px;}
+  .property-info {
+    padding: 70px 0;
+    h2 {margin-top: 0;margin-bottom: 50px;font-weight: 400;}
+  }
+  .property-description {
+    font-size: 13px;
+    font-weight: 300;
+    line-height: 25px;
+  }
 
+  .property-box {
+    background: #f7f7f7;
+    padding: 30px 35px;
+  }
   .property-features {
-    padding: 20px;
+    width: 100%;
 
     .features {
       background-color: white;
+      ul {
+        padding: 20px;
+        list-style-type: none;
+        text-align: center;
+      }
+      li {display: inline-block;}
+
+      img {
+        max-width: 50px;
+        margin: 0 10px;
+      }
+      .first {margin: 0 10px 0 0}
+
     }
   }
 

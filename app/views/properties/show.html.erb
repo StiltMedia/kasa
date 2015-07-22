@@ -69,16 +69,16 @@
           </div>
         </div>
         <div class="col-sm-4">
-          <div class="property-box" style="background:#f7f7f7;">
+          <div class="property-box">
             <div class="property-type">
               <p><strong>Property type:</strong> <span><i class="fa fa-home"></i></span> <%= @property.property_type %></p>
             </div>
             <div class="property-features">
               <div class="features">
                 <ul>
-                  <li><img src="https://s3-us-west-2.amazonaws.com/kasa-dev/images/property-icons/bedroom.png" alt="Bedrooms" /></li>
-                  <li><img src="https://s3-us-west-2.amazonaws.com/kasa-dev/images/property-icons/bathroom.png" alt="Bathroom" /></li>
-                  <li><img src="https://s3-us-west-2.amazonaws.com/kasa-dev/images/property-icons/garage.png" alt="Garage" /></li>
+                  <li><img class="first" src="https://s3-us-west-2.amazonaws.com/kasa-dev/images/property-icons/bedroom.png" alt="Bedrooms" /><%= @property.bedrooms %></li>
+                  <li><img src="https://s3-us-west-2.amazonaws.com/kasa-dev/images/property-icons/bathroom.png" alt="Bathroom" /><%= @property.full_bathrooms %><%= @property.half_bathrooms %></li>
+                  <li><img src="https://s3-us-west-2.amazonaws.com/kasa-dev/images/property-icons/garage.png" alt="Garage" /><% unless @property.has_garage == false %><%= @property.garage_size %><% end %></li>
                 </ul>
               </div>
             </div>
@@ -90,21 +90,6 @@
   </div>
 </section>
 
-
-<p>
-  <strong>City:</strong>
-  <%= @property.city %>
-</p>
-
-<p>
-  <strong>Zip:</strong>
-  <%= @property.zip %>
-</p>
-
-<p>
-  <strong>Location:</strong>
-  <%= @property.location %>
-</p>
 
 
 
@@ -157,20 +142,6 @@
   <%= @property.condition %>
 </p>
 
-<p>
-  <strong>Bedrooms:</strong>
-  <%= @property.bedrooms %>
-</p>
-
-<p>
-  <strong>Half bathrooms:</strong>
-  <%= @property.half_bathrooms %>
-</p>
-
-<p>
-  <strong>Full bathrooms:</strong>
-  <%= @property.full_bathrooms %>
-</p>
 
 <p>
   <strong>Favorited:</strong>
