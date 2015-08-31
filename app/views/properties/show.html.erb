@@ -71,16 +71,22 @@
         <div class="col-sm-4">
           <div class="property-box">
             <div class="property-type">
-              <p><strong>Property type:</strong> <span><i class="fa fa-home"></i></span> <%= @property.property_type %></p>
+              <p><span>Property type:</span> <span class="the-property"><i class="fa fa-home fa-1_5x"></i> <%= @property.property_type %></p></span>
             </div>
             <div class="property-features">
               <div class="features">
                 <ul>
                   <li><img class="first" src="https://s3-us-west-2.amazonaws.com/kasa-dev/images/property-icons/bedroom.png" alt="Bedrooms" /><%= @property.bedrooms %></li>
                   <li><img src="https://s3-us-west-2.amazonaws.com/kasa-dev/images/property-icons/bathroom.png" alt="Bathroom" /><%= @property.full_bathrooms %><%= @property.half_bathrooms %></li>
-                  <li><img src="https://s3-us-west-2.amazonaws.com/kasa-dev/images/property-icons/garage.png" alt="Garage" /><% unless @property.has_garage == false %><%= @property.garage_size %><% end %></li>
+                  <% unless @property.has_garage == false %>
+                    <li><img src="https://s3-us-west-2.amazonaws.com/kasa-dev/images/property-icons/garage.png" alt="Garage" /><%= @property.garage_size %></li>
+                  <% end %>
                 </ul>
               </div>
+            </div>
+            <div class="property-info">
+              <p><b>Other Features:</b></p>
+              <%= @property.year_built %>,
             </div>
 
           </div>
@@ -92,7 +98,7 @@
 
 
 
-
+<hr>
 
 
 

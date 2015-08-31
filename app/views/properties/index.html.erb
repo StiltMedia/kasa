@@ -73,7 +73,6 @@
         <td><%= property.favorited %></td>
         <td><%= property.fake_favorited %></td>
         <td><%= link_to 'Show', property %></td>
-        <td><%= link_to 'Edit', edit_property_path(property) %></td>
         <td><%= link_to 'Destroy', property, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
@@ -82,4 +81,4 @@
 
 <br>
 
-<%= link_to 'New Property', new_property_path %>
+<%# link_to 'New Property', new_property_path %>

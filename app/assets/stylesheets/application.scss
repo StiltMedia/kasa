@@ -59,6 +59,13 @@ h1, h2, h3, h4, h5, h6, p, a {font-family: $lato;}
                               horizontally within the column  */
 }
 
+.fa-2x {
+  font-size: 2em !important;
+}
+.fa-1_5x {
+  font-size: 1.5em !important;
+}
+
 // 2. Navigation
 
 .navbar-brand {
@@ -178,6 +185,18 @@ h1, h2, h3, h4, h5, h6, p, a {font-family: $lato;}
   .property-box {
     background: #f7f7f7;
     padding: 30px 35px;
+  }
+  .property-type {
+    margin-bottom: 20px;
+    span {
+      font-size: 20px;
+      font-weight: 400;
+      margin-right: 20px;
+    }
+    .the-property {
+      font-size: 15px;
+      font-weight: 300;
+    }
   }
   .property-features {
     width: 100%;
