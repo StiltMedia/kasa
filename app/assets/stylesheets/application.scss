@@ -66,6 +66,16 @@ h1, h2, h3, h4, h5, h6, p, a {font-family: $lato;}
   font-size: 1.5em !important;
 }
 
+.mt-10 {margin-top: 10px;}
+.mt-15 {margin-top: 15px;}
+.mt-20 {margin-top: 20px;}
+
+.mb-10 {margin-bottom: 10px;}
+
+.mr-15 {margin-right: 15px;}
+
+.k-blue {color:#154067}
+
 // 2. Navigation
 
 .navbar-brand {
@@ -176,6 +186,12 @@ h1, h2, h3, h4, h5, h6, p, a {font-family: $lato;}
     padding: 70px 0;
     h2 {margin-top: 0;margin-bottom: 50px;font-weight: 400;}
   }
+  .more-info {
+    h2 {margin-top: 10px;margin-bottom: 10px;font-weight: 400;}
+    p {color:#4e4e4e;}
+    .status {text-transform: uppercase;}
+    .sqft-price {font-size: 20px;font-weight: 300;}
+  }
   .property-description {
     font-size: 13px;
     font-weight: 300;
@@ -218,6 +234,35 @@ h1, h2, h3, h4, h5, h6, p, a {font-family: $lato;}
 
     }
   }
+}
+.create-an-offer {
+  background: #154067;
+  color: white;
+  width: 100%;
+  margin: 0;
+  text-align: center;
+  display: block;
+  padding: 15px 0;
+  transition: .2s all;
+  &:hover {color:#154067;background: white;text-decoration: none;}
+}
 
-
+.request-showing {
+  background: #555c6d;
+  color: white;
+  padding: 15px 0;
+  margin: 0;
+  display: block;
+  text-align: center;
+  width: 100%;
+  transition: .2s all;
+  &:hover {color:#555c6d;background: white;text-decoration: none;}
+}
+.request-info {
+  text-align: right;
+  color: #154067;
+  display: block;
+}
+.learn-more {
+  text-align: center;
 }

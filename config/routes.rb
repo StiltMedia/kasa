@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  mount RailsAdmin::Engine => '/kasa-admin', as: 'rails_admin'
   resources :properties, only: [:index, :show]
 
   # devise_for :users, path_names: {sign_in: "login", sign_out: "logout", sign_up: "setup"}

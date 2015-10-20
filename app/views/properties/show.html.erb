@@ -84,11 +84,56 @@
                 </ul>
               </div>
             </div>
-            <div class="property-info">
+            <div class="more-info">
               <p><b>Other Features:</b></p>
-              <%= @property.year_built %>,
+              <p>Built <%= @property.year_built %><% @property.features.each do |f| %>, <%= f.name %><% end %></p>
+              <p>
+                <a href="#" class="k-blue mr-15">Favorite</a>
+                <a href="#" class="k-blue">Share</a>
+              </p>
+              <hr>
+              <div class="row">
+                <div class="col-md-8">
+                  <h2><%= number_to_currency(@property.current_list_price, :unit => "$") %></h2>
+                  <p class="sqft-price"><%= number_to_currency((@property.current_list_price/@property.sqft), :unit => "$", :precision => 0) %>/sf</p>
+                </div>
+                <div class="col-md-4">
+                  <p class="status mt-15"><b><%= @property.status %></b></p>
+                  <p class="mt-15"><b><%= ((Time.zone.now - @property.created_at) / 3600).to_i.round %>hrs ago</b></p>
+                </div>
+              </div>
             </div>
 
+            <div class="mt-10"></div>
+
+            <div class="row">
+              <div class="col-sm-12">
+                <a href="#" class="create-an-offer">CREATE AN OFFER</a>
+              </div>
+            </div>
+
+            <div class="mt-10"></div>
+
+            <div class="row">
+              <div class="col-sm-12">
+                <a href="#" class="request-showing">REQUEST SHOWING</a>
+              </div>
+            </div>
+
+            <div class="mt-10"></div>
+
+            <div class="row">
+              <div class="col-sm-12">
+                <a href="#" class="request-info">Request More Info</a>
+              </div>
+            </div>
+
+            <div class="mt-20"></div>
+            <div class="row">
+              <div class="col-sm-12">
+                <p class="learn-more">Get a <b>$6,475</b> refund when you buy with KASA. <a href="#" class="k-blue">Learn more</a></p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -98,81 +143,10 @@
 
 
 
-<hr>
-
-
-
-
-<p>
-  <strong>Status:</strong>
-  <%= @property.status %>
-</p>
-
-<p>
-  <strong>Current list price:</strong>
-  <%= @property.current_list_price %>
-</p>
-
-<p>
-  <strong>Sold price:</strong>
-  <%= @property.sold_price %>
-</p>
-
-<p>
-  <strong>Sqft:</strong>
-  <%= @property.sqft %>
-</p>
-
-<p>
-  <strong>Sqft price:</strong>
-  <%= @property.sqft_price %>
-</p>
-
-<p>
-  <strong>Lot sqft:</strong>
-  <%= @property.lot_sqft %>
-</p>
-
-<p>
-  <strong>Year built:</strong>
-  <%= @property.year_built %>
-</p>
-
-<p>
-  <strong>Listing office:</strong>
-  <%= @property.listing_office %>
-</p>
-
-<p>
-  <strong>Condition:</strong>
-  <%= @property.condition %>
-</p>
-
-
-<p>
-  <strong>Favorited:</strong>
-  <%= @property.favorited %>
-</p>
-
-<p>
-  <strong>Fake favorited:</strong>
-  <%= @property.fake_favorited %>
-</p>
-
-
-
-<div class="container">
-  <div class="row">
-    <div class="col-sm-4">
-      <%= image_tag @property.featured.url(:original), class: 'img-responsive' %>
-    </div>
-  </div>
-</div>
 
 
 
 
 
-
-<%= link_to 'Edit', edit_property_path(@property) %> |
+<%# link_to 'Edit', edit_property_path(@property) %> |
 <%= link_to 'Back', properties_path %>
