@@ -79,17 +79,17 @@ class PropertiesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_property
-      @property = Property.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_property
+    @property = Property.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def property_params
-      params.require(:property).permit(:featured, :description, :short_description, :garage_size, :has_garage, :mls_listing_number, :mls_name, :mls_sources, :mls_date_added, :mls_date_modified, :street_number, :street_name, :unit_number, :city, :zip, :location, :full_address, :property_type, :last_update_description, :short_last_update_description, :status, :current_list_price, :sold_price, :sqft, :sqft_price, :lot_sqft, :year_built, :listing_office, :condition, :bedrooms, :half_bathrooms, :full_bathrooms, :favorited, :fake_favorited)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def property_params
+    params.require(:property).permit(:featured, :description, :short_description, :garage_size, :has_garage, :mls_listing_number, :mls_name, :mls_sources, :mls_date_added, :mls_date_modified, :street_number, :street_name, :unit_number, :city, :zip, :location, :full_address, :property_type, :last_update_description, :short_last_update_description, :status, :current_list_price, :sold_price, :sqft, :sqft_price, :lot_sqft, :year_built, :listing_office, :condition, :bedrooms, :half_bathrooms, :full_bathrooms, :favorited, :fake_favorited)
+  end
 
-    # def set_images
-    #   0.times {@property.images.build}
-    # end
+  # def set_images
+  #   0.times {@property.images.build}
+  # end
 end

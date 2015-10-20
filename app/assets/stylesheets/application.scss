@@ -56,7 +56,7 @@ h1, h2, h3, h4, h5, h6, p, a {font-family: $lato;}
   align-items: center;     /* Align the flex-items vertically */
   // justify-content: center;
   /* Optional, to align inner flex-items
-                              horizontally within the column  */
+  horizontally within the column  */
 }
 
 .fa-2x {
@@ -99,12 +99,12 @@ h1, h2, h3, h4, h5, h6, p, a {font-family: $lato;}
     font-weight: 300;
     font-size: 18px;
     // &:hover, &:active, &:focus {text-decoration: none; color:white;}
-  }
-  .activo {
-    background: #154067;
-    padding: 3px 15px;
-    color: white;
-  }
+}
+.activo {
+  background: #154067;
+  padding: 3px 15px;
+  color: white;
+}
 }
 .navi-links {
   color: white;
@@ -134,30 +134,30 @@ h1, h2, h3, h4, h5, h6, p, a {font-family: $lato;}
     font-weight: 400;
     text-align: center;
     font-size: 60px;
-  }
-  p {text-align: center;color:white;font-weight: 300;font-size: 20px;}
-  .get-started-btn {margin: 40px auto 0; width:100%; text-align: center;}
-  .btn-center {width: 100%;border: solid 1px white;padding: 10px 0;text-transform: uppercase;text-decoration: none;color: white;}
-  .hvr-sweep-to-bottom:hover, .hvr-sweep-to-bottom:focus, .hvr-sweep-to-bottom:active {color: black !important;}
-  .hvr-sweep-to-bottom:before {background: white;}
-  .v-center {position: absolute;top:0;bottom: 0;left: 0;right: 0;margin: auto;height: 40%;}
-  @media (max-width: 767px) {.btn-center{margin: 5px 0;}}
-  @media (max-width: 767px) {
-    .v-center{height: 60%;}
-    h1 {font-size: 40px;}
-    p {font-size: 15px;}
-  }
+}
+p {text-align: center;color:white;font-weight: 300;font-size: 20px;}
+.get-started-btn {margin: 40px auto 0; width:100%; text-align: center;}
+.btn-center {width: 100%;border: solid 1px white;padding: 10px 0;text-transform: uppercase;text-decoration: none;color: white;}
+.hvr-sweep-to-bottom:hover, .hvr-sweep-to-bottom:focus, .hvr-sweep-to-bottom:active {color: black !important;}
+.hvr-sweep-to-bottom:before {background: white;}
+.v-center {position: absolute;top:0;bottom: 0;left: 0;right: 0;margin: auto;height: 40%;}
+@media (max-width: 767px) {.btn-center{margin: 5px 0;}}
+@media (max-width: 767px) {
+  .v-center{height: 60%;}
+  h1 {font-size: 40px;}
+  p {font-size: 15px;}
+}
 }
 @media (max-width: 736px) {
   .home-intro {
     height: auto;
     min-height: 100vh;
-  }
+}
 }
 @media (max-height: 320px) {
   .home-intro {
     min-height: 120vh;
-  }
+}
 }
 
 // 4. Sign up | Login
@@ -180,60 +180,60 @@ h1, h2, h3, h4, h5, h6, p, a {font-family: $lato;}
     margin-top: 15px;
     margin-bottom: 15px;
     font-weight: 400;
+}
+.navbar {border-bottom: #e0e0e0 solid 1px;}
+.property-info {
+  padding: 70px 0;
+  h2 {margin-top: 0;margin-bottom: 50px;font-weight: 400;}
+}
+.more-info {
+  h2 {margin-top: 10px;margin-bottom: 10px;font-weight: 400;}
+  p {color:#4e4e4e;}
+  .status {text-transform: uppercase;}
+  .sqft-price {font-size: 20px;font-weight: 300;}
+}
+.property-description {
+  font-size: 13px;
+  font-weight: 300;
+  line-height: 25px;
+}
+
+.property-box {
+  background: #f7f7f7;
+  padding: 30px 35px;
+}
+.property-type {
+  margin-bottom: 20px;
+  span {
+    font-size: 20px;
+    font-weight: 400;
+    margin-right: 20px;
   }
-  .navbar {border-bottom: #e0e0e0 solid 1px;}
-  .property-info {
-    padding: 70px 0;
-    h2 {margin-top: 0;margin-bottom: 50px;font-weight: 400;}
-  }
-  .more-info {
-    h2 {margin-top: 10px;margin-bottom: 10px;font-weight: 400;}
-    p {color:#4e4e4e;}
-    .status {text-transform: uppercase;}
-    .sqft-price {font-size: 20px;font-weight: 300;}
-  }
-  .property-description {
-    font-size: 13px;
+  .the-property {
+    font-size: 15px;
     font-weight: 300;
-    line-height: 25px;
   }
+}
+.property-features {
+  width: 100%;
 
-  .property-box {
-    background: #f7f7f7;
-    padding: 30px 35px;
-  }
-  .property-type {
-    margin-bottom: 20px;
-    span {
-      font-size: 20px;
-      font-weight: 400;
-      margin-right: 20px;
+  .features {
+    background-color: white;
+    ul {
+      padding: 20px;
+      list-style-type: none;
+      text-align: center;
     }
-    .the-property {
-      font-size: 15px;
-      font-weight: 300;
+    li {display: inline-block;}
+
+    img {
+      max-width: 50px;
+      margin: 0 10px;
     }
+    .first {margin: 0 10px 0 0}
+
   }
-  .property-features {
-    width: 100%;
-
-    .features {
-      background-color: white;
-      ul {
-        padding: 20px;
-        list-style-type: none;
-        text-align: center;
-      }
-      li {display: inline-block;}
-
-      img {
-        max-width: 50px;
-        margin: 0 10px;
-      }
-      .first {margin: 0 10px 0 0}
-
-    }
-  }
+}
 }
 .create-an-offer {
   background: #154067;
