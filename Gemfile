@@ -9,7 +9,7 @@ gem 'bcrypt' # Use ActiveModel has_secure_password
 
 gem 'sdoc', '~> 0.4.0', group: :doc
 
-gem 'rets'
+gem 'rets', :git => 'git://github.com/estately/rets.git'
 gem 'nokogiri'
 gem 'httpclient'
 
@@ -69,4 +69,5 @@ end
 
 group :development do
   gem 'habtm_generator'
+  gem 'annotate'
 end
