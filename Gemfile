@@ -47,7 +47,6 @@ gem "cancan"
 
 # Oh the Backend
 gem 'puma'
-gem 'sidekiq'
 gem 'awesome_print', '~> 1.6.1'
 gem "rack-timeout"
 gem 'paperclip', '~> 4.2.1'
@@ -55,6 +54,12 @@ gem 'delayed_paperclip'
 gem 'aws-sdk', '< 2.0'
 gem "figaro"
 gem 'rails_admin', '~> 0.6.8'
+
+# Backend Workers
+gem 'sidekiq'
+gem 'sidekiq-failures'
+gem 'sidekiq_mailer'
+gem 'whenever', :require => false
 
 group :production do
   gem 'rails_12factor'
