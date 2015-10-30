@@ -19,6 +19,6 @@
 
 # Learn more: http://github.com/javan/whenever
 
-every 1.day do
+every 1.day, :at => '1:00am' do
   rake "rake update:rets:properties"
 end
