@@ -23,5 +23,15 @@ module Kasa
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
     config.active_job.queue_adapter = :sidekiq  # Or :delayed_job or :resque
+
+    config.autoload_paths << Rails.root.join('lib', 'modules')
+
+    config.before_initialize do
+      dev = File.join(Rails.root, 'config', 'application.yml')
+      YAML.load(File.open(dev)).each do |key,value|
+        ENV[key.to_s] = value
+      end if File.exists?(dev)
+    end
+
   end
 end

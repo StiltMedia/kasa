@@ -18,3 +18,7 @@
 # end
 
 # Learn more: http://github.com/javan/whenever
+
+every 1.day do
+  rake "rake update:rets:properties"
+end

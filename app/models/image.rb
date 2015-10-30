@@ -9,7 +9,6 @@ class Image < ActiveRecord::Base
     # :url => "/system/:attachment/:id/:basename_:style.:extension",
     :url =>':s3_domain_url',
 
-
     :styles => {
       :admin    => ['100x100#',  :jpg, :quality => 70],
       :thumb    => ['250x250#',  :jpg, :quality => 70],
@@ -27,8 +26,6 @@ class Image < ActiveRecord::Base
     validates_attachment_content_type :image, :content_type => ["image/jpg", "image/jpeg", "image/png", "image/gif"]
 
     process_in_background :image
-
-
 
     def s3_credentials
       {:bucket => ENV['AWS_BUCKET'], :access_key_id => ENV["access_key_id"], :secret_access_key => ENV["secret_access_key"]}

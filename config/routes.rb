@@ -1,5 +1,8 @@
+require 'sidekiq'
+require 'sidekiq/web'
 Rails.application.routes.draw do
 
+  mount Sidekiq::Web, at: '/sidekiq_web'
   mount RailsAdmin::Engine => '/kasa-admin', as: 'rails_admin'
   resources :properties, only: [:index, :show]
 

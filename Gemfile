@@ -59,6 +59,7 @@ gem 'rails_admin', '~> 0.6.8'
 gem 'sidekiq'
 gem 'sidekiq-failures'
 gem 'sidekiq_mailer'
+gem 'sinatra', :require => nil
 gem 'whenever', :require => false
 
 group :production do

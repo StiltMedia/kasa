@@ -10,7 +10,6 @@ class Property < ActiveRecord::Base
     # :url => "/system/:attachment/:id/:basename_:style.:extension",
     :url =>':s3_domain_url',
 
-
     :styles => {
       :admin    => ['100x100#',  :jpg, :quality => 70],
       :thumb    => ['250x250#',  :jpg, :quality => 70],
@@ -29,13 +28,9 @@ class Property < ActiveRecord::Base
 
     process_in_background :featured
 
-
     def url
       {:url => ':s3_domain_url'}
     end
-
-
-
 
     def s3_credentials
       {:bucket => ENV['AWS_BUCKET'], :access_key_id => ENV["access_key_id"], :secret_access_key => ENV["secret_access_key"]}
