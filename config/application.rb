@@ -25,6 +25,7 @@ module Kasa
     config.active_job.queue_adapter = :sidekiq  # Or :delayed_job or :resque
 
     config.autoload_paths << Rails.root.join('lib', 'modules')
+    config.autoload_paths << Rails.root.join('app', 'workers')
 
     config.before_initialize do
       dev = File.join(Rails.root, 'config', 'application.yml')
