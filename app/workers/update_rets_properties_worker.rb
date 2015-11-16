@@ -18,6 +18,7 @@ class UpdateRetsPropertiesWorker
         ua_password:    '123456',
         version:        'RETS/1.5',
       })
+      debugger
 
       begin
         client.login
@@ -80,26 +81,26 @@ class UpdateRetsPropertiesWorker
       #  puts 'Error: ' + e.message
       #  exit!
       #end
-      #photos = client.objects '*', {
-      #  resource: 'Property',
-      #  object_type: 'Photo',
-      #  resource_id: property['sysid']
-      #}
+      photos = client.objects '*', {
+        resource: 'Property',
+        object_type: 'Photo',
+        resource_id: property['sysid']
+      }
       #debugger
-      #photos.each_with_index do |data, index|
-      #  debugger
-      #  prop.images.create(image: data.body)
-      #  ## -- START: This is if your writing to a local filesystem --
-      #  #dirname = "./public/photos/#{result['sysid']}"
-      #  #unless File.directory?(dirname)
-      #  #  FileUtils.mkdir_p(dirname)
-      #  #end
-      #  #File.open(dirname + "/property-#{index.to_s}.jpg", 'wb') do |file|
-      #  #  file.write data.body
-      #  #end
-      #  ## -- END: This is if your writing to a local filesystem --
-      #  prop.images.save
-      #end
+      photos.each_with_index do |data, index|
+        debugger
+        prop.images.create(image: data.body)
+        ## -- START: This is if your writing to a local filesystem --
+        #dirname = "./public/photos/#{result['sysid']}"
+        #unless File.directory?(dirname)
+        #  FileUtils.mkdir_p(dirname)
+        #end
+        #File.open(dirname + "/property-#{index.to_s}.jpg", 'wb') do |file|
+        #  file.write data.body
+        #end
+        ## -- END: This is if your writing to a local filesystem --
+        prop.images.save
+      end
     rescue => e
       puts 'Error: ' + e.message
       client.logout
