@@ -18,7 +18,6 @@ class UpdateRetsPropertiesWorker
         ua_password:    '123456',
         version:        'RETS/1.5',
       })
-      debugger
 
       begin
         client.login
