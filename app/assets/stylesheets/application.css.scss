@@ -42,16 +42,14 @@ $navy: #154067;
 
 // 1. Global
 
-body {
-  background-color: #f7f7f7;
-}
-h1, h2, h3, h4, h5, h6, p, a {
-  font-family: $lato;
-}
+body {background-color: #f7f7f7;}
+h1, h2, h3, h4, h5, h6, p, a {font-family: $lato;}
+
 .vertical-align {
   display: flex;
   flex-direction: row;
 }
+
 .vertical-align > [class^="col-"],
 .vertical-align > [class*=" col-"] {
   display: flex;
@@ -60,32 +58,26 @@ h1, h2, h3, h4, h5, h6, p, a {
   /* Optional, to align inner flex-items
   horizontally within the column  */
 }
+
 .fa-2x {
   font-size: 2em !important;
 }
 .fa-1_5x {
   font-size: 1.5em !important;
 }
-.mt-10 {
-  margin-top: 10px;
-}
-.mt-15 {
-  margin-top: 15px;
-}
-.mt-20 {
-  margin-top: 20px;
-}
-.mb-10 {
-  margin-bottom: 10px;
-}
-.mr-15 {
-  margin-right: 15px;
-}
-.k-blue {
-  color:#154067
-}
+
+.mt-10 {margin-top: 10px;}
+.mt-15 {margin-top: 15px;}
+.mt-20 {margin-top: 20px;}
+
+.mb-10 {margin-bottom: 10px;}
+
+.mr-15 {margin-right: 15px;}
+
+.k-blue {color:#154067}
 
 // 2. Navigation
+
 .navbar-brand {
   height: auto;
   width:200px;
@@ -134,7 +126,7 @@ h1, h2, h3, h4, h5, h6, p, a {
   height: 100vh;
   width: 100%;
   position: relative;
-  background: url(image-path("https://s3-us-west-2.amazonaws.com/kasa-dev/images/kasa-home.jpg"));
+  background: url('https://s3-us-west-2.amazonaws.com/kasa-dev/images/kasa-home.jpg');
   background-position: center center;
   background-size: cover;
   h1 {
@@ -216,11 +208,11 @@ p {text-align: center;color:white;font-weight: 300;font-size: 20px;}
     font-size: 20px;
     font-weight: 400;
     margin-right: 20px;
-}
-.the-property {
-  font-size: 15px;
-  font-weight: 300;
-}
+  }
+  .the-property {
+    font-size: 15px;
+    font-weight: 300;
+  }
 }
 .property-features {
   width: 100%;
@@ -231,16 +223,16 @@ p {text-align: center;color:white;font-weight: 300;font-size: 20px;}
       padding: 20px;
       list-style-type: none;
       text-align: center;
-}
-li {display: inline-block;}
+    }
+    li {display: inline-block;}
 
-img {
-  max-width: 50px;
-  margin: 0 10px;
-}
-.first {margin: 0 10px 0 0}
+    img {
+      max-width: 50px;
+      margin: 0 10px;
+    }
+    .first {margin: 0 10px 0 0}
 
-}
+  }
 }
 }
 .create-an-offer {
