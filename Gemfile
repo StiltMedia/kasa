@@ -46,13 +46,13 @@ gem 'devise', '~> 3.5.1'
 gem "cancan"
 
 # Oh the Backend
-gem 'puma'
-gem 'awesome_print', '~> 1.6.1'
-gem "rack-timeout"
-gem 'paperclip', '~> 4.2.1'
-gem 'delayed_paperclip'
-gem 'aws-sdk', '< 2.0'
 gem "figaro"
+gem "rack-timeout"
+gem 'awesome_print', '~> 1.6.1'
+gem 'aws-sdk', '< 2.0'
+gem 'delayed_paperclip'
+gem 'paperclip', '~> 4.2.1'
+gem 'puma'
 gem 'rails_admin', '~> 0.6.8'
 
 # Backend Workers

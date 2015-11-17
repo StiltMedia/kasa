@@ -1,4 +1,4 @@
-require 'Retslibrary'
+require 'retslibrary'
 include Retslibrary
 namespace :update do
   namespace :rets do
