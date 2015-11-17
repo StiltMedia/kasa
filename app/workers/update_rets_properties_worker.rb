@@ -1,3 +1,4 @@
+require 'retslibrary'
 class UpdateRetsPropertiesWorker
 
   include Sidekiq::Worker
