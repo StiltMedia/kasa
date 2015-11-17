@@ -1,4 +1,5 @@
-include CustomRets
+require 'Retslibrary'
+include Retslibrary
 namespace :update do
   namespace :rets do
     desc "Update RETS properties"

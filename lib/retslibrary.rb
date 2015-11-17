@@ -29,7 +29,7 @@
 #                   "State" => "FL",
 #              "Directions" => "",
 #   "SaleAgentNRDSMemberID" => ""
-module CustomRets
+module Retslibrary
 
   def rets_search_query
     '(246=|A,B,C,CS,PS,Q,T,W,X),(61=|BROWARD,DADE,GLADES,HENDRY,INDNRIV,MARTIN,OKEECHB,OTHER,PALMBCH,STLUCIE)'

@@ -1,7 +1,7 @@
 class UpdateRetsPropertiesWorker
 
   include Sidekiq::Worker
-  include CustomRets
+  include Retslibrary
 
   sidekiq_options queue: 'rets', :retry => false, :backtrace => true
 
