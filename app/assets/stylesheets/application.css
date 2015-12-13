@@ -70,3 +70,24 @@ body * {
   padding-left: 22px;
   padding-right: 22px;
 }
+
+
+section.login .white-block {
+  position: relative;
+  padding: 40px;
+  background-color: #FFF;
+}
+
+section.login .btn-alt {
+  border: medium none;
+  font-size: 14px;
+  color: #363636;
+}
+
+.homepage .login-action .btn {
+  min-height: auto;
+}
+
+.navbar .login-action {
+  padding: 30px 40px !important;
+}

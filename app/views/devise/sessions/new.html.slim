@@ -1,0 +1,44 @@
+
+= render 'shared/topbar'
+
+
+section.login
+  = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+    .row
+      .col-md-12
+        .title.text-center
+          h2 Log in
+    br
+    .row
+      .col-md-4.col-md-offset-4
+        .white-block
+    
+            .info-content
+              - if notice || alert
+                p = notice
+                p = alert
+              p style="line-height: 250%"
+                b Email
+                input class="form-control form-control-solid placeholder-no-fix" placeholder="Email" autocomplete="on" value="" name="user[email]" id="user_email" type="email"
+              p style="line-height: 250%"
+                b Password
+                input class="form-control form-control-solid placeholder-no-fix" placeholder="Password" autocomplete="off" name="user[password]" id="user_password" type="password"
+    	  
+              p
+                input name="user[remember_me]" type="hidden" value="0" /
+                input#user_remember_me name="user[remember_me]" type="checkbox" value="1" &nbsp;&nbsp;Remember me
+    
+            
+
+
+    br
+    .row
+      .col-md-4.col-md-offset-4.text-right
+        input.btn.btn-alt type="submit" name="commit" value=="SUBMIT &rarr;"
+br
+br
+hr
+br
+h2
+
+= render 'shared/footer'

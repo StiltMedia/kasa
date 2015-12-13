@@ -47,3 +47,4 @@ end
 
 gem 'slim-rails'
 gem 'pg'
+gem 'devise'

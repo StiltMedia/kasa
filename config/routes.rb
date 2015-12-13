@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :users
   get 'pages/landing'
   get 'pages/untitled'
   root 'pages#landing'
