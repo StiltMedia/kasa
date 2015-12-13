@@ -13,3 +13,60 @@
  *= require_tree .
  *= require_self
  */
+
+.pb60 {
+  padding-bottom: 60px;
+}
+
+
+nav {
+  outline: 1px solid red;
+}
+
+body * {
+   outline: 0px solid red;
+}
+
+.topbar {
+  height: 87px;
+  background-color: #FFF;
+}
+
+.topbar .logo {
+  line-height: 84px;
+  margin-left: 30px;
+}
+
+.topbar .logo img {
+  width: 90px;
+}
+
+.topbar a {
+  color: #363636;
+}
+
+.topbar a.register {
+  zmargin-top: -15px;
+  zpadding: 5px 22px;
+  background-color: #154067;
+  border-radius: 0px;
+  color: #FFF;
+  line-height: 15px;
+}
+
+.topbar .actions {
+  line-height: 84px;
+}
+
+.topbar .btn {
+  margin: 0px 40px 0px 0px;
+}
+
+.topbar a.btn {
+  zmargin: 0px 25px;
+  zpadding: 0px;
+  font-size: 18px;
+  font-weight: 400;
+  padding-left: 22px;
+  padding-right: 22px;
+}

@@ -2,11 +2,13 @@
 <html>
 <head>
   <title>Kasa</title>
-  <%= stylesheet_link_tag    'application', media: 'all' %>
   <%= stylesheet_link_tag    'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css'  %>
+  <%= stylesheet_link_tag    'https://fonts.googleapis.com/css?family=Lato:100,100italic,300,300italic,400,400italic,700,700italic,900italic,900' %>
+  <%= stylesheet_link_tag    'https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css' %>
+  <%= stylesheet_link_tag    'application', media: 'all' %>
+  <%= stylesheet_link_tag    asset_url('style.css'), media: 'all' %>  
 
-
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application' %>
   <%= csrf_meta_tags %>
 </head>
 <body>
@@ -14,5 +16,8 @@
 <%= yield %>
 
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js">
+<%= javascript_include_tag 'custom' %>
+<%= javascript_include_tag 'jquery.scrollTo.min.js' %>
+<%= javascript_include_tag 'https://code.jquery.com/ui/1.10.4/jquery-ui.js' %>
 </body>
 </html>
