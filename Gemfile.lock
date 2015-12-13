@@ -1,3 +1,12 @@
+GIT
+  remote: git://github.com/estately/rets.git
+  revision: f017ea6e4fbee5f07493013bb0e75ab0511f624c
+  specs:
+    rets (0.9.0.20150611164600)
+      http-cookie (~> 1.0.0)
+      httpclient (~> 2.7.0)
+      nokogiri (~> 1.5)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -51,10 +60,15 @@ GEM
       responders
       thread_safe (~> 0.1)
       warden (~> 1.2.3)
+    domain_name (0.5.25)
+      unf (>= 0.0.5, < 1.0.0)
     erubis (2.7.0)
     execjs (2.6.0)
     globalid (0.3.6)
       activesupport (>= 4.1.0)
+    http-cookie (1.0.2)
+      domain_name (~> 0.5)
+    httpclient (2.7.0.1)
     i18n (0.7.0)
     jbuilder (2.3.2)
       activesupport (>= 3.0.0, < 5)
@@ -143,6 +157,9 @@ GEM
     uglifier (2.7.2)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
+    unf (0.1.4)
+      unf_ext
+    unf_ext (0.0.7.1)
     warden (1.2.3)
       rack (>= 1.0)
     web-console (2.2.1)
@@ -161,6 +178,7 @@ DEPENDENCIES
   jquery-rails
   pg
   rails (= 4.2.5)
+  rets!
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
   slim-rails

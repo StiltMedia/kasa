@@ -48,3 +48,4 @@ end
 gem 'slim-rails'
 gem 'pg'
 gem 'devise'
+gem 'rets', :git => 'git://github.com/estately/rets.git'
