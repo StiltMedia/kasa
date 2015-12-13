@@ -1,0 +1,39 @@
+= render 'shared/topbar'
+
+section.listings
+  .container
+    .row.article
+      .col-md-8.col-md-offset-2
+        .listing-box.clearfix
+          .col-md-6.no-padding
+            .image-box
+              img alt="kasa" src=asset_path("bg-kasa.jpg")
+          .col-md-6
+            .listing-box-content
+              h5
+                a href="inside_listing.html"  111 Lorem Ipsum Lorem Asat
+              p.listing-price
+                | $459,000
+                span $322/sf
+              ul.listing-info.list-unstyled.list-inline
+                li
+                  img alt="" src="img/pt_house_dark.png" /
+                li
+                  img alt="" src="img/icon_couch_big.png" /
+                  span 2
+                li
+                  img alt="" src="img/icon_bathroom_big.png" /
+                  span 1
+                li
+                  img alt="" src="img/icon_car_big.png" /
+                  span 2
+              .listing-box-footer
+                p Listed 19hrs ago
+                .links.pull-right
+                  a href="#"  Favorite
+                  a href="#"  Share
+        
+
+
+
+= render 'shared/footer'
