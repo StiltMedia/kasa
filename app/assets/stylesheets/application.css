@@ -98,3 +98,16 @@ section.login .btn-alt {
   background-color: #FFF;
   border-radius: 3px;
 }
+
+
+
+
+.pagination { padding: 3px; margin: 10px 3px 10px 3px !important; }
+.pagination a { padding: 2px 5px 2px 5px; margin: 2px; border: 1px solid silver; text-decoration: none; color: #9A9A9A; }
+.pagination a:hover, .pagination span.current { padding: 2px 5px 2px 5px; margin: 2px; border: 1px solid #000099; font-weight: bold; background-color: #000099; color: #FFF; }
+.pagination span.disabled { padding: 2px 5px 2px 5px; margin: 2px; border: 1px solid #eee; color: #ddd; }
+
+/* override a theme default */
+section {
+  padding: 0px !important;
+}

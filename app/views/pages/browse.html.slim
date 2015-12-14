@@ -2,7 +2,12 @@
 
 section.listings
   .container
-    - Property.all[0..4].each do |property|
+    - @properties = Property.paginate(:page => params[:page], :per_page => 5)
+    br
+    .row
+      .col-md-8.col-md-offset-2.text-right
+        span = will_paginate @properties
+    - @properties.each do |property|
       .row.article
         .col-md-8.col-md-offset-2
           .listing-box.clearfix
@@ -33,8 +38,9 @@ section.listings
                   .links.pull-right
                     a href="/pages/untitled"  Favorite
                     a href="/pages/untitled"  Share
-        
-
+    .row
+      .col-md-8.col-md-offset-2.text-right
+        span = will_paginate @properties
 
 
 = render 'shared/footer'
