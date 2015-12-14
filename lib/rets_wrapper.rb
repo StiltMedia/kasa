@@ -52,6 +52,7 @@ class RetsWrapper
     require 'aws-sdk'
     @s3 = Aws::S3::Resource.new(region:'us-west-1',
       credentials: Aws::Credentials.new(S3_LOGIN, S3_PASSWORD))
+    @bucket_files = @s3.bucket('kasa-staging').objects.collect(&:key)
   end
 
   # saves an image to s3
@@ -61,7 +62,19 @@ class RetsWrapper
     obj.upload_file('tmp/tmp.jpg')
   end
 
+  # checks whether we already have the image for a listing
+  def image_exists?(listing_id)
+    result = nil
+    connect_to_s3() if ! @s3
+    result = @bucket_files.select { |file_name| file_name =~ /#{listing_id}/ }.present?
+    result
+  end
+
   def get_photos(listing, serial_no,total)
+    if image_exists?(listing['157'])
+      puts " #{serial_no+1}/#{total} Listing ID #{listing['157']}, image exists"
+      return
+    end
     imgs = @client.objects '*', {
       resource: 'Property',
       object_type: 'Photo',
