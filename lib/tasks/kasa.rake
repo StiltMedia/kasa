@@ -7,7 +7,7 @@ namespace :kasa do
     require 'rets_wrapper'
     rets = RetsWrapper.new
     rets.connect
-    rets.counties[2..3].each do |county|
+    rets.counties.each do |county|
       listings += rets.download(county)
     end
     puts "Downloaded #{listings.size} listings in #{distance_of_time_in_words_to_now(started, {include_seconds: true})}"

@@ -1,9 +1,24 @@
 require 'rets'
 require 'silence_warning'
 
+# Key RETS field codes
+#         pg          type
+# 157     listing_id  string
+# 881     address     string
+# 10      zip         string
+# 922     City        string
+# 924     State       string
+# 137     price       number
+# 261     area        number
+# 246     status      string
+# 80      date        timestamp
+# 61      county      string
+# 25      beds        integer
+# 1424    baths       integer
+# 102     garage      integer
+# syscode syscode     string
 
-class RetsWrapper
-
+class RetsWrapper  
   COUNTIES = [ 'BROWARD' , 'DADE', 'GLADES', 'HENDRY',
                'INDNRIV', 'MARTIN', 'OKEECHB', 'OTHER',
                'PALMBCH', 'STLUCIE' ]
@@ -14,7 +29,6 @@ class RetsWrapper
   def initialize
     @client = nil
     @s3 = nil
-
   end
 
   def connect
@@ -41,10 +55,12 @@ class RetsWrapper
   end
 
   # saves an image to s3
-  def save_to_s3(file_name)
+  def save_to_s3(file_name, listing_id)
     connect_to_s3() if ! @s3
     obj = @s3.bucket(S3_BUCKET).object(file_name)
     obj.upload_file('tmp/tmp.jpg')
+    t = Property.find_by_listing_id(listing_id).id
+    Image.create(property_id: t, serial: 0, guid: file_name)
   end
 
   def get_photos(listing, serial_no,total)
@@ -54,7 +70,8 @@ class RetsWrapper
       resource_id: listing['sysid']+':0'
     }
     File.open("tmp/tmp.jpg", 'wb') { |file| file.write imgs[0].body }
-    save_to_s3("#{listing['157']}.jpg") 
+    file_name = "#{listing['61']}_#{listing['157']}_0_#{SecureRandom.uuid[0..6]}.jpg"
+    save_to_s3(file_name,listing['157'])
     puts " #{serial_no+1}/#{total} Listing ID #{listing['157']}, #{imgs.size} photos. 1 saved."
   end
 
@@ -66,11 +83,11 @@ class RetsWrapper
       query:          "(246=|A),(61=|#{county})", #246 ListingStatus
                                                   #A ActiveAvailable
                                                   #61 County
-      select: '157,247,sysid',  # 247 Street Name
-                                # 157 ListingID / ML#
+      select: '157,881,10,922,924,137,261,246,80,61,25,1424,102,sysid', 
       search_type:    'Property'
     }
-    puts "#{results.size} listings"
+    print "#{results.size} listings "
+    pg_save(results)
     results
   end
 
@@ -85,9 +102,27 @@ class RetsWrapper
       query: '(246=|A),(61=|BROWARD)', # 246 ListingStatus
                                        # A Active-Available
                                        # 61 County
-                                       # Broward County
       limit: 1
     }
   end
 
+  def pg_save(listings)
+    listings.each do |l|
+      Property.create(
+        listing_id: l['157'],
+        address: l['881'],
+        zip: l['10'],
+        city: l['922'],
+        state: l['924'],
+        price: l['137'],
+        area: l['261'],
+        date: l['80'],
+        beds: l['25'],
+        baths: l['1424'],
+        garage: l['102'],
+        county: l['61'],
+        sysid: l['sysid'])
+      end
+    puts "saved"
+  end
 end
