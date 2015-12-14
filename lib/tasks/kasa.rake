@@ -16,7 +16,7 @@ namespace :kasa do
     started = Time.now
     saved_photos_count = 0
     listings.each_with_index do |listing, serial_no|
-      rets.get_photos(listing, serial_no,listings.size)
+      rets.get_photos(listing, serial_no,listings.size) rescue puts "get_photos(#{listing['157']}, serial_no,listings.size) failed"
       saved_photos_count += 1
     end
     puts "Downloaded #{saved_photos_count} photos in #{distance_of_time_in_words_to_now(started, {include_seconds: true})}"

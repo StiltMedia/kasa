@@ -59,8 +59,6 @@ class RetsWrapper
     connect_to_s3() if ! @s3
     obj = @s3.bucket(S3_BUCKET).object(file_name)
     obj.upload_file('tmp/tmp.jpg')
-    t = Property.find_by_listing_id(listing_id).id
-    Image.create(property_id: t, serial: 0, guid: file_name)
   end
 
   def get_photos(listing, serial_no,total)
@@ -70,7 +68,7 @@ class RetsWrapper
       resource_id: listing['sysid']+':0'
     }
     File.open("tmp/tmp.jpg", 'wb') { |file| file.write imgs[0].body }
-    file_name = "#{listing['61']}_#{listing['157']}_0_#{SecureRandom.uuid[0..6]}.jpg"
+    file_name = "#{listing['157']}_0.jpg"
     save_to_s3(file_name,listing['157'])
     puts " #{serial_no+1}/#{total} Listing ID #{listing['157']}, #{imgs.size} photos. 1 saved."
   end

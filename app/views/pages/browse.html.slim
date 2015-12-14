@@ -2,36 +2,37 @@
 
 section.listings
   .container
-    .row.article
-      .col-md-8.col-md-offset-2
-        .listing-box.clearfix
-          .col-md-6.no-padding
-            .image-box
-              img alt="kasa" src=asset_path("bg-kasa.jpg")
-          .col-md-6
-            .listing-box-content
-              h5
-                a href="inside_listing.html" = Property.first.full_address
-              p.listing-price
-                | $000,000
-                span $000/sf
-              ul.listing-info.list-unstyled.list-inline
-                li
-                  img alt="" src=asset_path("pt_house_dark.png")
-                li
-                  img alt="" src=asset_path("icon_couch_big.png")
-                  span 0
-                li
-                  img alt="" src=asset_path("icon_bathroom_big.png")
-                  span 0
-                li
-                  img alt="" src=asset_path("icon_car_big.png")
-                  span 0
-              .listing-box-footer
-                p Listed 0 hrs ago
-                .links.pull-right
-                  a href="#"  Favorite
-                  a href="#"  Share
+    - Property.all[0..4].each do |property|
+      .row.article
+        .col-md-8.col-md-offset-2
+          .listing-box.clearfix
+            .col-md-6.no-padding
+              .image-box
+                img alt="kasa" src=asset_path("bg-kasa.jpg")
+            .col-md-6
+              .listing-box-content
+                h5
+                  a href="inside_listing.html" = "#{property.address.titleize} #{property.city.titleize}"
+                p.listing-price
+                  = number_to_currency(property.price, precision: 0)
+                  span = "$#{property.price/property.area}/sf"
+                ul.listing-info.list-unstyled.list-inline
+                  li
+                    img alt="" src=asset_path("pt_house_dark.png")
+                  li
+                    img alt="" src=asset_path("icon_couch_big.png")
+                    span = property.beds
+                  li
+                    img alt="" src=asset_path("icon_bathroom_big.png")
+                    span = property.baths
+                  li
+                    img alt="" src=asset_path("icon_car_big.png")
+                    span = property.garage
+                .listing-box-footer
+                  p = "Listed #{distance_of_time_in_words_to_now(property.date)} ago"
+                  .links.pull-right
+                    a href="/pages/untitled"  Favorite
+                    a href="/pages/untitled"  Share
         
 
 
