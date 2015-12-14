@@ -51,3 +51,6 @@ gem 'devise'
 gem 'rets', :git => 'git://github.com/estately/rets.git'
 gem 'aws-sdk', '~> 2'
 gem 'will_paginate', '~> 3.0.6'
+group :staging, :production do
+  gem 'rails_12factor'
+end
