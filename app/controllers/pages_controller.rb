@@ -6,13 +6,13 @@ class PagesController < ApplicationController
   end
   def browse
     if params[:sort] == 'Newest Listings'
-      @properties = Property.order(date: :desc).paginate(:page => params[:page], :per_page => 5, :total_entries => 15)
+      @properties = Property.order(date: :desc).paginate(:page => params[:page], :per_page => 5, :total_entries => 25)
     elsif params[:sort] == 'Highest Price'
-      @properties = Property.order(price: :desc).paginate(:page => params[:page], :per_page => 5, :total_entries => 15)
+      @properties = Property.order(price: :desc).paginate(:page => params[:page], :per_page => 5, :total_entries => 25)
     elsif params[:sort] == 'Lowest Price'
-      @properties = Property.order(:price).paginate(:page => params[:page], :per_page => 5, :total_entries => 15)
+      @properties = Property.order(:price).paginate(:page => params[:page], :per_page => 5, :total_entries => 25)
     else
-      @properties = Property.order(date: :desc).paginate(:page => params[:page], :per_page => 5, :total_entries => 15)
+      @properties = Property.order(date: :desc).paginate(:page => params[:page], :per_page => 5, :total_entries => 25)
     end
     
   end

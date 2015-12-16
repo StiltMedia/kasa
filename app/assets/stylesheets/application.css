@@ -102,15 +102,43 @@ section.login .btn-alt {
 
 
 
-.pagination { padding: 3px; margin: 10px 3px 10px 3px !important; }
-.pagination a { padding: 2px 5px 2px 5px; margin: 2px; border: 1px solid silver; text-decoration: none; color: #9A9A9A; }
-.pagination a:hover, .pagination span.current { padding: 2px 5px 2px 5px; margin: 2px; border: 1px solid #000099; font-weight: bold; background-color: #000099; color: #FFF; }
-.pagination span.disabled { padding: 2px 5px 2px 5px; margin: 2px; border: 1px solid #eee; color: #ddd; }
+.pagination {
+  font-size: 18px;
+}
 
-/* override a theme default */
-/*section {
-  padding: 0px !important;
-}*/
+.pagination a {
+  background-color: #FFF;
+  color: #363636;
+  padding: 12px;
+  margin: 0px;
+  border: 0px solid silver;
+  text-decoration: none;
+}
+
+.pagination em.current {
+  padding: 12px;
+  margin: 2px;
+  border: 1px solid #000099;
+  font-weight: bold;
+  background-color: #154067;
+  color: #FFF;
+  text-decoration: none;
+  font-style: normal;
+}
+
+.pagination a:hover {
+  zpadding: 12px;
+  zmargin: 2px;
+  zborder: 1px solid #000099;
+  font-weight: bold;
+  background-color: #154067;
+  color: #FFF;
+  text-decoration: none;
+  font-style: normal;
+}
+.pagination span.disabled {
+  padding: 2px 5px 2px 5px; margin: 2px; border: 1px solid #eee; color: #ddd;
+}
 
 .listing-box .image-box {
   max-width: 350px;

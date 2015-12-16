@@ -54,8 +54,8 @@ section.listings
                     a href="/pages/untitled"  Favorite
                     a href="/pages/untitled"  Share
     .row
-      .col-md-8.col-md-offset-2.text-right
-        span = will_paginate @properties
+      .col-md-8.col-md-offset-2.text-center
+        span = will_paginate @properties, :previous_label => '<i class="fa fa-angle-double-left"></i>', :next_label => '<i class="fa fa-angle-double-right"></i>'
 
 
 = render 'shared/footer'
