@@ -20,7 +20,7 @@ section.listings
                   a href="inside_listing.html" = "#{property.address.titleize} #{property.city.titleize}"
                 p.listing-price
                   = number_to_currency(property.price, precision: 0)
-                  span = "$#{property.price/property.area}/sf"
+                  span = "$#{property.price/property.area}/sf" rescue ""
                 ul.listing-info.list-unstyled.list-inline
                   li
                     img alt="" src=asset_path("pt_house_dark.png")
