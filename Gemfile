@@ -54,3 +54,4 @@ gem 'will_paginate', '~> 3.0.6'
 group :staging, :production do
   gem 'rails_12factor'
 end
+gem 'puma'

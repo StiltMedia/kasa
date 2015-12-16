@@ -19,9 +19,9 @@ require 'silence_warning'
 # syscode syscode     string
 
 class RetsWrapper  
-  COUNTIES = [ 'BROWARD' , 'DADE', 'GLADES', 'HENDRY',
-               'INDNRIV', 'MARTIN', 'OKEECHB', 'OTHER',
-               'PALMBCH', 'STLUCIE' ]
+  COUNTIES = [ 'GLADES', 'HENDRY',
+               'INDNRIV', 'MARTIN', 'OKEECHB',
+               'PALMBCH', 'STLUCIE', 'BROWARD', 'DADE', 'OTHER' ]
   S3_BUCKET = 'kasa-staging'
   S3_LOGIN = 'AKIAI5R5DFMV3PYHNBDQ'
   S3_PASSWORD = 'NKUknIpVGfEr+ZqlJfTytH5eCpjcuVaVY87PY/Sp'
@@ -32,7 +32,7 @@ class RetsWrapper
   end
 
   def connect
-    puts "Connecting to RETS api"
+    puts "F95BA Connecting to RETS api"
     @client = Rets::Client.new({
       login_url: 'http://sef.rets.interealty.com/Login.asmx/Login',
       username: 'guilRWSmo',
@@ -72,7 +72,7 @@ class RetsWrapper
 
   def get_photos(listing, serial_no,total)
     if image_exists?(listing['157'])
-      puts " #{serial_no+1}/#{total} Listing ID #{listing['157']}, image exists"
+      puts " F95BA #{serial_no+1}/#{total} #{listing['157']}_0.jpg exists, skipping"
       return
     end
     imgs = @client.objects '*', {
@@ -83,12 +83,12 @@ class RetsWrapper
     File.open("tmp/tmp.jpg", 'wb') { |file| file.write imgs[0].body }
     file_name = "#{listing['157']}_0.jpg"
     save_to_s3(file_name,listing['157'])
-    puts " #{serial_no+1}/#{total} Listing ID #{listing['157']}, #{imgs.size} photos. 1 saved."
+    puts " F95BA #{serial_no+1}/#{total} Listing ID #{listing['157']}, #{imgs.size} photos. 1 saved."
   end
 
   # downloads listings, sans photos
   def download(county)
-    print " #{county}: "
+    puts " F95BA #{county}"
     results = @client.find :all, {
       class:          '1', # 1 Residential
       query:          "(246=|A),(61=|#{county})", #246 ListingStatus
@@ -97,7 +97,8 @@ class RetsWrapper
       select: '157,881,10,922,924,137,261,246,80,61,25,1424,102,sysid', 
       search_type:    'Property'
     }
-    print "#{results.size} listings "
+    puts "F95BA #{results.size} listings"
+    puts "F95BA saving"
     pg_save(results)
     results
   end
@@ -119,6 +120,7 @@ class RetsWrapper
 
   def pg_save(listings)
     listings.each do |l|
+      puts "F95BA .NOBR"
       Property.create(
         listing_id: l['157'],
         address: l['881'],
@@ -134,6 +136,6 @@ class RetsWrapper
         county: l['61'],
         sysid: l['sysid'])
       end
-    puts "saved"
+    puts "F95BA saved"
   end
 end
