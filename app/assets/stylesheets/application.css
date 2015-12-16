@@ -111,3 +111,8 @@ section.login .btn-alt {
 /*section {
   padding: 0px !important;
 }*/
+
+.listing-box .image-box {
+  max-width: 350px;
+  max-height: 263px;
+}
