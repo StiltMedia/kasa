@@ -5,6 +5,16 @@ class PagesController < ApplicationController
   def landing
   end
   def browse
+    if params[:sort] == 'Newest Listings'
+      @properties = Property.order(date: :desc).paginate(:page => params[:page], :per_page => 5, :total_entries => 15)
+    elsif params[:sort] == 'Highest Price'
+      @properties = Property.order(price: :desc).paginate(:page => params[:page], :per_page => 5, :total_entries => 15)
+    elsif params[:sort] == 'Lowest Price'
+      @properties = Property.order(:price).paginate(:page => params[:page], :per_page => 5, :total_entries => 15)
+    else
+      @properties = Property.order(date: :desc).paginate(:page => params[:page], :per_page => 5, :total_entries => 15)
+    end
+    
   end
 
   def fetch
