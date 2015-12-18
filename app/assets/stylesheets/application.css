@@ -30,6 +30,7 @@ body * {
 .topbar {
   height: 87px;
   background-color: #FFF;
+  min-width: 850px;
 }
 
 .topbar .logo {
@@ -92,6 +93,10 @@ section.login .btn-alt {
   padding: 30px 40px !important;
 }
 
+.listing-box {
+  width: 730px;
+}
+
 .listing-list .listing-box {
   margin-top: 10px;
   padding: 10px;
@@ -99,6 +104,9 @@ section.login .btn-alt {
   border-radius: 3px;
 }
 
+.listing-box * {
+  white-space: nowrap !important;
+}
 
 
 
@@ -143,4 +151,81 @@ section.login .btn-alt {
 .listing-box .image-box {
   max-width: 350px;
   max-height: 263px;
+}
+
+.loading-gif {
+  background:url('http://www.hsi.com.hk/HSI-Net/pages/images/en/share/ajax-loader.gif') no-repeat right center;
+  background-position: 95% 50%;
+}
+
+
+.search-bar {
+  min-width: 898px;
+  
+}
+
+.more-filter.modal-filter {
+  white-space: nowrap;
+}
+
+.search-bar .container {
+  min-width: 940px;
+}
+
+/* section.search-bar .dropdown */
+/* { */
+/*   white-space: nowrap; */
+/* } */
+
+/* .browse-page .search-bar .fa-angle-down { */
+/*   white-space: nowrap; */
+/*   outline: 3px solid yellow; */
+/* } */
+
+.search-bar .col-xs-2:nth-child(2) .small-input img {
+  margin-right: 7px;
+  width: 10px;
+}
+.search-bar .col-xs-2:not(:first-child):not(:nth-child(2)) .small-input img {
+  position: absolute;
+  top: 13px;
+  left: 4px;
+  width: 22px;
+}
+.search-bar .col-xs-2:not(:first-child):not(:nth-child(2)) .small-input .dropdown-toggle {
+  left: 0;
+  margin-left: 40px;
+}
+.search-bar .col-xs-2:not(:first-child):not(:nth-child(2)) .small-input .dropdown-menu {
+  margin-left: 20px;
+}
+.search-bar .col-xs-2:nth-last-of-type(2) .dropdown.small-input img {
+  top: 10px;
+}
+
+/* .browse-page { */
+/*   width: 100%; */
+/*   min-width: 1122px; */
+/* } */
+
+
+/* .row .col-xs-8 { */
+/*   min-width: 622px; */
+/* } */
+
+.mytest {
+  width: 768px;
+}
+
+.browse-page .listing-box-content h5 {
+  overflow: hidden;
+}
+
+.listings {
+  padding: 40px 0px 0px;
+}
+
+.browse-page .no-results {
+  outline: 1px solid yellow;
+  padding: 20px 40px;
 }

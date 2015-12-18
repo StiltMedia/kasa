@@ -1,61 +1,195 @@
 = render 'shared/topbar'
 
-section.listings
-  .container
-    br
-    .row
-      .col-md-8.col-md-offset-2
-        .sort-listings
-          p Sort By:
-          /! dropdown select
-          .dropdown
-            button#listing-sort-by.dropdown-toggle aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" type="button" 
-              | #{params[:sort] ? params[:sort] : "Newest Listings"}
-              span.fa.fa-angle-down.pull-right
-            ul.dropdown-menu aria-labelledby="listing-sort-by" 
-              li
-                a href="?sort=Newest Listings"  Newest Listings
-              li
-                a href="?sort=Highest Price"  Highest Price
-              li
-                a href="?sort=Lowest Price"  Lowest Price
-          /! .dropdown select
-          p.pull-right Viewing page #{params[:page] ? params[:page] : "1"} of #{number_with_delimiter(Property.count)} Found
+.browse-page
+  section.search-bar
+      .row
+        .col-xs-10
+          .row
+            /! alternate input
+            .col-xs-3
+              .input-group.small-input
+                input.form-control.search placeholder="Address, City or Zip" type="text" value=session[:browse_search]
+            /! .alternate input
+            /! dropdown select
+            .col-xs-2.no-padding.first-div
+              .dropdown.small-input
+                img alt="" src=asset_path("icon_money.png")
+                button#anyprice.dropdown-toggle aria-expanded="true" aria-haspopup="true" data-toggle="dropdown" type="button" 
+                  = "Any Price" if session[:browse_price] == 'Any Price'
+                  = "< $100,000" if session[:browse_price] == '<100000'
+                  = "> $100,000" if session[:browse_price] == '>100000'
+                  = "> $200,000" if session[:browse_price] == '>200000'
+                  = "> $300,000" if session[:browse_price] == '>300000'
+                  = "> $400,000" if session[:browse_price] == '>400000'
+                  = "> $500,000" if session[:browse_price] == '>500000'
+                  span.fa.fa-angle-down.pull-right
+                ul.dropdown-menu aria-labelledby="anyprice" 
+                  li
+                    a href="?price=Any Price"  Any Price
+                  li
+                    a href="?price=<100000"  < $100,000
+                  li
+                    a href="?price=>100000"  > $100,000
+                  li
+                    a href="?price=>200000"  > $200,000
+                  li
+                    a href="?price=>300000"  > $300,000
+                  li
+                    a href="?price=>400000"  > $400,000
+                  li
+                    a href="?price=>500000"  > $500,000
+            /! .dropdown select
+            /! dropdown select
+            .col-xs-2.text-center.no-padding
+              .dropdown.small-input
+                img alt="" src=asset_path("icon_couch.png")
+                button#rooms.dropdown-toggle aria-expanded="true" aria-haspopup="true" data-toggle="dropdown" type="button" 
+                  = "#{session[:browse_beds] ? session[:browse_beds] : 'All'}"
+                  span.fa.fa-angle-down.pull-right
+                ul.dropdown-menu aria-labelledby="rooms" 
+                  li
+                    a href="?beds=All"  All
+                  li
+                    a href="?beds=1"  1
+                  li
+                    a href="?beds=2"  2
+                  li
+                    a href="?beds=3"  3
+                  li
+                    a href="?beds=4"  4
+                  li
+                    a href="?beds=>5"  >5
+  
+            /! .dropdown select
+            /! dropdown select
+            .col-xs-2.text-center
+              .dropdown.small-input
+                img alt="" src=asset_path("icon_bathroom.png")
+                button#bathrooms.dropdown-toggle aria-expanded="true" aria-haspopup="true" data-toggle="dropdown" type="button" 
+                  = "#{session[:browse_baths] ? session[:browse_baths] : 'All'}"
+                  span.fa.fa-angle-down.pull-right
+                ul.dropdown-menu aria-labelledby="bathrooms" 
+                  li
+                    a href="?baths=All"  All
+                  li
+                    a href="?baths=1"  1
+                  li
+                    a href="?baths=2"  2
+                  li
+                    a href="?baths=3"  3
+                  li
+                    a href="?baths=4"  4
+                  li
+                    a href="?baths=>5"  >5
+            /! .dropdown select
+            /! more filter
+            .col-xs-2
+              a.more-filter.modal-filter href="/pages/untitled" 
+                img alt="" src=asset_path("icon_filter.png")
+                | More Filters
+            /! .more filter
+        .col-xs-2
+          a.more-filter.list-view href="/pages/untitled" 
+            img alt="" src=asset_path("icon_map_view.png") Map View
+  
+  
+  section.listings
+    .container
+      br
+      .row.text-center
+        .col-xs-8.col-xs-offset-1
+          .sort-listings
+            p Sort By:
+            /! dropdown select
+            .dropdown
+              button#listing-sort-by.dropdown-toggle aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" type="button" 
+                | #{session[:browse_sort] ? session[:browse_sort] : "Newest Listings"}
+                span.fa.fa-angle-down.pull-right
+              ul.dropdown-menu aria-labelledby="listing-sort-by" 
+                li
+                  a href="?sort=Newest Listings"  Newest Listings
+                li
+                  a href="?sort=Highest Price"  Highest Price
+                li
+                  a href="?sort=Lowest Price"  Lowest Price
+            /! .dropdown select
+            - if @properties.size > 0
+              p.pull-right Viewing page #{session[:browse_page] ? session[:browse_page] : "1"} of #{number_with_delimiter(@result_count)} Found
+            - else
+              p.pull-right.invisible Viewing page #{session[:browse_page] ? session[:browse_page] : "1"} of #{number_with_delimiter(@result_count)} Found
 
-    - @properties.each do |property|
-      .row.article
-        .col-md-8.col-md-offset-2
-          .listing-box.clearfix
-            .col-md-6.no-padding
-              .image-box
-                img alt="kasa" src="http://kasa-staging.s3.amazonaws.com/#{property.listing_id}_0.jpg"
-            .col-md-6
-              .listing-box-content
-                h5
-                  a href="inside_listing.html" = "#{property.address.titleize} #{property.city.titleize}"
-                p.listing-price
-                  = number_to_currency(property.price, precision: 0)
-                  span = "$#{property.price/property.area}/sf" rescue ""
-                ul.listing-info.list-unstyled.list-inline
-                  li
-                    img alt="" src=asset_path("pt_house_dark.png")
-                  li
-                    img alt="" src=asset_path("icon_couch_big.png")
-                    span = property.beds
-                  li
-                    img alt="" src=asset_path("icon_bathroom_big.png")
-                    span = property.baths
-                  li
-                    img alt="" src=asset_path("icon_car_big.png")
-                    span = property.garage
-                .listing-box-footer
-                  p = "Listed #{distance_of_time_in_words_to_now(property.date)} ago"
-                  .links.pull-right
-                    a href="/pages/untitled"  Favorite
-                    a href="/pages/untitled"  Share
-    .row
-      .col-md-8.col-md-offset-2.text-center
-        span = will_paginate @properties, :previous_label => '<i class="fa fa-angle-double-left"></i>', :next_label => '<i class="fa fa-angle-double-right"></i>'
+      - if @properties.size == 0
+        .row.article
+          .col-xs-12
+            .listing-box.clearfix.center-block
+              .col-xs-6.no-padding
+                .image-box
+                  .no-results Nothing found.
+              .col-xs-6
+                .listing-box-content
+                  h5
+                    a href="inside_listing.html" = ""
+                  p.listing-price
+                    = ""
+                    span = ""
+                  ul.listing-info.list-unstyled.list-inline.invisible
+                    li
+                      img alt="" src=asset_path("pt_house_dark.png")
+                    li
+                      img alt="" src=asset_path("icon_couch_big.png")
+                      span = "property.beds"
+                    li
+                      img alt="" src=asset_path("icon_bathroom_big.png")
+                      span = "property.baths"
+                    li
+                      img alt="" src=asset_path("icon_car_big.png")
+                      span = "property.garage"
+                  .listing-box-footer
+                    p = ""
+                    .links.pull-right.invisible
+                      a href="/pages/untitled"  Favorite
+                      a href="/pages/untitled"  Share
 
+
+
+  
+      - @properties.each do |property|
+        .row.article
+          .col-xs-12
+            .listing-box.clearfix.center-block
+              .col-xs-6.no-padding
+                .image-box
+                  img alt="Image" src="http://kasa-staging.s3.amazonaws.com/#{property.listing_id}_0.jpg"
+              .col-xs-6
+                .listing-box-content
+                  h5
+                    a href="inside_listing.html" = "#{property.address.titleize} #{property.city.titleize}"
+                  p.listing-price
+                    = number_to_currency(property.price, precision: 0)
+                    span = "$#{property.price/property.area}/sf" rescue ""
+                  ul.listing-info.list-unstyled.list-inline
+                    li
+                      img alt="" src=asset_path("pt_house_dark.png")
+                    li
+                      img alt="" src=asset_path("icon_couch_big.png")
+                      span = ""
+                    li
+                      img alt="" src=asset_path("icon_bathroom_big.png")
+                      span = property.baths
+                    li
+                      img alt="" src=asset_path("icon_car_big.png")
+                      span = property.garage
+                  .listing-box-footer
+                    p = "Listed #{distance_of_time_in_words_to_now(property.date)} ago"
+                    .links.pull-right
+                      a href="/pages/untitled"  Favorite
+                      a href="/pages/untitled"  Share
+      .row
+        .col-xs-8.col-xs-offset-2.text-center
+          - if @result_count > 10
+            span = will_paginate @properties, :previous_label => '<i class="fa fa-angle-double-left"></i>', :next_label => '<i class="fa fa-angle-double-right"></i>'
+          - else
+            span.invisible = will_paginate @properties, :previous_label => '<i class="fa fa-angle-double-left"></i>', :next_label => '<i class="fa fa-angle-double-right"></i>'
+  
 
 = render 'shared/footer'
