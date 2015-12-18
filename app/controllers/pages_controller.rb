@@ -1,5 +1,4 @@
 require 'open3'
-require 'uri'
 
 class PagesController < ApplicationController
   include ActionController::Live

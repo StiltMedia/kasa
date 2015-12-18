@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   get 'pages/browse'
   get 'pages/untitled'
   get 'pages/fetch'
+  post 'api/favorite_on'
+  post 'api/favorite_off'
   root 'pages#landing'
 
   # The priority is based upon order of creation: first created -> highest priority.

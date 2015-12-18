@@ -15,6 +15,30 @@
 //= require_tree .
 
 $(document).ready(function() {
+  // functions related to users pressing favorite button
+  // in the browse page
+  $('.browse-page .links a.favorite').click(function(){
+    var this_elem = $(this);
+    var url = "/api/favorite_on";
+    var user_id = $(this).data('userid');
+    var property_id = $(this).data('propertyid');
+    if ($(this).hasClass('fav-on') == true) {
+      url = "/api/favorite_off";
+    }
+    $.post( url, { user_id: user_id, property_id: property_id }, function( data ) {
+      if (data.status == 'ok') {
+        this_elem.toggleClass('fav-on');
+      } else {
+        console.log('Error b1832d');
+      }
+    });
+    
+
+  });
+
+
+
+
   var typingTimer;                //timer identifier
   var doneTypingInterval = 750;  //time in ms, 5 second for example
 

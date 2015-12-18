@@ -188,7 +188,19 @@
                     .links
                       a href="/pages/untitled"
                         div#my-share.share-widget data-url="#{@base_url}properties/#{property.listing_id}" data-text="Checkout out this listing" data-title="Share"
-                      a href="/pages/untitled"  Favorite
+                      - if user_signed_in?
+                        - if property.is_favorite?(current_user)
+                            a.favorite.fav-on href="javascript:void(0)" data-userid=current_user.id.to_s data-propertyid=property.id
+                              i.favorite.fa.fa-heart
+                              span &nbsp
+                              span.words Favorite
+                        - else
+                            a.favorite href="javascript:void(0)" data-userid=current_user.id.to_s data-propertyid=property.id
+                              i.favorite.fa.fa-heart
+                              span &nbsp
+                              span.words Favorite
+                      - else
+                        a href="javascript:alert('You must be logged in to Favourite a listing')"  Favorite
       .row
         .col-xs-8.col-xs-offset-2.text-center
           - if @result_count > 10

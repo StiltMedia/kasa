@@ -311,7 +311,38 @@ section.login .btn-alt {
   display: inline-block;
 }
 
+.browse-page .links a:hover {
+  text-decoration: none;
+}
+
 .btn:hover, .btn:focus:hover, .btn:active:hover {
   color: inherit;
+}
+
+.red {
+  color: red;
+}
+
+.browse-page .links a span.words {
+  color: #154067;
+}
+
+.browse-page .links a.fav-on span.words {
+  color: white;
+}
+
+
+.browse-page .links a i.fa-heart {
+  color: white;
+}
+
+.browse-page .links a.fav-on i.fa-heart {
+  color: red;
+  padding-left: 15px;
+}
+
+.browse-page .links a.favorite,  .browse-page .links a.favorite:hover, .browse-page .links a.favorite:active{
+  outline: 0;
+  text-decoration: none;
 }
 
