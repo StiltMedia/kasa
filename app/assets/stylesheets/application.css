@@ -229,3 +229,89 @@ section.login .btn-alt {
   outline: 1px solid yellow;
   padding: 20px 40px;
 }
+
+
+
+
+/* sharrre styles */
+.sharrre .box{
+  float:left;
+}
+.sharrre .count {
+  color:#444444;
+  display:block;
+  font-size:17px;
+  line-height:34px;
+  height:34px;
+  padding:4px 0;
+  position:relative;
+  text-align:center;
+  text-decoration:none;
+  width:50px;
+  background-color:#eee;
+  -webkit-border-radius:4px;
+  -moz-border-radius:4px;
+  border-radius:4px; 
+}
+.sharrre .share {
+  color:#FFFFFF;
+  display:block;
+  font-size:11px;
+  height:16px;
+  line-height:16px;
+  margin-top:3px;
+  padding:0;
+  text-align:center;
+  text-decoration:none;
+  width:50px;
+  background-color:#9CCE39;
+  -webkit-border-radius:4px;
+  -moz-border-radius:4px;
+  border-radius:4px; 
+}
+.sharrre .buttons {
+  display:none;
+  position:absolute;
+  margin-left:50px;
+  z-index:10;
+  background-color:#fff;
+}
+.sharrre .button {
+  float:left;
+  max-width:50px;
+  margin-left:10px;
+}
+
+.browse-page .sharrre a.count {
+  display: none;
+}
+
+.browse-page .sharrre a.share {
+  background-color: white;
+}
+
+.browse-page .links .sharrre {
+  zdisplay: inline-block;
+}
+
+.browse-page .sharrre .box {
+  float: none;
+}
+
+.browse-page .links {
+  margin-left: 40px;
+  margin-right: 40px;
+}
+
+.browse-page .sharrre .buttons {
+  margin-left: 0px;
+}
+
+.browse-page .links a {
+  display: inline-block;
+}
+
+.btn:hover, .btn:focus:hover, .btn:active:hover {
+  color: inherit;
+}
+

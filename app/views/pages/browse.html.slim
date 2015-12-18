@@ -1,3 +1,6 @@
+- require 'uri'
+- @parts = URI.split(request.original_url)
+- @base_url = "#{@parts[0]}://#{@parts[2]}/"
 = render 'shared/topbar'
 
 .browse-page
@@ -148,7 +151,8 @@
                     p = ""
                     .links.pull-right.invisible
                       a href="/pages/untitled"  Favorite
-                      a href="/pages/untitled"  Share
+                      a href="/pages/untitled" Share
+
 
 
 
@@ -181,9 +185,10 @@
                       span = property.garage
                   .listing-box-footer
                     p = "Listed #{distance_of_time_in_words_to_now(property.date)} ago"
-                    .links.pull-right
+                    .links
+                      a href="/pages/untitled"
+                        div#my-share.share-widget data-url="#{@base_url}properties/#{property.listing_id}" data-text="Checkout out this listing" data-title="Share"
                       a href="/pages/untitled"  Favorite
-                      a href="/pages/untitled"  Share
       .row
         .col-xs-8.col-xs-offset-2.text-center
           - if @result_count > 10
@@ -193,3 +198,26 @@
   
 
 = render 'shared/footer'
+
+
+| <script>
+| $('.share-widget').sharrre({
+|   share: {
+|     twitter: true
+|   },
+|   enableCounter: true,
+|   enableHover: true,
+|   enableTracking: false,
+|   buttons: {
+|     googlePlus: {size: 'tall', annotation:'bubble'},
+|     twitter: {count: 'vertical', via: ''}
+|   },
+|   hover: function(api, options){
+|     $(api.element).find('.buttons').show();
+|   },
+|   hide: function(api, options){
+|     $(api.element).find('.buttons').hide();
+|   },
+|   enableTracking: true
+| });
+| </script>

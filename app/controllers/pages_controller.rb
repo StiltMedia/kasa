@@ -1,4 +1,5 @@
 require 'open3'
+require 'uri'
 
 class PagesController < ApplicationController
   include ActionController::Live
@@ -25,6 +26,7 @@ class PagesController < ApplicationController
 
     session[:browse_beds] = 'All' if (!session[:browse_beds].present?) && (!params[:beds])
     session[:browse_baths] = 'All' if (!session[:browse_baths].present?) && (!params[:baths])
+    session[:browse_price] = 'Any Price' if (!session[:browse_price].present?) && (!params[:price])
     session[:browse_page] = 1 if (!session[:browse_page].present?) && (!params[:page])
     session[:browse_sort] = 'Newest Listings' if (!session[:browse_sort].present?) && (!params[:sort])
     #step 1 - filtering
