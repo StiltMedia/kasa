@@ -24,7 +24,10 @@ $(document).ready(function() {
     };
     var map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
   }
-  google.maps.event.addDomListener(window, 'load', initialize());
+
+  if ( window.location.href.indexOf("/pages/browse") > -1 ) {
+    google.maps.event.addDomListener(window, 'load', initialize());
+  }
   // end Google Maps initializations
 
   // ensure user agreed to tos
@@ -81,14 +84,6 @@ $(document).ready(function() {
   });
   
 });
-
-
-
-
-
-
-
-
 
 
 

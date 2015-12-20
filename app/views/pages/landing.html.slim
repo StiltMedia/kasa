@@ -110,9 +110,15 @@
           .col-md-12
             h2 Have Questions? Contact Us
             p.phone-number 1 800 000 0000
-            a.message-text href="/pages/untitled"  OR SEND US A MESSAGE
-            span.border
-            a.btn href="/pages/untitled"  Live Chat
+            a.message-text href="javascript:void(0)" onclick="MyLiveChat_OpenDialog()" OR SEND US A MESSAGE
+            / span.border
+            br
+            br
+            a#MyLiveChatScriptLink.btn href="javascript:void(0)" onclick="MyLiveChat_OpenDialog()"  Live Chat
+
+
+
+
     /! .have a question
     /! footer
     footer

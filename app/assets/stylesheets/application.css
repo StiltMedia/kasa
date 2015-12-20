@@ -315,9 +315,14 @@ section.login .btn-alt, section.signup .btn-alt {
   text-decoration: none;
 }
 
-.btn:hover, .btn:focus:hover, .btn:active:hover {
-  color: inherit;
+.btn:hover,
+.btn:focus:hover,
+.btn:active:hover {
+  color: white;
 }
+
+
+
 
 .red {
   color: red;
