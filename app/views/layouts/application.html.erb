@@ -7,10 +7,10 @@
   <%= stylesheet_link_tag    'https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css' %>
   <%= stylesheet_link_tag    asset_url('style.css'), media: 'all' %>  
   <%= stylesheet_link_tag    'application', media: 'all' %>
+  <%#= stylesheet_link_tag    'http://s3-us-west-2.amazonaws.com/pesticide/1.2.0/pesticide.min.css', media: 'all' %>
 
 
   <%= javascript_include_tag 'application' %>
-  <%= javascript_include_tag 'jquery.sharrre.js' %>
 
   <%= csrf_meta_tags %>
 </head>
@@ -18,9 +18,12 @@
 
 <%= yield %>
 
+
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js">
 <%= javascript_include_tag 'custom' %>
 <%= javascript_include_tag 'jquery.scrollTo.min.js' %>
 <%= javascript_include_tag 'https://code.jquery.com/ui/1.10.4/jquery-ui.js' %>
+<%= javascript_include_tag 'jquery.sharrre.js' %>
+<%= javascript_include_tag 'http://maps.googleapis.com/maps/api/js' %>
 </body>
 </html>

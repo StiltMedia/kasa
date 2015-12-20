@@ -16,6 +16,17 @@
 
 $(document).ready(function() {
 
+  // Google Maps initializations
+  function initialize() {
+    var mapOptions = {
+      center: new google.maps.LatLng(-34.397, 150.644),
+      zoom: 8
+    };
+    var map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
+  }
+  google.maps.event.addDomListener(window, 'load', initialize());
+  // end Google Maps initializations
+
   // ensure user agreed to tos
   $("section.signup form#new_user").submit(function(event) {
     if ( $("form#new_user input.tos").is(':checked') == false ) {
@@ -70,3 +81,15 @@ $(document).ready(function() {
   });
   
 });
+
+
+
+
+
+
+
+
+
+
+
+

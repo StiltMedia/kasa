@@ -6,6 +6,11 @@ class PagesController < ApplicationController
   end
 
   def browse
+    if params[:browse_view].present?
+      session[:browse_view] = params[:browse_view]
+      params[:browse_view] = nil
+    end
+
     if params[:baths] == 'All'
       params[:baths] = nil
       session[:browse_baths] ='All'
@@ -14,6 +19,8 @@ class PagesController < ApplicationController
       params[:beds] = nil
       session[:browse_beds] ='All'
     end
+
+
 
     session[:browse_search] = params[:search] if params.has_key? 'search'
     session[:browse_price] = params[:price] if params[:price].present?

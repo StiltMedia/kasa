@@ -410,3 +410,23 @@ div.copyrights {
 div#error_explanation h2 {
   display: none;
 }
+
+.browse-page .left-panel {
+  outline: 0px solid yellow !important;
+  display: inline-block;
+  width: 407px;
+  vertical-align: top;
+}
+
+.browse-page .right-panel {
+  outline: 0px solid blue !important;
+  display: inline-block;
+}
+
+#map_canvas{
+  height: 100vh;
+  width: 408px;
+  margin: 10px 1px;
+    
+}
+
