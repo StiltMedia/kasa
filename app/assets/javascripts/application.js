@@ -15,6 +15,16 @@
 //= require_tree .
 
 $(document).ready(function() {
+
+  // ensure user agreed to tos
+  $("section.signup form#new_user").submit(function(event) {
+    if ( $("form#new_user input.tos").is(':checked') == false ) {
+      alert('Please agree to the Terms of Service');
+      event.preventDefault();
+    }
+  });
+
+
   // functions related to users pressing favorite button
   // in the browse page
   $('.browse-page .links a.favorite').click(function(){

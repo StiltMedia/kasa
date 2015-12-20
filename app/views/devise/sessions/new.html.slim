@@ -4,40 +4,26 @@
 
 section.login
   = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
-    .row
-      .col-md-12
-        .title.text-center
-          h2 Log in
+
     br
     .row
-      .col-md-4.col-md-offset-4
-        .white-block
-    
-            .info-content
-              - if notice || alert
+      .col-sm-12
+        .white-block.center-block
+            .heading.text-center Log In
+            p.gray1.text-center
+              span Don't have an account? &nbsp;
+              a.underlined href="/users/sign_up" Sign Up
+            .info-content.text-center
+              - if notice || alert || devise_error_messages!
                 p = notice
                 p = alert
+                p = devise_error_messages!
               p style="line-height: 250%"
-                b Email
-                input class="form-control form-control-solid placeholder-no-fix" placeholder="Email" autocomplete="on" value="" name="user[email]" id="user_email" type="email"
+                input class="center-block form-control form-control-solid placeholder-no-fix" placeholder="Email" autocomplete="on" value="" name="user[email]" id="user_email" type="email"
               p style="line-height: 250%"
-                b Password
-                input class="form-control form-control-solid placeholder-no-fix" placeholder="Password" autocomplete="off" name="user[password]" id="user_password" type="password"
-    	  
+                input class="center-block form-control form-control-solid placeholder-no-fix" placeholder="Password" autocomplete="off" name="user[password]" id="user_password" type="password"
               p
-                input name="user[remember_me]" type="hidden" value="0" /
-                input#user_remember_me name="user[remember_me]" type="checkbox" value="1" &nbsp;&nbsp;Remember me
-    
-            
-
-
-    br
-    .row
-      .col-md-4.col-md-offset-4.text-right
-        input.btn.btn-alt type="submit" name="commit" value=="SUBMIT &rarr;"
-br
-br
-hr
+                input.submit.btn.btn-alt type="submit" name="commit" value="LOG IN"
 br
 h2
 

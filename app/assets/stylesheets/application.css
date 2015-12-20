@@ -73,13 +73,13 @@ body * {
 }
 
 
-section.login .white-block {
+section.login .white-block, section.signup .white-block {
   position: relative;
   padding: 40px;
   background-color: #FFF;
 }
 
-section.login .btn-alt {
+section.login .btn-alt, section.signup .btn-alt {
   border: medium none;
   font-size: 14px;
   color: #363636;
@@ -346,3 +346,67 @@ section.login .btn-alt {
   text-decoration: none;
 }
 
+section.login .white-block, section.signup .white-block {
+  width: 500px;
+}
+
+.underlined {
+  text-decoration: underline;
+}
+
+.gray1 {
+  color: rgb(171,174,175);
+}
+
+section.login #user_email,
+  section.login #user_password,
+  section.login #user_password_confirmation,
+  section.signup #user_email,
+  section.signup #user_password,
+  section.signup #user_password_confirmation {
+  width: 300px;
+  margin-top: 22px;
+  border-radius: 0px;
+  height: 43px;
+  padding: 6px 19px;
+  border: 1px solid #939393;
+}
+
+section.login input.submit, section.signup input.submit {
+  color: #FFF;
+  background-color: #154067;
+  font-size: 13px;
+  font-weight: 400;
+  padding-left: 47px;
+  padding-right: 47px;
+  margin-top: 15px;
+  border-radius: 0px;
+
+}
+
+section.login input.submit, section.signup input.submit {
+  color: #FFF;
+  background-color: #154067;
+  font-size: 13px;
+  font-weight: 400;
+  padding-left: 47px;
+  padding-right: 47px;
+  margin-top: 15px;
+  border-radius: 0px;
+
+}
+
+section.login .heading, section.signup .heading {
+  font-size: 28px;
+  font-weight: 400 !important;
+  font-family: "Lato",sans-serif;
+  font-size: 28px;
+}
+
+div.copyrights {
+  white-space: nowrap;
+}
+
+div#error_explanation h2 {
+  display: none;
+}
