@@ -15,6 +15,15 @@
 //= require_tree .
 
 $(document).ready(function() {
+// Without JQuery
+var slider = new Slider('#ex1', {
+	formatter: function(value) {
+                $(".wewill .amount").text('$'+numberWithCommas(value*0.005));
+		return 'Purchase Price $' + numberWithCommas(value);
+	}, tooltip: 'always',
+});
+
+
 
   // Google Maps initializations
   function initialize() {
@@ -86,5 +95,6 @@ $(document).ready(function() {
 });
 
 
-
-
+function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}

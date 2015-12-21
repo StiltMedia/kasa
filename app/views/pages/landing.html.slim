@@ -1,3 +1,5 @@
+
+
 .homepage
   #menu
     nav
@@ -67,13 +69,7 @@
               | nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem.
               | Nulla
               | consequat massa quis enim.
-            br
-            br
-            br
-            br
-            br
-            br
-            br 
+
     /! .intro section
 
 
@@ -211,18 +207,20 @@
     section.refund-calculator
       .container
         .row
-          .col-md-10
-            .refund-content.pull-right
-              h2
-                | See How Much You
-                br/
-                | Save On Your Next Home
-              a.btn href="/pages/untitled" 
-                span
-                  img alt="icon" src=asset_path("icon_calculator.svg")
-                | Refund Calculator
+          .col-sm-12
+            .refund-content.text-center
+              p.see SEE HOW MUCH YOU'LL SAVE ON YOUR NEXT HOME
+              p
+                | <input id="ex1" data-slider-id='ex1Slider' type="text" data-slider-min="250000" data-slider-step="100000" data-slider-max="22000000" data-slider-step="1" data-slider-value="3400000"/>
+              p.assuming Assuming typical 2.5% agent commission
+              p.wewill
+                span We'll refund you 
+                span.amount $10,625
+
     /! .refund calculator
-    br
+
+
+
     /! about kasa
     section#about.about-kasa.no-padding
       .container-fluid
@@ -241,13 +239,15 @@
         .row
           .col-md-12
             h2 Have Questions? Contact Us
-            p.phone-number 1 800 000 0000
+            p.phone-number 1 800 800 4321
             a.message-text href="javascript:void(0)" onclick="MyLiveChat_OpenDialog()" OR SEND US A MESSAGE
             / span.border
             br
             br
+            br
             a#MyLiveChatScriptLink.btn href="javascript:void(0)" onclick="MyLiveChat_OpenDialog()"  Live Chat
-
+            br
+            br
 
 
 
@@ -320,3 +320,4 @@
                 p ©2015 KASA. All Rights Reserved.
           /! .for mobiles
     /! .footer
+

@@ -438,3 +438,53 @@ div#error_explanation h2 {
 section.refund-calculator {
   padding: 120px 0px;
 }
+
+.refund-calculator {
+  font-size: 15px;
+  color: #FFF;
+  font-weight: bold;
+  line-height: 20px;
+}
+
+a#MyLiveChatScriptLink:nth-of-type(1){
+  display: none;
+}
+
+.refund-calculator .see {
+  color: 
+  font-size: 15px; 
+  margin: 0px auto 68px;
+  color: #FFF;
+  font-weight: bold;
+}
+
+.refund-calculator .assuming {
+  margin-top: 30px;
+  color: #FFF;
+  font-weight: 300;
+}
+
+
+.homepage .slider-track,
+  .homepage .slider-track-low,
+  .homepage .slider-track-high,
+  .homepage .slider-selection {
+  background-image: none;
+  background-color: rgba(255,255,255,0.1);
+}
+
+.homepage .wewill {
+  letter-spacing: -0.03em;
+  font-size: 36px;
+  color: #FFF;
+  font-weight: 400;
+}
+
+.homepage .wewill .amount {
+  color: #85C9A3;
+}
+
+
+.homepage section.about-kasa {
+  padding: 0px 0px;
+}
