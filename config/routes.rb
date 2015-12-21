@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   get 'pages/browse'
   get 'pages/untitled'
   get 'pages/fetch'
+  get 'pages/listing_details/:listing_id' => 'pages#listing_details'
   post 'api/favorite_on'
   post 'api/favorite_off'
   root 'pages#landing'

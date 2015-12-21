@@ -16,6 +16,10 @@ require 'silence_warning'
 # 25      beds        integer
 # 1424    baths       integer
 # 102     garage      integer
+# 214     remarks     text
+# 314     built       string
+# 96      floor       string
+# 1       type        string
 # syscode syscode     string
 
 class RetsWrapper  
@@ -71,19 +75,24 @@ class RetsWrapper
   end
 
   def get_photos(listing, serial_no,total)
-    if image_exists?(listing['157'])
-      puts " F95BA #{serial_no+1}/#{total} #{listing['157']}_0.jpg exists, skipping"
-      return
+    #if image_exists?(listing['157'])
+    #  puts " F95BA #{serial_no+1}/#{total} #{listing['157']}_0.jpg exists, skipping"
+    #  return
+    #end
+    imgs = (@client.objects '*', { resource: 'Property', object_type: 'Photo', resource_id: listing['sysid']+':0' }) rescue Array.new
+
+    images_tot = imgs.size
+    images_tot = 5 if imgs.size >= 5
+    listing.update_attribute(:images_tot, images_tot)
+   
+    imgs[0..3].each_with_index do |img, ndx|
+      File.open("tmp/tmp.jpg", 'wb') { |file| file.write imgs[ndx].body }
+      file_name = "#{listing['listing_id']}_#{ndx}.jpg"
+      save_to_s3(file_name,listing['listing_id'])
+      puts " F95BA #{serial_no+1}/#{total} Listing ID #{listing['listing_id']}, #{imgs.size} photos. saved \##{ndx+1}."
     end
-    imgs = @client.objects '*', {
-      resource: 'Property',
-      object_type: 'Photo',
-      resource_id: listing['sysid']+':0'
-    }
-    File.open("tmp/tmp.jpg", 'wb') { |file| file.write imgs[0].body }
-    file_name = "#{listing['157']}_0.jpg"
-    save_to_s3(file_name,listing['157'])
-    puts " F95BA #{serial_no+1}/#{total} Listing ID #{listing['157']}, #{imgs.size} photos. 1 saved."
+
+    return imgs.size
   end
 
   # downloads listings, sans photos
@@ -94,7 +103,7 @@ class RetsWrapper
       query:          "(246=|A),(61=|#{county})", #246 ListingStatus
                                                   #A ActiveAvailable
                                                   #61 County
-      select: '157,881,10,922,924,137,261,246,80,61,25,1424,102,sysid', 
+      select: '157,881,10,922,924,137,261,246,80,61,25,1424,102,214,314,96,1,sysid', 
       search_type:    'Property'
     }
     puts "F95BA #{results.size} listings"
@@ -134,6 +143,10 @@ class RetsWrapper
         baths: l['1424'],
         garage: l['102'],
         county: l['61'],
+        remarks: l['214'],
+        built: l['314'],
+        floor: l['96'],
+        ptype: l['1'],
         sysid: l['sysid'])
       end
     puts "F95BA saved"

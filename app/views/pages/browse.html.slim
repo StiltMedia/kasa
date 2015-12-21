@@ -139,7 +139,7 @@
                 .col-xs-6
                   .listing-box-content
                     h5
-                      a href="inside_listing.html" = ""
+                      a href="/pages/untitled" = ""
                     p.listing-price
                       = ""
                       span = ""
@@ -168,14 +168,15 @@
         - @properties.each do |property|
           .row.article
             .col-xs-12
-              .listing-box.clearfix.center-block
+              .listing-box.clearfix.center-block class=(session[:browse_view] == 'Map' ? 'skinny' : '')
                 .col-xs-6.no-padding
                   .image-box
                     img alt="" src="http://kasa-staging.s3.amazonaws.com/#{property.listing_id}_0.jpg"
                 .col-xs-6
                   .listing-box-content
                     h5
-                      a href="inside_listing.html" = "#{property.address.titleize} #{property.city.titleize}"
+                      .prop_addr.invisible = "#{property.address} #{property.zip} #{property.state} USA"
+                      a href="/pages/listing_details/#{property.listing_id}" = "#{property.address.titleize} #{property.city.titleize} #{property.state}"
                     p.listing-price
                       = number_to_currency(property.price, precision: 0)
                       span = "$#{property.price/property.area}/sf" rescue ""
@@ -194,6 +195,7 @@
                     .listing-box-footer
                       p = "Listed #{distance_of_time_in_words_to_now(property.date)} ago"
                       .links
+                        a.twitter.popup href="https://twitter.com/intent/tweet?text=Check+out+this+listing&url=http://kasa-staging.herokuapp.com/listings/#{property.listing_id}" Share
                         a href="/pages/untitled"
                           div#my-share.share-widget data-url="#{@base_url}properties/#{property.listing_id}" data-text="Checkout out this listing" data-title="Share"
                         - if user_signed_in?
@@ -215,29 +217,59 @@
               span = will_paginate @properties, :previous_label => '<i class="fa fa-angle-double-left"></i>', :next_label => '<i class="fa fa-angle-double-right"></i>'
             - else
               span.invisible = will_paginate @properties, :previous_label => '<i class="fa fa-angle-double-left"></i>', :next_label => '<i class="fa fa-angle-double-right"></i>'
-  
 
 = render 'shared/footer'
 
 
-| <script>
-| $('.share-widget').sharrre({
-|   share: {
-|     twitter: true
-|   },
-|   enableCounter: true,
-|   enableHover: true,
-|   enableTracking: false,
-|   buttons: {
-|     googlePlus: {size: 'tall', annotation:'bubble'},
-|     twitter: {count: 'vertical', via: ''}
-|   },
-|   hover: function(api, options){
-|     $(api.element).find('.buttons').show();
-|   },
-|   hide: function(api, options){
-|     $(api.element).find('.buttons').hide();
-|   },
-|   enableTracking: true
-| });
-| </script>
+javascript:
+  function gm_initialize() {
+    var mapOptions = {
+      scrollwheel: false,
+      navigationControl: false,
+      mapTypeControl: false,
+      scaleControl: false,
+      draggable: false,
+      center: new google.maps.LatLng(25.7753, -80.2089),  //Florida
+      zoom: 10
+    };
+    map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
+  }
+
+  document.addEventListener("DOMContentLoaded", function()  {
+    gm_initialize();
+ 
+    var markers = [];
+
+    $(".prop_addr").each(function() {
+      pinpoint( $(this).text() );    // draw markers
+
+    });
+
+    function pinpoint(address) {
+      var iconBase = 'https://maps.google.com/mapfiles/kml/shapes/';
+      address = address.replace(/\s+/g, ' ').trim();
+      console.log("pinpoint() called with "+address);
+      var geocoder = new google.maps.Geocoder();
+      geocoder.geocode( { 'address': address}, function(results, status) {
+        if (status == google.maps.GeocoderStatus.OK) {
+          //map.setCenter(results[0].geometry.location);
+          var m = new google.maps.Marker({
+            map: map,
+            title: address,
+            icon: iconBase + 'placemark_square_highlight.png',
+            position: results[0].geometry.location
+          })
+          var infowindow = new google.maps.InfoWindow({ content: address });
+          m.addListener('click', function() {
+            infowindow.open(map, m);
+          });          
+          markers.push(m);
+        } else {
+          console.log('Geocode was not successful: ' + status);
+        }
+      });
+    }
+  });
+  
+
+

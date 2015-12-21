@@ -1,0 +1,244 @@
+= render 'shared/topbar'
+
+.listing_details
+
+  /! inside listing
+  section.inside-listing-top
+    .container-fluid
+      .row
+        .col-md-12
+          /! property title
+          .property-title
+            h2 #{@listing.address.titleize} #{@listing.city.titleize} #{@listing.state}
+          /! .property title
+  /! .inside listing
+  /! slider
+  aside
+    #myCarousel.carousel.slide data-wrap="false" data-interval="6000" data-ride="carousel" 
+      .carousel-inner
+        .item.active
+          img.img-responsive.slide-img alt="" src="http://kasa-staging.s3.amazonaws.com/#{@listing.listing_id}_1.jpg" title="" /
+        - if @listing.images_tot && @listing.images_tot > 2
+          - (2..@listing.images_tot-2).each do |i|
+            .item
+              img.img-responsive.slide-img alt="" src="http://kasa-staging.s3.amazonaws.com/#{@listing.listing_id}_#{i}.jpg" title="" /
+      /! controls
+      .control-box
+        a.left.carousel-control data-slide="prev" href="#myCarousel" role="button" 
+          i.fa.fa-angle-left
+        a.right.carousel-control data-slide="next" href="#myCarousel" role="button" 
+          i.fa.fa-angle-right
+      /! .controls
+  /! .slider
+  /! property content
+  section.property-content
+    .container
+      .row
+        .col-md-8
+          h3
+            | #{@listing.address.titleize},
+            br/
+            | #{@listing.city.titleize} #{@listing.state}
+          .text-box
+            p = @listing.remarks.humanize rescue ""
+            p.faded
+              | Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.
+              | Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus
+              | mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa
+              | quis enim. nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium
+              | quis, sem. Nulla consequat massa quis enim.
+            p.faded
+              | Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.
+              | Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus
+              | mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa
+              | quis enim. nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium
+              | quis, sem. Nulla consequat massa quis enim.
+        aside.col-md-4
+          .sidebar.property-info.clearfix
+            p.p-type
+              b Property Type:
+              img alt=("icon house") src=asset_path("pt_house_dark.png") /
+              span Home
+            ul.listing-info.list-unstyled.list-inline
+              li
+                img alt="" src=asset_path("icon_couch_big.png") /
+                span = @listing.beds
+              li
+                img alt="" src=asset_path("icon_bathroom_big.png") /
+                span = @listing.baths
+              li
+                img alt="" src=asset_path("icon_car_big.png") /
+                span = @listing.garage
+            p.other-features
+              b Other Features:
+            p Built #{@listing.built}, #{@listing.floor.sub(' Other floor','').gsub(',',', ').titleize} floor
+            .links
+              a href="#"  Favorite
+              a href="#"  Share
+            hr/
+            .price.pull-left
+              p.listing-price
+                | #{number_to_currency(@listing.price, precision: 0)}
+                span = "$#{@listing.price/@listing.area}/sf" rescue ""
+            .for-sale.pull-right
+              p
+                | FOR SALE
+                span 19hrs ago
+            .sidebar-btn.text-right
+              a.btn href="#"  CREATE AND OFFER
+              a.btn href="#"  REQUEST SHOWING
+              a.request-more-info data-target="#more-info" data-toggle="modal" href="#"  Request More Info
+            .footer.text-center
+              p
+                | Get a 
+                b $NN,NNN 
+                | refund when you buy with KASA. 
+                a href="/pages/untitled" Learn More
+  /! .property content
+  /! nearby schools
+  section.schools
+    hr/
+    .container
+      .row
+        .col-md-12
+          h3.inner-title Schools Nearby
+          ul.list-inline.schools
+            li Elementary School: Castle Heights
+            li Jr. High School: Palms
+            li High School: Hamilton
+  /! .nearby schools
+  /! map
+  .header-map.inside-listing-map
+    #map_canvas
+  /! .map
+  /! nearby listings
+  section.similar-listings
+    .container
+      .row
+        .col-md-12
+          h3.inner-title Similar Listings Nearby
+      .row
+        - Property.where(zip: @listing.zip).limit(3).each do |l|
+          .col-md-4
+            /! listing box
+            .listing-box.listing-box-grid.clearfix
+              .col-md-6.no-padding
+                .image-box
+                  img alt="kasa" src="http://kasa-staging.s3.amazonaws.com/#{l.listing_id}_0.jpg"
+              .col-md-6
+                .listing-box-content
+                  h5
+                    a href="/pages/listing_details/#{l.listing_id}" = "#{l.address.titleize} #{l.city.titleize}"
+                  p.listing-price
+                    | #{number_to_currency(l.price, precision: 0)}
+                    span = "Listed #{distance_of_time_in_words_to_now(l.date)} ago"
+                  ul.listing-info.list-unstyled.list-inline
+                    li
+                      img alt="" src=asset_path("pt_house_dark.png") /
+                    li
+                      img alt="" src=asset_path("icon_couch_big.png") /
+                      span = l.beds
+                    li
+                      img alt="" src=asset_path("icon_bathroom_big.png") /
+                      span = l.baths
+                    li
+                      img alt="" src=asset_path("icon_car_big.png") /
+                      span = l.garage
+            /! .listing box
+      .row
+        .col-md-12
+          .show-more-btn.text-center
+            a.btn href="/pages/browse"  SHOW MORE
+  /! .nearby listings
+  
+
+
+
+= render 'shared/footer'
+
+
+javascript:
+
+  function gm_initialize() {
+    var mapOptions = {
+      scrollwheel: false,
+      navigationControl: false,
+      mapTypeControl: false,
+      scaleControl: false,
+      draggable: false,
+  
+      center: new google.maps.LatLng(25.7753, -80.2089),  //Florida
+      zoom: 9
+    };
+    map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
+  }
+
+  function pinpoint(address) {
+    var iconBase = 'https://maps.google.com/mapfiles/kml/shapes/';
+    address = address.replace(/\s+/g, ' ').trim();
+    console.log("pinpoint() called with "+address);
+    var geocoder = new google.maps.Geocoder();
+    geocoder.geocode( { 'address': address}, function(results, status) {
+      if (status == google.maps.GeocoderStatus.OK) {
+        //map.setCenter(results[0].geometry.location);
+        var m = new google.maps.Marker({
+          map: map,
+          title: address,
+          icon: iconBase + 'placemark_square_highlight.png',
+          position: results[0].geometry.location
+        })
+        var infowindow = new google.maps.InfoWindow({ content: address });
+        m.addListener('click', function() {
+          infowindow.open(map, m);
+        });          
+        
+      } else {
+        console.log('Geocode was not successful: ' + status);
+      }
+    });
+  }
+
+
+  function callback(results, status) {
+    if (status === google.maps.places.PlacesServiceStatus.OK) {
+      $("ul.list-inline.schools").empty();
+      var max = 3;
+      if (results.length < 3) {
+        max = results.length;
+      }
+      for (var i = 0; i < max; i++) {
+        //createMarker(results[i]);
+        console.log(results[i].name);
+        $("ul.list-inline.schools").append('<li>'+results[i].name+'</li>');
+      }
+    }
+  }
+  
+
+  // when given an address, finds a few closeby schools
+  // and adds children to the ul.list-inline.schools element
+  function find_schools(addr) {
+    console.log("find_schools() called with "+addr);
+    var geocoder = new google.maps.Geocoder();
+    geocoder.geocode( { 'address': addr}, function(results, status) {
+      if (status == google.maps.GeocoderStatus.OK) {
+        console.log(results[0].geometry.location);
+        var service = new google.maps.places.PlacesService(map);
+        service.nearbySearch({
+        location: results[0].geometry.location,
+        radius: 2500,
+        types: ['school']
+        }, callback);
+
+        
+      } else {
+        console.log('Geocode was not successful: ' + status);
+      }
+    });
+  }
+
+  document.addEventListener("DOMContentLoaded", function()  {
+    gm_initialize();
+    pinpoint( $(".property-title h2").text() );    // draw marker
+    find_schools( $(".property-title h2").text() );
+  });

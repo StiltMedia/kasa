@@ -2,6 +2,12 @@ require 'open3'
 
 class PagesController < ApplicationController
   include ActionController::Live
+
+
+  def listing_details
+    @listing = Property.find_by_listing_id(params[:listing_id])
+  end
+
   def landing
   end
 
@@ -85,8 +91,8 @@ class PagesController < ApplicationController
 
   def fetch
     response.headers['Content-Type'] = 'text/html'
-    response.stream.write "<br>Running rake kasa:fetch PHOTOS=1\n"
-    cmd = 'rake kasa:fetch PHOTOS=1'
+    response.stream.write "<br>Running rake kasa:fetch LISTINGS=1 PHOTOS=0\n"
+    cmd = 'rake kasa:fetch LISTINGS=1 PHOTOS=0'
     Open3.popen3(cmd) do |stdin, stdout, stderr, wait_thr|
       while line = stdout.gets
         Rails.logger.debug line

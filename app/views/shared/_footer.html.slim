@@ -39,15 +39,18 @@ footer
             p ©2015 KASA. All Rights Reserved.
             a href="/pages/untitled"  Privacy Policy
             a href="/pages/untitled"  Terms and Conditions
-            a href="/pages/untiled"  FAQ
+            a href="/pages/untitled"  FAQ
         .col-sm-4
           .social-icons.text-right
-            a href="/pages/untitled" 
+            a href="javascript:fbShare('http://kasa-staging.herokuapp.com/', 'Fb Share', 'Facebook share popup', 'http://goo.gl/dS52U', 520, 350)" 
               img alt="facebook" src=asset_path("icon_facebook.png")
-            a href="/pages/untitled" 
+            a.twitter.popup href="http://twitter.com/share"
               img alt="twitter" src=asset_path("icon_twitter.png")
-            a href="/pages/untitled" 
+            a href="https://plus.google.com/share?url=#{request.original_url}" onclick="javascript:window.open('https://plus.google.com/share?url=kasa-staging.herokuapp.com','','menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600'); return false;"
               img alt="google-plus" src=asset_path("icon_g_plus.png")
+
+
+
       /! for mobiles
       .copy-mobiles.text-center
         .col-sm-12
@@ -58,6 +61,9 @@ footer
               img alt="twitter" src=asset_path("icon_twitter.png")
             a href="/pages/untitled" 
               img alt="google-plus" src=asset_path("icon_g_plus.png")
+
+
+
         .col-sm-12
           .copyrights
             a href="/pages/untitled"  Privacy Policy

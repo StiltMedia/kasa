@@ -10,7 +10,7 @@
   <%#= stylesheet_link_tag    'http://s3-us-west-2.amazonaws.com/pesticide/1.2.0/pesticide.min.css', media: 'all' %>
   <%= stylesheet_link_tag    'https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/5.3.2/css/bootstrap-slider.css' %>
 
-  <%= javascript_include_tag 'application' %>
+
 
 
   <%= csrf_meta_tags %>
@@ -19,15 +19,16 @@
 
 <%= yield %>
 
+
+<%= javascript_include_tag 'application' %>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js">
 <%= javascript_include_tag 'custom' %>
 <%= javascript_include_tag 'jquery.scrollTo.min.js' %>
 <%= javascript_include_tag 'https://code.jquery.com/ui/1.10.4/jquery-ui.js' %>
-<%= javascript_include_tag 'jquery.sharrre.js' %>
-<%= javascript_include_tag 'http://maps.googleapis.com/maps/api/js' %>
+<%= javascript_include_tag 'http://maps.googleapis.com/maps/api/js?libraries=places' %>
 
 <script type="text/javascript" async="async" defer="defer" data-cfasync="false" src="https://mylivechat.com/chatlink.aspx?hccid=93301249"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/5.3.2/bootstrap-slider.min.js">
+<%= javascript_include_tag 'bootstrap-slider.js' %>
 
 </script>
 

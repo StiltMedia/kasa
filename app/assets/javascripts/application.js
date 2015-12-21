@@ -14,29 +14,56 @@
 //= require jquery_ujs
 //= require_tree .
 
+var map; //the google map used in browse page ->  maps view
+
+function fbShare(url, title, descr, image, winWidth, winHeight) {
+    var winTop = (screen.height / 2) - (winHeight / 2);
+    var winLeft = (screen.width / 2) - (winWidth / 2);
+    window.open('http://www.facebook.com/sharer.php?s=100&p[title]=' + title + '&p[summary]=' + descr + '&p[url]=' + url + '&p[images][0]=' + image, 'sharer', 'top=' + winTop + ',left=' + winLeft + ',toolbar=0,status=0,width=' + winWidth + ',height=' + winHeight);
+}
+
+if ( $("#ex1").length > 0 ) {
+  // Without JQuery
+  var slider = new Slider('#ex1', {
+  	formatter: function(value) {
+                  $(".wewill .amount").text('$'+numberWithCommas(value*0.005));
+  		return 'Purchase Price $' + numberWithCommas(value);
+  	}, tooltip: 'always',
+  });
+}
+
+
 $(document).ready(function() {
-// Without JQuery
-var slider = new Slider('#ex1', {
-	formatter: function(value) {
-                $(".wewill .amount").text('$'+numberWithCommas(value*0.005));
-		return 'Purchase Price $' + numberWithCommas(value);
-	}, tooltip: 'always',
-});
+  
 
-
+  $('.twitter.popup').click(function(event) {
+    var width  = 575,
+        height = 400,
+        left   = ($(window).width()  - width)  / 2,
+        top    = ($(window).height() - height) / 2,
+        url    = this.href,
+        opts   = 'status=1' +
+                 ',width='  + width  +
+                 ',height=' + height +
+                 ',top='    + top    +
+                 ',left='   + left;
+    
+    window.open(url, 'twitter', opts);
+    return false;
+  });
 
   // Google Maps initializations
-  function initialize() {
+  function gm_initialize() {
     var mapOptions = {
-      center: new google.maps.LatLng(-34.397, 150.644),
-      zoom: 8
+      center: new google.maps.LatLng(25.7753, -80.2089),
+      zoom: 10
     };
-    var map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
+    map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
   }
 
-  if ( window.location.href.indexOf("/pages/browse") > -1 ) {
-    google.maps.event.addDomListener(window, 'load', initialize());
-  }
+  
+
+
   // end Google Maps initializations
 
   // ensure user agreed to tos

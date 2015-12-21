@@ -93,7 +93,7 @@ section.login .btn-alt, section.signup .btn-alt {
   padding: 30px 40px !important;
 }
 
-.listing-box {
+.browse-page .listing-box {
   width: 730px;
 }
 
@@ -104,7 +104,7 @@ section.login .btn-alt, section.signup .btn-alt {
   border-radius: 3px;
 }
 
-.listing-box * {
+.browse-page .listing-box * {
   white-space: nowrap !important;
 }
 
@@ -148,7 +148,7 @@ section.login .btn-alt, section.signup .btn-alt {
   padding: 2px 5px 2px 5px; margin: 2px; border: 1px solid #eee; color: #ddd;
 }
 
-.listing-box .image-box {
+.browse-page .listing-box .image-box {
   max-width: 350px;
   max-height: 263px;
 }
@@ -451,7 +451,6 @@ a#MyLiveChatScriptLink:nth-of-type(1){
 }
 
 .refund-calculator .see {
-  color: 
   font-size: 15px; 
   margin: 0px auto 68px;
   color: #FFF;
@@ -487,4 +486,45 @@ a#MyLiveChatScriptLink:nth-of-type(1){
 
 .homepage section.about-kasa {
   padding: 0px 0px;
+}
+
+
+
+.carousel-inner>.item>a>img, .carousel-inner>.item>img  {
+  height: 358px;
+}
+
+.listing_details .faded {
+  opacity: 0.5;
+}
+
+.login.btn:hover,
+.login.btn:focus:hover,
+.login.btn:active:hover {
+  color: #363636;
+}
+
+ 
+.homepage .login.btn:hover,
+.homepage .login.btn:focus:hover,
+.homepage .login.btn:active:hover {
+  color: white;
+}
+
+
+.browse-page .listing-box.skinny {
+  padding: 0px;
+  border-radius: 0px;
+  width: 650px;
+}
+
+
+.listing_details #map_canvas {
+  height: 450px;
+  width: 100%;
+}
+
+
+.listing_details ul.listing-info {
+  white-space: nowrap;
 }
