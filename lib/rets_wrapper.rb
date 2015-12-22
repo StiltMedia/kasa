@@ -67,10 +67,10 @@ class RetsWrapper
   end
 
   # checks whether we already have the image for a listing
-  def image_exists?(listing_id)
+  def image_exists?(listing_id, ndx)
     result = nil
     connect_to_s3() if ! @s3
-    result = @bucket_files.select { |file_name| file_name =~ /#{listing_id}/ }.present?
+    result = @bucket_files.select { |file_name| file_name =~ /#{listing_id}_#{ndx}/ }.present?
     result
   end
 
@@ -80,16 +80,20 @@ class RetsWrapper
     #  return
     #end
     imgs = (@client.objects '*', { resource: 'Property', object_type: 'Photo', resource_id: listing['sysid']+':0' }) rescue Array.new
-
+    imgs.reject! { |img| img.to_s[0..200] =~ /Object not available/ }
     images_tot = imgs.size
     images_tot = 5 if imgs.size >= 5
     listing.update_attribute(:images_tot, images_tot)
-   
+
     imgs[0..3].each_with_index do |img, ndx|
-      File.open("tmp/tmp.jpg", 'wb') { |file| file.write imgs[ndx].body }
-      file_name = "#{listing['listing_id']}_#{ndx}.jpg"
-      save_to_s3(file_name,listing['listing_id'])
-      puts " F95BA #{serial_no+1}/#{total} Listing ID #{listing['listing_id']}, #{imgs.size} photos. saved \##{ndx+1}."
+      if image_exists?(listing['listing_id'],ndx)
+        puts " F95BA #{(serial_no+1).to_s.rjust(4,' ')}/#{total} Listing ID #{listing['listing_id'].ljust(10," ")}, #{imgs.size.to_s.rjust(2,"0")} photos. skipping \##{ndx+1}."        
+      else
+        File.open("tmp/tmp.jpg", 'wb') { |file| file.write imgs[ndx].body }
+        file_name = "#{listing['listing_id']}_#{ndx}.jpg"
+        save_to_s3(file_name,listing['listing_id'])
+        puts " F95BA #{(serial_no+1).to_s.rjust(4,' ')}/#{total} Listing ID #{listing['listing_id'].ljust(10," ")}, #{imgs.size.to_s.rjust(2,"0")} photos. saved \##{ndx+1}."
+      end
     end
 
     return imgs.size
@@ -110,6 +114,12 @@ class RetsWrapper
     puts "F95BA saving"
     pg_save(results)
     results
+  end
+
+
+  def experiment(listing_id, sysid)
+    puts __method__.to_s + " "+ listing_id
+    imgs = (@client.objects '*', { resource: 'Property', object_type: 'Photo', resource_id: sysid+':0' }) rescue Array.new
   end
 
   private
