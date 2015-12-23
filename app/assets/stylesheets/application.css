@@ -528,3 +528,58 @@ a#MyLiveChatScriptLink:nth-of-type(1){
 .listing_details ul.listing-info {
   white-space: nowrap;
 }
+
+
+
+.browse-page.map-view .right-panel {
+  overflow: scroll;
+  overflow-x: hidden;
+}
+
+body.map-view {
+  overflow: hidden;
+}
+
+body.map-view .listing-box .image-box img {
+  max-width: 75%;
+}
+
+body.map-view .listings .listing-box .listing-box-content {
+  padding: 1px 1px;
+}
+
+body.map-view .listings .right-panel {
+  width: 35%;
+}
+
+body.map-view .listings .container {
+  width: 100%;
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
+body.map-view .listings .left-panel {
+  outline: 0px solid yellow !important;
+  width: 70%;
+}
+
+body.map-view .listings .right-panel {
+  outline: 0px solid yellow !important;
+  width: 29%;
+}
+
+body.map-view .listings .left-panel #map_canvas {
+  width: 100%;
+}
+
+body.map-view .listings {
+  padding-top: 0px;
+}
+
+body.map-view #map_canvas {
+  margin: 0px 1px;
+}
+
+body.map-view .listing-box {
+  margin-top: 1px;
+}

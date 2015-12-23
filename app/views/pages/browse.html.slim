@@ -3,7 +3,7 @@
 - @base_url = "#{@parts[0]}://#{@parts[2]}/"
 = render 'shared/topbar'
 
-.browse-page
+.browse-page class=(session[:browse_view] == 'Map' ? 'map-view' : '')
   section.search-bar
       .row
         .col-xs-10
@@ -102,7 +102,7 @@
   
   section.listings
     .container.text-center
-      .row.text-center
+      .row.text-center class=(session[:browse_view] == 'Map' ? 'hide' : '')
         .col-xs-8.col-xs-offset-1
           .sort-listings
             p Sort By:
@@ -126,9 +126,10 @@
 
       
       .left-panel.map-view class=(session[:browse_view]=='Map' ? '' : 'hidden')
+        div#sticky-anchor
         div#map_canvas
 
-      .right-panel.text-left
+      #right-panel.right-panel.text-left
         - if @properties.size == 0
           .row.article
             .col-xs-12
@@ -166,57 +167,17 @@
         
         
         - @properties.each do |property|
-          .row.article
-            .col-xs-12
-              .listing-box.clearfix.center-block class=(session[:browse_view] == 'Map' ? 'skinny' : '')
-                .col-xs-6.no-padding
-                  .image-box
-                    img alt="" src="http://kasa-staging.s3.amazonaws.com/#{property.listing_id}_0.jpg"
-                .col-xs-6
-                  .listing-box-content
-                    h5
-                      .prop_addr.invisible = "#{property.address} #{property.zip} #{property.state} USA"
-                      a href="/pages/listing_details/#{property.listing_id}" = "#{property.address.titleize} #{property.city.titleize} #{property.state}"
-                    p.listing-price
-                      = number_to_currency(property.price, precision: 0)
-                      span = "$#{property.price/property.area}/sf" rescue ""
-                    ul.listing-info.list-unstyled.list-inline
-                      li
-                        img alt="" src=asset_path("pt_house_dark.png")
-                      li
-                        img alt="" src=asset_path("icon_couch_big.png")
-                        span = property.beds
-                      li
-                        img alt="" src=asset_path("icon_bathroom_big.png")
-                        span = property.baths
-                      li
-                        img alt="" src=asset_path("icon_car_big.png")
-                        span = property.garage
-                    .listing-box-footer
-                      p = "Listed #{distance_of_time_in_words_to_now(property.date)} ago"
-                      .links
-                        a.twitter.popup href="https://twitter.com/intent/tweet?text=Check+out+this+listing&url=http://kasa-staging.herokuapp.com/listings/#{property.listing_id}" Share
-                        a href="/pages/untitled"
-                          div#my-share.share-widget data-url="#{@base_url}properties/#{property.listing_id}" data-text="Checkout out this listing" data-title="Share"
-                        - if user_signed_in?
-                          - if property.is_favorite?(current_user)
-                              a.favorite.fav-on href="javascript:void(0)" data-userid=current_user.id.to_s data-propertyid=property.id
-                                i.favorite.fa.fa-heart
-                                span &nbsp
-                                span.words Favorite
-                          - else
-                              a.favorite href="javascript:void(0)" data-userid=current_user.id.to_s data-propertyid=property.id
-                                i.favorite.fa.fa-heart
-                                span &nbsp
-                                span.words Favorite
-                        - else
-                          a href="javascript:alert('You must be logged in to Favourite a listing')"  Favorite
+          = render :partial => "shared/listing_cell", :locals => { :property => property}
+
         .row
           .col-xs-8.col-xs-offset-2.text-center
             - if @result_count > 10
               span = will_paginate @properties, :previous_label => '<i class="fa fa-angle-double-left"></i>', :next_label => '<i class="fa fa-angle-double-right"></i>'
             - else
               span.invisible = will_paginate @properties, :previous_label => '<i class="fa fa-angle-double-left"></i>', :next_label => '<i class="fa fa-angle-double-right"></i>'
+        .row
+          .col-sm-12
+            .spacer &nbsp;
 
 = render 'shared/footer'
 
@@ -228,9 +189,9 @@ javascript:
       navigationControl: false,
       mapTypeControl: false,
       scaleControl: false,
-      draggable: false,
-      center: new google.maps.LatLng(25.7753, -80.2089),  //Florida
-      zoom: 10
+      draggable: true,
+      center: new google.maps.LatLng(26.1333, -80.1500),  //Florida
+      zoom: 9
     };
     map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
   }
@@ -256,7 +217,8 @@ javascript:
           var m = new google.maps.Marker({
             map: map,
             title: address,
-            icon: iconBase + 'placemark_square_highlight.png',
+            icon: '#{asset_url("marker.png")}',
+            //icon: iconBase + 'placemark_square_highlight.png',
             position: results[0].geometry.location
           })
           var infowindow = new google.maps.InfoWindow({ content: address });

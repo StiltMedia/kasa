@@ -23,7 +23,6 @@ function fbShare(url, title, descr, image, winWidth, winHeight) {
 }
 
 if ( $("#ex1").length > 0 ) {
-  // Without JQuery
   var slider = new Slider('#ex1', {
   	formatter: function(value) {
                   $(".wewill .amount").text('$'+numberWithCommas(value*0.005));
@@ -33,8 +32,17 @@ if ( $("#ex1").length > 0 ) {
 }
 
 
+
+
+
 $(document).ready(function() {
-  
+  if ( $("body").hasClass('map-view') ) {  
+    var vh = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+    var vh2 = $('.browse-page .right-panel')[0].getBoundingClientRect().y;
+    $(".browse-page .right-panel").css('height',vh - vh2 - 3);
+    $(".browse-page #map_canvas").css('height',vh - vh2 - 10);
+  }
+
 
   $('.twitter.popup').click(function(event) {
     var width  = 575,
