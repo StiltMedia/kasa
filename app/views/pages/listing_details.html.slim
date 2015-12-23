@@ -73,8 +73,20 @@
               b Other Features:
             p Built #{@listing.built}, #{@listing.floor.sub(' Other floor','').gsub(',',', ').titleize} floor
             .links
-              a href="#"  Favorite
-              a href="#"  Share
+
+              - if user_signed_in?
+                - if @listing.is_favorite?(current_user)
+                    a.favorite.fav-on href="javascript:void(0)" data-userid=current_user.id.to_s data-propertyid=@listing.id
+                      i.favorite.fa.fa-heart
+                      span &nbsp
+                      span.words Favorite
+                - else
+                    a.favorite href="javascript:void(0)" data-userid=current_user.id.to_s data-propertyid=@listing.id
+                      i.favorite.fa.fa-heart
+                      span &nbsp
+                      span.words Favorite
+
+              a.twitter.popup href="https://twitter.com/intent/tweet?text=Check+out+this+listing&url=http://kasa-staging.herokuapp.com/listings/#{@listing.listing_id}" Share
             hr/
             .price.pull-left
               p.listing-price

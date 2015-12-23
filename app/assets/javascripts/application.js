@@ -85,7 +85,7 @@ $(document).ready(function() {
 
   // functions related to users pressing favorite button
   // in the browse page
-  $('.browse-page .links a.favorite').click(function(){
+  $('.browse-page .links a.favorite, .listing_details .links a.favorite').click(function(){
     var this_elem = $(this);
     var url = "/api/favorite_on";
     var user_id = $(this).data('userid');

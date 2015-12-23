@@ -290,9 +290,6 @@ section.login .btn-alt, section.signup .btn-alt {
   background-color: white;
 }
 
-.browse-page .links .sharrre {
-  zdisplay: inline-block;
-}
 
 .browse-page .sharrre .box {
   float: none;
@@ -328,12 +325,21 @@ section.login .btn-alt, section.signup .btn-alt {
   color: red;
 }
 
-.browse-page .links a span.words {
+.browse-page .links a span.words,
+.listing_details .links a span.words {
   color: #154067;
+
 }
 
 .browse-page .links a.fav-on span.words {
-  color: white;
+  color: white;;
+  cursor: default;
+}
+
+
+.listing_details .links a.fav-on span.words {
+  color: #F2F2F2;
+  cursor: default;
 }
 
 
@@ -341,12 +347,22 @@ section.login .btn-alt, section.signup .btn-alt {
   color: white;
 }
 
-.browse-page .links a.fav-on i.fa-heart {
+.listing_details .links a i.fa-heart {
+  color: #F2F2F2;
+}
+
+.browse-page .links a.fav-on i.fa-heart,
+.listing_details .links a.fav-on i.fa-heart {
   color: red;
   padding-left: 15px;
 }
 
-.browse-page .links a.favorite,  .browse-page .links a.favorite:hover, .browse-page .links a.favorite:active{
+.browse-page .links a.favorite,
+.browse-page .links a.favorite:hover,
+.browse-page .links a.favorite:active,
+.listing_details .links a.favorite,
+.listing_details .links a.favorite:hover,
+.listing_details .links a.favorite:active {
   outline: 0;
   text-decoration: none;
 }
