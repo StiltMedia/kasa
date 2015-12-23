@@ -42,6 +42,16 @@ class PagesController < ApplicationController
       session[:browse_max_price] ='Any'
     end
 
+    if params[:area] == 'Any'
+      params[:area] = nil
+      session[:browse_area] ='Any'
+    end
+
+    if params[:area_lot] == 'Any'
+      params[:min_area_lot] = nil
+      session[:browse_area_lot] ='Any'
+    end
+
 
 
     session[:browse_search] = params[:search] if params.has_key? 'search'
@@ -57,8 +67,14 @@ class PagesController < ApplicationController
     session[:browse_baths] = 'All' if (!session[:browse_baths].present?) && (!params[:baths])
     session[:browse_min_price] = 'Any' if (!session[:browse_min_price].present?) && (!params[:min_price])
     session[:browse_max_price] = 'Any' if (!session[:browse_max_price].present?) && (!params[:max_price])
+
+    session[:browse_area] = 'Any' if (!session[:browse_area].present?) && (!params[:area])
+    session[:browse_area_lot] = 'Any' if (!session[:browse_area_lot].present?) && (!params[:area_lot])
+
     session[:browse_page] = 1 if (!session[:browse_page].present?) && (!params[:page])
     session[:browse_sort] = 'Newest Listings' if (!session[:browse_sort].present?) && (!params[:sort])
+
+
     #step 1 - filtering
     @properties = Property.all
 
@@ -80,6 +96,14 @@ class PagesController < ApplicationController
 
     if session[:browse_max_price] =~ /\d+/
       @properties = Property.where("price < #{session[:browse_max_price]}")
+    end
+
+    if session[:browse_area] =~ /\d+/
+      @properties = Property.where("area = #{session[:browse_area]}")
+    end
+
+    if session[:browse_area_lot] =~ /\d+/
+      @properties = Property.where("area_lot = #{session[:browse_area_lot]}")
     end
 
     if session[:browse_search].present?

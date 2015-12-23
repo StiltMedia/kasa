@@ -9,7 +9,8 @@ require 'silence_warning'
 # 922     City        string
 # 924     State       string
 # 137     price       number
-# 261     area        number
+# 261     area_lot    number
+# 129     area
 # 246     status      string
 # 80      date        timestamp
 # 61      county      string
@@ -107,7 +108,7 @@ class RetsWrapper
       query:          "(246=|A),(61=|#{county})", #246 ListingStatus
                                                   #A ActiveAvailable
                                                   #61 County
-      select: '157,881,10,922,924,137,261,246,80,61,25,1424,102,214,314,96,1,sysid', 
+      select: '157,881,10,922,924,137,261,129,246,80,61,25,1424,102,214,314,96,1,sysid', 
       search_type:    'Property'
     }
     puts "F95BA #{results.size} listings"
@@ -147,7 +148,8 @@ class RetsWrapper
         city: l['922'],
         state: l['924'],
         price: l['137'],
-        area: l['261'],
+        area_lot: l['261'],
+        area: l['129'],
         date: l['80'],
         beds: l['25'],
         baths: l['1424'],

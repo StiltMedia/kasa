@@ -51,7 +51,6 @@ $(document).ready(function() {
     query_string = query_string + 'baths='+$(".more-filters-page input.baths").val()+'&';
     query_string = query_string + 'area='+$(".more-filters-page input#area").val()+'&';
     query_string = query_string + 'area_lot='+$(".more-filters-page input#area_lot").val()+'&';
-    alert(query_string);
     window.location.href = '/pages/browse?'+query_string;
     
   });
@@ -135,7 +134,7 @@ $(document).ready(function() {
   var doneTypingInterval = 750;  //time in ms, 5 second for example
 
   //on keyup, start the countdown
-  $('.browse-page input.search').keyup(function(){
+  $('.browse-page input.search').keydown(function(){
       clearTimeout(typingTimer);
       if ($('.browse-page .search-bar input.search').val() ) {
           typingTimer = setTimeout(function(){
@@ -148,7 +147,7 @@ $(document).ready(function() {
   });
 
   //on keyup, start the countdown
-  $('.browse-page input.min_price').keyup(function(){
+  $('.browse-page input.min_price').keydown(function(){
       clearTimeout(typingTimer_2);
       if ($('.browse-page .search-bar input.min_price').val() ) {
           typingTimer_2 = setTimeout(function(){
@@ -161,7 +160,7 @@ $(document).ready(function() {
   });
 
   //on keyup, start the countdown
-  $('.browse-page input.max_price').keyup(function(){
+  $('.browse-page input.max_price').keydown(function(){
       clearTimeout(typingTimer_3);
       if ($('.browse-page .search-bar input.max_price').val() ) {
           typingTimer_3 = setTimeout(function(){

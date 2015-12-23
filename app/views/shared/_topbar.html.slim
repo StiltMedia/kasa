@@ -9,7 +9,7 @@
           .actions.text-right
             - if user_signed_in?
               a.btn.btn-alt.login.invisible href="#"  Log In
-              = link_to('Logout', destroy_user_session_path, { :class => 'btn btn-alt', :method => :delete } )
+              = link_to('Logout', destroy_user_session_path, { :class => 'btn btn-alt logout', :method => :delete } )
             - else
               a.btn.btn-alt.login href=new_user_session_path  Log In
               a.btn.btn-alt.register href=new_user_registration_path  Sign up

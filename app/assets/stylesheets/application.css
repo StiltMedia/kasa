@@ -319,6 +319,9 @@ section.login .btn-alt, section.signup .btn-alt {
 }
 
 
+.topbar .actions .btn.btn-alt.logout:hover {
+  color: inherit;
+}
 
 
 .red {
