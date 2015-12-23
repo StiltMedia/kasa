@@ -165,9 +165,11 @@
         
         
         
-        
         - @properties.each do |property|
-          = render :partial => "shared/listing_cell", :locals => { :property => property}
+          - if lookup_context.find_all('shared/_listing_cell_mv.html.slim').any?
+            = render :partial => "shared/listing_cell_mv", :locals => { :property => property}
+          - else
+            = render :partial => "shared/listing_cell", :locals => { :property => property}
 
         .row
           .col-xs-8.col-xs-offset-2.text-center
