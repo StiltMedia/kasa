@@ -5,7 +5,11 @@
 section.login
   = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
 
-    br
+    .row
+      .col-sm-12
+        .logo
+          a href="/"
+            img.img-responsive alt="Kasa" src=asset_path("Kasa.svg")
     .row
       .col-sm-12
         .white-block.center-block

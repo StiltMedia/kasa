@@ -583,3 +583,11 @@ body.map-view #map_canvas {
 body.map-view .listing-box {
   margin-top: 1px;
 }
+
+
+.login .logo, .signup .logo {
+  margin: 60px auto 0px;
+  padding: 15px;
+  text-align: center;
+  width: 100px;
+}

@@ -184,7 +184,7 @@ javascript:
         var m = new google.maps.Marker({
           map: map,
           title: address,
-          icon: iconBase + 'placemark_square_highlight.png',
+          icon: '#{asset_url("marker.png")}',
           position: results[0].geometry.location
         })
         var infowindow = new google.maps.InfoWindow({ content: address });
