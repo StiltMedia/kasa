@@ -607,3 +607,63 @@ body.map-view .listing-box {
   text-align: center;
   width: 100px;
 }
+
+.browse-page input.form-control.min_price {
+  outline: 0px solid yellow;
+  width: 50px;
+ 
+}
+
+.browse-page .search-bar .price-controls a.min_price{
+  font-size: 13px;
+  font-weight: 400;
+  color: #363636;
+  line-height: 35px;
+  outline: 0px none;
+
+}
+
+.browse-page .search-bar .price-controls input.search {
+  width: 40px;
+}
+
+.browse-page .search-bar .price-controls input {
+  height: 30px;
+  border: 1px solid #363636;
+  border-radius: 3px;
+  font-size: 13px;
+  width: 73px;
+  margin-left: 1px;
+  padding-left: 15px;
+}
+
+.browse-page .search-bar .price-controls span {
+  padding-right: 4px;
+}
+
+section.search-bar {
+  width: 100%;
+  padding-left: 15px;
+  padding-right: 0px;
+}
+
+section.search-bar .row {
+  width: 100%;
+}
+
+.ib {
+  display: inline-block;
+}
+
+.notyet {
+  outline: 0px solid yellow;
+
+}
+
+.notyet, .notyet * {
+  opacity: 0.5;
+}
+
+.more-filters-page .modal-price-range img {
+  padding-right: 4px;
+}

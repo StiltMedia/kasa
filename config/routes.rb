@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   devise_for :users
+  get 'pages/more_filters'
   get 'pages/landing'
   get 'pages/browse'
   get 'pages/untitled'

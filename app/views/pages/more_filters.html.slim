@@ -1,0 +1,136 @@
+
+
+
+#myModal.more-filters-page.modal.fade role="dialog" 
+  .modal-dialog
+    /! Modal content
+    .modal-content
+      .modal-header.text-center
+        h2.modal-title Search
+      .modal-body.clearfix
+        .col-md-4
+          .sec.location
+            h3 Location
+            .input-group.small-input
+              input.form-control.search placeholder="Address, City or Zip" type="text" value=session[:browse_search]
+
+
+
+            .notyet
+              /! include areas
+              .checkbox.checkbox-inline
+                input#include-areas name="include" type="checkbox" value=("Include Areas Within") /
+                label for="include-areas"  Include Areas Within
+              .dropdown.small-input
+                button#inc-areas.dropdown-toggle aria-expanded="true" aria-haspopup="true" data-toggle="dropdown" type="button" 
+                  | 0 Miles
+                  span.fa.fa-caret-down.pull-right
+                ul.dropdown-menu aria-labelledby="inc-areas" 
+                  li
+                    a href="#"  Select 1
+                  li
+                    a href="#"  Select 2
+                  li
+                    a href="#"  Select 3
+              /! .include areas
+              /! nearby areas
+              .checkbox.checkbox-inline
+                input#nearby-areas name="include" type="checkbox" value=("Closest Nearby Areas") /
+                label for="nearby-areas"  Closest Nearby Areas
+              .sortby
+                p
+                  | Sortby:
+                  a.active href="#"  Distance
+                  | \
+                  a href=""  Name
+                textarea#nearby-areas-text name="nearby-areas" 
+              /! .nearby areas
+
+
+          .sec.show-me.notyet
+            h3 Show Me
+            .checkbox.checkbox-inline
+              input#show-me-any name="show-me" type="radio" value="Any" /
+              label for="show-me-any"  Any
+              input#show-me-new-house name="show-me" type="radio" value=("New Homes Only") /
+              label for="show-me-new-house"  New Homes Only
+              input#show-me-foreclosures name="show-me" type="radio" value="Foreclosures" /
+              label for="show-me-foreclosures"  Foreclosures
+        .col-md-4
+          .sec.price
+            h3 Price
+            .modal-price-range.clearfix
+              .input-group.small-input
+                input.form-control.min_price placeholder=("Min Price") type="text" value=session[:browse_min_price] /
+              span.small-divide
+              .input-group.small-input
+                input.form-control.max_price placeholder=("Max Price") type="text" value=session[:browse_max_price]
+              .dropdown.small-input.add-margin
+                img alt="" src=asset_path("icon_couch.png") /
+                input#rooms.beds.modal-rooms.dropdown-toggle aria-expanded="true" aria-haspopup="true" data-toggle="dropdown" type="text" value="#{session[:browse_beds] ? session[:browse_beds] : 'All'}"
+              .dropdown.small-input
+                img alt="" src=asset_path("icon_bathroom.png") /
+                input#baths.modal-bathrooms.baths.dropdown-toggle aria-expanded="true" aria-haspopup="true" data-toggle="dropdown" type="text" value="#{session[:browse_baths] ? session[:browse_baths] : 'All'}"
+          /! show me
+          .sec.size
+            h3 Size
+            p.desc House Size (Sq Ft)
+            .dropdown.small-input
+              input#area.baths.dropdown-toggle aria-expanded="true" aria-haspopup="true" data-toggle="dropdown" type="text" value="#{session[:browse_area] ? session[:browse_area] : 'Any'}"
+            p.desc Lot Size (Sq Ft)
+            .dropdown.small-input
+                input#area_lot.dropdown-toggle aria-expanded="true" aria-haspopup="true" data-toggle="dropdown" type="text" value="#{session[:browse_area_lot] ? session[:browse_area_lot] : 'Any'}"
+          .sec.add-more.notyet
+            h3 Add More Feature
+            p
+              | Click on
+              a href="#"  Add Features
+              | to narrow down specific property features
+          /! .show
+        .col-md-4
+          .sec.property-type.notyet
+            h3 Property Type
+            .checkboxes-group
+              .checkbox
+                input#all-types name="include" type="checkbox" value=("All Types") /
+                label for="all-types"  All Types
+              .checkbox
+                input#homes name="include" type="checkbox" value="Homes" /
+                label for="homes"  Homes
+              .checkbox
+                input#apartments name="include" type="checkbox" value="Apartments" /
+                label for="apartments"  Apartments
+              .checkbox
+                input#multi-family name="multi-family" type="checkbox" value=("Multi-Family Properties") /
+                label for="multi-family"  Multi-Family Properties
+              .checkbox
+                input#land-check name="land" type="checkbox" value="Land" /
+                label for="land-check"  Land
+          .sec.listing-activity.notyet
+            h3 Property Type
+            .checkboxes-group
+              .checkbox
+                input#hide-list name="include" type="checkbox" value=("Hide Pending Listings") /
+                label for="hide-list"  Hide Pending Listings
+              .checkbox
+                input#open-house name="include" type="checkbox" value=("Open House") /
+                label for="open-house"  Open House
+              .checkbox
+                input#new-list name="include" type="checkbox" value=("New Listings") /
+                label for="new-list"  New Listings
+              .checkbox
+                input#price-reduced name="multi-family" type="checkbox" value=("Price Reduced") /
+                label for="price-reduced"  Price Reduced
+              .checkbox
+                input#land name="land" type="checkbox" value="Land" /
+                label for="land"  Land
+          .search-results-btn
+            a.btn.view_results href="javascript:void(0)"  VIEW RESULTS
+            button.close onclick="window.location='/pages/browse';" type="button"  Cancel
+
+
+javascript:
+  document.addEventListener("DOMContentLoaded", function(event) { 
+    $('#myModal').modal();
+  });
+

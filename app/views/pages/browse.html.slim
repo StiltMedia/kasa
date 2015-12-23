@@ -14,35 +14,15 @@
                 input.form-control.search placeholder="Keyword  e.g. City" type="text" value=session[:browse_search]
             /! .alternate input
             /! dropdown select
-            .col-xs-2.no-padding.first-div
-              .dropdown.small-input
-                img alt="" src=asset_path("icon_money.png")
-                button#anyprice.dropdown-toggle aria-expanded="true" aria-haspopup="true" data-toggle="dropdown" type="button" 
-                  = "Any Price" if session[:browse_price] == 'Any Price'
-                  = "< $100,000" if session[:browse_price] == '<100000'
-                  = "> $100,000" if session[:browse_price] == '>100000'
-                  = "> $200,000" if session[:browse_price] == '>200000'
-                  = "> $300,000" if session[:browse_price] == '>300000'
-                  = "> $400,000" if session[:browse_price] == '>400000'
-                  = "> $500,000" if session[:browse_price] == '>500000'
-                  span.fa.fa-angle-down.pull-right
-                ul.dropdown-menu aria-labelledby="anyprice" 
-                  li
-                    a href="?price=Any Price"  Any Price
-                  li
-                    a href="?price=<100000"  < $100,000
-                  li
-                    a href="?price=>100000"  > $100,000
-                  li
-                    a href="?price=>200000"  > $200,000
-                  li
-                    a href="?price=>300000"  > $300,000
-                  li
-                    a href="?price=>400000"  > $400,000
-                  li
-                    a href="?price=>500000"  > $500,000
-            /! .dropdown select
-            /! dropdown select
+            .col-xs-4.price-controls
+              span href="/pages/untitled" 
+                | Price (From) 
+              input.form-control.min_price.ib placeholder="Any" type="text" value=session[:browse_min_price]
+              | &nbsp;&nbsp
+              span href="/pages/untitled" 
+                | Price (To)  
+              input.form-control.max_price.ib placeholder="Any" type="text" value=session[:browse_max_price]
+
             .col-xs-2.text-center.no-padding
               .dropdown.small-input
                 img alt="" src=asset_path("icon_couch.png")
@@ -86,10 +66,9 @@
                     a href="?baths=>5"  >5
             /! .dropdown select
             /! more filter
-            .col-xs-2
-              a.more-filter.modal-filter href="/pages/untitled" 
+            .col-xs-1
+              a.more-filter.modal-filter href="/pages/more_filters" 
                 img alt="" src=asset_path("icon_filter.png")
-                | More Filters
             /! .more filter
         .col-xs-2
           - if session[:browse_view] == 'Map'

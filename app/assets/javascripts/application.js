@@ -36,6 +36,28 @@ if ( $("#ex1").length > 0 ) {
 
 
 $(document).ready(function() {
+
+  $('.more-filters-page#myModal').on('hidden.bs.modal', function () {
+    window.location.href = '/pages/browse'
+  })
+  
+
+  $(".more-filters-page .btn.view_results").click( function() {
+    var query_string = '';
+    query_string = query_string + 'min_price='+$(".more-filters-page input.min_price").val()+'&';
+    query_string = query_string + 'max_price='+$(".more-filters-page input.max_price").val()+'&';
+    query_string = query_string + 'search='+$(".more-filters-page input.search").val()+'&';
+    query_string = query_string + 'beds='+$(".more-filters-page input.beds").val()+'&';
+    query_string = query_string + 'baths='+$(".more-filters-page input.baths").val()+'&';
+    query_string = query_string + 'area='+$(".more-filters-page input#area").val()+'&';
+    query_string = query_string + 'area_lot='+$(".more-filters-page input#area_lot").val()+'&';
+    alert(query_string);
+    window.location.href = '/pages/browse?'+query_string;
+    
+  });
+
+
+
   if ( $("body").hasClass('map-view') ) {  
     var vh = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
     var vh2 = $('.browse-page .right-panel')[0].getBoundingClientRect().y;
@@ -108,17 +130,15 @@ $(document).ready(function() {
 
 
   var typingTimer;                //timer identifier
+  var typingTimer_2;              //timer identifier
+  var typingTimer_3;              //timer identifier
   var doneTypingInterval = 750;  //time in ms, 5 second for example
 
   //on keyup, start the countdown
   $('.browse-page input.search').keyup(function(){
       clearTimeout(typingTimer);
-      if ($('.browse-page .search-bar input.search').val) {
+      if ($('.browse-page .search-bar input.search').val() ) {
           typingTimer = setTimeout(function(){
-              //do stuff here e.g ajax call etc....
-               //var v = $("#in").val();
-               //$("#out").html(v);
-               console.log("a");
                $('.browse-page input.search').addClass('loading-gif');
                setTimeout(function() {window.location.href = '?search=' 
 + $('.browse-page input.search').val(); },500);
@@ -126,6 +146,33 @@ $(document).ready(function() {
           }, doneTypingInterval);
       }
   });
+
+  //on keyup, start the countdown
+  $('.browse-page input.min_price').keyup(function(){
+      clearTimeout(typingTimer_2);
+      if ($('.browse-page .search-bar input.min_price').val() ) {
+          typingTimer_2 = setTimeout(function(){
+               $('.browse-page input.min_price').addClass('loading-gif');
+               setTimeout(function() {window.location.href = '?min_price=' 
++ $('.browse-page input.min_price').val(); },500);
+               
+          }, doneTypingInterval);
+      }
+  });
+
+  //on keyup, start the countdown
+  $('.browse-page input.max_price').keyup(function(){
+      clearTimeout(typingTimer_3);
+      if ($('.browse-page .search-bar input.max_price').val() ) {
+          typingTimer_3 = setTimeout(function(){
+               $('.browse-page input.max_price').addClass('loading-gif');
+               setTimeout(function() {window.location.href = '?max_price=' 
++ $('.browse-page input.max_price').val(); },500);
+               
+          }, doneTypingInterval);
+      }
+  });
+
   
 });
 

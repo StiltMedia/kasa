@@ -3,6 +3,8 @@ require 'open3'
 class PagesController < ApplicationController
   include ActionController::Live
 
+  def more_filters
+  end
 
   def listing_details
     @listing = Property.find_by_listing_id(params[:listing_id])
@@ -12,6 +14,10 @@ class PagesController < ApplicationController
   end
 
   def browse
+    # remove commas, dollars and dots
+    params[:min_price].gsub!(/[,\.\$\s]/,'') rescue nil
+    params[:max_price].gsub!(/[,\.\$\s]/,'') rescue nil
+
     if params[:browse_view].present?
       session[:browse_view] = params[:browse_view]
       params[:browse_view] = nil
@@ -26,10 +32,21 @@ class PagesController < ApplicationController
       session[:browse_beds] ='All'
     end
 
+    if params[:min_price] == 'Any'
+      params[:min_price] = nil
+      session[:browse_min_price] ='Any'
+    end
+
+    if params[:max_price] == 'Any'
+      params[:max_price] = nil
+      session[:browse_max_price] ='Any'
+    end
+
 
 
     session[:browse_search] = params[:search] if params.has_key? 'search'
-    session[:browse_price] = params[:price] if params[:price].present?
+    session[:browse_min_price] = params[:min_price] if params[:min_price].present? && params[:min_price] =~ /(\d+|Any)/
+    session[:browse_max_price] = params[:max_price] if params[:max_price].present? && params[:max_price] =~ /(\d+|Any)/
     session[:browse_beds] = params[:beds] if params[:beds].present?
     session[:browse_baths] = params[:baths] if params[:baths].present?
 
@@ -38,7 +55,8 @@ class PagesController < ApplicationController
 
     session[:browse_beds] = 'All' if (!session[:browse_beds].present?) && (!params[:beds])
     session[:browse_baths] = 'All' if (!session[:browse_baths].present?) && (!params[:baths])
-    session[:browse_price] = 'Any Price' if (!session[:browse_price].present?) && (!params[:price])
+    session[:browse_min_price] = 'Any' if (!session[:browse_min_price].present?) && (!params[:min_price])
+    session[:browse_max_price] = 'Any' if (!session[:browse_max_price].present?) && (!params[:max_price])
     session[:browse_page] = 1 if (!session[:browse_page].present?) && (!params[:page])
     session[:browse_sort] = 'Newest Listings' if (!session[:browse_sort].present?) && (!params[:sort])
     #step 1 - filtering
@@ -56,19 +74,14 @@ class PagesController < ApplicationController
       @properties = @properties.where(beds: session[:browse_beds]) if session[:browse_beds] != "All"
     end
 
-    if session[:browse_price] == '<100000'
-      @properties = Property.where("price < 100000")
-    elsif session[:browse_price] == '>100000'
-      @properties = Property.where("price >= 100000 AND price < 199999")
-    elsif session[:browse_price] == '>200000'
-      @properties = Property.where("price >= 200000 AND price < 299999")
-    elsif session[:browse_price] == '>300000'
-      @properties = Property.where("price >= 300000 AND price < 399999")
-    elsif session[:browse_price] == '>400000'
-      @properties = Property.where("price >= 400000 AND price < 499999")
-    elsif session[:browse_price] == '>500000'
-      @properties = Property.where("price >= 500000 AND price < 599999")
+    if session[:browse_min_price] =~ /\d+/
+      @properties = Property.where("price > #{session[:browse_min_price]}")
     end
+
+    if session[:browse_max_price] =~ /\d+/
+      @properties = Property.where("price < #{session[:browse_max_price]}")
+    end
+
     if session[:browse_search].present?
       @properties = Property.where("address ILIKE '%#{session[:browse_search]}%' OR listing_id ILIKE '%#{session[:browse_search]}%'  OR city ILIKE '%#{session[:browse_search]}%' OR county ILIKE '%#{session[:browse_search]}%' OR zip ILIKE '%#{session[:browse_search]}%'")
     end
