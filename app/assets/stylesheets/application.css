@@ -373,6 +373,7 @@ div#error_explanation h2 {
     -webkit-flex-flow: row nowrap;
     -ms-flex-flow: row nowrap;
     flex-flow: row nowrap;
+    outline: 0;
 }
 .browse-page .left-panel {
     outline: 0px solid yellow !important;
