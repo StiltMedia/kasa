@@ -472,16 +472,15 @@ body.map-view .listings .container {
     -webkit-flex-flow: row nowrap;
     -ms-flex-flow: row nowrap;
     flex-flow: row nowrap;
+    width: 100%;
     padding-left: 0px;
     padding-right: 0px;
 }
 body.map-view .listings .left-panel {
     outline: 0px solid yellow !important;
-    width: 70%;
 }
 body.map-view .listings .right-panel {
     outline: 0px solid yellow !important;
-    width: 29%;
 }
 body.map-view .listings .left-panel #map_canvas {
     width: 100%;
