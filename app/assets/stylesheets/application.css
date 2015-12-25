@@ -472,6 +472,10 @@ body.map-view .listing-box .image-box img {
 body.map-view .listings .listing-box .listing-box-content {
     padding: 1px 1px;
 }
+body.map-view .listings {
+    height: 100vh;
+    overflow: hidden;
+}
 body.map-view .listings .container {
     display: -webkit-box;
     display: -webkit-flex;
