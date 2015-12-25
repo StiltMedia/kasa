@@ -439,7 +439,18 @@ a#MyLiveChatScriptLink:nth-of-type(1) {
 .browse-page .listing-box.skinny {
     padding: 0px;
     border-radius: 0px;
-    width: 650px;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: start;
+    -webkit-align-items: flex-start;
+    -ms-flex-align: start;
+    align-items: flex-start;
 }
 .listing_details #map_canvas {
     height: 450px;
@@ -493,6 +504,11 @@ body.map-view #map_canvas {
 }
 body.map-view .listing-box {
     margin-top: 1px;
+}
+body.map-view .listing-box .listing-box-content h5,
+body.map-view .listing-box .listing-box-content .listing-price,
+body.map-view .listing-box .listing-box-content .listing-info {
+    margin-top: 0
 }
 .login .logo, .signup .logo {
     margin: 60px auto 0px;
