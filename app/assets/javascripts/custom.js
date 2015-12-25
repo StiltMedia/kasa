@@ -180,4 +180,8 @@ jQuery(document).ready(function ($) {
         $(this).closest('.option').find('.result').html($(event.target).text());
     });
 
+    /* calculate map height and enable scrolling of right panel*/
+    var $mHeight = $('.map-view').outerHeight();
+    $('.browse-page.map-view .right-panel').css('height', $mHeight);
+
 });
