@@ -488,6 +488,9 @@ body.map-view .listings .container {
     padding-right: 0px;
 }
 body.map-view .listings .left-panel {
+    -webkit-flex-basis: 61%;
+    -ms-flex-preferred-size: 61%;
+    flex-basis: 61%;
     outline: 0px solid yellow !important;
 }
 body.map-view .listings .right-panel {
