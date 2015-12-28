@@ -76,9 +76,6 @@ section.login .btn-alt, section.signup .btn-alt {
 .navbar .login-action {
     padding: 30px 40px !important;
 }
-.browse-page .listing-box {
-    width: 730px;
-}
 .listing-list .listing-box {
     margin-top: 10px;
     padding: 10px;
@@ -126,7 +123,6 @@ section.login .btn-alt, section.signup .btn-alt {
     color: #ddd;
 }
 .browse-page .listing-box .image-box {
-    max-width: 350px;
     max-height: 263px;
 }
 .loading-gif {
