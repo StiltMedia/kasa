@@ -10,13 +10,14 @@
           /! property title
           .property-title
             h2 #{@listing.address.titleize} #{@listing.city.titleize} #{@listing.state}
-          /! .property title
+  /! .property title
   /! .inside listing
   /! slider
   aside
     #myCarousel.carousel.slide data-wrap="false" data-interval="6000" data-ride="carousel" 
       .carousel-inner
-        .item.active
+        .item.active.gallery-image
+          a
           img.img-responsive.slide-img alt="" src="http://kasa-staging.s3.amazonaws.com/#{@listing.listing_id}_1.jpg" title="" /
         - if @listing.images_tot && @listing.images_tot > 2
           - (2..@listing.images_tot-2).each do |i|
@@ -28,7 +29,7 @@
           i.fa.fa-angle-left
         a.right.carousel-control data-slide="next" href="#myCarousel" role="button" 
           i.fa.fa-angle-right
-      /! .controls
+  /! .controls
   /! .slider
   /! property content
   section.property-content
@@ -76,15 +77,15 @@
 
               - if user_signed_in?
                 - if @listing.is_favorite?(current_user)
-                    a.favorite.fav-on href="javascript:void(0)" data-userid=current_user.id.to_s data-propertyid=@listing.id
-                      i.favorite.fa.fa-heart
-                      span &nbsp
-                      span.words Favorite
+                  a.favorite.fav-on href="javascript:void(0)" data-userid=current_user.id.to_s data-propertyid=@listing.id
+                    i.favorite.fa.fa-heart
+                    span &nbsp
+                    span.words Favorite
                 - else
-                    a.favorite href="javascript:void(0)" data-userid=current_user.id.to_s data-propertyid=@listing.id
-                      i.favorite.fa.fa-heart
-                      span &nbsp
-                      span.words Favorite
+                  a.favorite href="javascript:void(0)" data-userid=current_user.id.to_s data-propertyid=@listing.id
+                    i.favorite.fa.fa-heart
+                    span &nbsp
+                    span.words Favorite
 
               a.twitter.popup href="https://twitter.com/intent/tweet?text=Check+out+this+listing&url=http://kasa-staging.herokuapp.com/listings/#{@listing.listing_id}" Share
             hr/
@@ -156,14 +157,12 @@
                     li
                       img alt="" src=asset_path("icon_car_big.png") /
                       span = l.garage
-            /! .listing box
+      /! .listing box
       .row
         .col-md-12
           .show-more-btn.text-center
             a.btn href="/pages/browse"  SHOW MORE
   /! .nearby listings
-  
-
 
 
 = render 'shared/footer'
@@ -178,7 +177,7 @@ javascript:
       mapTypeControl: false,
       scaleControl: false,
       draggable: false,
-  
+
       center: new google.maps.LatLng(25.7753, -80.2089),  //Florida
       zoom: 9
     };
@@ -188,9 +187,9 @@ javascript:
   function pinpoint(address) {
     var iconBase = 'https://maps.google.com/mapfiles/kml/shapes/';
     address = address.replace(/\s+/g, ' ').trim();
-    console.log("pinpoint() called with "+address);
+    console.log("pinpoint() called with " + address);
     var geocoder = new google.maps.Geocoder();
-    geocoder.geocode( { 'address': address}, function(results, status) {
+    geocoder.geocode({'address': address}, function (results, status) {
       if (status == google.maps.GeocoderStatus.OK) {
         //map.setCenter(results[0].geometry.location);
         var m = new google.maps.Marker({
@@ -199,11 +198,11 @@ javascript:
           icon: '#{asset_url("marker.png")}',
           position: results[0].geometry.location
         })
-        var infowindow = new google.maps.InfoWindow({ content: address });
-        m.addListener('click', function() {
+        var infowindow = new google.maps.InfoWindow({content: address});
+        m.addListener('click', function () {
           infowindow.open(map, m);
-        });          
-        
+        });
+
       } else {
         console.log('Geocode was not successful: ' + status);
       }
@@ -221,36 +220,36 @@ javascript:
       for (var i = 0; i < max; i++) {
         //createMarker(results[i]);
         console.log(results[i].name);
-        $("ul.list-inline.schools").append('<li>'+results[i].name+'</li>');
+        $("ul.list-inline.schools").append('<li>' + results[i].name + '</li>');
       }
     }
   }
-  
+
 
   // when given an address, finds a few closeby schools
   // and adds children to the ul.list-inline.schools element
   function find_schools(addr) {
-    console.log("find_schools() called with "+addr);
+    console.log("find_schools() called with " + addr);
     var geocoder = new google.maps.Geocoder();
-    geocoder.geocode( { 'address': addr}, function(results, status) {
+    geocoder.geocode({'address': addr}, function (results, status) {
       if (status == google.maps.GeocoderStatus.OK) {
         console.log(results[0].geometry.location);
         var service = new google.maps.places.PlacesService(map);
         service.nearbySearch({
-        location: results[0].geometry.location,
-        radius: 2500,
-        types: ['school']
+          location: results[0].geometry.location,
+          radius: 2500,
+          types: ['school']
         }, callback);
 
-        
+
       } else {
         console.log('Geocode was not successful: ' + status);
       }
     });
   }
 
-  document.addEventListener("DOMContentLoaded", function()  {
+  document.addEventListener("DOMContentLoaded", function () {
     gm_initialize();
-    pinpoint( $(".property-title h2").text() );    // draw marker
-    find_schools( $(".property-title h2").text() );
+    pinpoint($(".property-title h2").text());    // draw marker
+    find_schools($(".property-title h2").text());
   });

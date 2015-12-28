@@ -174,6 +174,17 @@ $(document).ready(function () {
 
 });
 
+/* --- Magnific Popup Init --------------- */
+/*  carousel gallery popup- - - */
+$('.gallery-image').magnificPopup({
+    delegate: 'a',
+    type: 'image',
+    gallery: {
+        enabled: true
+    }
+    // other options
+});
+
 
 function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
