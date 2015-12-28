@@ -18,7 +18,7 @@
       .carousel-inner
         .item.active.gallery-image
           a
-          img.img-responsive.slide-img alt="" src="http://kasa-staging.s3.amazonaws.com/#{@listing.listing_id}_1.jpg" title="" /
+            img.img-responsive.slide-img alt="" src="http://kasa-staging.s3.amazonaws.com/#{@listing.listing_id}_1.jpg" title="" /
         - if @listing.images_tot && @listing.images_tot > 2
           - (2..@listing.images_tot-2).each do |i|
             .item
