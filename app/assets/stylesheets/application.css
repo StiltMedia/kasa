@@ -437,7 +437,6 @@ a#MyLiveChatScriptLink:nth-of-type(1) {
     color: white;
 }
 .browse-page .listing-box.skinny {
-    padding: 0px;
     border-radius: 0px;
     display: -webkit-box;
     display: -webkit-flex;
