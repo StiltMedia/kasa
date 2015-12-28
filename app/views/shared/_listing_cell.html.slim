@@ -2,10 +2,10 @@
           .article
             .col-xs-12
               .listing-box.clearfix.center-block class=(session[:browse_view] == 'Map' ? 'skinny' : '')
-                .col-xs-5.no-padding
+                .col-xs-6.no-padding
                   .image-box
                     img alt="" src="http://kasa-staging.s3.amazonaws.com/#{property.listing_id}_0.jpg"
-                .col-xs-7
+                .col-xs-6
                   .listing-box-content
                     h5
                       .prop_addr.invisible = "#{property.address} #{property.zip} #{property.state} USA"
