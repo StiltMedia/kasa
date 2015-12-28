@@ -5,80 +5,80 @@
 
 .browse-page class=(session[:browse_view] == 'Map' ? 'map-view' : '')
   section.search-bar
-      .row
-        .col-xs-10
-          .row
-            /! alternate input
-            .col-xs-3
-              .input-group.small-input
-                input.form-control.search placeholder="Keyword  e.g. City" type="text" value=session[:browse_search]
-            /! .alternate input
-            /! dropdown select
-            .col-xs-4.price-controls
-              span href="/pages/untitled" 
-                | Price (From) 
-              input.form-control.min_price.ib placeholder="Any" type="text" value=session[:browse_min_price]
-              | &nbsp;&nbsp
-              span href="/pages/untitled" 
-                | Price (To)  
-              input.form-control.max_price.ib placeholder="Any" type="text" value=session[:browse_max_price]
+    .row
+      .col-xs-10
+        .row
+          /! alternate input
+          .col-xs-3
+            .input-group.small-input
+              input.form-control.search placeholder="Keyword  e.g. City" type="text" value=session[:browse_search]
+          /! .alternate input
+          /! dropdown select
+          .col-xs-4.price-controls
+            span href="/pages/untitled"
+              | Price (From)
+            input.form-control.min_price.ib placeholder="Any" type="text" value=session[:browse_min_price]
+            | &nbsp;&nbsp
+            span href="/pages/untitled"
+              | Price (To)
+            input.form-control.max_price.ib placeholder="Any" type="text" value=session[:browse_max_price]
 
-            .col-xs-2.text-center.no-padding
-              .dropdown.small-input
-                img alt="" src=asset_path("icon_couch.png")
-                button#rooms.dropdown-toggle aria-expanded="true" aria-haspopup="true" data-toggle="dropdown" type="button" 
-                  = "#{session[:browse_beds] ? session[:browse_beds] : 'All'}"
-                  span.fa.fa-angle-down.pull-right
-                ul.dropdown-menu aria-labelledby="rooms" 
-                  li
-                    a href="?beds=All"  All
-                  li
-                    a href="?beds=1"  1
-                  li
-                    a href="?beds=2"  2
-                  li
-                    a href="?beds=3"  3
-                  li
-                    a href="?beds=4"  4
-                  li
-                    a href="?beds=>5"  >5
-  
-            /! .dropdown select
-            /! dropdown select
-            .col-xs-2.text-center
-              .dropdown.small-input
-                img alt="" src=asset_path("icon_bathroom.png")
-                button#bathrooms.dropdown-toggle aria-expanded="true" aria-haspopup="true" data-toggle="dropdown" type="button" 
-                  = "#{session[:browse_baths] ? session[:browse_baths] : 'All'}"
-                  span.fa.fa-angle-down.pull-right
-                ul.dropdown-menu aria-labelledby="bathrooms" 
-                  li
-                    a href="?baths=All"  All
-                  li
-                    a href="?baths=1"  1
-                  li
-                    a href="?baths=2"  2
-                  li
-                    a href="?baths=3"  3
-                  li
-                    a href="?baths=4"  4
-                  li
-                    a href="?baths=>5"  >5
-            /! .dropdown select
-            /! more filter
-            .col-xs-1
-              a.more-filter.modal-filter href="/pages/more_filters" 
-                img alt="" src=asset_path("icon_filter.png")
-            /! .more filter
-        .col-xs-2
-          - if session[:browse_view] == 'Map'
-            a.more-filter.list-view href="?browse_view=List"
-              i.fa.fa-list.fa-lg &nbsp;&nbsp;
-              span List View
-          - else
-            a.more-filter.list-view href="?browse_view=Map" 
-              img alt="" src=asset_path("icon_map_view.png") Map View
-  
+          .col-xs-2.text-center.no-padding
+            .dropdown.small-input
+              img alt="" src=asset_path("icon_couch.png")
+              button#rooms.dropdown-toggle aria-expanded="true" aria-haspopup="true" data-toggle="dropdown" type="button"
+                = "#{session[:browse_beds] ? session[:browse_beds] : 'All'}"
+                span.fa.fa-angle-down.pull-right
+              ul.dropdown-menu aria-labelledby="rooms"
+                li
+                  a href="?beds=All"  All
+                li
+                  a href="?beds=1"  1
+                li
+                  a href="?beds=2"  2
+                li
+                  a href="?beds=3"  3
+                li
+                  a href="?beds=4"  4
+                li
+                  a href="?beds=>5"  >5
+
+          /! .dropdown select
+          /! dropdown select
+          .col-xs-2.text-center
+            .dropdown.small-input
+              img alt="" src=asset_path("icon_bathroom.png")
+              button#bathrooms.dropdown-toggle aria-expanded="true" aria-haspopup="true" data-toggle="dropdown" type="button"
+                = "#{session[:browse_baths] ? session[:browse_baths] : 'All'}"
+                span.fa.fa-angle-down.pull-right
+              ul.dropdown-menu aria-labelledby="bathrooms"
+                li
+                  a href="?baths=All"  All
+                li
+                  a href="?baths=1"  1
+                li
+                  a href="?baths=2"  2
+                li
+                  a href="?baths=3"  3
+                li
+                  a href="?baths=4"  4
+                li
+                  a href="?baths=>5"  >5
+          /! .dropdown select
+          /! more filter
+          .col-xs-1
+            a.more-filter.modal-filter href="/pages/more_filters"
+              img alt="" src=asset_path("icon_filter.png")
+      /! .more filter
+      .col-xs-2
+        - if session[:browse_view] == 'Map'
+          a.more-filter.list-view href="?browse_view=List"
+            i.fa.fa-list.fa-lg &nbsp;&nbsp;
+            span List View
+        - else
+          a.more-filter.list-view href="?browse_view=Map"
+            img alt="" src=asset_path("icon_map_view.png") Map View
+
   section.listings
     .container.text-center
       .row.text-center class=(session[:browse_view] == 'Map' ? 'hide' : '')
@@ -103,7 +103,7 @@
             - else
               p.pull-right.invisible Viewing page #{session[:browse_page] ? session[:browse_page] : "1"} of #{number_with_delimiter(@result_count)} Found
 
-      
+
       .left-panel.map-view class=(session[:browse_view]=='Map' ? '' : 'hidden')
         div#sticky-anchor
         div#map_canvas
@@ -140,15 +140,13 @@
                       .links.pull-right.invisible
                         a href="/pages/untitled"  Favorite
                         a href="/pages/untitled" Share
-        
-        
-        
-        
+
+
         - @properties.each do |property|
           - if lookup_context.find_all('shared/_listing_cell_mv.html.slim').any?
-            = render :partial => "shared/listing_cell_mv", :locals => { :property => property}
+            = render :partial => "shared/listing_cell_mv", :locals => {:property => property}
           - else
-            = render :partial => "shared/listing_cell", :locals => { :property => property}
+            = render :partial => "shared/listing_cell", :locals => {:property => property}
 
         .row
           .col-xs-8.col-xs-offset-2.text-center
@@ -175,24 +173,200 @@ javascript:
       zoom: 12
     };
     map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
+    map.set('styles', [
+      {
+        "featureType": "water",
+        "elementType": "geometry",
+        "stylers": [
+          {
+            "color": "#e9e9e9"
+          },
+          {
+            "lightness": 17
+          }
+        ]
+      },
+      {
+        "featureType": "landscape",
+        "elementType": "geometry",
+        "stylers": [
+          {
+            "color": "#f5f5f5"
+          },
+          {
+            "lightness": 20
+          }
+        ]
+      },
+      {
+        "featureType": "road.highway",
+        "elementType": "geometry.fill",
+        "stylers": [
+          {
+            "color": "#ffffff"
+          },
+          {
+            "lightness": 17
+          }
+        ]
+      },
+      {
+        "featureType": "road.highway",
+        "elementType": "geometry.stroke",
+        "stylers": [
+          {
+            "color": "#ffffff"
+          },
+          {
+            "lightness": 29
+          },
+          {
+            "weight": 0.2
+          }
+        ]
+      },
+      {
+        "featureType": "road.arterial",
+        "elementType": "geometry",
+        "stylers": [
+          {
+            "color": "#ffffff"
+          },
+          {
+            "lightness": 18
+          }
+        ]
+      },
+      {
+        "featureType": "road.local",
+        "elementType": "geometry",
+        "stylers": [
+          {
+            "color": "#ffffff"
+          },
+          {
+            "lightness": 16
+          }
+        ]
+      },
+      {
+        "featureType": "poi",
+        "elementType": "geometry",
+        "stylers": [
+          {
+            "color": "#f5f5f5"
+          },
+          {
+            "lightness": 21
+          }
+        ]
+      },
+      {
+        "featureType": "poi.park",
+        "elementType": "geometry",
+        "stylers": [
+          {
+            "color": "#dedede"
+          },
+          {
+            "lightness": 21
+          }
+        ]
+      },
+      {
+        "elementType": "labels.text.stroke",
+        "stylers": [
+          {
+            "visibility": "on"
+          },
+          {
+            "color": "#ffffff"
+          },
+          {
+            "lightness": 16
+          }
+        ]
+      },
+      {
+        "elementType": "labels.text.fill",
+        "stylers": [
+          {
+            "saturation": 36
+          },
+          {
+            "color": "#333333"
+          },
+          {
+            "lightness": 40
+          }
+        ]
+      },
+      {
+        "elementType": "labels.icon",
+        "stylers": [
+          {
+            "visibility": "off"
+          }
+        ]
+      },
+      {
+        "featureType": "transit",
+        "elementType": "geometry",
+        "stylers": [
+          {
+            "color": "#f2f2f2"
+          },
+          {
+            "lightness": 19
+          }
+        ]
+      },
+      {
+        "featureType": "administrative",
+        "elementType": "geometry.fill",
+        "stylers": [
+          {
+            "color": "#fefefe"
+          },
+          {
+            "lightness": 20
+          }
+        ]
+      },
+      {
+        "featureType": "administrative",
+        "elementType": "geometry.stroke",
+        "stylers": [
+          {
+            "color": "#fefefe"
+          },
+          {
+            "lightness": 17
+          },
+          {
+            "weight": 1.2
+          }
+        ]
+      }
+    ]);
   }
 
-  document.addEventListener("DOMContentLoaded", function()  {
+  document.addEventListener("DOMContentLoaded", function () {
     gm_initialize();
- 
+
     var markers = [];
 
-    $(".prop_addr").each(function() {
-      pinpoint( $(this).text() );    // draw markers
+    $(".prop_addr").each(function () {
+      pinpoint($(this).text());    // draw markers
 
     });
 
     function pinpoint(address) {
       var iconBase = 'https://maps.google.com/mapfiles/kml/shapes/';
       address = address.replace(/\s+/g, ' ').trim();
-      console.log("pinpoint() called with "+address);
+      console.log("pinpoint() called with " + address);
       var geocoder = new google.maps.Geocoder();
-      geocoder.geocode( { 'address': address}, function(results, status) {
+      geocoder.geocode({'address': address}, function (results, status) {
         if (status == google.maps.GeocoderStatus.OK) {
           //map.setCenter(results[0].geometry.location);
           var m = new google.maps.Marker({
@@ -202,10 +376,10 @@ javascript:
             //icon: iconBase + 'placemark_square_highlight.png',
             position: results[0].geometry.location
           })
-          var infowindow = new google.maps.InfoWindow({ content: address });
-          m.addListener('click', function() {
+          var infowindow = new google.maps.InfoWindow({content: address});
+          m.addListener('click', function () {
             infowindow.open(map, m);
-          });          
+          });
           markers.push(m);
         } else {
           console.log('Geocode was not successful: ' + status);
