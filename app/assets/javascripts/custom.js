@@ -182,6 +182,6 @@ jQuery(document).ready(function ($) {
 
     /* calculate map height and enable scrolling of right panel*/
     var $mHeight = $('.map-view .listings').outerHeight();
-    $('.browse-page.map-view .right-panel').css('height', $mHeight - 200 + 'px');
+    $('.browse-page.map-view .right-panel, #map_canvas').css('height', $mHeight - 200 + 'px');
 
 });
