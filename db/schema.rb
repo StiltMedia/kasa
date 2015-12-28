@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151223111329) do
+ActiveRecord::Schema.define(version: 20151228233040) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,9 +36,10 @@ ActiveRecord::Schema.define(version: 20151223111329) do
   add_index "favourites", ["property_id"], name: "index_favourites_on_property_id", using: :btree
   add_index "favourites", ["user_id"], name: "index_favourites_on_user_id", using: :btree
 
-  create_table "properties", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+  create_table "mybkp", id: false, force: :cascade do |t|
+    t.integer  "id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.string   "listing_id"
     t.integer  "price"
     t.string   "address"
@@ -58,6 +59,34 @@ ActiveRecord::Schema.define(version: 20151223111329) do
     t.string   "ptype"
     t.text     "remarks"
     t.integer  "area_lot"
+    t.datetime "last_trans_date"
+    t.datetime "last_img_trans_date"
+  end
+
+  create_table "properties", force: :cascade do |t|
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
+    t.string   "listing_id"
+    t.integer  "price"
+    t.string   "address"
+    t.string   "city"
+    t.string   "zip"
+    t.string   "state"
+    t.integer  "area"
+    t.datetime "date"
+    t.integer  "beds"
+    t.integer  "baths"
+    t.integer  "garage"
+    t.string   "sysid"
+    t.string   "county"
+    t.integer  "images_tot"
+    t.string   "built"
+    t.string   "floor"
+    t.string   "ptype"
+    t.text     "remarks"
+    t.integer  "area_lot"
+    t.datetime "last_trans_date"
+    t.datetime "last_img_trans_date"
   end
 
   create_table "users", force: :cascade do |t|

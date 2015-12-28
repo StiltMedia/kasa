@@ -33,7 +33,7 @@ namespace :kasa do
       puts "F95BA Downloading photos"
       started = Time.now
       saved_photos_count = 0
-      Property.all.order(id: :desc).each_with_index do |listing, serial_no|
+      Property.all.order(last_trans_date: :desc).each_with_index do |listing, serial_no|
         rets.get_photos(listing, serial_no,Property.all.size) #rescue puts "F95BA get_photos(#{listing['157']}, serial_no,listings.size)"
         saved_photos_count += 1
       end

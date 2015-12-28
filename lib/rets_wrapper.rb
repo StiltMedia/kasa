@@ -20,7 +20,10 @@ require 'silence_warning'
 # 214     remarks     text
 # 314     built       string
 # 96      floor       string
+# 131     last_trans_date timestamp
+# 1329    last_img_trans_date timestamp
 # 1       type        string
+
 # syscode syscode     string
 
 class RetsWrapper  
@@ -108,7 +111,7 @@ class RetsWrapper
       query:          "(246=|A),(61=|#{county})", #246 ListingStatus
                                                   #A ActiveAvailable
                                                   #61 County
-      select: '157,881,10,922,924,137,261,129,246,80,61,25,1424,102,214,314,96,1,sysid', 
+      select: '157,881,10,922,924,137,261,129,246,80,61,25,1424,102,214,314,96,1,131,1329,sysid', 
       search_type:    'Property'
     }
     puts "F95BA #{results.size} listings"
@@ -159,6 +162,8 @@ class RetsWrapper
         built: l['314'],
         floor: l['96'],
         ptype: l['1'],
+        last_trans_date: l['131'],
+        last_img_trans_date: l['1329'],
         sysid: l['sysid'])
       end
     puts "F95BA saved"
