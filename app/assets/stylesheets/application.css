@@ -479,12 +479,17 @@ body.map-view .listings .container {
     padding-right: 0px;
 }
 body.map-view .listings .left-panel {
-    -webkit-flex-basis: 80%;
-    -ms-flex-preferred-size: 80%;
-    flex-basis: 80%;
+    -webkit-box-flex: 30;
+    -webkit-flex: 30;
+    -ms-flex: 30;
+    flex: 30;
     outline: 0px solid yellow !important;
 }
 body.map-view .listings .right-panel {
+    -webkit-box-flex: 20;
+    -webkit-flex: 20;
+    -ms-flex: 20;
+    flex: 20;
     outline: 0px solid yellow !important;
 }
 body.map-view .listings .right-panel .article {
