@@ -441,15 +441,6 @@ a#MyLiveChatScriptLink:nth-of-type(1) {
 .homepage .login.btn:active:hover {
     color: white;
 }
-.browse-page .listing-box.skinny {
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-align-items: center;
-    -ms-flex-align: center;
-    align-items: center;
-}
 .listing_details #map_canvas {
     height: 450px;
     width: calc(100% - 1px);
@@ -515,9 +506,8 @@ body.map-view #map_canvas {
 body.map-view .listing-box {
     padding: 15px;
 }
-body.map-view .listing-box .col-xs-6 {
-    -webkit-align-self: center; /* Safari 7.0+ */
-    align-self: center;
+body.map-view .listing-box .col-xs-6:first-child {
+    padding-right: 15px;
 }
 body.map-view .listing-box .listing-box-content h5,
 body.map-view .listing-box .listing-box-content .listing-price,
