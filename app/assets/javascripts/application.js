@@ -14,6 +14,7 @@
 //= require jquery_ujs
 //= require_tree .
 
+
 var map; //the google map used in browse page ->  maps view
 var map_bounds;
 
