@@ -440,7 +440,6 @@ a#MyLiveChatScriptLink:nth-of-type(1) {
     color: white;
 }
 .browse-page .listing-box.skinny {
-    border-radius: 0px;
     display: -webkit-box;
     display: -webkit-flex;
     display: -ms-flexbox;
@@ -513,7 +512,7 @@ body.map-view #map_canvas {
 }
 body.map-view .listing-box {
     padding: 15px;
-    margin-top: 1px;
+    margin-top: 20px;
 }
 body.map-view .listing-box .col-xs-6 {
     -webkit-align-self: center; /* Safari 7.0+ */
