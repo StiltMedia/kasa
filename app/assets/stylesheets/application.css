@@ -512,7 +512,6 @@ body.map-view #map_canvas {
 }
 body.map-view .listing-box {
     padding: 15px;
-    margin-top: 20px;
 }
 body.map-view .listing-box .col-xs-6 {
     -webkit-align-self: center; /* Safari 7.0+ */
