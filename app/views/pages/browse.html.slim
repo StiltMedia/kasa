@@ -86,7 +86,7 @@
         div#map_canvas
 
       #right-panel.right-panel.text-left
-        .col-xs-12
+        div class=(session[:browse_view]=='Map' ? 'col-xs-12' : 'col-xs-8 col-xs-offset-2')
           .sort-listings
             p Sort By:
             /! dropdown select
