@@ -15,6 +15,7 @@
 //= require_tree .
 
 var map; //the google map used in browse page ->  maps view
+var map_bounds;
 
 function fbShare(url, title, descr, image, winWidth, winHeight) {
     var winTop = (screen.height / 2) - (winHeight / 2);
@@ -84,6 +85,7 @@ $(document).ready(function () {
             zoom: 10
         };
         map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
+        map_bounds = new google.maps.LatLngBounds();
 
     }
 

@@ -357,18 +357,34 @@ javascript:
     var markers = [];
 
     $(".prop_addr").each(function () {
-      pinpoint($(this).text());    // draw markers
+      pinpoint($(this).text(), $(this).data('listingid') );    // draw markers
 
     });
 
-    function pinpoint(address) {
+    setTimeout(function() { centerMap(); },1000);
+
+    function centerMap() {
+      if (! $("body").hasClass('map-view')) {
+        return;   //we have to be in map-view mode
+      }
+      map_bounds = new google.maps.LatLngBounds();
+      $(".prop_addr").each(function() {
+        var position = new google.maps.LatLng( $(this).data('lat'), $(this).data('lng') );
+        //alert(position);
+        if (position.lat()!=0 && position.lng!=0)
+          map_bounds.extend(position);
+      });
+      map.fitBounds(map_bounds);
+    }
+
+    function pinpoint(address,listingid) {
       var iconBase = 'https://maps.google.com/mapfiles/kml/shapes/';
       address = address.replace(/\s+/g, ' ').trim();
-      console.log("pinpoint() called with " + address);
       var geocoder = new google.maps.Geocoder();
       geocoder.geocode({'address': address}, function (results, status) {
         if (status == google.maps.GeocoderStatus.OK) {
-          //map.setCenter(results[0].geometry.location);
+          $('.prop_addr[data-listingid="'+listingid+'"]').data('lat',results[0].geometry.location.lat());
+          $('.prop_addr[data-listingid="'+listingid+'"]').data('lng',results[0].geometry.location.lng());
           var m = new google.maps.Marker({
             map: map,
             title: address,
