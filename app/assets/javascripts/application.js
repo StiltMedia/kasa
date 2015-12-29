@@ -186,7 +186,9 @@ $(document).ready(function () {
     });
 
     /* fill images to div*/
-    $(".browse-page .image-box").imgLiquid();
+    $(".browse-page .image-box").imgLiquid({
+        fill: false
+    });
 
 });
 

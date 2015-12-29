@@ -133,6 +133,7 @@ section.login .btn-alt, section.signup .btn-alt {
 }
 .browse-page .listing-box .image-box {
     max-height: 263px;
+    height: 180px;
 }
 .loading-gif {
     background: url('http://www.hsi.com.hk/HSI-Net/pages/images/en/share/ajax-loader.gif') no-repeat right center;
