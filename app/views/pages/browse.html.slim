@@ -86,27 +86,26 @@
         div#map_canvas
 
       #right-panel.right-panel.text-left
-        .row.text-center
-          .col-xs-12
-            .sort-listings
-              p Sort By:
-              /! dropdown select
-              .dropdown
-                button#listing-sort-by.dropdown-toggle aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" type="button"
-                  | #{session[:browse_sort] ? session[:browse_sort] : "Newest Listings"}
-                  span.fa.fa-angle-down.pull-right
-                ul.dropdown-menu aria-labelledby="listing-sort-by"
-                  li
-                    a href="?sort=Newest Listings"  Newest Listings
-                  li
-                    a href="?sort=Highest Price"  Highest Price
-                  li
-                    a href="?sort=Lowest Price"  Lowest Price
-              /! .dropdown select
-              - if @properties.size > 0
-                p.pull-right Viewing page #{session[:browse_page] ? session[:browse_page] : "1"} of #{number_with_delimiter(@result_count)} Found
-              - else
-                p.pull-right.invisible Viewing page #{session[:browse_page] ? session[:browse_page] : "1"} of #{number_with_delimiter(@result_count)} Found
+        .col-xs-12
+          .sort-listings
+            p Sort By:
+            /! dropdown select
+            .dropdown
+              button#listing-sort-by.dropdown-toggle aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" type="button"
+                | #{session[:browse_sort] ? session[:browse_sort] : "Newest Listings"}
+                span.fa.fa-angle-down.pull-right
+              ul.dropdown-menu aria-labelledby="listing-sort-by"
+                li
+                  a href="?sort=Newest Listings"  Newest Listings
+                li
+                  a href="?sort=Highest Price"  Highest Price
+                li
+                  a href="?sort=Lowest Price"  Lowest Price
+            /! .dropdown select
+            - if @properties.size > 0
+              p.pull-right Viewing page #{session[:browse_page] ? session[:browse_page] : "1"} of #{number_with_delimiter(@result_count)} Found
+            - else
+              p.pull-right.invisible Viewing page #{session[:browse_page] ? session[:browse_page] : "1"} of #{number_with_delimiter(@result_count)} Found
 
         - if @properties.size == 0
           .article
