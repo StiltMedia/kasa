@@ -108,36 +108,37 @@
               p.pull-right.invisible Viewing page #{session[:browse_page] ? session[:browse_page] : "1"} of #{number_with_delimiter(@result_count)} Found
 
         - if @properties.size == 0
-          .article
-            .col-xs-12
-              .listing-box.clearfix.center-block
-                .col-xs-6.no-padding
-                  .image-box
-                    .no-results Nothing found.
-                .col-xs-6
-                  .listing-box-content
-                    h5
-                      a href="/pages/untitled" = ""
-                    p.listing-price
-                      = ""
-                      span = ""
-                    ul.listing-info.list-unstyled.list-inline.invisible
-                      li
-                        img alt="" src=asset_path("pt_house_dark.png")
-                      li
-                        img alt="" src=asset_path("icon_couch_big.png")
-                        span = "property.beds"
-                      li
-                        img alt="" src=asset_path("icon_bathroom_big.png")
-                        span = "property.baths"
-                      li
-                        img alt="" src=asset_path("icon_car_big.png")
-                        span = "property.garage"
-                    .listing-box-footer
-                      p = ""
-                      .links.pull-right.invisible
-                        a href="/pages/untitled"  Favorite
-                        a href="/pages/untitled" Share
+          div class=(session[:browse_view]=='Map' ? '' : 'col-xs-12 col-xs-offset-2')
+            .article
+              .col-xs-12
+                .listing-box.clearfix.center-block
+                  .col-xs-6.no-padding
+                    .image-box
+                      .no-results Nothing found.
+                  .col-xs-6
+                    .listing-box-content
+                      h5
+                        a href="/pages/untitled" = ""
+                      p.listing-price
+                        = ""
+                        span = ""
+                      ul.listing-info.list-unstyled.list-inline.invisible
+                        li
+                          img alt="" src=asset_path("pt_house_dark.png")
+                        li
+                          img alt="" src=asset_path("icon_couch_big.png")
+                          span = "property.beds"
+                        li
+                          img alt="" src=asset_path("icon_bathroom_big.png")
+                          span = "property.baths"
+                        li
+                          img alt="" src=asset_path("icon_car_big.png")
+                          span = "property.garage"
+                      .listing-box-footer
+                        p = ""
+                        .links.pull-right.invisible
+                          a href="/pages/untitled"  Favorite
+                          a href="/pages/untitled" Share
 
 
         - @properties.each do |property|
