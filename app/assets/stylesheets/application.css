@@ -133,6 +133,8 @@ section.login .btn-alt, section.signup .btn-alt {
 }
 .browse-page .listing-box .image-box {
     max-height: 263px;
+}
+.map-view .listing-box .image-box {
     height: 180px;
 }
 .loading-gif {
