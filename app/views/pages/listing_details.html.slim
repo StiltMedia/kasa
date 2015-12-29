@@ -17,12 +17,13 @@
     #myCarousel.carousel.slide data-wrap="false" data-interval="6000" data-ride="carousel" 
       .carousel-inner
         .item.active.gallery-image
-          a
+          a href="http://kasa-staging.s3.amazonaws.com/#{@listing.listing_id}_1.jpg"
             img.img-responsive.slide-img alt="" src="http://kasa-staging.s3.amazonaws.com/#{@listing.listing_id}_1.jpg" title="" /
         - if @listing.images_tot && @listing.images_tot > 2
           - (2..@listing.images_tot-2).each do |i|
-            .item
-              img.img-responsive.slide-img alt="" src="http://kasa-staging.s3.amazonaws.com/#{@listing.listing_id}_#{i}.jpg" title="" /
+            .item.gallery-image
+              a href="http://kasa-staging.s3.amazonaws.com/#{@listing.listing_id}_#{i}.jpg"
+                img.img-responsive.slide-img alt="" src="http://kasa-staging.s3.amazonaws.com/#{@listing.listing_id}_#{i}.jpg" title="" /
       /! controls
       .control-box
         a.left.carousel-control data-slide="prev" href="#myCarousel" role="button" 
