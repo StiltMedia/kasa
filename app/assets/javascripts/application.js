@@ -186,7 +186,7 @@ $(document).ready(function () {
     });
 
     /* fill images to div*/
-    $(".browse-page .image-box").imgLiquid({
+    $(".map-view .image-box").imgLiquid({
         fill: false
     });
 
