@@ -185,11 +185,6 @@ $(document).ready(function () {
         // other options
     });
 
-    /* fill images to div*/
-    $(".browse-page .image-box").imgLiquid({
-        fill: true
-    });
-
 });
 
 function numberWithCommas(x) {
