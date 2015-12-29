@@ -186,7 +186,7 @@ $(document).ready(function () {
     });
 
     /* fill images to div*/
-    $(".browse-page .image-box img").imgLiquid({
+    $(".browse-page .image-box").imgLiquid({
         fill: true
     });
 
