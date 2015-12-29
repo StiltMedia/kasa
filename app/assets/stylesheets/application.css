@@ -89,8 +89,10 @@ section.login .btn-alt, section.signup .btn-alt {
 .browse-page .listing-box * {
     white-space: nowrap !important;
 }
-.browse-page .price-controls {
-    width: 22%;
+@media screen and (min-width: 1500px) {
+    .browse-page .price-controls {
+        width: 22%;
+    }
 }
 .pagination {
     font-size: 18px;
