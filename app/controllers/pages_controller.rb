@@ -112,17 +112,16 @@ class PagesController < ApplicationController
 
     # count, for the  'Viewing page 1 of 5' Found panel
     @result_count = @properties.all.size
-    
 
     #step 2 - sorting
     if session[:browse_sort] == 'Newest Listings'
-      @properties = @properties.order(date: :desc).paginate(:page => session[:browse_page], :per_page => 10, :total_entries => 25)
+      @properties = @properties.order(date: :desc).paginate(:page => session[:browse_page], :per_page => 15, :total_entries => 60)
     elsif session[:browse_sort] == 'Highest Price'
-      @properties = @properties.order(price: :desc).paginate(:page => session[:browse_page], :per_page => 10, :total_entries => 25)
+      @properties = @properties.order(price: :desc).paginate(:page => session[:browse_page], :per_page => 15, :total_entries => 60)
     elsif session[:browse_sort] == 'Lowest Price'
-      @properties = @properties.order(:price).paginate(:page => session[:browse_page], :per_page => 10, :total_entries => 25)
+      @properties = @properties.order(:price).paginate(:page => session[:browse_page], :per_page => 15, :total_entries => 60)
     else
-      @properties = @properties.order(date: :desc).paginate(:page => session[:browse_page], :per_page => 10, :total_entries => 25)
+      @properties = @properties.order(date: :desc).paginate(:page => session[:browse_page], :per_page => 15, :total_entries => 60)
     end
   end
 
