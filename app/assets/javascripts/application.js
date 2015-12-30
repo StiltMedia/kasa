@@ -193,8 +193,8 @@ $(document).ready(function () {
     /* listing details carousel*/
     $('.owl-carousel').owlCarousel({
         loop: true,
-        navigation: true,
-        navigationText: [
+        nav: true,
+        navText: [
             "<i class='fa fa-angle-left'></i>",
             "<i class='fa fa-angle-right'></i>"
         ],
