@@ -34,7 +34,7 @@ section.search-properties
               .col-md-12
                 .input-group
                   input#zipcode.form-control name="zipcode" placeholder="Enter a city, neighborhood or zip code" type="text" /
-                  input.btn.submit-btn placeholder="ADD" type="submit" value="ADD" /
+                  input#get-listing-btn.btn.submit-btn placeholder="ADD" type="submit" value="ADD" /
             /! .input
             /! .input
             .search-properties-content.price-range-properties.clearfix
@@ -48,9 +48,43 @@ section.search-properties
               /! .input
               /! btn
               .col-md-6.text-right
-                a.btn.btn-alt href="listing_properties_map.html"  GET LISTING →
+                a.btn.btn-alt.get-listing.invisible href="javascript:void(0)"  GET LISTING →
               /! .btn
   /! .content
 
+
+javascript:
+
+  function reset_price_min() {
+    document.getElementById('price-min').value = '0';
+  }
+
+  function reset_price_max() {
+    document.getElementById('price-max').value = '999000000';
+  }
+
+  function reset_search() {
+    document.getElementById('zipcode').value = '*';
+  }
+
+  document.getElementById('get-listing-btn').onclick=function() {
+    var query_string = '?'; 
+    if (isNaN(parseInt(document.getElementById('price-min').value))  ) {
+      reset_price_min();
+    }
+    if (isNaN(parseInt(document.getElementById('price-max').value))  ) {
+      reset_price_max();
+    }
+
+    if ( document.getElementById('zipcode').value.trim() == "" ) {
+      reset_search();
+    }
+
+
+    query_string += '&min_price='+document.getElementById('price-min').value;
+    query_string += '&max_price='+document.getElementById('price-max').value;
+    query_string += '&search='+document.getElementById('zipcode').value;
+    window.location.replace('/pages/browse'+query_string);
+  }
 
 = render 'shared/footer'

@@ -21,6 +21,9 @@ class PagesController < ApplicationController
     params[:min_price].gsub!(/[,\.\$\s]/,'') rescue nil
     params[:max_price].gsub!(/[,\.\$\s]/,'') rescue nil
 
+    #remove asterisk
+    params.delete :search if params[:search] == '*'
+
     if params[:browse_view].present?
       session[:browse_view] = params[:browse_view]
       params[:browse_view] = nil
