@@ -1014,18 +1014,18 @@ img.mfp-img {
     left: auto;
     right: 60px;
 }
-.owl-carousel .owl-nav .owl-prev::before,
-.owl-carousel .owl-nav .owl-next::before {
+.owl-carousel .owl-nav .owl-prev i,
+.owl-carousel .owl-nav .owl-next i {
     font-family: "FontAwesome";
     content: "\f104";
     font-size: 40px;
     color: #fff;
     opacity: .6;
 }
-.owl-carousel .owl-nav .owl-next::before {
+.owl-carousel .owl-nav .owl-next i {
     content: "\f105";
 }
-.owl-carousel .owl-nav .owl-prev:hover::before,
-.owl-carousel .owl-nav .owl-next:hover::before {
+.owl-carousel .owl-nav .owl-prev:hover i,
+.owl-carousel .owl-nav .owl-next:hover i{
     opacity: 1;
 }

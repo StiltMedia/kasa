@@ -193,7 +193,11 @@ $(document).ready(function () {
     /* listing details carousel*/
     $('.owl-carousel').owlCarousel({
         loop: true,
-        nav: true,
+        navigation: true,
+        navigationText: [
+            "<i class='fa fa-angle-left'></i>",
+            "<i class='fa fa-angle-right'></i>"
+        ],
         responsive: {
             0: {
                 items: 1
