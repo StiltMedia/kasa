@@ -986,3 +986,10 @@ img.mfp-img {
     right: 0;
     padding-top: 0;
 }
+
+
+
+
+.schools ul li:first-child {
+  margin-left: auto;
+}

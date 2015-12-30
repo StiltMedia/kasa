@@ -391,14 +391,16 @@ javascript:
   function callback(results, status) {
     if (status === google.maps.places.PlacesServiceStatus.OK) {
       $("ul.list-inline.schools").empty();
-      var max = 3;
-      if (results.length < 3) {
+      var max = 6;
+      if (results.length < 6) {
         max = results.length;
       }
       for (var i = 0; i < max; i++) {
         //createMarker(results[i]);
         console.log(results[i].name);
         $("ul.list-inline.schools").append('<li>' + results[i].name + '</li>');
+        if (i==2)
+          $("ul.list-inline.schools").append('<br>');
       }
     }
   }
