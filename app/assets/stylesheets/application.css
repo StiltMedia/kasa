@@ -986,14 +986,42 @@ img.mfp-img {
     right: 0;
     padding-top: 0;
 }
-
-
-
-
 .schools ul li:first-child {
-  margin-left: auto;
+    margin-left: auto;
 }
-
 .search-bar {
-  min-width: 1225px;
+    min-width: 1225px;
+}
+.owl-carousel {
+    position: relative;
+}
+.owl-carousel .owl-nav {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    -webkit-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    -o-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+.owl-carousel .owl-nav .owl-prev,
+.owl-carousel .owl-nav .owl-next {
+    position: absolute;
+    left: 60px;
+}
+.owl-carousel .owl-nav .owl-next {
+    left: auto;
+    right: 60px;
+}
+.owl-carousel .owl-nav .owl-prev::before,
+.owl-carousel .owl-nav .owl-next::before {
+    font-family: "FontAwesome";
+    content: "\f104";
+    font-size: 40px;
+    color: #fff;
+    opacity: .6;
+}
+.owl-carousel .owl-nav .owl-next::before {
+    content: "\f105";
 }

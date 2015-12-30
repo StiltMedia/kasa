@@ -193,7 +193,7 @@ $(document).ready(function () {
     /* listing details carousel*/
     $('.owl-carousel').owlCarousel({
         loop: true,
-        nav: true,
+        nav: false,
         responsive: {
             0: {
                 items: 1
