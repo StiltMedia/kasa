@@ -78,7 +78,7 @@ class PagesController < ApplicationController
     session[:browse_area_lot] = 'Any' if (!session[:browse_area_lot].present?) && (!params[:area_lot])
 
     session[:browse_page] = 1 if (!session[:browse_page].present?) && (!params[:page])
-    session[:browse_sort] = 'Newest Listings' if (!session[:browse_sort].present?) && (!params[:sort])
+    session[:browse_sort] = 'Highest Price' if (!session[:browse_sort].present?) && (!params[:sort])
 
 
     #step 1 - filtering
