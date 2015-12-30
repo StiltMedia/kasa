@@ -3,6 +3,9 @@ require 'open3'
 class PagesController < ApplicationController
   include ActionController::Live
 
+  def search
+  end
+
   def more_filters
   end
 

@@ -1,0 +1,56 @@
+= render 'shared/topbar'
+
+section.search-properties
+  .container
+    /! title
+    .row
+      .col-md-12
+        .title.text-center
+          h2
+            | What type of property are
+            br/
+            | you looking to buy?
+    /! .title
+    /! content
+    .row
+      .inner-content
+        .col-md-10.col-md-offset-1
+          .row
+            /! search fields
+            .property-fields.text-center.clearfix
+              .col-md-12
+                ul.list-unstyled.list-inline
+                  li.home
+                    span Home
+                  li.apartment
+                    span Apartment
+                  li.multi-family
+                    span Multi-Family
+                  li.land
+                    span Land
+            /! .search fields
+            /! .input
+            .search-properties-content.clearfix
+              .col-md-12
+                .input-group
+                  input#zipcode.form-control name="zipcode" placeholder="Enter a city, neighborhood or zip code" type="text" /
+                  input.btn.submit-btn placeholder="ADD" type="submit" value="ADD" /
+            /! .input
+            /! .input
+            .search-properties-content.price-range-properties.clearfix
+              .col-md-3
+                .input-group.clearfix
+                  input#price-min.form-control name="price-range" placeholder=("Minimum Price") type="text" /
+                span.small-divide
+              .col-md-3
+                .input-group
+                  input#price-max.form-control name="price-range" placeholder=("Maximum Price") type="text" /
+              /! .input
+              /! btn
+              .col-md-6.text-right
+                a.btn.btn-alt href="listing_properties_map.html"  GET LISTING →
+              /! .btn
+  /! .content
+
+
+= render 'shared/footer'
