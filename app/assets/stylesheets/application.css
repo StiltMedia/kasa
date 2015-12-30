@@ -993,3 +993,7 @@ img.mfp-img {
 .schools ul li:first-child {
   margin-left: auto;
 }
+
+.search-bar {
+  min-width: 1225px;
+}
