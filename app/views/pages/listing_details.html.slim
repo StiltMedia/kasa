@@ -14,16 +14,13 @@
   /! .inside listing
   /! slider
   aside
-    #myCarousel.carousel.slide data-wrap="false" data-interval="6000" data-ride="carousel" 
-      .carousel-inner
-        .item.active.gallery-image
-          a href="http://kasa-staging.s3.amazonaws.com/#{@listing.listing_id}_1.jpg"
-            img.img-responsive.slide-img alt="" src="http://kasa-staging.s3.amazonaws.com/#{@listing.listing_id}_1.jpg" title="" /
-        - if @listing.images_tot && @listing.images_tot > 2
-          - (2..@listing.images_tot-2).each do |i|
-            .item.gallery-image
-              a href="http://kasa-staging.s3.amazonaws.com/#{@listing.listing_id}_#{i}.jpg"
-                img.img-responsive.slide-img alt="" src="http://kasa-staging.s3.amazonaws.com/#{@listing.listing_id}_#{i}.jpg" title="" /
+    .owl-carousel
+      a.item href="http://kasa-staging.s3.amazonaws.com/#{@listing.listing_id}_1.jpg"
+      - if @listing.images_tot && @listing.images_tot > 2
+        - (2..@listing.images_tot-2).each do |i|
+          .item.gallery-image
+            a href="http://kasa-staging.s3.amazonaws.com/#{@listing.listing_id}_#{i}.jpg"
+              img.img-responsive.slide-img alt="" src="http://kasa-staging.s3.amazonaws.com/#{@listing.listing_id}_#{i}.jpg" title="" /
       /! controls
       .control-box
         a.left.carousel-control data-slide="prev" href="#myCarousel" role="button" 
@@ -393,7 +390,7 @@ javascript:
         //createMarker(results[i]);
         console.log(results[i].name);
         $("ul.list-inline.schools").append('<li>' + results[i].name + '</li>');
-        if (i==2)
+        if (i == 2)
           $("ul.list-inline.schools").append('<br>');
       }
     }
