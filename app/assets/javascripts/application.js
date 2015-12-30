@@ -176,7 +176,7 @@ $(document).ready(function () {
 
     /* --- Magnific Popup Init --------------- */
     /*  carousel gallery popup- - - */
-    $('.gallery-image').magnificPopup({
+    $('.owl-carousel .item').magnificPopup({
         delegate: 'a',
         type: 'image',
         gallery: {
