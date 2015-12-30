@@ -15,8 +15,9 @@
   /! slider
   aside
     .owl-carousel
-      a.item href="http://kasa-staging.s3.amazonaws.com/#{@listing.listing_id}_1.jpg"
+      .item
         img.img-responsive.slide-img alt="" src="http://kasa-staging.s3.amazonaws.com/#{@listing.listing_id}_#{i}.jpg" title="" /
+          a href="http://kasa-staging.s3.amazonaws.com/#{@listing.listing_id}_1.jpg"
       - if @listing.images_tot && @listing.images_tot > 2
         - (2..@listing.images_tot-2).each do |i|
           .item.gallery-image
