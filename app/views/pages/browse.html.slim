@@ -355,7 +355,7 @@ javascript:
     var markers = [];
 
     $(".prop_addr").each(function () {
-      pinpoint($(this).text(), $(this).data('listingid'));    // draw markers
+      pinpoint($(this).text(), $(this).data('listingid'), $(this).data('addr'), $(this).data('price'), $(this).data('beds'),$(this).data('baths'), $(this).data('garage'),$(this).data('date'),$(this).data('sf'));    // draw markers
 
     });
 
@@ -377,7 +377,7 @@ javascript:
       map.fitBounds(map_bounds);
     }
 
-    function pinpoint(address, listingid) {
+    function pinpoint(address, listingid, addr, price, beds, baths, garage, date, sf) {
       var iconBase = 'https://maps.google.com/mapfiles/kml/shapes/';
       address = address.replace(/\s+/g, ' ').trim();
       var geocoder = new google.maps.Geocoder();
@@ -392,7 +392,15 @@ javascript:
             //icon: iconBase + 'placemark_square_highlight.png',
             position: results[0].geometry.location
           })
-          var infowindow = new google.maps.InfoWindow({content: address});
+          var infobox_contents = '<!-- infobox contents of map markers box goes here -->            <div class="infobox-wrapper">                <div id="infobox">                    <div class="listing-box clearfix">                        <div class="col-md-4 no-padding">                            <div class="image-box">                                <img src="http://kasa-staging.s3.amazonaws.com/REPLACEME_LISTING_ID_0.jpg" alt="Image N/A">                            </div>                        </div>                        <div class="col-md-8">                            <div class="listing-box-content">                                <h5>REPLACEME_ADDRESS</h5>                                <p class="listing-price">                                    REPLACEME_PRICE                                    <span>REPLACEME_SF</span>                                </p>                                <ul class="listing-info list-unstyled list-inline">                                    <li><img src="#{asset_path("pt_house_dark.png")}" alt=""></li>                                    <li><img src="#{asset_path("icon_couch.png")}" alt=""><span>REPLACEME_BEDS</span></li>                                    <li><img src="#{asset_path("icon_bathroom.png")}" alt=""><span>REPLACEME_BATHS</span></li>                                    <li><img src="#{asset_path("icon_car.png")}" alt=""><span>REPLACEME_GARAGE</span></li>                                </ul>                            </div>                        </div>                    </div>                </div>            </div>            <!-- .infobox contents of map markers box goes here -->';
+          infobox_contents = infobox_contents.replace('REPLACEME_LISTING_ID', listingid);
+          infobox_contents = infobox_contents.replace('REPLACEME_ADDRESS', addr);
+          infobox_contents = infobox_contents.replace('REPLACEME_PRICE', price);
+          infobox_contents = infobox_contents.replace('REPLACEME_BEDS', beds);
+          infobox_contents = infobox_contents.replace('REPLACEME_BATHS', baths);
+          infobox_contents = infobox_contents.replace('REPLACEME_GARAGE', garage);
+          infobox_contents = infobox_contents.replace('REPLACEME_SF', sf);
+          var infowindow = new google.maps.InfoWindow({content: infobox_contents});
           m.addListener('click', function () {
             infowindow.open(map, m);
           });

@@ -5,4 +5,8 @@ class Property < ActiveRecord::Base
   def is_favorite?(curr_user)
     Favorite.where(user_id: curr_user.id, property_id: self.id).size == 1
   end
+
+  def sf
+    "$#{self.price/self.area}/sf" rescue ""
+  end
 end

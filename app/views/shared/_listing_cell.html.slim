@@ -8,7 +8,7 @@ div class=(session[:browse_view]=='Map' ? '' : 'col-xs-8 col-xs-offset-2')
         .col-xs-6.no-padding
           .listing-box-content
             h5
-              .prop_addr.invisible data-listingid=property.listing_id data-lat="" data-lng="" = "#{property.address} #{property.zip} #{property.state} USA"
+              .prop_addr.invisible data-listingid=property.listing_id data-lat="" data-lng="" data-addr="#{property.address.titleize} #{property.city.titleize} #{property.state}" data-beds=property.beds data-baths=property.baths data-garage=property.garage data-price=number_to_currency(property.price, precision: 0) data-sf=property.sf = "#{property.address} #{property.zip} #{property.state} USA"
               a href="/pages/listing_details/#{property.listing_id}" = "#{property.address.titleize} #{property.city.titleize} #{property.state}"
             p.listing-price
               = number_to_currency(property.price, precision: 0)
