@@ -1018,9 +1018,11 @@ img.mfp-img {
 .owl-carousel .owl-nav .owl-next i {
     font-family: "FontAwesome";
     content: "\f104";
-    font-size: 40px;
+    font-size: 100px;
     color: #fff;
     opacity: .6;
+    line-height: 1px;
+    cursor: pointer;
 }
 .owl-carousel .owl-nav .owl-next i {
     content: "\f105";
