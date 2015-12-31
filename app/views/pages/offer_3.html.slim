@@ -1,0 +1,166 @@
+= render 'shared/topbar'
+
+
+
+/! steps
+section.create-offer.steps
+  .container
+    /! mobile steps process
+    .row
+      ul.breadcrumb
+        li.completed
+          a href="javascript:void(0);"  Step 1
+        li.completed
+          a href="javascript:void(0);"  Step 2
+        li.active
+          a href="javascript:void(0);"  Step 3
+        li
+          a href="javascript:void(0);"  Step 4
+    /! .mobile steps process
+    /! title
+    .row
+      .col-md-12
+        .title.text-center
+          h2 Create an Offer
+    /! .title
+    /! step beginning
+    .row.bs-wizard style="border-bottom:0;" 
+      .col-xs-3.bs-wizard-step.complete
+        .progress
+          .progress-bar
+        span.bs-wizard-dot
+        .text-center.bs-wizard-stepnum Property Info
+      .col-xs-3.bs-wizard-step.complete
+        /! complete
+        .progress
+          .progress-bar
+        span.bs-wizard-dot
+        .text-center.bs-wizard-stepnum Financing
+      .col-xs-3.bs-wizard-step.active
+        /! complete
+        .progress
+          .progress-bar
+        span.bs-wizard-dot
+        span.bs-wizard-dot
+        .text-center.bs-wizard-stepnum Offer Details
+      .col-xs-3.bs-wizard-step.disabled
+        /! complete
+        .progress
+          .progress-bar
+        span.bs-wizard-dot
+        span.bs-wizard-dot
+        .text-center.bs-wizard-stepnum Account Info
+      /! .step begining
+    /! .steps
+    /! content
+    .row
+      .inner-content
+        .col-md-8.col-md-offset-2
+          .cash-mortgage
+            .col-md-12
+              h5 OFFER DETAILS AND COSTS SETTLEMENT
+            .col-md-6
+              .checkbox.checkbox-huge
+                input#standard-terms name="standard-terms" type="checkbox" value=("use standard terms") /
+                label for="standard-terms"  USE STANDARD TERMS
+            .col-md-6
+              .checkbox.checkbox-huge
+                input#customize-terms name="standard-terms" type="checkbox" value=("use customize terms") /
+                label for="customize-terms"  CUSTOMIZE MY TERMS
+          .col-md-12
+            /! checkbox section
+            .checkbox-section
+              h5 MORTGAGE DOWN PAYMENT AMOUNT
+              .select-box
+                .percentage.days
+                  input.input-text.qty.text max="100" min="1" name="quantity" size="4" step="1" title="Percentage" type="number" value="30" /
+                  span days after seller accepts your offer until close of escrow
+            /! .checkbox section
+            /! checkbox selection
+            .checkbox-section
+              h5 PLANNING ANY INSPECTIONS?
+              .checkbox.checkbox-inline
+                input#preapproved-yes name="preapproved" type="radio" value="YES" /
+                label for="preapproved-yes"  YES
+              .checkbox.checkbox-inline
+                input#preapproved-no name="preapproved" type="radio" value="NO" /
+                label for="preapproved-no"  NO/WAIVE
+              span.desc = '*Your offer will be contigent on inspections'
+            /! .checkbox section
+            /! checkbox selection
+            .checkbox-section
+              h5 REQUEST A PEST CONTROL REPORT?
+              .checkbox.checkbox-inline
+                input#pest-no name="pest" type="radio" value="NO" /
+                label for="pest-no"  NO
+              .checkbox.checkbox-inline
+                input#pest-you name="pest" type="radio" value="YES" /
+                label for="pest-you"  YOU PAY
+              .checkbox.checkbox-inline
+                input#pest-seller name="pest" type="radio" value="SELLER" /
+                label for="pest-seller"  SELLER PAYS
+              span.desc = '*The seller will not be required to prepare a pest control report'
+            /! .checkbox section
+            /! checkbox selection
+            .checkbox-section
+              h5 REQUEST A 1 YEAR HOME WARRANTY?
+              .checkbox.checkbox-inline
+                input#warranty-no name="warranty" type="radio" value="NO" /
+                label for="warranty-no"  NO
+              .checkbox.checkbox-inline
+                input#warranty-you name="warranty" type="radio" value="YES" /
+                label for="warranty-you"  YOU PAY
+              .checkbox.checkbox-inline
+                input#warranty-seller name="warranty" type="radio" value="SELLER" /
+                label for="warranty-seller"  SELLER PAYS
+            /! .checkbox section
+            /! checkbox section
+            .checkbox-section
+              h5 INITIAL "EARNEST MONEY" DEPOSIT
+              .select-box
+                .percentage
+                  input.input-text.qty.text max="100" min="1" name="quantity" size="4" step="1" title="Percentage" type="number" value="3" /
+                  span %
+                  span.desc = '*You must deposit this amount into escrow within 3 days of an accepted offer'
+            /! .checkbox section
+            /! checkbox section
+            .checkbox-section
+              h5 OFFER EXPIRES
+              .select-box
+                .percentage.days
+                  input.input-text.qty.text max="100" min="1" name="quantity" size="4" step="1" title="Percentage" type="number" value="3" /
+                  span days
+                  span = '*The seller can no longer accept your offer after it expires'
+            /! .checkbox section
+            /! checkbox section
+            .checkbox-section
+              h5 SPECIAL INSTRUCTIONS
+              .input-group
+                textarea#message.form-control name="message" 
+          /! .checkbox section
+          /! btn
+          .row
+            .col-md-3.col-md-offset-9.text-right
+              a.next-step.btn.btn-alt href="javascript:void(0)"  Next Step →
+          /! .btn
+    /! .content
+/! .steps
+
+= render 'shared/footer'
+
+javascript:
+  document.addEventListener("DOMContentLoaded", function(event) { 
+    $(".next-step.btn").click(function() {
+      var errors=false;
+      if (! errors)
+        window.location.replace('/pages/offer_4');
+      else
+        console.log("form validation failed");
+    });
+  });
+
+
+
+
+
+

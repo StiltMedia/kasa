@@ -5,6 +5,23 @@ class PagesController < ApplicationController
 
   def offer_1
     @listing = Property.find_by_listing_id(params[:listing_id])
+    session[:offer_listing_id] = params[:listing_id]
+  end
+
+  def offer_2
+    @listing = Property.find_by_listing_id(session[:offer_listing_id])
+  end
+
+  def offer_3
+    @listing = Property.find_by_listing_id(session[:offer_listing_id])
+  end
+
+  def offer_4
+    @listing = Property.find_by_listing_id(session[:offer_listing_id])
+  end
+
+  def offer_5
+    @listing = Property.find_by_listing_id(session[:offer_listing_id])
   end
 
   def search

@@ -1,0 +1,107 @@
+= render 'shared/topbar'
+
+
+/! steps
+section.create-offer.steps
+  .container
+    /! mobile steps process
+    .row
+      ul.breadcrumb
+        li.completed
+          a href="javascript:void(0);"  Step 1
+        li.active
+          a href="javascript:void(0);"  Step 2
+        li
+          a href="javascript:void(0);"  Step 3
+        li
+          a href="javascript:void(0);"  Step 4
+    /! .mobile steps process
+    /! title
+    .row
+      .col-md-12
+        .title.text-center
+          h2 Create an Offer
+    /! .title
+    /! step beginning
+    .row.bs-wizard style="border-bottom:0;" 
+      .col-xs-3.bs-wizard-step.complete
+        .progress
+          .progress-bar
+        span.bs-wizard-dot
+        .text-center.bs-wizard-stepnum Property Info
+      .col-xs-3.bs-wizard-step.active
+        /! complete
+        .progress
+          .progress-bar
+        span.bs-wizard-dot
+        .text-center.bs-wizard-stepnum Financing
+      .col-xs-3.bs-wizard-step.disabled
+        /! complete
+        .progress
+          .progress-bar
+        span.bs-wizard-dot
+        span.bs-wizard-dot
+        .text-center.bs-wizard-stepnum Offer Details
+      .col-xs-3.bs-wizard-step.disabled
+        /! complete
+        .progress
+          .progress-bar
+        span.bs-wizard-dot
+        span.bs-wizard-dot
+        .text-center.bs-wizard-stepnum Account Info
+      /! .step begining
+    /! .steps
+    /! content
+    .row
+      .inner-content
+        .col-md-8.col-md-offset-2
+          .cash-mortgage
+            .col-md-12
+              h5 HOW WILL YOU BE PAYING FOR YOUR HOME
+            .col-md-6
+              .checkbox.checkbox-huge
+                input#cash name="cash" type="checkbox" value="cash" /
+                label for="cash"  CASH
+            .col-md-6
+              .checkbox.checkbox-huge
+                input#mortgage name="mortgage" type="checkbox" value=("with mortgage") /
+                label for="mortgage"  WITH MORTGAGE
+          /! checkbox section
+          .col-md-12
+            .checkbox-section
+              h5 HAVE YOU BEEN PRE-APPROVED FOR MORTGAGE
+              .checkbox.checkbox-inline
+                input#preapproved-yes name="preapproved" type="radio" value="YES" /
+                label for="preapproved-yes"  YES
+              .checkbox.checkbox-inline
+                input#preapproved-no name="preapproved" type="radio" value="NO" /
+                label for="preapproved-no"  NO, NOT YET
+            /! .checkbox section
+            /! checkbox section
+            .checkbox-section
+              h5 MORTGAGE DOWN PAYMENT AMOUNT
+              .select-box
+                .percentage
+                  input.input-text.qty.text max="100" min="1" name="quantity" size="4" step="1" title="Percentage" type="number" value="1" /
+                  span %
+          /! .checkbox section
+          /! btn
+          .row
+            .col-md-3.col-md-offset-9.text-right
+              a.next-step.btn.btn-alt href="javascript:void(0)"  Next Step →
+          /! .btn
+    /! .content
+/! .steps
+
+= render 'shared/footer'
+
+javascript:
+  document.addEventListener("DOMContentLoaded", function(event) { 
+    $(".next-step.btn").click(function() {
+      var errors=false;
+      if (! errors)
+        window.location.replace('/pages/offer_3');
+      else
+        console.log("form validation failed");
+    });
+  });
