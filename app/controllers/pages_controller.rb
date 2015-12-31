@@ -6,6 +6,7 @@ class PagesController < ApplicationController
   def offer_1
     @listing = Property.find_by_listing_id(params[:listing_id])
     session[:offer_listing_id] = params[:listing_id]
+    Offer.create
   end
 
   def offer_2

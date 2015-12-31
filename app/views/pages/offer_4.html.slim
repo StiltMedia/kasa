@@ -1,208 +1,129 @@
 = render 'shared/topbar'
 
 /! steps
-section.create-offer.review-offer.steps
+section.create-offer.steps
   .container
+    /! mobile steps process
+    .row
+      ul.breadcrumb
+        li.completed
+          a href="javascript:void(0);"  Step 1
+        li.completed
+          a href="javascript:void(0);"  Step 2
+        li.completed
+          a href="javascript:void(0);"  Step 3
+        li.active
+          a href="javascript:void(0);"  Step 4
+    /! .mobile steps process
     /! title
     .row
       .col-md-12
         .title.text-center
           h2 Create an Offer
     /! .title
+    /! step beginning
+    .row.bs-wizard style="border-bottom:0;" 
+      .col-xs-3.bs-wizard-step.complete
+        .progress
+          .progress-bar
+        span.bs-wizard-dot
+        .text-center.bs-wizard-stepnum Property Info
+      .col-xs-3.bs-wizard-step.complete
+        /! complete
+        .progress
+          .progress-bar
+        span.bs-wizard-dot
+        .text-center.bs-wizard-stepnum Financing
+      .col-xs-3.bs-wizard-step.complete
+        /! complete
+        .progress
+          .progress-bar
+        span.bs-wizard-dot
+        span.bs-wizard-dot
+        .text-center.bs-wizard-stepnum Offer Details
+      .col-xs-3.bs-wizard-step.active
+        /! complete
+        .progress
+          .progress-bar
+        span.bs-wizard-dot
+        span.bs-wizard-dot
+        .text-center.bs-wizard-stepnum Account Info
+      /! .step begining
+    /! .steps
     /! content
     .row
       .inner-content
-        .col-md-10.col-md-offset-1
-          /! review block
-          .review-block
-            .blue-title
-              h5 PROPERTY INFO
-            .white-block
-              a.edit href="#"  Edit
-              /! info content
-              .info-content
-                p
-                  b ADDRESS
-                p 19223 Index St #6, Northrige, CA 91326
-              /! .info content
-              /! info content
-              .info-content
-                p
-                  b AMOUNT YOU'D LIKE TO OFFER
-                p $300,000
-              /! .info content
-          /! review block
-          /! review block
-          .review-block
-            .blue-title
-              h5 FINANCING
-            .white-block
-              a.edit href="#"  Edit
-              /! info content
-              .info-content
-                p
-                  b HOW WILL YOU BE PAYING FOR YOUR HOME?
-                p With Motgage
-              /! .info content
-              /! info content
-              .info-content
-                p
-                  b HAVE YOU BEEN PRE-APPROVED FOR A MORTGAGE?
-                p Yes
-              /! .info content
-              /! info content
-              .info-content
-                p
-                  b MORTGAGE DOWN PAYMENT AMOUNT
-                p 30%
-              /! .info content
-          /! review block
-          /! review block
-          .review-block
-            .blue-title
-              h5 OFFER DETAILS
-            .white-block
-              a.edit href="#"  Edit
-              /! info content
-              .info-content
-                p
-                  b OFFER DETAILS AND COSTS SETTLEMENT
-                p Customized My Terms
-              /! .info content
-              /! info content
-              .info-content
-                p
-                  b LENGTH OF ESCROW
-                p 30 days after seller accepts your offer until close of escrow
-              /! .info content
-              /! info content
-              .info-content
-                p
-                  b PLANNING ANY INSPECTIONS?
-                p Yes *Your offer will be contigent on inspections
-              /! .info content
-              /! info content
-              .info-content
-                p
-                  b REQUEST A PEST CONTROL REPORT?
-                p No *The seller will not be required to prepare a pest control report
-              /! .info content
-              /! info content
-              .info-content
-                p
-                  b REQUEST A 1 YEAR HOME WARRANTY?
-                p No
-              /! .info content
-              /! info content
-              .info-content
-                p
-                  b INITIAL "EARNEST MONEY" DEPOSIT
-                p 3% *You must deposit this amount into escrow within 3 days of an accepted offer
-              /! .info content
-              /! info content
-              .info-content
-                p
-                  b SPECIAL INSTRUCTIONS
-                p
-                  | Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem cupiditate excepturi
-                  | exercitationem hic illo minus, nemo sapiente unde veritatis voluptas? Aliquid amet
-                  | at debitis molestiae natus, quam quas quis quos. Ab alias animi, delectus dolorem,
-                  | enim excepturi fugiat iste nam nisi porro tempora veniam, vero. A dicta dolores eum
-                  | exercitationem, explicabo fuga inventore nesciunt optio perspiciatis quaerat.
-              /! .info content
-              /! info content
-              .info-content
-                p
-                  b PLANNING ANY INSPECTIONS?
-                p Yes *Your offer will be contigent on inspections
-              /! .info content
-          /! review block
-          /! review block
-          .review-block
-            .blue-title
-              h5 ACCOUNT INFO
-            .white-block
-              a.edit href="#"  Edit
-              /! info content
-              .info-content.clearfix
-                .review-inline
-                  p
-                    b NAME
-                  p John
-                /! .info content
-                /! info content
-                .review-inline
-                  p
-                    b LAST NAME
-                  p Abrams
-                /! .info content
-                /! info content
-                .review-inline
-                  p
-                    b EMAIL
-                  p lorem@imsaumasat.com
-                /! .info content
-                /! info content
-                .review-inline.review-info
-                  p
-                    b CURRENT ADDRESS
-                  p 222 Lorem Ipsum, Los Angeles, CA 22222
-                /! .info content
-                /! info content
-                .review-inline.review-info
-                  p
-                    b PHONE NUMBER
-                  p 222 222 2222
-              /! .info content
-              hr/
-              /! info content
-              .info-content.clearfix
-                .blue-title
-                  h5 CO-BUYER
-                .review-inline
-                  p
-                    b NAME
-                  p Alex
-                /! .info content
-                /! info content
-                .review-inline
-                  p
-                    b LAST NAME
-                  p Gonzalez
-                /! .info content
-                /! info content
-                .review-inline
-                  p
-                    b EMAIL
-                  p lorem@imsaumasat.com
-                /! .info content
-          /! .review block
-          /! review block
-          .review-block
-            .blue-title
-              h5 DOCUMENTS
-            .white-block
-              a.edit href="#"  Add
-              /! info content
-              .info-content
-                ul.list-unstyled.list-inline
-                  li
-                    | Lorem Ims...pdf
-                    span.remove-file X
-                  li
-                    | Lorem Ims...pdf
-                    span.remove-file X
-                  li
-                    | Lorem Ims...pdf
-                    span.remove-file X
-              /! .info content
-          /! .review block
+        .col-md-8.col-md-offset-2
+          .row
+            .col-md-12
+              /! input
+              .input-group
+                input#name.form-control name="name" placeholder="Name" type="text" /
+          /! .input
+          .row
+            .col-md-12
+              .input-group
+                input#surname.form-control name="surname" placeholder=("Last Name") type="text" /
+          /! .input
+          /! .input
+          .row
+            .col-md-12
+              .input-group
+                input#email.form-control name="address" placeholder="Email" type="email" /
+          /! .input
+          /! .input
+          .row
+            .col-md-12
+              .input-group
+                input#create-password.form-control name=("Create Password") placeholder=("Create Password") type="password" /
+                a.pull-right.add-option href="#"  or Sign In
+          /! .input
+          /! .input
+          .row
+            .col-md-12
+              .input-group
+                input#address.form-control name="address" placeholder=("Current Address") type="address" /
+                a.pull-right.add-option.add-buyer-option href="javascript:void(1)" 
+                  | + Add
+                  | Buyer
+          /! .input
+          /! .input
+          .row.add-buyer
+            .col-md-12
+              .input-group.removable
+                input#co-buyer-name.form-control name="address" placeholder=("Co-Buyers Name") type="text" /
+                span.close-option X
+            /! .input
+            /! .input
+            .col-md-12
+              .input-group.removable
+                input#co-buyer-email.form-control name="address" placeholder=("Co-Buyers Email") type="email" /
+                span.close-option X
+                a.pull-right.add-option.add-buyer-option href="javascript:void(0)" 
+                  | + Add
+                  | Buyer
+            /! .input
+          .cloned-items
+          /! checkbox selection
+          .checkbox-section.text-center
+            .checkbox.checkbox-inline
+              input#terms-of-use name="terms-of-use" type="checkbox" value=("terms of use") /
+              label for="terms-of-use" 
+                | In agreement with our
+                a href="#"  Terms of Use
+            /! blue button
+            .blue-button.text-center
+              a.btn href="#"  UPLOAD DOCUMENTS
+            /! .blue button
+          /! .checkbox section
         /! btn
-        .review-btn.col-md-3.col-md-offset-8.text-right
-          a.next-step.btn.btn-alt href="javascript:void(0)"  SUBMIT →
+        .col-md-3.col-md-offset-8.text-right
+          a.next-step.btn.btn-alt href="#"  Review Offer →
         /! .btn
     /! .content
 /! .steps
+
+
 
 = render 'shared/footer'
 
@@ -216,4 +137,3 @@ javascript:
         console.log("form validation failed");
     });
   });
-

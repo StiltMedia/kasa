@@ -1,14 +1,219 @@
 = render 'shared/topbar'
 
-section#about.about-kasa.no-padding
-  .container-fluid
+/! steps
+section.create-offer.review-offer.steps
+  .container
+    /! title
     .row
-      .col-sm-6.no-padding
-        .left-bg
-      .col-sm-6
-        .right-bg
-          h2 Thank you.
-
-
+      .col-md-12
+        .title.text-center
+          h2 Create an Offer
+    /! .title
+    /! content
+    .row
+      .inner-content
+        .col-md-10.col-md-offset-1
+          /! review block
+          .review-block
+            .blue-title
+              h5 PROPERTY INFO
+            .white-block
+              a.edit href="#"  Edit
+              /! info content
+              .info-content
+                p
+                  b ADDRESS
+                p 19223 Index St #6, Northrige, CA 91326
+              /! .info content
+              /! info content
+              .info-content
+                p
+                  b AMOUNT YOU'D LIKE TO OFFER
+                p $300,000
+              /! .info content
+          /! review block
+          /! review block
+          .review-block
+            .blue-title
+              h5 FINANCING
+            .white-block
+              a.edit href="#"  Edit
+              /! info content
+              .info-content
+                p
+                  b HOW WILL YOU BE PAYING FOR YOUR HOME?
+                p With Motgage
+              /! .info content
+              /! info content
+              .info-content
+                p
+                  b HAVE YOU BEEN PRE-APPROVED FOR A MORTGAGE?
+                p Yes
+              /! .info content
+              /! info content
+              .info-content
+                p
+                  b MORTGAGE DOWN PAYMENT AMOUNT
+                p 30%
+              /! .info content
+          /! review block
+          /! review block
+          .review-block
+            .blue-title
+              h5 OFFER DETAILS
+            .white-block
+              a.edit href="#"  Edit
+              /! info content
+              .info-content
+                p
+                  b OFFER DETAILS AND COSTS SETTLEMENT
+                p Customized My Terms
+              /! .info content
+              /! info content
+              .info-content
+                p
+                  b LENGTH OF ESCROW
+                p 30 days after seller accepts your offer until close of escrow
+              /! .info content
+              /! info content
+              .info-content
+                p
+                  b PLANNING ANY INSPECTIONS?
+                p Yes *Your offer will be contigent on inspections
+              /! .info content
+              /! info content
+              .info-content
+                p
+                  b REQUEST A PEST CONTROL REPORT?
+                p No *The seller will not be required to prepare a pest control report
+              /! .info content
+              /! info content
+              .info-content
+                p
+                  b REQUEST A 1 YEAR HOME WARRANTY?
+                p No
+              /! .info content
+              /! info content
+              .info-content
+                p
+                  b INITIAL "EARNEST MONEY" DEPOSIT
+                p 3% *You must deposit this amount into escrow within 3 days of an accepted offer
+              /! .info content
+              /! info content
+              .info-content
+                p
+                  b SPECIAL INSTRUCTIONS
+                p
+                  | Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem cupiditate excepturi
+                  | exercitationem hic illo minus, nemo sapiente unde veritatis voluptas? Aliquid amet
+                  | at debitis molestiae natus, quam quas quis quos. Ab alias animi, delectus dolorem,
+                  | enim excepturi fugiat iste nam nisi porro tempora veniam, vero. A dicta dolores eum
+                  | exercitationem, explicabo fuga inventore nesciunt optio perspiciatis quaerat.
+              /! .info content
+              /! info content
+              .info-content
+                p
+                  b PLANNING ANY INSPECTIONS?
+                p Yes *Your offer will be contigent on inspections
+              /! .info content
+          /! review block
+          /! review block
+          .review-block
+            .blue-title
+              h5 ACCOUNT INFO
+            .white-block
+              a.edit href="#"  Edit
+              /! info content
+              .info-content.clearfix
+                .review-inline
+                  p
+                    b NAME
+                  p John
+                /! .info content
+                /! info content
+                .review-inline
+                  p
+                    b LAST NAME
+                  p Abrams
+                /! .info content
+                /! info content
+                .review-inline
+                  p
+                    b EMAIL
+                  p lorem@imsaumasat.com
+                /! .info content
+                /! info content
+                .review-inline.review-info
+                  p
+                    b CURRENT ADDRESS
+                  p 222 Lorem Ipsum, Los Angeles, CA 22222
+                /! .info content
+                /! info content
+                .review-inline.review-info
+                  p
+                    b PHONE NUMBER
+                  p 222 222 2222
+              /! .info content
+              hr/
+              /! info content
+              .info-content.clearfix
+                .blue-title
+                  h5 CO-BUYER
+                .review-inline
+                  p
+                    b NAME
+                  p Alex
+                /! .info content
+                /! info content
+                .review-inline
+                  p
+                    b LAST NAME
+                  p Gonzalez
+                /! .info content
+                /! info content
+                .review-inline
+                  p
+                    b EMAIL
+                  p lorem@imsaumasat.com
+                /! .info content
+          /! .review block
+          /! review block
+          .review-block
+            .blue-title
+              h5 DOCUMENTS
+            .white-block
+              a.edit href="#"  Add
+              /! info content
+              .info-content
+                ul.list-unstyled.list-inline
+                  li
+                    | Lorem Ims...pdf
+                    span.remove-file X
+                  li
+                    | Lorem Ims...pdf
+                    span.remove-file X
+                  li
+                    | Lorem Ims...pdf
+                    span.remove-file X
+              /! .info content
+          /! .review block
+        /! btn
+        .review-btn.col-md-3.col-md-offset-8.text-right
+          a.next-step.btn.btn-alt href="javascript:void(0)"  SUBMIT →
+        /! .btn
+    /! .content
+/! .steps
 
 = render 'shared/footer'
+
+javascript:
+  document.addEventListener("DOMContentLoaded", function(event) { 
+    $(".next-step.btn").click(function() {
+      var errors=false;
+      if (! errors)
+        window.location.replace('/pages/offer_6');
+      else
+        console.log("form validation failed");
+    });
+  });
+
