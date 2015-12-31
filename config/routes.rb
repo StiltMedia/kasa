@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   get 'pages/fetch'
   get 'pages/listing_details/:listing_id' => 'pages#listing_details'
   get 'pages/search'
+  get 'pages/offer_1'
   post 'api/favorite_on'
   post 'api/favorite_off'
   root 'pages#landing'

@@ -3,6 +3,10 @@ require 'open3'
 class PagesController < ApplicationController
   include ActionController::Live
 
+  def offer_1
+    @listing = Property.find_by_listing_id(params[:listing_id])
+  end
+
   def search
   end
 

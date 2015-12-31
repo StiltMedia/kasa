@@ -1,0 +1,87 @@
+= render 'shared/topbar'
+
+/! steps
+section.create-offer.steps
+  .container
+    /! mobile steps process
+    .row
+      ul.breadcrumb
+        li.active
+          a href="javascript:void(0);"  Step 1
+        li
+          a href="javascript:void(0);"  Step 2
+        li
+          a href="javascript:void(0);"  Step 3
+        li
+          a href="javascript:void(0);"  Step 4
+    /! .mobile steps process
+    /! title
+    .row
+      .col-md-12
+        .title.text-center
+          h2 Create an Offer
+    /! .title
+    /! step beginning
+    .row.bs-wizard style="border-bottom:0;" 
+      .col-xs-3.bs-wizard-step.active
+        .progress
+          .progress-bar
+        span.bs-wizard-dot
+        .text-center.bs-wizard-stepnum Property Info
+      .col-xs-3.bs-wizard-step.disabled
+        /! complete
+        .progress
+          .progress-bar
+        span.bs-wizard-dot
+        .text-center.bs-wizard-stepnum Financing
+      .col-xs-3.bs-wizard-step.disabled
+        /! complete
+        .progress
+          .progress-bar
+        span.bs-wizard-dot
+        span.bs-wizard-dot
+        .text-center.bs-wizard-stepnum Offer Details
+      .col-xs-3.bs-wizard-step.disabled
+        /! complete
+        .progress
+          .progress-bar
+        span.bs-wizard-dot
+        span.bs-wizard-dot
+        .text-center.bs-wizard-stepnum Account Info
+      /! .step begining
+    /! .steps
+    /! content
+    .row
+      .inner-content
+        .col-md-8.col-md-offset-2
+          /! input
+          .col-md-12
+            .input-group
+              input#addres.form-control name="address"  type="text" readonly="1" value="#{@listing.address.titleize} #{@listing.city.titleize} #{@listing.state}"
+            /! .input
+            .input-group
+              input#amount.form-control name="address" placeholder=("Amount You'd Like To Offer") type="text" /
+          /! .input
+        /! btn
+        .col-md-3.col-md-offset-7.text-right
+          a.next-step.btn.btn-alt href="javascript:void(0)"  Next Step →
+        /! .btn
+    /! .content
+/! .steps
+
+
+= render 'shared/footer'
+
+javascript:
+  document.addEventListener("DOMContentLoaded", function(event) { 
+    $(".next-step.btn").click(function() {
+      var errors=false;
+      var amount = $("input#amount").val().replace(/\$/,"");
+      if (isNaN(parseInt(amount)))
+        errors=true;
+      if (! errors)
+        window.location.replace('/pages/offer_2');
+      else
+        console.log("form validation failed");
+    });
+  });

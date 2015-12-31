@@ -85,7 +85,10 @@
                 | FOR SALE
                 span 19hrs ago
             .sidebar-btn.text-right
-              a.btn href="#"  CREATE AN OFFER
+              - if user_signed_in?
+                a.btn href="/pages/offer_1?listing_id=#{@listing.listing_id}"  CREATE AN OFFER
+              - else
+                a.btn href="javascript:alert('You must be logged in to make an offer.')"  CREATE AN OFFER
               a.btn href="#"  REQUEST SHOWING
               a.request-more-info data-target="#more-info" data-toggle="modal" href="#"  Request More Info
             .footer.text-center
