@@ -5,24 +5,48 @@ class PagesController < ApplicationController
 
   def offer_1
     @listing = Property.find_by_listing_id(params[:listing_id])
-    session[:offer_listing_id] = params[:listing_id]
-    Offer.create
+    @offer = Offer.create(user_id: current_user.id, property_id: Property.find_by_listing_id(params[:listing_id]).id)
   end
 
   def offer_2
-    @listing = Property.find_by_listing_id(session[:offer_listing_id])
+    @offer = Offer.find(params[:offer_id])
+    @offer.amount = params[:amount]
+    @offer.save
   end
 
   def offer_3
-    @listing = Property.find_by_listing_id(session[:offer_listing_id])
+    @offer = Offer.find(params[:offer_id])
+    @offer.down_payment = params[:down_payment] if params.has_key?('down_payment')
+    @offer.funding_source = params[:funding_source] if params.has_key?('funding_source')
+    @offer.pre_approved = params[:pre_approved] if params.has_key?('pre_approved')
+    @offer.save
   end
 
   def offer_4
-    @listing = Property.find_by_listing_id(session[:offer_listing_id])
+    @offer = Offer.find(params[:offer_id])
+    @offer.standard_terms = params[:standard_terms] if params.has_key?('standard_terms')
+    @offer.downpayment_days = params[:downpayment_days] if params.has_key?('downpayment_days')
+    @offer.planning_inspections = params[:planning_inspections] if params.has_key?('planning_inspections')
+    @offer.request_pest_report = params[:request_pest_report] if params.has_key?('request_pest_report')
+    @offer.request_one_year_home_warranty = params[:request_one_year_home_warranty] if params.has_key?('request_one_year_home_warranty')
+    @offer.initial_deposit = params[:initial_deposit] if params.has_key?('initial_deposit')
+    @offer.offer_expires = params[:offer_expires] if params.has_key?('offer_expires')
+    @offer.special_instructions = params[:special_instructions] if params.has_key?('special_instructions')
+    @offer.save
   end
 
   def offer_5
-    @listing = Property.find_by_listing_id(session[:offer_listing_id])
+    @offer = Offer.find(params[:offer_id])
+    @property = Property.find(@offer.property_id)
+    @address = "#{@property.address.titleize} #{@property.city.titleize} #{@property.state}"
+    @offer.first_name = params[:first_name] if params.has_key?('first_name')
+    @offer.last_name = params[:last_name] if params.has_key?('last_name')
+    @offer.address = params[:address] if params.has_key?('address')
+    @offer.save
+  end
+
+
+  def offer_6
   end
 
   def search

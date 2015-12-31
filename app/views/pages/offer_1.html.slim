@@ -64,6 +64,7 @@ section.create-offer.steps
           /! .input
         /! btn
         .col-md-3.col-md-offset-7.text-right
+          input.offer_id type="hidden" name="offer_id" value=@offer.id
           a.next-step.btn.btn-alt href="javascript:void(0)"  Next Step →
         /! .btn
     /! .content
@@ -80,7 +81,7 @@ javascript:
       if (isNaN(parseInt(amount)))
         errors=true;
       if (! errors)
-        window.location.replace('/pages/offer_2');
+        window.location.replace('/pages/offer_2?offer_id='+$("input.offer_id").val()+'&amount='+amount);
       else
         console.log("form validation failed");
     });

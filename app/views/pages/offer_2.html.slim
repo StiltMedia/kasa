@@ -88,6 +88,7 @@ section.create-offer.steps
           /! btn
           .row
             .col-md-3.col-md-offset-9.text-right
+              input.offer_id type="hidden" name="offer_id" value=@offer.id
               a.next-step.btn.btn-alt href="javascript:void(0)"  Next Step →
           /! .btn
     /! .content
@@ -99,8 +100,17 @@ javascript:
   document.addEventListener("DOMContentLoaded", function(event) { 
     $(".next-step.btn").click(function() {
       var errors=false;
+      var query_string = "?";
+      query_string += '&offer_id='+$("input.offer_id").val();
+      query_string += '&down_payment='+$("input.qty").val();
+      if ( $("input#preapproved-yes").is(':checked') )
+        query_string += '&pre_approved=1';
+      if ( $("input#cash").is(':checked') )
+        query_string += '&funding_source=cash';
+      if ( $("input#mortgage").is(':checked') )
+        query_string += '&funding_source=with_mortgage';
       if (! errors)
-        window.location.replace('/pages/offer_3');
+        window.location.replace('/pages/offer_3' + query_string);
       else
         console.log("form validation failed");
     });

@@ -18,18 +18,18 @@ section.create-offer.review-offer.steps
             .blue-title
               h5 PROPERTY INFO
             .white-block
-              a.edit href="#"  Edit
+              a.edit.invisible href="#"  Edit
               /! info content
               .info-content
                 p
                   b ADDRESS
-                p 19223 Index St #6, Northrige, CA 91326
+                p = @address
               /! .info content
               /! info content
               .info-content
                 p
                   b AMOUNT YOU'D LIKE TO OFFER
-                p $300,000
+                p = "$#{@offer.amount}"
               /! .info content
           /! review block
           /! review block
@@ -37,24 +37,30 @@ section.create-offer.review-offer.steps
             .blue-title
               h5 FINANCING
             .white-block
-              a.edit href="#"  Edit
+              a.edit.invisible href="#"  Edit
               /! info content
               .info-content
                 p
                   b HOW WILL YOU BE PAYING FOR YOUR HOME?
-                p With Motgage
+                - if @offer.funding_source == 'with_mortgage'
+                  p With Motgage
+                - else
+                  p Cash
               /! .info content
               /! info content
               .info-content
                 p
                   b HAVE YOU BEEN PRE-APPROVED FOR A MORTGAGE?
-                p Yes
+                - if @offer.pre_approved == "1"
+                  p Yes
+                - else
+                  p No
               /! .info content
               /! info content
               .info-content
                 p
                   b MORTGAGE DOWN PAYMENT AMOUNT
-                p 30%
+                p = "#{@offer.down_payment}%"
               /! .info content
           /! review block
           /! review block
@@ -62,59 +68,73 @@ section.create-offer.review-offer.steps
             .blue-title
               h5 OFFER DETAILS
             .white-block
-              a.edit href="#"  Edit
+              a.edit.invisible href="#"  Edit
               /! info content
               .info-content
                 p
                   b OFFER DETAILS AND COSTS SETTLEMENT
-                p Customized My Terms
+                - if @offer.standard_terms == "1"
+                  p Use Standard Terms
+                - else
+                  p Customize My Terms
               /! .info content
               /! info content
               .info-content
                 p
                   b LENGTH OF ESCROW
-                p 30 days after seller accepts your offer until close of escrow
+                p #{@offer.downpayment_days} days after seller accepts your offer until close of escrow
               /! .info content
               /! info content
               .info-content
                 p
                   b PLANNING ANY INSPECTIONS?
-                p Yes *Your offer will be contigent on inspections
+                - if @offer.planning_inspections == "1"
+                  p Yes *Your offer will be contigent on inspections
+                - else
+                  p No *Your offer will be contigent on inspections
               /! .info content
               /! info content
               .info-content
                 p
                   b REQUEST A PEST CONTROL REPORT?
-                p No *The seller will not be required to prepare a pest control report
+                - if @offer.request_pest_report == "1"
+                  p No
+                - if @offer.request_pest_report == "2"
+                  p You Pay
+                - if @offer.request_pest_report == "3"
+                  p Seller Pays
               /! .info content
               /! info content
               .info-content
                 p
                   b REQUEST A 1 YEAR HOME WARRANTY?
-                p No
+                - if @offer.request_one_year_home_warranty == "1"
+                  p No
+                - if @offer.request_one_year_home_warranty == "2"
+                  p You Pay
+                - if @offer.request_one_year_home_warranty == "3"
+                  p Seller Pays
               /! .info content
               /! info content
               .info-content
                 p
                   b INITIAL "EARNEST MONEY" DEPOSIT
-                p 3% *You must deposit this amount into escrow within 3 days of an accepted offer
+                p #{@offer.initial_deposit}% *You must deposit this amount into escrow within 3 days of an accepted offer
               /! .info content
               /! info content
               .info-content
                 p
                   b SPECIAL INSTRUCTIONS
-                p
-                  | Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem cupiditate excepturi
-                  | exercitationem hic illo minus, nemo sapiente unde veritatis voluptas? Aliquid amet
-                  | at debitis molestiae natus, quam quas quis quos. Ab alias animi, delectus dolorem,
-                  | enim excepturi fugiat iste nam nisi porro tempora veniam, vero. A dicta dolores eum
-                  | exercitationem, explicabo fuga inventore nesciunt optio perspiciatis quaerat.
+                p = @offer.special_instructions
               /! .info content
               /! info content
               .info-content
                 p
                   b PLANNING ANY INSPECTIONS?
-                p Yes *Your offer will be contigent on inspections
+                - if @offer.planning_inspections
+                  p Yes *Your offer will be contigent on inspections
+                - else
+                  p No *Your offer will be contigent on inspections
               /! .info content
           /! review block
           /! review block
@@ -122,41 +142,41 @@ section.create-offer.review-offer.steps
             .blue-title
               h5 ACCOUNT INFO
             .white-block
-              a.edit href="#"  Edit
+              a.edit.invisible href="#"  Edit
               /! info content
               .info-content.clearfix
                 .review-inline
                   p
                     b NAME
-                  p John
+                  p = @offer.first_name
                 /! .info content
                 /! info content
                 .review-inline
                   p
                     b LAST NAME
-                  p Abrams
+                  p = @offer.last_name
                 /! .info content
                 /! info content
                 .review-inline
                   p
                     b EMAIL
-                  p lorem@imsaumasat.com
+                  p = current_user.email
                 /! .info content
                 /! info content
                 .review-inline.review-info
                   p
                     b CURRENT ADDRESS
-                  p 222 Lorem Ipsum, Los Angeles, CA 22222
+                  p = @offer.address
                 /! .info content
                 /! info content
-                .review-inline.review-info
+                .review-inline.review-info.invisible
                   p
                     b PHONE NUMBER
                   p 222 222 2222
               /! .info content
               hr/
               /! info content
-              .info-content.clearfix
+              .info-content.clearfix.invisible
                 .blue-title
                   h5 CO-BUYER
                 .review-inline
@@ -178,7 +198,7 @@ section.create-offer.review-offer.steps
                 /! .info content
           /! .review block
           /! review block
-          .review-block
+          .review-block.hidden
             .blue-title
               h5 DOCUMENTS
             .white-block

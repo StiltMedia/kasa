@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   get 'pages/offer_3'
   get 'pages/offer_4'
   get 'pages/offer_5'
+  get 'pages/offer_6'
   post 'api/favorite_on'
   post 'api/favorite_off'
   root 'pages#landing'

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151228233040) do
+ActiveRecord::Schema.define(version: 20151231100558) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -63,6 +63,32 @@ ActiveRecord::Schema.define(version: 20151228233040) do
     t.datetime "last_img_trans_date"
   end
 
+  create_table "offers", force: :cascade do |t|
+    t.string   "amount"
+    t.string   "funding_source"
+    t.string   "pre_approved"
+    t.string   "down_payment"
+    t.string   "standard_terms"
+    t.string   "downpayment_days"
+    t.string   "planning_inspections"
+    t.string   "request_pest_report"
+    t.string   "initial_deposit"
+    t.string   "offer_expires"
+    t.string   "special_instructions"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "phone"
+    t.string   "address"
+    t.integer  "user_id"
+    t.integer  "property_id"
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+    t.string   "request_one_year_home_warranty"
+  end
+
+  add_index "offers", ["property_id"], name: "index_offers_on_property_id", using: :btree
+  add_index "offers", ["user_id"], name: "index_offers_on_user_id", using: :btree
+
   create_table "properties", force: :cascade do |t|
     t.datetime "created_at",          null: false
     t.datetime "updated_at",          null: false
@@ -111,4 +137,6 @@ ActiveRecord::Schema.define(version: 20151228233040) do
   add_foreign_key "favorites", "users"
   add_foreign_key "favourites", "properties"
   add_foreign_key "favourites", "users"
+  add_foreign_key "offers", "properties"
+  add_foreign_key "offers", "users"
 end

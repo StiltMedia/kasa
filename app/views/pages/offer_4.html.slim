@@ -69,23 +69,13 @@ section.create-offer.steps
           .row
             .col-md-12
               .input-group
-                input#email.form-control name="address" placeholder="Email" type="email" /
-          /! .input
-          /! .input
-          .row
-            .col-md-12
-              .input-group
-                input#create-password.form-control name=("Create Password") placeholder=("Create Password") type="password" /
-                a.pull-right.add-option href="#"  or Sign In
+                input#email.form-control name="address" placeholder="Email" type="email" value=current_user.email /
           /! .input
           /! .input
           .row
             .col-md-12
               .input-group
                 input#address.form-control name="address" placeholder=("Current Address") type="address" /
-                a.pull-right.add-option.add-buyer-option href="javascript:void(1)" 
-                  | + Add
-                  | Buyer
           /! .input
           /! .input
           .row.add-buyer
@@ -113,11 +103,12 @@ section.create-offer.steps
                 a href="#"  Terms of Use
             /! blue button
             .blue-button.text-center
-              a.btn href="#"  UPLOAD DOCUMENTS
+              a.btn href="javascript:alert('TODO')"  UPLOAD DOCUMENTS
             /! .blue button
           /! .checkbox section
         /! btn
         .col-md-3.col-md-offset-8.text-right
+          input.offer_id type="hidden" name="offer_id" value=@offer.id
           a.next-step.btn.btn-alt href="#"  Review Offer →
         /! .btn
     /! .content
@@ -131,8 +122,13 @@ javascript:
   document.addEventListener("DOMContentLoaded", function(event) { 
     $(".next-step.btn").click(function() {
       var errors=false;
+      var query_string = "?";
+      query_string += '&offer_id='+$("input.offer_id").val();
+      query_string += '&first_name='+$("input#name").val();
+      query_string += '&last_name='+$("input#surname").val();
+      query_string += '&address='+$("input#address").val();
       if (! errors)
-        window.location.replace('/pages/offer_5');
+        window.location.replace('/pages/offer_5' + query_string);
       else
         console.log("form validation failed");
     });
