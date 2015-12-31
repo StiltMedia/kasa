@@ -134,9 +134,12 @@ $(document).ready(function () {
         if ($('.browse-page .search-bar input.search').val()) {
             typingTimer = setTimeout(function () {
                 $('.browse-page input.search').addClass('loading-gif');
+                var val = $('.browse-page input.search').val();
+                if ( val == "" ) {
+                  val = "*"
+                }
                 setTimeout(function () {
-                    window.location.href = '?search='
-                        + $('.browse-page input.search').val();
+                    window.location.href = '?search=' + val;
                 }, 500);
 
             }, doneTypingInterval);
@@ -149,9 +152,12 @@ $(document).ready(function () {
         if ($('.browse-page .search-bar input.min_price').val()) {
             typingTimer_2 = setTimeout(function () {
                 $('.browse-page input.min_price').addClass('loading-gif');
+                var val = $('.browse-page input.min_price').val();
+                if ( val == "" ) {
+                  val = "*"
+                }
                 setTimeout(function () {
-                    window.location.href = '?min_price='
-                        + $('.browse-page input.min_price').val();
+                    window.location.href = '?min_price=' + val;
                 }, 500);
 
             }, doneTypingInterval);
@@ -164,9 +170,12 @@ $(document).ready(function () {
         if ($('.browse-page .search-bar input.max_price').val()) {
             typingTimer_3 = setTimeout(function () {
                 $('.browse-page input.max_price').addClass('loading-gif');
+                var val = $('.browse-page input.max_price').val();
+                if ( val == "" ) {
+                  val = "*"
+                }
                 setTimeout(function () {
-                    window.location.href = '?max_price='
-                        + $('.browse-page input.max_price').val();
+                    window.location.href = '?max_price=' + val;
                 }, 500);
 
             }, doneTypingInterval);

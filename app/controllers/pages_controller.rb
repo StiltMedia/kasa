@@ -21,29 +21,32 @@ class PagesController < ApplicationController
     params[:min_price].gsub!(/[,\.\$\s]/,'') rescue nil
     params[:max_price].gsub!(/[,\.\$\s]/,'') rescue nil
 
-    #remove asterisk
-    params.delete :search if params[:search] == '*'
-
     if params[:browse_view].present?
       session[:browse_view] = params[:browse_view]
       params[:browse_view] = nil
+    end
+
+    if params[:search] == '*'
+      params.delete :search
+      session[:browse_search] = nil
     end
 
     if params[:baths] == 'All'
       params[:baths] = nil
       session[:browse_baths] ='All'
     end
+
     if params[:beds] == 'All'
       params[:beds] = nil
       session[:browse_beds] ='All'
     end
 
-    if params[:min_price] == 'Any'
+    if params[:min_price] == 'Any' || params[:min_price] == '*'
       params[:min_price] = nil
       session[:browse_min_price] ='Any'
     end
 
-    if params[:max_price] == 'Any'
+    if params[:max_price] == 'Any' || params[:max_price] == '*'
       params[:max_price] = nil
       session[:browse_max_price] ='Any'
     end
@@ -80,7 +83,6 @@ class PagesController < ApplicationController
     session[:browse_page] = 1 if (!session[:browse_page].present?) && (!params[:page])
     session[:browse_sort] = 'Highest Price' if (!session[:browse_sort].present?) && (!params[:sort])
 
-
     #step 1 - filtering
     @properties = Property.all
 
@@ -97,23 +99,23 @@ class PagesController < ApplicationController
     end
 
     if session[:browse_min_price] =~ /\d+/
-      @properties = Property.where("price > #{session[:browse_min_price]}")
+      @properties = @properties.where("price > #{session[:browse_min_price]}")
     end
 
     if session[:browse_max_price] =~ /\d+/
-      @properties = Property.where("price < #{session[:browse_max_price]}")
+      @properties = @properties.where("price < #{session[:browse_max_price]}")
     end
 
     if session[:browse_area] =~ /\d+/
-      @properties = Property.where("area = #{session[:browse_area]}")
+      @properties = @properties.where("area = #{session[:browse_area]}")
     end
 
     if session[:browse_area_lot] =~ /\d+/
-      @properties = Property.where("area_lot = #{session[:browse_area_lot]}")
+      @properties = @properties.where("area_lot = #{session[:browse_area_lot]}")
     end
 
     if session[:browse_search].present?
-      @properties = Property.where("address ILIKE '%#{session[:browse_search]}%' OR listing_id ILIKE '%#{session[:browse_search]}%'  OR city ILIKE '%#{session[:browse_search]}%' OR county ILIKE '%#{session[:browse_search]}%' OR zip ILIKE '%#{session[:browse_search]}%'")
+      @properties = @properties.where("address ILIKE '%#{session[:browse_search]}%' OR listing_id ILIKE '%#{session[:browse_search]}%'  OR city ILIKE '%#{session[:browse_search]}%' OR county ILIKE '%#{session[:browse_search]}%' OR zip ILIKE '%#{session[:browse_search]}%'")
     end
 
     # count, for the  'Viewing page 1 of 5' Found panel
