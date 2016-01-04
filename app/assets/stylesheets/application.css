@@ -1033,6 +1033,6 @@ img.mfp-img {
 }
 /* Google Map infoBox*/
 .gm-style-iw {
-    width: 400px;
-    min-height: 250px;
+    width: 400px !important;
+    min-height: 160px;
 }
