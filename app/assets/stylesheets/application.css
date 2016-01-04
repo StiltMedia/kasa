@@ -1034,7 +1034,7 @@ img.mfp-img {
 /* Google Map infoBox*/
 .gm-style-iw {
     width: 400px !important;
-    height: 160px;
+    height: 125px;
 }
 body.map-view #infobox .listing-box {
     margin: 0;
