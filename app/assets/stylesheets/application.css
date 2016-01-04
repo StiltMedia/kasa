@@ -1036,7 +1036,10 @@ img.mfp-img {
     width: 400px !important;
     height: 160px;
 }
-.infobox .listing-box {
+body.map-view .infobox .listing-box {
     margin: 0;
     padding: 0;
+}
+.map-view .infobox .listing-box .image-box {
+    height: auto;
 }
