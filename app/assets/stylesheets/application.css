@@ -1031,3 +1031,8 @@ img.mfp-img {
 .owl-carousel .owl-nav .owl-next:hover i{
     opacity: 1;
 }
+/* Google Map infoBox*/
+.gm-style-iw {
+    width: 400px;
+    min-height: 250px;
+}
