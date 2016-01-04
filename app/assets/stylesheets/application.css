@@ -1036,3 +1036,7 @@ img.mfp-img {
     width: 400px !important;
     min-height: 160px;
 }
+.infobox .listing-box {
+    margin: 0;
+    padding: 0;
+}
