@@ -1034,10 +1034,9 @@ img.mfp-img {
 /* Google Map infoBox*/
 .gm-style-iw {
     width: 400px !important;
-    height: 125px;
+    height: 135px;
 }
 body.map-view #infobox .listing-box {
-    margin: 0;
     padding: 0;
 }
 .map-view #infobox .listing-box .image-box {
