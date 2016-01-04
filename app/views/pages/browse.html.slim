@@ -355,7 +355,7 @@ javascript:
     var markers = [];
 
     $(".prop_addr").each(function () {
-      pinpoint($(this).text(), $(this).data('listingid'), $(this).data('addr'), $(this).data('price'), $(this).data('beds'), $(this).data('baths'), $(this).data('garage'), $(this).data('date'), $(this).data('sf'));    // draw markers
+      pinpoint($(this).text(), $(this).data('listingid'), $(this).data('addr'), $(this).data('price'), $(this).data('beds'),$(this).data('baths'), $(this).data('garage'),$(this).data('date'),$(this).data('sf'));    // draw markers
 
     });
 
@@ -400,13 +400,7 @@ javascript:
           infobox_contents = infobox_contents.replace('REPLACEME_BATHS', baths);
           infobox_contents = infobox_contents.replace('REPLACEME_GARAGE', garage);
           infobox_contents = infobox_contents.replace('REPLACEME_SF', sf);
-          var infowindow = new google.maps.InfoWindow({
-            content: infobox_contents,
-            boxStyle: {
-              opacity: 1,
-              width: "400px"
-            },
-          });
+          var infowindow = new google.maps.InfoWindow({content: infobox_contents, maxWidth: 400px});
           m.addListener('click', function () {
             infowindow.open(map, m);
           });
