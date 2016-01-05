@@ -229,7 +229,7 @@ $(document).ready(function () {
         }
         if ($('.checkbox-huge #cash').hasClass('selected')) {
             $('.next-step').removeClass('disabled');
-        } else if ($('.checkbox-huge #mortgage').hasClass('selected') && $('.checkbox-section input').is(':checked')) {
+        } else if ($('.checkbox-huge #mortgage').hasClass('selected') && $('#preapproved-no').is(':checked')) {
             $('.next-step').removeClass('disabled');
         }
         if ($('.checkbox-huge #mortgage').hasClass('selected')) {
