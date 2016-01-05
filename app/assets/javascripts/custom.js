@@ -107,7 +107,7 @@ jQuery(document).ready(function ($) {
     $('.cash-mortgage .checkbox-huge input').on('click', function () {
         var $this = $(this);
         if (!$this.hasClass('selected')) {
-            $this.addClass('selected');
+            $this.removeClass('selected');
         } else {
             $this.addClass('selected');
         }
