@@ -226,6 +226,9 @@ $(document).ready(function () {
         if (!$this.hasClass('selected')) {
             $this.addClass('selected');
         }
+        if ($('.checkbox-huge #cash').hasClass('selected')) {
+            $('.next-step').removeClass('disabled');
+        }
     });
 
 });
