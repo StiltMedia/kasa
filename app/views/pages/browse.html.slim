@@ -405,7 +405,7 @@ javascript:
           infowindow = new google.maps.InfoWindow({content: infobox_contents});
           m.addListener('click', function () {
             if ( infowindow ) {
-              infowindow.close();
+              infowindow.hide();
             }
             infowindow.open(map, m);
           });
