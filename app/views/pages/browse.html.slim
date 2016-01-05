@@ -403,7 +403,7 @@ javascript:
           var infowindow = new google.maps.InfoWindow({content: infobox_contents});
           m.addListener('click', function () {
             infowindow.css('visibility', 'hidden');
-            infowindow.open(map, m);
+            infowindow.open(map, m).css('visibility', 'visible');
           });
           markers.push(m);
         } else {
