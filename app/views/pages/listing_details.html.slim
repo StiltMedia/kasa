@@ -425,4 +425,14 @@ javascript:
     gm_initialize();
     pinpoint($(".property-title h2").text());    // draw marker
     find_schools($(".property-title h2").text());
+
+    // http://stackoverflow.com/questions/24768772/prevent-a-google-maps-iframe-from-capturing-the-mouses-scrolling-wheel-behavior
+    $('#map_canvas').addClass('scrolloff');
+    $('.header-map.inside-listing-map').on('click', function () {
+        $('#map_canvas').removeClass('scrolloff'); // set the pointer events true on click
+    });
+
+
   });
+
+

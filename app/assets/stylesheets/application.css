@@ -1055,3 +1055,8 @@ body.map-view #infobox .listing-box {
   width: 320px;
   margin-right: 10px;
 }
+
+
+.scrolloff {
+  pointer-events: none;
+}
