@@ -106,10 +106,10 @@ jQuery(document).ready(function ($) {
     // cash checkbox
     $('.cash-mortgage .checkbox-huge input').on('click', function () {
         var $this = $(this);
-        $this.addClass('selected');
         if ($this.hasClass('selected')) {
             $this.removeClass('selected');
         }
+        $this.addClass('selected');
     });
 
     // search properties adding class
