@@ -224,7 +224,7 @@ $(document).ready(function () {
         $('.checkbox-huge input').removeClass('selected');
         var $this = $(this);
         if (!$this.hasClass('selected')) {
-            $this.addClassName('selected');
+            $this.addClass('selected');
         }
     });
 
