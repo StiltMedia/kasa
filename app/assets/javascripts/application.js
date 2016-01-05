@@ -220,6 +220,7 @@ $(document).ready(function () {
         }
     })
 
+    $('.create-offer-check').hide();
     $('.checkbox-huge input').on('click', function () {
         $('.checkbox-huge input').removeClass('selected');
         var $this = $(this);
@@ -229,7 +230,6 @@ $(document).ready(function () {
         if ($('.checkbox-huge #cash').hasClass('selected')) {
             $('.next-step').removeClass('disabled');
         }
-        $('.create-offer-check').hide();
         if ($('.checkbox-huge #mortgage').hasClass('selected')) {
             $('.create-offer-check').fadeIn();
         } else {
