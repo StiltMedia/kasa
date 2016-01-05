@@ -227,9 +227,7 @@ $(document).ready(function () {
         if (!$this.hasClass('selected')) {
             $this.addClass('selected');
         }
-        if ($('.checkbox-huge #cash').hasClass('selected')) {
-            $('.next-step').removeClass('disabled');
-        } else if (($('.checkbox-huge #mortgage').hasClass('selected')) && ($('input[name="preapproved"]').is(':checked'))) {
+        if ($('.checkbox-huge #cash').hasClass('selected') || $('.checkbox-huge #mortgage').hasClass('selected')) {
             $('.next-step').removeClass('disabled');
         }
         if ($('.checkbox-huge #mortgage').hasClass('selected')) {
