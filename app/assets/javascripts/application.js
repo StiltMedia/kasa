@@ -229,14 +229,13 @@ $(document).ready(function () {
         if ($('.checkbox-huge #cash').hasClass('selected')) {
             $('.next-step').removeClass('disabled');
         }
-    });
-
-    $('.create-offer-check').hide();
-    if ($('.checkbox-huge #mortgage').hasClass('selected')) {
-        $('.create-offer-check').fadeIn();
-    } else {
         $('.create-offer-check').hide();
-    }
+        if ($('.checkbox-huge #mortgage').hasClass('selected')) {
+            $('.create-offer-check').fadeIn();
+        } else {
+            $('.create-offer-check').hide();
+        }
+    });
 
 });
 
