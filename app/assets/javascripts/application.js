@@ -135,8 +135,8 @@ $(document).ready(function () {
             typingTimer = setTimeout(function () {
                 $('.browse-page input.search').addClass('loading-gif');
                 var val = $('.browse-page input.search').val();
-                if ( val == "" ) {
-                  val = "*"
+                if (val == "") {
+                    val = "*"
                 }
                 setTimeout(function () {
                     window.location.href = '?search=' + val;
@@ -153,8 +153,8 @@ $(document).ready(function () {
             typingTimer_2 = setTimeout(function () {
                 $('.browse-page input.min_price').addClass('loading-gif');
                 var val = $('.browse-page input.min_price').val();
-                if ( val == "" ) {
-                  val = "*"
+                if (val == "") {
+                    val = "*"
                 }
                 setTimeout(function () {
                     window.location.href = '?min_price=' + val;
@@ -171,8 +171,8 @@ $(document).ready(function () {
             typingTimer_3 = setTimeout(function () {
                 $('.browse-page input.max_price').addClass('loading-gif');
                 var val = $('.browse-page input.max_price').val();
-                if ( val == "" ) {
-                  val = "*"
+                if (val == "") {
+                    val = "*"
                 }
                 setTimeout(function () {
                     window.location.href = '?max_price=' + val;
@@ -221,7 +221,7 @@ $(document).ready(function () {
     })
 
     $('.create-offer-check').hide();
-    if($('label[for="cash"]').is(':after')) {
+    if ($('label[for="cash"]:after').length > 0) {
         $('.create-offer-check').fadeIn();
     }
 
