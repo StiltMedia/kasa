@@ -402,8 +402,10 @@ javascript:
           infobox_contents = infobox_contents.replace('REPLACEME_SF', sf);
           var infowindow = new google.maps.InfoWindow({content: infobox_contents});
           m.addListener('click', function () {
+            if ( infowindow ) {
+              infowindow.close();
+            }
             infowindow.open(map, m);
-            infowindow.close();
           });
           markers.push(m);
         } else {
