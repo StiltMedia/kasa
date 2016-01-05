@@ -220,10 +220,12 @@ $(document).ready(function () {
         }
     })
 
-    $('.create-offer-check').hide();
-    if ($('label[for="cash"]:after').length > 0) {
-        $('.create-offer-check').fadeIn();
-    }
+    $('.checkbox-huge label').on('click', function () {
+        $('.checkbox-huge label').removeClass('selected');
+        if (!$(this).hasClass('selected')) {
+            $(this).addClassName('selected');
+        }
+    });
 
 });
 
