@@ -240,6 +240,10 @@ $(document).ready(function () {
         }
     });
 
+    if (!$('.create-offer input.form-control').val()) {
+        $('.next-step').removeClass('disabled');
+    }
+
 });
 
 function numberWithCommas(x) {
