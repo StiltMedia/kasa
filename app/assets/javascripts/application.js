@@ -220,6 +220,10 @@ $(document).ready(function () {
         }
     })
 
+    if($('label[for="cash"]').is(':after')) {
+        $('.create-offer-check').fadeIn();
+    }
+
 });
 
 function numberWithCommas(x) {
