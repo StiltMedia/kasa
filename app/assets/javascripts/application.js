@@ -230,6 +230,9 @@ $(document).ready(function () {
         if ($('.checkbox-huge #cash').hasClass('selected') || $('.checkbox-huge #mortgage').hasClass('selected')) {
             $('.next-step').removeClass('disabled');
         }
+        if ($('.checkbox-huge #standard-terms').hasClass('selected') || $('.checkbox-huge #customize-terms').hasClass('selected')) {
+            $('.next-step').removeClass('disabled');
+        }
         if ($('.checkbox-huge #mortgage').hasClass('selected')) {
             $('.create-offer-check').fadeIn();
         } else {
