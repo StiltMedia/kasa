@@ -60,7 +60,7 @@ section.create-offer.steps
               input#addres.form-control name="address"  type="text" readonly="1" value="#{@listing.address.titleize} #{@listing.city.titleize} #{@listing.state}"
             /! .input
             .input-group
-              input#amount.form-control name="address" placeholder=("Amount You'd Like To Offer") type="text" /
+              input#amount.form-control name="address" placeholder=("Amount You'd Like To Offer") type="text" value=@listing.price /
           /! .input
         /! btn
         .col-md-3.col-md-offset-7.text-right
