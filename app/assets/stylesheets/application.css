@@ -1042,3 +1042,16 @@ body.map-view #infobox .listing-box {
 .map-view #infobox .listing-box .image-box {
     height: auto;
 }
+
+
+
+.listing_details ul.schools {
+  padding: 15px 20px;
+  padding-left: 40px;
+}
+
+.listing_details ul.schools li {
+  outline: 0px dotted yellow;
+  width: 320px;
+  margin-right: 10px;
+}

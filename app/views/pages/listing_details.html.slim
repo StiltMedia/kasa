@@ -387,8 +387,12 @@ javascript:
       for (var i = 0; i < max; i++) {
         //createMarker(results[i]);
         console.log(results[i].name);
-        $("ul.list-inline.schools").append('<li>' + results[i].name + '</li>');
-        if (i == 2)
+        var short_school_name = results[i].name.replace(/^(.{32}[^\s]*).*/, "$1");
+        if ( short_school_name.length < results[i].name.length )
+          short_school_name += "..."
+        $("ul.list-inline.schools").append('<li>' + short_school_name + '</li>');
+        //$("ul.list-inline.schools").append('<br>');
+        if (i+1 % 2 == 0)
           $("ul.list-inline.schools").append('<br>');
       }
     }
