@@ -352,6 +352,8 @@ javascript:
   document.addEventListener("DOMContentLoaded", function () {
     gm_initialize();
 
+    var infowindow;
+
     var markers = [];
 
     $(".prop_addr").each(function () {
@@ -400,7 +402,7 @@ javascript:
           infobox_contents = infobox_contents.replace('REPLACEME_BATHS', baths);
           infobox_contents = infobox_contents.replace('REPLACEME_GARAGE', garage);
           infobox_contents = infobox_contents.replace('REPLACEME_SF', sf);
-          var infowindow = new google.maps.InfoWindow({content: infobox_contents});
+          infowindow = new google.maps.InfoWindow({content: infobox_contents});
           google.maps.event.addListener(m, 'click', function () {
             if (!m.open) {
               infowindow.open(map, m);
