@@ -226,6 +226,11 @@ $(document).ready(function () {
     if ($('#cash:checked') || $('#mortgage:checked')) {
         $('.next-step').removeClass('disabled');
     }
+    if($('#mortage:checked')) {
+        $cOffer.slideUp();
+    } else {
+        $cOffer.slideDown();
+    }
 
 });
 
