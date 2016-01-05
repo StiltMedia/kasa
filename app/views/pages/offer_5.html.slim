@@ -14,11 +14,11 @@ section.create-offer.review-offer.steps
       .inner-content
         .col-md-10.col-md-offset-1
           /! review block
-          .review-block
+          .review-block.property-info
             .blue-title
               h5 PROPERTY INFO
             .white-block
-              a.edit.invisible href="#"  Edit
+              a.edit href="javascript:review_edit_prop_info()"  Edit
               /! info content
               .info-content
                 p
@@ -29,21 +29,23 @@ section.create-offer.review-offer.steps
               .info-content
                 p
                   b AMOUNT YOU'D LIKE TO OFFER
-                p = "$#{@offer.amount}"
+                span = "$ "
+                = best_in_place @offer, :amount, :as => :input, :url => "/pages/best_in_place_update"
+               
               /! .info content
           /! review block
           /! review block
-          .review-block
+          .review-block.financing
             .blue-title
               h5 FINANCING
             .white-block
-              a.edit.invisible href="#"  Edit
+              a.edit href="javascript:review_edit_financing()"  Edit
               /! info content
               .info-content
                 p
                   b HOW WILL YOU BE PAYING FOR YOUR HOME?
-                - if @offer.funding_source == 'with_mortgage'
-                  p With Motgage
+                - if @offer.funding_source == 'With Mortgage'
+                  p With Mortgage
                 - else
                   p Cash
               /! .info content
@@ -51,24 +53,22 @@ section.create-offer.review-offer.steps
               .info-content
                 p
                   b HAVE YOU BEEN PRE-APPROVED FOR A MORTGAGE?
-                - if @offer.pre_approved == "1"
-                  p Yes
-                - else
-                  p No
+                = best_in_place @offer, :pre_approved, :as => :input, :url => "/pages/best_in_place_update"
               /! .info content
               /! info content
               .info-content
                 p
                   b MORTGAGE DOWN PAYMENT AMOUNT
-                p = "#{@offer.down_payment}%"
+                = best_in_place @offer, :down_payment, :as => :input, :url => "/pages/best_in_place_update"
+                span = "%"
               /! .info content
           /! review block
           /! review block
-          .review-block
+          .review-block.order
             .blue-title
               h5 OFFER DETAILS
             .white-block
-              a.edit.invisible href="#"  Edit
+              a.edit href="javascript:review_edit_order()"  Edit
               /! info content
               .info-content
                 p
@@ -82,97 +82,103 @@ section.create-offer.review-offer.steps
               .info-content
                 p
                   b LENGTH OF ESCROW
-                p #{@offer.downpayment_days} days after seller accepts your offer until close of escrow
+                span.best_in_place #{@offer.downpayment_days} 
+                span days after seller accepts your offer until close of escrow
               /! .info content
               /! info content
               .info-content
                 p
                   b PLANNING ANY INSPECTIONS?
                 - if @offer.planning_inspections == "1"
-                  p Yes *Your offer will be contigent on inspections
+                  span.best_in_place Yes 
+                  span = "*Your offer will be contigent on inspections"
                 - else
-                  p No *Your offer will be contigent on inspections
+                  span.best_in_place No 
+                  span = "*Your offer will be contigent on inspections"
               /! .info content
               /! info content
               .info-content
                 p
                   b REQUEST A PEST CONTROL REPORT?
+                - if @offer.request_pest_report == "0"
+                  p.best_in_place No
                 - if @offer.request_pest_report == "1"
-                  p No
+                  p.best_in_place You Pay
                 - if @offer.request_pest_report == "2"
-                  p You Pay
-                - if @offer.request_pest_report == "3"
-                  p Seller Pays
+                  p.best_in_place Seller Pays
               /! .info content
               /! info content
               .info-content
                 p
                   b REQUEST A 1 YEAR HOME WARRANTY?
+                - if @offer.request_one_year_home_warranty == "0"
+                  span.best_in_place No
                 - if @offer.request_one_year_home_warranty == "1"
-                  p No
+                  span.best_in_place You Pay
                 - if @offer.request_one_year_home_warranty == "2"
-                  p You Pay
-                - if @offer.request_one_year_home_warranty == "3"
-                  p Seller Pays
+                  span.best_in_place Seller Pays
               /! .info content
               /! info content
               .info-content
                 p
                   b INITIAL "EARNEST MONEY" DEPOSIT
-                p #{@offer.initial_deposit}% *You must deposit this amount into escrow within 3 days of an accepted offer
+                span.best_in_place #{@offer.initial_deposit}% 
+                |  *You must deposit this amount into escrow within 3 days of an accepted offer
               /! .info content
               /! info content
               .info-content
                 p
                   b SPECIAL INSTRUCTIONS
-                p = @offer.special_instructions
+                p.best_in_place = @offer.special_instructions
               /! .info content
               /! info content
               .info-content
                 p
                   b PLANNING ANY INSPECTIONS?
                 - if @offer.planning_inspections
-                  p Yes *Your offer will be contigent on inspections
+                  span.best_in_place Yes 
+                  span *Your offer will be contigent on inspections
                 - else
-                  p No *Your offer will be contigent on inspections
+                  span.best_in_place No
+                  |  *Your offer will be contigent on inspections
               /! .info content
           /! review block
           /! review block
-          .review-block
+          .review-block.account-info
             .blue-title
               h5 ACCOUNT INFO
             .white-block
-              a.edit.invisible href="#"  Edit
+              a.edit href="javascript:review_edit_account_info()"  Edit
               /! info content
               .info-content.clearfix
                 .review-inline
                   p
                     b NAME
-                  p = @offer.first_name
+                  p.best_in_place = ( @offer.first_name.present? ? @offer.first_name : "Empty" )
                 /! .info content
                 /! info content
                 .review-inline
                   p
                     b LAST NAME
-                  p = @offer.last_name
+                  p.best_in_place = ( @offer.last_name.present? ? @offer.last_name : "Empty" )
                 /! .info content
                 /! info content
                 .review-inline
                   p
                     b EMAIL
-                  p = current_user.email
+                  p.best_in_place = current_user.email
                 /! .info content
                 /! info content
                 .review-inline.review-info
                   p
                     b CURRENT ADDRESS
-                  p = @offer.address
+                  p.best_in_place = ( @offer.address.present? ? @offer.address : "Empty" )
                 /! .info content
                 /! info content
-                .review-inline.review-info.invisible
+                .review-inline.review-info
                   p
                     b PHONE NUMBER
-                  p 222 222 2222
+                  p.best_in_place = "222 222 2222"
               /! .info content
               hr/
               /! info content
@@ -237,3 +243,22 @@ javascript:
     });
   });
 
+  function review_edit_prop_info() {
+    $(".review-block.property-info .best_in_place").best_in_place();
+    $(".review-block.property-info .best_in_place").css("border-bottom", "3px solid silver");
+  }
+
+  function review_edit_financing() {
+    $(".review-block.financing .best_in_place").best_in_place();
+    $(".review-block.financing .best_in_place").css("border-bottom", "3px solid silver");
+  }
+
+  function review_edit_order() {
+    $(".review-block.order .best_in_place").best_in_place();
+    $(".review-block.order .best_in_place").css("border-bottom", "3px solid silver");
+  }
+
+  function review_edit_account_info() {
+    $(".review-block.account-info .best_in_place").best_in_place();
+    $(".review-block.account-info .best_in_place").css("border-bottom", "3px solid silver");
+  }

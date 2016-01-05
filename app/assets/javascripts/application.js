@@ -12,6 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require best_in_place
 //= require_tree .
 
 var map; //the google map used in browse page ->  maps view

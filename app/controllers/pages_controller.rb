@@ -3,6 +3,15 @@ require 'open3'
 class PagesController < ApplicationController
   include ActionController::Live
 
+  def best_in_place_update
+    #not implementing for MVP
+    render json: { status: "ok" }
+  end
+
+  def put_todo
+    render json: { status: "ok" }
+  end
+
   def offer_1
     @listing = Property.find_by_listing_id(params[:listing_id])
     @offer = Offer.create(user_id: current_user.id, property_id: Property.find_by_listing_id(params[:listing_id]).id)

@@ -1068,3 +1068,9 @@ body.map-view #infobox .listing-box {
 .search-properties .input-group input[type="submit"] {
   z-index: 3;
 }
+
+
+input.best_in_place {
+  outline: 0px;
+  border: 0px;
+}

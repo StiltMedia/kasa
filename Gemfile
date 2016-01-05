@@ -56,3 +56,4 @@ group :staging, :production do
 end
 gem 'puma'
 gem 'pry'
+gem 'best_in_place', '~> 3.0.1'

@@ -13,6 +13,8 @@ Rails.application.routes.draw do
   get 'pages/offer_4'
   get 'pages/offer_5'
   get 'pages/offer_6'
+  put '/pages/best_in_place_update'
+  put '/pages/offer_5' => 'pages#put_todo'
   post 'api/favorite_on'
   post 'api/favorite_off'
   root 'pages#landing'
