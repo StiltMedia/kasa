@@ -222,8 +222,9 @@ $(document).ready(function () {
 
     $('.checkbox-huge input').on('click', function () {
         $('.checkbox-huge input').removeClass('selected');
-        if (!$(this).hasClass('selected')) {
-            $(this).addClassName('selected');
+        var $this = $(this);
+        if (!$this.hasClass('selected')) {
+            $this.addClassName('selected');
         }
     });
 
