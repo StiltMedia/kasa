@@ -254,10 +254,9 @@ function numberWithCommas(x) {
         });
 
         if (empty) {
-            $('.next-step')
-            addClass().('disabled');
+            $('.next-step').addClass('disabled');
         } else {
-            $('.next-step').removeAttr('disabled');
+            $('.next-step').removeClass('disabled');
         }
     });
 })()
