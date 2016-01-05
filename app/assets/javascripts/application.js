@@ -220,6 +220,10 @@ $(document).ready(function () {
         }
     })
 
+    /* create offer checking to proceed*/
+    var $cOffer = $('.create-offer-check');
+    $cOffer.hide();
+
 });
 
 function numberWithCommas(x) {

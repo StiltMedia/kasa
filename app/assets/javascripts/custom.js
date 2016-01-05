@@ -103,6 +103,15 @@ jQuery(document).ready(function ($) {
         $(this).attr("checked", $(this).attr("checked"));
     });
 
+    // cash checkbox
+    $('.cash-mortgage .checkbox-huge input').on('click', function () {
+        var $this = $(this);
+        $this.addClass('selected');
+        if ($this.hasClass('selected')) {
+            $this.removeClass('selected');
+        }
+    });
+
     // search properties adding class
     var $sv = $('.search-properties .property-fields ul li');
     $sv.on('click', function () {
@@ -176,7 +185,7 @@ jQuery(document).ready(function ($) {
         $(this).parent().addClass('selected')
     });
 
-    $('.options a').on('focus', function() {
+    $('.options a').on('focus', function () {
         $(this).closest('.option').find('.result').html($(event.target).text());
     });
 
