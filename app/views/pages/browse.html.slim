@@ -403,19 +403,11 @@ javascript:
           infobox_contents = infobox_contents.replace('REPLACEME_GARAGE', garage);
           infobox_contents = infobox_contents.replace('REPLACEME_SF', sf);
           infowindow = new google.maps.InfoWindow({content: infobox_contents});
-          google.maps.event.addListener(m, 'click', function () {
-            if (!m.open) {
-              infowindow.open(map, m);
-              m.open = true;
-            }
-            else {
+          m.addListener('click', function () {
+            if ( infowindow ) {
               infowindow.close();
-              m.open = false;
             }
-            google.maps.event.addListener(m, 'click', function () {
-              infowindow.close();
-              m.open = false;
-            });
+            infowindow.open(map, m);
           });
           markers.push(m);
         } else {
