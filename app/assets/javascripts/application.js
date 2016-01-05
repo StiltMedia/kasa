@@ -242,3 +242,22 @@ $(document).ready(function () {
 function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
+
+(function () {
+    $('form > input').keyup(function () {
+
+        var empty = false;
+        $('.checkbox-section > input').each(function () {
+            if ($(this).val() == '') {
+                empty = true;
+            }
+        });
+
+        if (empty) {
+            $('.next-step')
+            addClass().('disabled');
+        } else {
+            $('.next-step').removeAttr('disabled');
+        }
+    });
+})()
