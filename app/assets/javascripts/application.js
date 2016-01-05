@@ -227,7 +227,7 @@ $(document).ready(function () {
         if (!$this.hasClass('selected')) {
             $this.addClass('selected');
         }
-        if ($('.checkbox-huge #cash').hasClass('selected')) {
+        if ($('.checkbox-huge #cash').hasClass('selected') || $('.checkbox-huge #mortgage').hasClass('selected')) {
             $('.next-step').removeClass('disabled');
         }
         if ($('.checkbox-huge #mortgage').hasClass('selected')) {
@@ -242,21 +242,3 @@ $(document).ready(function () {
 function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
-
-(function () {
-    $('form > input').keyup(function () {
-
-        var empty = false;
-        $('.checkbox-section > input').each(function () {
-            if ($(this).val() == '') {
-                empty = true;
-            }
-        });
-
-        if (empty) {
-            $('.next-step').addClass('disabled');
-        } else {
-            $('.next-step').removeClass('disabled');
-        }
-    });
-})()
