@@ -45,6 +45,17 @@ section.search-properties
               .col-md-3
                 .input-group
                   input#price-max.form-control name="price-range" placeholder=("Maximum Price") type="text" /
+
+              .col-md-1
+                | &nbsp;
+              .col-md-2
+                .input-group.clearfix
+                  input#beds.form-control name="beds" placeholder=("Beds") type="text" /
+              .col-md-2
+                .input-group
+                  input#baths.form-control name="baths" placeholder=("Baths") type="text" /
+
+
               /! .input
               /! btn
               .col-md-6.text-right
@@ -63,12 +74,24 @@ javascript:
     document.getElementById('price-max').value = '999000000';
   }
 
-  function reset_search() {
-    document.getElementById('zipcode').value = '*';
+
+  function reset_beds() {
+    document.getElementById('beds').value = 'All';
   }
+
+  function reset_baths() {
+    document.getElementById('baths').value = 'All';
+  }
+
 
   document.getElementById('get-listing-btn').onclick=function() {
     var query_string = '?'; 
+
+    if ( document.getElementById('zipcode').value.trim() == "" ) {
+      alert('Enter a city, neighborhood or zip code');
+      return true;
+    }
+
     if (isNaN(parseInt(document.getElementById('price-min').value))  ) {
       reset_price_min();
     }
@@ -76,14 +99,20 @@ javascript:
       reset_price_max();
     }
 
-    if ( document.getElementById('zipcode').value.trim() == "" ) {
-      reset_search();
+
+    if (isNaN(parseInt(document.getElementById('beds').value)) ) {
+      reset_beds();
     }
 
+    if (isNaN(parseInt(document.getElementById('baths').value)) ) {
+      reset_baths();
+    }
 
     query_string += '&min_price='+document.getElementById('price-min').value;
     query_string += '&max_price='+document.getElementById('price-max').value;
     query_string += '&search='+document.getElementById('zipcode').value;
+    query_string += '&beds='+document.getElementById('beds').value;
+    query_string += '&baths='+document.getElementById('baths').value;
     window.location.replace('/pages/browse'+query_string);
   }
 

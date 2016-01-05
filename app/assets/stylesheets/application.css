@@ -1064,3 +1064,7 @@ body.map-view #infobox .listing-box {
 #infobox h5 {
   cursor: pointer;
 }
+
+.search-properties .input-group input[type="submit"] {
+  z-index: 3;
+}
