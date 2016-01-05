@@ -231,6 +231,13 @@ $(document).ready(function () {
         }
     });
 
+    $('.create-offer-check').hide();
+    if ($('.checkbox-huge #mortgage').hasClass('selected')) {
+        $('.create-offer-check').fadeIn();
+    } else {
+        $('.create-offer-check').hide();
+    }
+
 });
 
 function numberWithCommas(x) {
