@@ -401,13 +401,8 @@ javascript:
           infobox_contents = infobox_contents.replace('REPLACEME_GARAGE', garage);
           infobox_contents = infobox_contents.replace('REPLACEME_SF', sf);
           var infowindow = new google.maps.InfoWindow({content: infobox_contents});
-          var prev_infowindow =false;
           m.addListener('click', function () {
-            if (prev_infowindow) {
-              prev_infowindow.close();
-            }
-
-            prev_infowindow = infowindow;
+            infowindow.css('visibility', 'hidden');
             infowindow.open(map, m);
           });
           markers.push(m);
