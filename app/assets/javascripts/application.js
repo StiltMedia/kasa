@@ -220,6 +220,7 @@ $(document).ready(function () {
         }
     })
 
+    $('.create-offer-check').hide();
     if($('label[for="cash"]').is(':after')) {
         $('.create-offer-check').fadeIn();
     }
