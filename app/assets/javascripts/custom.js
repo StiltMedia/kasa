@@ -103,16 +103,6 @@ jQuery(document).ready(function ($) {
         $(this).attr("checked", $(this).attr("checked"));
     });
 
-    // cash checkbox
-    $('.cash-mortgage .checkbox-huge input').on('click', function () {
-        var $this = $(this);
-        if ($('.cash-mortgage .checkbox-huge input').hasClass('selected')) {
-            $('.cash-mortgage .checkbox-huge input').removeClass('selected');
-        } else {
-            $this.addClass('selected');
-        }
-    });
-
     // search properties adding class
     var $sv = $('.search-properties .property-fields ul li');
     $sv.on('click', function () {
