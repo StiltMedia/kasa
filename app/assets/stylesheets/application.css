@@ -1060,3 +1060,7 @@ body.map-view #infobox .listing-box {
 .scrolloff {
   pointer-events: none;
 }
+
+#infobox h5 {
+  cursor: pointer;
+}
