@@ -220,8 +220,8 @@ $(document).ready(function () {
         }
     })
 
-    $('.checkbox-huge label').on('click', function () {
-        $('.checkbox-huge label').removeClass('selected');
+    $('.checkbox-huge input').on('click', function () {
+        $('.checkbox-huge input').removeClass('selected');
         if (!$(this).hasClass('selected')) {
             $(this).addClassName('selected');
         }
