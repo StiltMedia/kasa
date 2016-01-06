@@ -191,7 +191,7 @@ class PagesController < ApplicationController
   def fetch
     response.headers['Content-Type'] = 'text/html'
     response.stream.write "<br>Running rake kasa:fetch LISTINGS=1 PHOTOS=0\n"
-    cmd = 'rake kasa:fetch LISTINGS=1 PHOTOS=0'
+    cmd = 'rake kasa:fetch LISTINGS=1 PHOTOS=1'
     Open3.popen3(cmd) do |stdin, stdout, stderr, wait_thr|
       while line = stdout.gets
         Rails.logger.debug line
