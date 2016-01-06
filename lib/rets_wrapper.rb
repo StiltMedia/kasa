@@ -30,9 +30,9 @@ class RetsWrapper
   COUNTIES = [ 'GLADES', 'HENDRY',
                'INDNRIV', 'MARTIN', 'OKEECHB',
                'PALMBCH', 'STLUCIE', 'BROWARD', 'DADE', 'OTHER' ]
-  S3_BUCKET = 'kasa-staging'
-  S3_LOGIN = 'AKIAI5R5DFMV3PYHNBDQ'
-  S3_PASSWORD = 'NKUknIpVGfEr+ZqlJfTytH5eCpjcuVaVY87PY/Sp'
+  S3_BUCKET = 'kasa-staging-02'
+  S3_LOGIN = 'AKIAJ6P4PCOUQL5GW52Q'
+  S3_PASSWORD = '67/kSQQuGN/cgvtmREDpBu8jYsLTeA0nuP3LI/tW'
 
   def initialize
     @client = nil
@@ -58,9 +58,9 @@ class RetsWrapper
 
   def connect_to_s3
     require 'aws-sdk'
-    @s3 = Aws::S3::Resource.new(region:'us-west-1',
+    @s3 = Aws::S3::Resource.new(region:'us-west-2',
       credentials: Aws::Credentials.new(S3_LOGIN, S3_PASSWORD))
-    @bucket_files = @s3.bucket('kasa-staging').objects.collect(&:key)
+    @bucket_files = @s3.bucket('kasa-staging-02').objects.collect(&:key)
   end
 
   # saves an image to s3
@@ -86,10 +86,10 @@ class RetsWrapper
     imgs = (@client.objects '*', { resource: 'Property', object_type: 'Photo', resource_id: listing['sysid']+':0' }) rescue Array.new
     imgs.reject! { |img| img.to_s[0..200] =~ /Object not available/ }
     images_tot = imgs.size
-    images_tot = 5 if imgs.size >= 5
+    images_tot = 15 if imgs.size >= 15
     listing.update_attribute(:images_tot, images_tot)
 
-    imgs[0..3].each_with_index do |img, ndx|
+    imgs[0..14].each_with_index do |img, ndx|
       if image_exists?(listing['listing_id'],ndx)
         puts " F95BA #{(serial_no+1).to_s.rjust(4,' ')}/#{total} Listing ID #{listing['listing_id'].ljust(10," ")}, #{imgs.size.to_s.rjust(2,"0")} photos. skipping \##{ndx+1}."        
       else
@@ -115,7 +115,7 @@ class RetsWrapper
       search_type:    'Property'
     }
     puts "F95BA #{results.size} listings"
-    puts "F95BA saving"
+    #puts "F95BA saving"
     pg_save(results)
     results
   end
@@ -143,7 +143,7 @@ class RetsWrapper
 
   def pg_save(listings)
     listings.each do |l|
-      puts "F95BA .NOBR"
+      #puts "F95BA .NOBR"
       Property.create(
         listing_id: l['157'],
         address: l['881'],
@@ -166,6 +166,6 @@ class RetsWrapper
         last_img_trans_date: l['1329'],
         sysid: l['sysid'])
       end
-    puts "F95BA saved"
+    #puts "F95BA saved"
   end
 end
