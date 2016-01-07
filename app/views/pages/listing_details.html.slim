@@ -14,15 +14,15 @@
   /! .inside listing
   /! slider
   aside
-    .owl-carousel
-      .item
-        a href="http://kasa-staging.s3.amazonaws.com/#{@listing.listing_id}_1.jpg"
-          img.img-responsive.slide-img alt="" src="http://kasa-staging.s3.amazonaws.com/#{@listing.listing_id}_1.jpg" title="" /
+    #owl-example.owl-carousel
+      a.item href="http://kasa-staging-02.s3.amazonaws.com/#{@listing.listing_id}_0.jpg"
+        img alt="" src="http://kasa-staging-02.s3.amazonaws.com/#{@listing.listing_id}_0.jpg" title="" /
       - if @listing.images_tot && @listing.images_tot > 2
         - (2..@listing.images_tot-2).each do |i|
           .item
-            a href="http://kasa-staging.s3.amazonaws.com/#{@listing.listing_id}_#{i}.jpg"
-              img.img-responsive.slide-img alt="" src="http://kasa-staging.s3.amazonaws.com/#{@listing.listing_id}_#{i}.jpg" title="" /
+            a href="http://kasa-staging-02.s3.amazonaws.com/#{@listing.listing_id}_#{i}.jpg"
+              img.img-responsive.slide-img alt="" src="http://kasa-staging-02.s3.amazonaws.com/#{@listing.listing_id}_#{i}.jpg" title="" /
+
   /! .slider
   /! property content
   section.property-content
@@ -127,7 +127,7 @@
             .listing-box.listing-box-grid.clearfix
               .col-md-6.no-padding
                 .image-box
-                  img alt="kasa" src="http://kasa-staging.s3.amazonaws.com/#{l.listing_id}_0.jpg"
+                  img alt="kasa" src="http://kasa-staging-02.s3.amazonaws.com/#{l.listing_id}_0.jpg"
               .col-md-6
                 .listing-box-content
                   h5

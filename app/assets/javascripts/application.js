@@ -36,6 +36,25 @@ if ($("#ex1").length > 0) {
 
 $(document).ready(function () {
 
+    $("#owl-example").owlCarousel({
+        loop: true,
+        pagination: false,
+        navigation: false,
+        navigationText: [
+            "<i class='fa fa-angle-left'></i>",
+            "<i class='fa fa-angle-right'></i>"
+        ]
+    });
+
+    $('#owl-example').magnificPopup({
+        delegate: 'a',
+        type: 'image',
+        gallery: {
+            enabled: true
+        }
+        // other options
+    });
+
     $('.more-filters-page#myModal').on('hidden.bs.modal', function () {
         window.location.href = '/pages/browse'
     })
@@ -183,43 +202,10 @@ $(document).ready(function () {
         }
     });
 
-
-    /* --- Magnific Popup Init --------------- */
-    /*  carousel gallery popup- - - */
-    $('.owl-carousel .item').magnificPopup({
-        delegate: 'a',
-        type: 'image',
-        gallery: {
-            enabled: true
-        }
-        // other options
-    });
-
     /* fill images to div*/
     $(".map-view .image-box").imgLiquid({
         fill: false
     });
-
-    /* listing details carousel*/
-    $('.owl-carousel').owlCarousel({
-        loop: true,
-        nav: true,
-        navText: [
-            "<i class='fa fa-angle-left'></i>",
-            "<i class='fa fa-angle-right'></i>"
-        ],
-        responsive: {
-            0: {
-                items: 1
-            },
-            600: {
-                items: 3
-            },
-            1000: {
-                items: 4
-            }
-        }
-    })
 
     $('.create-offer-check').hide();
     $('.checkbox-huge input').on('click', function () {
