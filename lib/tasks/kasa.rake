@@ -1,5 +1,10 @@
 namespace :kasa do
 
+  desc "Untitled"
+  task untitled: :environment do
+    puts "Abc"
+  end
+
   desc "Quick sync job"
   task synch_it: :environment do
     puts "synch_it"
