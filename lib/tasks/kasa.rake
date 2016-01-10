@@ -3,6 +3,9 @@ namespace :kasa do
   desc "Untitled"
   task untitled: :environment do
     puts "Abc"
+    Property.all.each_with_index do |p,i|
+     puts "#{i} #{p.id} #{p.listing_id} #{p.address[0..6]}"
+    end
   end
 
   desc "Quick sync job"
