@@ -86,10 +86,10 @@ class RetsWrapper
     imgs = (@client.objects '*', { resource: 'Property', object_type: 'Photo', resource_id: listing['sysid']+':0' }) rescue Array.new
     imgs.reject! { |img| img.to_s[0..200] =~ /Object not available/ }
     images_tot = imgs.size
-    images_tot = 15 if imgs.size >= 15
+    images_tot = 16 if imgs.size >= 16
     listing.update_attribute(:images_tot, images_tot)
 
-    imgs[0..14].each_with_index do |img, ndx|
+    imgs[0..15].each_with_index do |img, ndx|
       if image_exists?(listing['listing_id'],ndx)
         puts " F95BA #{(serial_no+1).to_s.rjust(4,' ')}/#{total} Listing ID #{listing['listing_id'].ljust(10," ")}, #{imgs.size.to_s.rjust(2,"0")} photos. skipping \##{ndx+1}."        
       else

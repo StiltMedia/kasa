@@ -2,9 +2,15 @@ namespace :kasa do
 
   desc "Untitled"
   task untitled: :environment do
-    puts "Abc"
+    require "sam.rb"
+        
+    #puts photos_available(Property.first.listing_id)
+    #get_photo(index)
+
+
+
     Property.all.each_with_index do |p,i|
-     puts "#{i} #{p.id} #{p.listing_id} #{p.address[0..6]}"
+     puts "#{i} #{p.id} #{p.listing_id} #{p.address[0..6]} avai:#{photos_available(p.listing_id)}"
     end
   end
 
@@ -67,7 +73,7 @@ namespace :kasa do
       puts "F95BA Downloading photos"
       started = Time.now
       saved_photos_count = 0
-      Property.all.order(last_trans_date: :desc)[3325..-1].each_with_index do |listing, serial_no|
+      Property.all.order(last_trans_date: :desc).shuffle.each_with_index do |listing, serial_no|
         rets.get_photos(listing, serial_no,Property.all.size) #rescue puts "F95BA get_photos(#{listing['157']}, serial_no,listings.size)"
         saved_photos_count += 1
       end
