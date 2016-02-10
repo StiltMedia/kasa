@@ -4,7 +4,6 @@ Rails.application.routes.draw do
   get 'pages/landing'
   get 'pages/browse'
   get 'pages/untitled'
-  get 'pages/fetch'
   get 'pages/listing_details/:listing_id' => 'pages#listing_details'
   get 'pages/search'
   get 'pages/offer_1'

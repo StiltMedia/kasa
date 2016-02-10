@@ -13,3 +13,8 @@ To download listings, run
 To download photos, do
 
   bundle exec rake kasa:fetch LISTINGS=0 PHOTOS=1
+
+Admin user is
+
+  guigo@stiltmedia.com password: stilt123
+
