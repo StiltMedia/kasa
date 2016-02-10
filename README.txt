@@ -2,6 +2,9 @@
 README
 
 
+To start server locally, run
+
+  PORT=3000 foreman start #assuming you have foreman installed
 
 To download listings, run
 
