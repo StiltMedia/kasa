@@ -24,6 +24,8 @@
             .login-action.text-right
               - if user_signed_in?
                 a.btn.btn-alt.login.invisible href=new_user_session_path  Log In
+                a.btn.btn-alt.login href="#{pages_user_dashboard_path}"
+                  i.fa.fa-tasks &nbsp;
                 = link_to('Logout', destroy_user_session_path, { :class => 'btn btn-alt', :method => :delete } )
               - else
                 a.btn.btn-alt.login href=new_user_session_path  Log In

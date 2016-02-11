@@ -3,6 +3,10 @@ require 'open3'
 class PagesController < ApplicationController
   include ActionController::Live
 
+  def user_dashboard
+
+  end
+
   def best_in_place_update
     #not implementing for MVP
     render json: { status: "ok" }

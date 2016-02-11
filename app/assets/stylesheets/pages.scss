@@ -2,7 +2,30 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+.dashboard-bar-1 {
+  padding: 8px 0px;
+  padding-left: 55px;
+  background-color: rgb(68,78,88);
+  border-top: 1px solid #f2f2f2;
+  color: white;
+}
+
+.dashboard-bar-1 span {
+  padding-right: 20px;
+}
+
+.dashboard-bar-2 {
+  padding: 8px 0px;
+  padding-left: 50px;
+  background-color: #fff;
+  border-top: 1px solid #f2f2f2;
+}
 
 
+.extra-margin {
+  margin-right: 20px;
+}
 
-
+.debug {
+  outline: 0px solid yellow;
+}
