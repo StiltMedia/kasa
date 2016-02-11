@@ -1,6 +1,7 @@
 class Property < ActiveRecord::Base
   has_many :favorites
   has_many :users, through: :favorites
+  has_many :users, through: :adverts
 
   def is_favorite?(curr_user)
     Favorite.where(user_id: curr_user.id, property_id: self.id).size == 1

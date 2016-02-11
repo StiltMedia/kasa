@@ -5,5 +5,8 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
   has_many :favorites
   has_many :properties, through: :favorites
+  has_many :adverts
+  has_many :properties, through: :adverts
+
 
 end
