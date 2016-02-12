@@ -1,0 +1,18 @@
+= form_for @advert do |f|
+  - if @advert.errors.any?
+    #error_explanation
+      h2 = "#{pluralize(@advert.errors.count, "error")} prohibited this advert from being saved:"
+      ul
+        - @advert.errors.full_messages.each do |message|
+          li = message
+
+  .field
+    = f.label :user
+    = f.text_field :user
+  .field
+    = f.label :property
+    = f.text_field :property
+  .field
+    = f.label :seed
+    = f.check_box :seed
+  .actions = f.submit

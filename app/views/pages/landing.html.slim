@@ -49,7 +49,10 @@
             .col-sm-6
               a.btn href="/pages/search"  Buy
             .col-sm-6
-              a.btn href="/pages/untitled"  Sell
+              - if current_user
+                = link_to "Sell", "/adverts/new?step=1", { :class => "btn" }
+              - else
+                = link_to "Sell", "javascript:alert('Please log in first')", { :class => "btn" }
     /! .intro slogan
     div#work.animated-section
       .container
@@ -325,3 +328,4 @@
           /! .for mobiles
     /! .footer
 
+| <script type="text/javascript" async="async" defer="defer" data-cfasync="false" src="https://mylivechat.com/chatlink.aspx?hccid=93301249"></script>

@@ -1,0 +1,26 @@
+
+.adverts-edit-page
+  = render 'shared/topbar'
+  
+  = render partial: 'shared/dashboard_bars', locals: { text2: "#{@advert.property.address} #{@advert.property.zip} #{@advert.property.state}" }
+  
+  .p Dashboard . Properties Listed By User . #{@advert.property.address} #{@advert.property.zip} #{@advert.property.state}
+  
+  br
+
+  div.editable-block  
+    = link_to "Edit", "javascript:void(0)", class: "edit_block"
+    
+    div ADDRESS
+    
+    div
+      span = best_in_place @advert.property, :address
+      span = best_in_place @advert.property, :zip
+      span = best_in_place @advert.property, :state
+    
+    div YOUR SET PRICE
+    
+    div = best_in_place @advert.property, :price
+  
+  
+  

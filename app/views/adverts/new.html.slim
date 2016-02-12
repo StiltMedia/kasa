@@ -1,0 +1,128 @@
+- case params[:step]
+  - when "1"
+    - @next_step = "2"
+  - when "2"
+    - @next_step = "3"
+  - when "3"
+    - @next_step = "4"
+  - when "4"
+    - @next_step = "5"
+
+
+.adverts-new-page
+
+  = render 'shared/topbar'
+    
+  = render partial: 'shared/dashboard_bars', locals: { text2: "" }
+  
+
+  /! steps
+  section.create-offer.steps
+    .container
+      /! title
+      .row
+        .col-md-12
+          .title.text-center
+            h2 Create Sale
+      /! .title
+      /! step beginning
+      .row.bs-wizard style="border-bottom:0;" 
+        .col-xs-3.bs-wizard-step class="#{ params[:step] == "1" ? "active" : "disabled" }"
+          .progress
+            .progress-bar
+          span.bs-wizard-dot
+          .text-center.bs-wizard-stepnum Property Location
+        .col-xs-3.bs-wizard-step class="#{ params[:step] == "2" ? "active" : "disabled" }"
+          /! complete
+          .progress
+            .progress-bar
+          span.bs-wizard-dot
+          .text-center.bs-wizard-stepnum Upload Photos
+        .col-xs-3.bs-wizard-step class="#{ params[:step] == "3" ? "active" : "disabled" }"
+          /! complete
+          .progress
+            .progress-bar
+          span.bs-wizard-dot
+          span.bs-wizard-dot
+          .text-center.bs-wizard-stepnum Property Facts
+        .col-xs-3.bs-wizard-step class="#{ params[:step] == "4" ? "active" : "disabled" }"
+          /! complete
+          .progress
+            .progress-bar
+          span.bs-wizard-dot
+          span.bs-wizard-dot
+          .text-center.bs-wizard-stepnum Contact Info
+        /! .step begining
+      /! .steps
+  /! .steps
+
+
+
+
+
+
+
+
+
+
+  - if params[:step] == "1"
+    /! content
+    .row
+      .inner-content
+        .col-md-8.col-md-offset-2
+          /! input
+          .col-md-12
+            .input-group
+              = best_in_place @advert.property, :address, :place_holder => "Address of Property for Sale", :inner_class => "w300", class: "look-like-input w300"
+              = best_in_place @advert.property, :city, :place_holder => "City", :inner_class => "w150", :class => "look-like-input w150"
+              = best_in_place @advert.property, :state, :place_holder => "State eg. FL", :inner_class => "w100", :class => "look-like-input w100"
+            br
+            /! .input
+            .input-group
+              = best_in_place @advert.property, :price, :place_holder => "Amount You'd Like to Offer", :inner_class => "w550", :class => "look-like-input w550"
+          /! .input
+        /! btn
+        .col-md-3.col-md-offset-7.text-right
+    /! .content
+
+
+
+
+
+
+
+  - if params[:step] == "2"
+    /! content
+    .row
+      .inner-content
+        .col-md-8.col-md-offset-2
+
+          .col-md-12
+            .input-group
+              p LISTINGS WITH 9+ PHOTOS GET MORE CONTACTS
+              = best_in_place @advert.property, :address, :place_holder => "Address of Property for Sale", :inner_class => "w300", class: "look-like-input w300"
+              = best_in_place @advert.property, :city, :place_holder => "City", :inner_class => "w150", :class => "look-like-input w150"
+              = best_in_place @advert.property, :state, :place_holder => "State eg. FL", :inner_class => "w100", :class => "look-like-input w100"
+            br
+            /! .input
+            .input-group
+              = best_in_place @advert.property, :price, :place_holder => "Amount You'd Like to Offer", :inner_class => "w550", :class => "look-like-input w550"
+          /! .input
+        /! btn
+        .col-md-3.col-md-offset-7.text-right
+    /! .content
+
+
+
+
+  .row
+    .inner-content
+      .col-md-3.col-md-offset-7.text-right
+        a.next-step.btn.btn-alt href="#{"/adverts/new?step="+@next_step}" Next Step →  
+
+
+
+
+
+
+= render partial: 'shared/footer'

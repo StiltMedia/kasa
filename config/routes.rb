@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :adverts
   devise_for :users
   get 'pages/more_filters'
   get 'pages/landing'
@@ -18,6 +19,10 @@ Rails.application.routes.draw do
   post 'api/favorite_on'
   post 'api/favorite_off'
   root 'pages#landing'
+  resources :users do
+    resources :adverts
+  end
+  resources :properties
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

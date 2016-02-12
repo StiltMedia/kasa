@@ -1,0 +1,15 @@
+p#notice = notice
+
+p
+  strong User:
+  = @advert.user
+p
+  strong Property:
+  = @advert.property
+p
+  strong Seed:
+  = @advert.seed
+
+= link_to 'Edit', edit_advert_path(@advert)
+'|
+= link_to 'Back', adverts_path

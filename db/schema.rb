@@ -11,10 +11,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160211180834) do
+ActiveRecord::Schema.define(version: 20160211184512) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "adverts", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "property_id"
+    t.boolean  "seed"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "adverts", ["property_id"], name: "index_adverts_on_property_id", using: :btree
+  add_index "adverts", ["user_id"], name: "index_adverts_on_user_id", using: :btree
 
   create_table "favorites", force: :cascade do |t|
     t.integer  "property_id"
@@ -113,6 +124,8 @@ ActiveRecord::Schema.define(version: 20160211180834) do
     t.integer  "area_lot"
     t.datetime "last_trans_date"
     t.datetime "last_img_trans_date"
+    t.boolean  "seed"
+    t.boolean  "non_rets"
   end
 
   create_table "properties_users", id: false, force: :cascade do |t|
@@ -133,11 +146,14 @@ ActiveRecord::Schema.define(version: 20160211180834) do
     t.inet     "last_sign_in_ip"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
+    t.boolean  "seed"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
+  add_foreign_key "adverts", "properties"
+  add_foreign_key "adverts", "users"
   add_foreign_key "favorites", "properties"
   add_foreign_key "favorites", "users"
   add_foreign_key "favourites", "properties"

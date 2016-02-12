@@ -1,19 +1,7 @@
 - @offer = Offer.first
 = render 'shared/topbar'
 
-section.dashboard-bar-1
-  .row
-    .col-md-12
-      span.cell Your Listings
-      span.cell Create An Offer
-      span.cell Admin Dashboard
-      span.cell Dashboard
-
-
-section.dashboard-bar-2
-  .row
-    .col-md-12
-      span Dashboard
+= render partial: 'shared/dashboard_bars', locals: { text2: "Dashboard" }
 
 /! steps
 section.create-offer.review-offer.steps
@@ -58,6 +46,26 @@ section.create-offer.review-offer.steps
               span = "$ "
               = best_in_place @offer, :amount, :as => :input, :url => "/pages/best_in_place_update"
             /! .info content
+        /! review block
+
+        /! review block
+        .review-block.property-info
+          .white-block
+            a.edit href="#{user_adverts_path(current_user)}"  Manage All Properties
+
+            /! info content
+            .info-content
+              p
+                b PROPERTIES LISTED BY YOU
+              - current_user.adverts.each do |advert|
+                p style="font-size: 10px"
+                  img src=" http://kasa-staging-02.s3.amazonaws.com/#{advert.property.listing_id}.jpg" width="40"
+                  span = "#{advert.property.address} #{advert.property.zip} #{advert.property.state} USA | #{number_to_currency(advert.property.price, precision: 0)} | Listed  #{distance_of_time_in_words_to_now(advert.property.date)} ago"
+                  span
+                    = link_to "Edit", edit_advert_path(advert)
+            /! .info content
+
+
         /! review block
 
 

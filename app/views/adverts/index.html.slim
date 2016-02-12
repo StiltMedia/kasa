@@ -1,0 +1,25 @@
+h1 Listing adverts
+
+table
+  thead
+    tr
+      th User
+      th Property
+      th Seed
+      th
+      th
+      th
+
+  tbody
+    - @adverts.each do |advert|
+      tr
+        td = advert.user
+        td = advert.property
+        td = advert.seed
+        td = link_to 'Show', advert
+        td = link_to 'Edit', edit_advert_path(advert)
+        td = link_to 'Destroy', advert, data: {:confirm => 'Are you sure?'}, :method => :delete
+
+br
+
+= link_to 'New Advert', new_advert_path
