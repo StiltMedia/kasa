@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160211184512) do
+ActiveRecord::Schema.define(version: 20160213230530) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -126,6 +126,8 @@ ActiveRecord::Schema.define(version: 20160211184512) do
     t.datetime "last_img_trans_date"
     t.boolean  "seed"
     t.boolean  "non_rets"
+    t.string   "open_house_beg"
+    t.string   "open_house_end"
   end
 
   create_table "properties_users", id: false, force: :cascade do |t|

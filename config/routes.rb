@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   resources :adverts
   devise_for :users
+  post '/properties/img_post' => 'properties#img_post'
+  post '/properties/img_rm' => 'properties#img_rm'
   get 'pages/more_filters'
   get 'pages/landing'
   get 'pages/browse'

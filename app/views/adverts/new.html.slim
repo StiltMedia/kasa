@@ -7,6 +7,8 @@
     - @next_step = "4"
   - when "4"
     - @next_step = "5"
+  - when "5"
+    - @next_step = "6"
 
 
 .adverts-new-page
@@ -15,46 +17,46 @@
     
   = render partial: 'shared/dashboard_bars', locals: { text2: "" }
   
-
-  /! steps
-  section.create-offer.steps
-    .container
-      /! title
-      .row
-        .col-md-12
-          .title.text-center
-            h2 Create Sale
-      /! .title
-      /! step beginning
-      .row.bs-wizard style="border-bottom:0;" 
-        .col-xs-3.bs-wizard-step class="#{ params[:step] == "1" ? "active" : "disabled" }"
-          .progress
-            .progress-bar
-          span.bs-wizard-dot
-          .text-center.bs-wizard-stepnum Property Location
-        .col-xs-3.bs-wizard-step class="#{ params[:step] == "2" ? "active" : "disabled" }"
-          /! complete
-          .progress
-            .progress-bar
-          span.bs-wizard-dot
-          .text-center.bs-wizard-stepnum Upload Photos
-        .col-xs-3.bs-wizard-step class="#{ params[:step] == "3" ? "active" : "disabled" }"
-          /! complete
-          .progress
-            .progress-bar
-          span.bs-wizard-dot
-          span.bs-wizard-dot
-          .text-center.bs-wizard-stepnum Property Facts
-        .col-xs-3.bs-wizard-step class="#{ params[:step] == "4" ? "active" : "disabled" }"
-          /! complete
-          .progress
-            .progress-bar
-          span.bs-wizard-dot
-          span.bs-wizard-dot
-          .text-center.bs-wizard-stepnum Contact Info
-        /! .step begining
-      /! .steps
-  /! .steps
+  - if params[:step] != '5'
+    /! steps
+    section.create-offer.steps
+      .container
+        /! title
+        .row
+          .col-md-12
+            .title.text-center
+              h2 Create Sale
+        /! .title
+        /! step beginning
+        .row.bs-wizard style="border-bottom:0;" 
+          .col-xs-3.bs-wizard-step class="#{ params[:step] == "1" ? "active" : "disabled" }"
+            .progress
+              .progress-bar
+            span.bs-wizard-dot
+            .text-center.bs-wizard-stepnum Property Location
+          .col-xs-3.bs-wizard-step class="#{ params[:step] == "2" ? "active" : "disabled" }"
+            /! complete
+            .progress
+              .progress-bar
+            span.bs-wizard-dot
+            .text-center.bs-wizard-stepnum Upload Photos
+          .col-xs-3.bs-wizard-step class="#{ params[:step] == "3" ? "active" : "disabled" }"
+            /! complete
+            .progress
+              .progress-bar
+            span.bs-wizard-dot
+            span.bs-wizard-dot
+            .text-center.bs-wizard-stepnum Property Facts
+          .col-xs-3.bs-wizard-step class="#{ params[:step] == "4" ? "active" : "disabled" }"
+            /! complete
+            .progress
+              .progress-bar
+            span.bs-wizard-dot
+            span.bs-wizard-dot
+            .text-center.bs-wizard-stepnum Contact Info
+          /! .step begining
+        /! .steps
+    /! .steps
 
 
 
@@ -73,17 +75,22 @@
           /! input
           .col-md-12
             .input-group
-              = best_in_place @advert.property, :address, :place_holder => "Address of Property for Sale", :inner_class => "w300", class: "look-like-input w300"
-              = best_in_place @advert.property, :city, :place_holder => "City", :inner_class => "w150", :class => "look-like-input w150"
-              = best_in_place @advert.property, :state, :place_holder => "State eg. FL", :inner_class => "w100", :class => "look-like-input w100"
+              = best_in_place @property, :address, :place_holder => "Address of Property for Sale", :inner_class => "w300", class: "look-like-input w300"
+              = best_in_place @property, :city, :place_holder => "City", :inner_class => "w150", :class => "look-like-input w150"
+              = best_in_place @property, :state, :place_holder => "State eg. FL", :inner_class => "w100", :class => "look-like-input w100"
             br
             /! .input
             .input-group
-              = best_in_place @advert.property, :price, :place_holder => "Amount You'd Like to Offer", :inner_class => "w550", :class => "look-like-input w550"
+              = best_in_place @property, :price, :place_holder => "Amount You'd Like to Offer", :inner_class => "w550", :class => "look-like-input w550"
           /! .input
         /! btn
         .col-md-3.col-md-offset-7.text-right
     /! .content
+    .row
+      .inner-content
+        .col-md-3.col-md-offset-7.text-right
+          a.next-step.btn.btn-alt href="#{"/adverts/new?step="+@next_step+"&propertyid="+@property.id.to_s}" Next Step    
+
 
 
 
@@ -100,25 +107,226 @@
           .col-md-12
             .input-group
               p LISTINGS WITH 9+ PHOTOS GET MORE CONTACTS
-              = best_in_place @advert.property, :address, :place_holder => "Address of Property for Sale", :inner_class => "w300", class: "look-like-input w300"
-              = best_in_place @advert.property, :city, :place_holder => "City", :inner_class => "w150", :class => "look-like-input w150"
-              = best_in_place @advert.property, :state, :place_holder => "State eg. FL", :inner_class => "w100", :class => "look-like-input w100"
+
+              .container
+                div.btn.fileinput-button style="width: 55%; height: 22px; cursor: initial"
+                  
+                  input#fileupload multiple="" name="files[]" type="file" data-propertyid=@property.id  data-url="/properties/img_post" / 
+                #progress.progress style="width: 55%"
+                  .progress-bar.progress-bar-success
+                #existingfiles
+                - @images_tot.times do |i|
+                  .img-wrap
+                    span.my-close data-propertyid=99 = "&times;".html_safe
+                    img style="width: 100px; height: 100px;" src="http://kasa-staging-02.s3.amazonaws.com/#{@property.listing_id}_#{i}.jpg"
+                #files.files
+                br/
             br
-            /! .input
-            .input-group
-              = best_in_place @advert.property, :price, :place_holder => "Amount You'd Like to Offer", :inner_class => "w550", :class => "look-like-input w550"
+
           /! .input
         /! btn
         .col-md-3.col-md-offset-7.text-right
     /! .content
+    .row
+      .inner-content
+        .col-md-3.col-md-offset-7.text-right
+          a.next-step.btn.btn-alt href="#{"/adverts/new?step="+@next_step+"&propertyid="+@property.id.to_s}" Next Step    
+
+
+
+  - if params[:step] == "3"
+    /! content
+    .row
+      .inner-content
+        .col-md-8.col-md-offset-2
+          /! input
+          .col-md-12
+            .input-group
+              h5 PROPERTY TYPE
+              = best_in_place @property, :ptype, :place_holder => "Property Type", :inner_class => "w500 select-themed", class: "look-like-input w550", :as => "select", :collection => {"Single Family" => "Single Family", "Townhouse or Condo" => "Townhouse or Condo", "Commercial" => "Commercial"}
+            br
+            .row
+              .col-md-5
+                 /! .input
+                 .input-group
+                   h5 BEDROOMS
+                   = best_in_place @property, :beds, :place_holder => "# of bedrooms", :inner_class => "w250", class: "look-like-input w250", :html_attrs => { onkeyup: 'this.value=this.value.replace(/[^\d]/,"")' }
+              .col-md-5
+                 /! .input
+                 .input-group
+                   h5 BATHROOMS
+                   = best_in_place @property, :baths, :place_holder => "# of bathrooms", :inner_class => "w250", class: "look-like-input w250", :html_attrs => { onkeyup: 'this.value=this.value.replace(/[^\d]/,"")' }
+            br
+            .row
+              .col-md-5
+                 /! .input
+                 .input-group
+                   h5 PROPERTY SQ. FT.
+                   = best_in_place @property, :area, :place_holder => "Property size in Square Feet", :inner_class => "w250", class: "look-like-input w250", :html_attrs => { onkeyup: 'this.value=this.value.replace(/[^\d]/,"")' }
+              .col-md-5
+                 /! .input
+                 .input-group
+                   h5 GARAGES
+                   = best_in_place @property, :garage, :place_holder => "# of grarage spaces", :inner_class => "w250", class: "look-like-input w250", :html_attrs => { onkeyup: 'this.value=this.value.replace(/[^\d]/,"")' }
+            br
+
+
+
+            .row
+              .col-md-5
+                 /! .input
+                 .input-group
+                   h5 BUILT (YEAR)
+                   = best_in_place @property, :area, :place_holder => "", :inner_class => "w250", class: "look-like-input w250"
+              .col-md-5
+                 /! .input
+                 .input-group
+                   h5 FLOOR
+                   = best_in_place @property, :floor, :place_holder => "TYPE OF FLOOR", :inner_class => "w250", class: "look-like-input w250"
+            br
+            .row
+              .col-md-8
+                 /! .input
+                 .input-group
+                   h5 REMARKS (INCL. CONTACT INFORMATION)
+                   = best_in_place @property, :remarks, :place_holder => "Include some contact information ...", :inner_class => "w500 textarea-themed", class: "look-like-textarea w550", :as => :textarea
+            br
+
+          /! .input
+        /! btn
+        .col-md-3.col-md-offset-7.text-right
+    /! .content
+    .row
+      .inner-content
+        .col-md-3.col-md-offset-7.text-right
+          a.next-step.btn.btn-alt href="#{"/adverts/new?step="+@next_step+"&propertyid="+@property.id.to_s}" Next Step    
 
 
 
 
-  .row
-    .inner-content
-      .col-md-3.col-md-offset-7.text-right
-        a.next-step.btn.btn-alt href="#{"/adverts/new?step="+@next_step}" Next Step →  
+
+
+
+
+
+
+
+
+
+
+  - if params[:step] == "4"
+    /! content
+    .row
+      .inner-content
+        .col-md-8.col-md-offset-2
+          /! input
+          .col-md-12
+            .row
+              .col-md-5
+                 /! .input
+                 .input-group
+                   h5 OPEN HOUSE (START)
+                   = best_in_place @property, :open_house_beg,  :inner_class => "w250", class: "look-like-input w250", :as => :datetime
+              .col-md-5
+                 /! .input
+                 .input-group
+                   h5 OPEN HOUSE (END)
+                   = best_in_place @property, :open_house_end,  :inner_class => "w250", class: "look-like-input w250", :as => :datetime
+            br
+            br
+            br
+            .input-group.text-center
+              p
+                input type="checkbox" class="agree" &nbsp;               
+                span In agreement with our 
+                a href="/pages/untitled" Terms of Use
+
+    .row
+      .inner-content
+        .col-md-3.col-md-offset-7.text-right
+          a.next-step.btn.btn-alt onclick='return validate_step_4()' href="#{"/adverts/new?step="+@next_step+"&propertyid="+@property.id.to_s}" Review Offer →  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  - if params[:step] == "5"
+
+
+    /! content
+    .row
+      .inner-content
+        .col-md-8.col-md-offset-2
+          /! input
+          .col-md-12
+            .row
+              .col-md-5
+                 /! .input
+                 .input-group
+                   h5 OPEN HOUSE (START)
+                   = best_in_place @property, :open_house_beg,  :inner_class => "w250", class: "look-like-input w250", :as => :datetime
+              .col-md-5
+                 /! .input
+                 .input-group
+                   h5 OPEN HOUSE (END)
+                   = best_in_place @property, :open_house_end,  :inner_class => "w250", class: "look-like-input w250", :as => :datetime
+            br
+            br
+            br
+            .input-group.text-center
+              p
+                input type="checkbox" class="agree" &nbsp;               
+                span In agreement with our 
+                a href="/pages/untitled" Terms of Use
+
+
+
+
+    .row
+      .inner-content
+        .col-md-3.col-md-offset-7.text-right
+          a.next-step.btn.btn-alt onclick='return validate_step_4()' href="#{"/adverts/new?step="+@next_step+"&propertyid="+@property.id.to_s}" Submit →
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

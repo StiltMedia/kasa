@@ -7,6 +7,45 @@ class PropertiesController < ApplicationController
     @properties = Property.all
   end
 
+  def img_rm
+    property = Property.find(params[:propertyid])   
+    property.images_tot -= 1
+    property.save
+    render json: { result: "ok" }
+  end
+
+  def img_post
+    @property = Property.find(params[:propertyid])
+    @property.images_tot = 0 if ! @property.images_tot
+    @property.images_tot += 1
+    result_1 = @property.save
+    ext = File.extname(params[:files][0].original_filename)
+    file_name = "#{@property.listing_id}_#{@property.images_tot-1}.jpg"
+    require 'aws-sdk'
+    @s3 = nil
+    s3_login = 'AKIAJ6P4PCOUQL5GW52Q'
+    s3_password = '67/kSQQuGN/cgvtmREDpBu8jYsLTeA0nuP3LI/tW'
+    s3_bucket = 'kasa-staging-02'
+    @s3 = Aws::S3::Resource.new(region:'us-west-2',
+      credentials: Aws::Credentials.new(s3_login, s3_password))
+    connect_to_s3() if ! @s3
+    logger.debug "DB8 saving #{file_name}"
+    obj = @s3.bucket(s3_bucket).object(file_name)
+    result_2 = obj.upload_file(params[:files][0].tempfile.path)
+    if result_1 && result_2
+      render json: { 
+        files: [ 
+          { name: file_name,
+            size: 100,
+            zurl: "http:\/\/example.org\/files\/picture1.jpg",
+            zthumbnailUrl: "http:\/\/example.org\/files\/thumbnail\/picture1.jpg",
+            zdeleteUrl: "http:\/\/example.org\/files\/picture1.jpg",
+            zdeleteType: "DELETE"  } 
+        ]
+      }
+    end
+  end
+
   # GET /properties/1
   # GET /properties/1.json
   def show
@@ -70,6 +109,7 @@ class PropertiesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def property_params
       #params[:property]
-      params.require(:property).permit(:address, :city, :state, :price)
+      params.require(:property).permit(:address, :city, :state, :price,
+        :ptype, :beds, :garage, :area, :floor, :built, :remarks, :open_house_beg, :open_house_end)
     end
 end

@@ -14,10 +14,15 @@ class AdvertsController < ApplicationController
 
   # GET /adverts/new
   def new
-    @property = Property.new
-    @property.save
-    @advert = Advert.new(property_id: @property.id, user_id: current_user.id)
-    @advert.save
+    if params[:step] == "1"
+      @property = Property.new(listing_id: "FE9E" + "0001", images_tot: 0)
+      @property.save
+      @advert = Advert.new(property_id: @property.id, user_id: current_user.id)
+      @advert.save
+    else
+      @property = Property.find(params[:propertyid])
+    end
+    @images_tot = @property.images_tot || 0
   end
 
   # GET /adverts/1/edit

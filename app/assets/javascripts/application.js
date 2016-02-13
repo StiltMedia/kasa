@@ -13,6 +13,10 @@
 //= require jquery
 //= require jquery_ujs
 //= require best_in_place
+//= require jquery-ui
+//= require best_in_place.jquery-ui
+//= require jquery-fileupload/basic-plus
+//= require jquery-ui-timepicker-addon
 //= require_tree .
 
 var map; //the google map used in browse page ->  maps view

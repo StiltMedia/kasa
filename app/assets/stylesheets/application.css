@@ -11,6 +11,8 @@
  * file per style scope.
  *
  *= require_tree .
+ *= require jquery-ui
+ *= require jquery-ui-timepicker-addon
  *= require_self
  */
 
