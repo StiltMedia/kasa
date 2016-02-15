@@ -1,25 +1,97 @@
-h1 Listing adverts
+- @offer = Offer.first
+= render 'shared/topbar'
 
-table
-  thead
-    tr
-      th User
-      th Property
-      th Seed
-      th
-      th
-      th
+= render partial: 'shared/dashboard_bars', locals: { text2: "Properties Listed" }
 
-  tbody
-    - @adverts.each do |advert|
-      tr
-        td = advert.user
-        td = advert.property
-        td = advert.seed
-        td = link_to 'Show', advert
-        td = link_to 'Edit', edit_advert_path(advert)
-        td = link_to 'Destroy', advert, data: {:confirm => 'Are you sure?'}, :method => :delete
+/! steps
+section.create-offer.review-offer.steps
+  .container
 
-br
+    .row
+      .col-md-5.col-md-offset-1.inner-content.zextra-margin
+        p
+          b Dashboard - 
+          span Properties Listed
+          p
+          - if params[:keywordfilter].present?
+            span searching for #{URI.unescape(params[:keywordfilter])} 
+          - if params[:monthfilter].present?
+            span searching for #{Time.at(params[:monthfilter].to_i).strftime("%B")} 
+          - if params[:keywordfilter].present? || params[:monthfilter].present?
+            = link_to "clear filter", 'javascript:window.location=window.location.pathname'
 
-= link_to 'New Advert', new_advert_path
+
+      
+
+    /! content
+    .row
+
+      .col-md-8.col-md-offset-1.zinner-content.extra-margin
+
+
+        - @adverts.each do |advert|
+          = render partial: 'shared/listing_cell_myprops', :locals =>  { property: advert.property, advert: advert }
+        - if @adverts.size == 0
+          p - None -
+
+
+
+      .col-md-2.inner-content
+        /! review block
+        .review-block.property-info
+          .white-block style="background-color: rgba(0,0,0,0)"
+            a.edit.invisible href="javascript:review_edit_prop_info()"  Edit
+            /! info content
+            .info-content
+              p
+                input
+                input type="button" value="Search" onclick="window.location='?keywordfilter='+encodeURIComponent( $(this).prev().val() )"
+              br
+              p
+                b ARCHIVES
+              p
+                - a = Time.now().to_i - (60*60*24*30)
+                - 4.times do
+                  = link_to Time.at(a).strftime("%B"), "?monthfilter=#{Time.at(a).to_i}"
+                  br
+                  - a -= (60*60*24*30)
+            /! .info content
+
+
+
+
+    /! .content
+/! .steps
+
+= render 'shared/footer'
+
+javascript:
+  document.addEventListener("DOMContentLoaded", function(event) { 
+    $(".next-step.btn").click(function() {
+      var errors=false;
+      if (! errors)
+        window.location.replace('/pages/offer_6');
+      else
+        console.log("form validation failed");
+    });
+  });
+
+  function review_edit_prop_info() {
+    $(".review-block.property-info .best_in_place").best_in_place();
+    $(".review-block.property-info .best_in_place").css("border-bottom", "3px solid silver");
+  }
+
+  function review_edit_financing() {
+    $(".review-block.financing .best_in_place").best_in_place();
+    $(".review-block.financing .best_in_place").css("border-bottom", "3px solid silver");
+  }
+
+  function review_edit_order() {
+    $(".review-block.order .best_in_place").best_in_place();
+    $(".review-block.order .best_in_place").css("border-bottom", "3px solid silver");
+  }
+
+  function review_edit_account_info() {
+    $(".review-block.account-info .best_in_place").best_in_place();
+    $(".review-block.account-info .best_in_place").css("border-bottom", "3px solid silver");
+  }

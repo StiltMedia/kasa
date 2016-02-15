@@ -9,7 +9,7 @@ section.create-offer.review-offer.steps
     /! content
     .row
 
-      .col-md-5.col-md-offset-1.debug.inner-content.extra-margin
+      .col-md-5.col-md-offset-1.inner-content.extra-margin
         /! review block
         .review-block.property-info
           .white-block
@@ -57,14 +57,25 @@ section.create-offer.review-offer.steps
             .info-content
               p
                 b PROPERTIES LISTED BY YOU
+
+              - if current_user.adverts.empty?
+                p style="font-size: 10px" - None -
+
+
+
               - current_user.adverts.each do |advert|
                 - if advert.property.images_tot == 0
                   - prop_img = "http://dummyimage.com/600x400/e3e0e3/ccabcc&text=+" if advert.property.images_tot == 0
                 - else
-                  - prop_img = "http://kasa-staging-02.s3.amazonaws.com/#{advert.property.listing_id}.jpg"
+                  - prop_img = "http://kasa-staging-02.s3.amazonaws.com/#{advert.property.listing_id}_0.jpg"
+                - if advert.property.date
+                  - prop_date = "Listed  #{distance_of_time_in_words_to_now(advert.property.date)} ago"
+                - else
+                   - prop_date = "Listed date: nil"
+   
                 p style="font-size: 10px"
                   img src=prop_img width="40"
-                  span = "#{advert.property.address} #{advert.property.zip} #{advert.property.state} | #{number_to_currency(advert.property.price, precision: 0)} | Listed  #{distance_of_time_in_words_to_now(advert.property.date) rescue "x days"} ago"
+                  span = "[ID: #{advert.property.id}] Address: #{advert.property.address} #{advert.property.zip} #{advert.property.state} | Price: #{number_to_currency(advert.property.price, precision: 0)} | #{prop_date} "
                   span
                     = link_to "Edit", edit_advert_path(advert)
             /! .info content
@@ -73,7 +84,7 @@ section.create-offer.review-offer.steps
         /! review block
 
 
-      .col-md-5.debug.inner-content
+      .col-md-5.inner-content
         /! review block
         .review-block.property-info
           .white-block

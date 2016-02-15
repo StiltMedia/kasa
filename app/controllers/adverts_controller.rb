@@ -4,7 +4,18 @@ class AdvertsController < ApplicationController
   # GET /adverts
   # GET /adverts.json
   def index
-    @adverts = Advert.all
+    if params[:keywordfilter].present?
+      @adverts = current_user.adverts.select do |advert|
+        advert.property.address.include? URI.unescape(params[:keywordfilter])
+      end
+    elsif params[:monthfilter].present?
+      @adverts = current_user.adverts
+      @adverts = @adverts.select do |advert|
+        advert.property.date && ( advert.property.date.strftime("%B") == Time.at(params[:monthfilter].to_i).strftime("%B") )
+      end
+    else
+      @adverts = current_user.adverts
+    end
   end
 
   # GET /adverts/1
@@ -27,6 +38,7 @@ class AdvertsController < ApplicationController
 
   # GET /adverts/1/edit
   def edit
+    redirect_to "/adverts/new?step=5&propertyid=#{Advert.find(params[:id]).property_id}"
   end
 
   # POST /adverts
@@ -62,9 +74,16 @@ class AdvertsController < ApplicationController
   # DELETE /adverts/1
   # DELETE /adverts/1.json
   def destroy
+    byebug
     @advert.destroy
     respond_to do |format|
-      format.html { redirect_to adverts_url, notice: 'Advert was successfully destroyed.' }
+      format.html {
+        if params[:redir_to] == "back"
+          redirect_to :back, notice: 'Advert was successfully destroyed.' 
+        else
+          redirect_to adverts_url, notice: 'Advert was successfully destroyed.' 
+        end
+      }
       format.json { head :no_content }
     end
   end

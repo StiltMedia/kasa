@@ -4,6 +4,7 @@
 $(document).on('ready page:load', function () {
 
   $(".adverts-new-page").closest('body').find('.review-block .look-like-input').css("border","0px");
+  $(".adverts-new-page").closest('body').find('.review-block .look-like-textarea').css("border","0px");
   $(".adverts-new-page").closest('body').find('.review-block .best_in_place').css("pointer-events","none");
   $(".adverts-new-page").closest('body').find('.review-block .longblue').css('visibility', 'hidden');
 
@@ -158,7 +159,7 @@ function validate_step_4() {
 function validate_step_5() {
   var errors = "";
   var success_url = '/users/'+$(".adverts-new-page").data('user-id')+'/adverts';
-
+  var property_id = $(".adverts-new-page").data('property-id');
   var val = $('*[data-bip-attribute="address"]').text();
   // address validations - cannot be empty
   if ( val.indexOf('Address of Property for Sale') > -1 ) {
@@ -208,9 +209,19 @@ function validate_step_5() {
     alert('Please correct the following issues:\n' + errors);
     return false;
   } else {
-    alert('Listing saved.');
-    return true;
-    //window.location(success_url);
+    $.ajax({
+      type: 'POST',
+      url: '/properties/' + property_id,
+      data: { _method: 'PUT', property: { date: new Date().toISOString() } },
+      success: function() { alert('Listing saved.'); return true; },
+      dataType: 'json',
+      async: false
+    });
+    
+    //$.post('/properties/' + property_id, { _method: 'PUT', property: { date: new Date().toISOString() } }, function (data) {
+    //  alert('Listing saved.');
+    //  return true;
+    //});
   }
 
 }
@@ -219,11 +230,11 @@ function validate_step_5() {
 function toggle_review_block(elem,ndx) {
   if ($(".adverts-new-page").closest('body').find('.review-block').eq(ndx).find('.best_in_place').eq(0).css('pointer-events') == 'none' ) {
     $(".adverts-new-page").closest('body').find('.review-block').eq(ndx).find('.best_in_place').css('pointer-events','inherit');
-    $(".adverts-new-page").closest('body').find('.review-block').eq(ndx).find('.look-like-input').css('border','2px solid #939393');
-    $(".adverts-new-page").closest('body').find('.review-block').eq(ndx).find('.look-like-input').eq(0).click();
+    $(".adverts-new-page").closest('body').find('.review-block').eq(ndx).find('.look-like-input, .look-like-textarea').css('border','2px solid #939393');
+    //$(".adverts-new-page").closest('body').find('.review-block').eq(ndx).find('.look-like-input').eq(0).click();
   } else {
     $(".adverts-new-page").closest('body').find('.review-block').eq(ndx).find('.best_in_place').css('pointer-events','none');
-    $(".adverts-new-page").closest('body').find('.review-block').eq(ndx).find('.look-like-input').css('border','0px');
+    $(".adverts-new-page").closest('body').find('.review-block').eq(ndx).find('.look-like-input, .look-like-textarea').css('border','0px');
   }
 
   if (ndx == 1) {

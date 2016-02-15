@@ -1,0 +1,34 @@
+div class=(session[:browse_view]=='Map' ? '' : 'col-md-12')
+  .article
+    .col-xs-12
+      .listing-box.clearfix.center-block class=(session[:browse_view] == 'Map' ? 'skinny' : '')
+        .col-xs-6.no-padding
+          .image-box
+            img alt="" src="http://kasa-staging-02.s3.amazonaws.com/#{property.listing_id}_0.jpg"
+        .col-xs-6.no-padding
+          .listing-box-content
+            h5
+              .prop_addr.invisible data-listingid=property.listing_id data-lat="" data-lng="" data-addr="#{property.address.titleize rescue "Empty"} #{property.city.titleize rescue "Empty"} #{property.state}" data-beds=property.beds data-baths=property.baths data-garage=property.garage data-price=number_to_currency(property.price, precision: 0) data-sf=property.sf = "#{property.address} #{property.zip} #{property.state} USA"
+              a href="/pages/listing_details/#{property.listing_id}" = "#{property.address.titleize rescue "Empty"} #{property.city.titleize rescue "Empty"} #{property.state}"
+            p.listing-price
+              = number_to_currency(property.price, precision: 0)
+              span = "$#{property.price/property.area}/sf" rescue ""
+            ul.listing-info.list-unstyled.list-inline
+              li
+                img alt="" src=asset_path("pt_house_dark.png")
+              li
+                img alt="" src=asset_path("icon_couch_big.png")
+                span = property.beds
+              li
+                img alt="" src=asset_path("icon_bathroom_big.png")
+                span = property.baths
+              li
+                img alt="" src=asset_path("icon_car_big.png")
+                span = property.garage
+            .listing-box-footer
+              p = "Listed #{distance_of_time_in_words_to_now(property.date)} ago" rescue "Empty"
+              .links
+                a href="/adverts/#{advert.id}/edit" Edit
+                = link_to 'Remove', advert_path(id: advert.id, redir_to: "back"), :method => :delete, :data => {:confirm => 'Are you sure?'}
+                a href="/pages/untitled"
+                  div#my-share.share-widget data-url="#{@base_url}properties/#{property.listing_id}" data-text="Checkout out this listing" data-title="Share"

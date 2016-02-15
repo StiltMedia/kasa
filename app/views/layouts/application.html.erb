@@ -14,6 +14,7 @@
 
   <%= csrf_meta_tags %>
 </head>
+
 <body class="<%= 'map-view' if session[:browse_view]  == 'Map' && params[:action] == 'browse' %>">
 
 <%= yield %>
