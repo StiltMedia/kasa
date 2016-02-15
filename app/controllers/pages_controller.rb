@@ -7,6 +7,10 @@ class PagesController < ApplicationController
 
   end
 
+  def admin_dashboard
+    @admins = User.where(admin: true).all
+  end
+
   def best_in_place_update
     #not implementing for MVP
     render json: { status: "ok" }

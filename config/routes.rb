@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   resources :adverts
+  get '/users/create_admin'
   devise_for :users
   post '/properties/img_post' => 'properties#img_post'
   post '/properties/img_rm' => 'properties#img_rm'
@@ -18,6 +19,7 @@ Rails.application.routes.draw do
   put '/pages/best_in_place_update'
   put '/pages/offer_5' => 'pages#put_todo'
   get '/pages/user_dashboard'
+  get '/pages/admin_dashboard'
   post 'api/favorite_on'
   post 'api/favorite_off'
   root 'pages#landing'

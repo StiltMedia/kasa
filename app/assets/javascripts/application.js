@@ -40,6 +40,7 @@ if ($("#ex1").length > 0) {
 
 $(document).ready(function () {
 
+
     $("#owl-example").owlCarousel({
         loop: true,
         pagination: false,

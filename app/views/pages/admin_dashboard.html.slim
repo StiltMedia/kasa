@@ -1,0 +1,172 @@
+- @offer = Offer.first
+= render 'shared/topbar'
+
+= render partial: 'shared/dashboard_bars', locals: { text2: "Admin Dashboard" }
+
+/! steps
+section.create-offer.review-offer.steps
+  .container
+    /! content
+    .row
+
+      .col-md-5.col-md-offset-1.inner-content.extra-margin
+
+        p = notice
+        /! review block
+        .review-block.property-info
+          .white-block
+            a.edit href="javascript:review_edit_prop_info()"  Edit
+            /! info content
+            .info-content
+              p
+                b ADDRESS
+              p = "@address"
+            /! .info content
+            /! info content
+            .info-content
+              p
+                b AMOUNT YOU'D LIKE TO OFFER
+              span = "$ "
+              = best_in_place @offer, :amount, :as => :input, :url => "/pages/best_in_place_update"
+            /! .info content
+        /! review block
+
+        /! review block
+        .review-block.property-info
+          .white-block
+            a.edit href="javascript:review_edit_prop_info()"  Edit
+            /! info content
+            .info-content
+              p
+                b ADDRESS
+              p = "@address"
+            /! .info content
+            /! info content
+            .info-content
+              p
+                b AMOUNT YOU'D LIKE TO OFFER
+              span = "$ "
+              = best_in_place @offer, :amount, :as => :input, :url => "/pages/best_in_place_update"
+            /! .info content
+        /! review block
+
+        /! review block
+        .review-block.property-info
+          .white-block
+            a.edit.create-admin href="/users/create_admin?redir_to=/pages/admin_dashboard"
+              i.fa.fa-user-plus &nbsp;
+              span Create New Admin
+
+            /! info content
+            .info-content
+              p
+                b Admins
+
+              - if @admins.size == 0
+                p style="font-size: 10px" - None -
+
+
+
+              - @admins.each do |admin|
+                   p style="font-size: 10px"
+                     i.fa.fa-user &nbsp;
+                     span #{admin.email}
+
+
+
+            /! .info content
+
+
+        /! review block
+
+
+      .col-md-5.inner-content
+        /! review block
+        .review-block.property-info
+          .white-block
+            a.edit href="javascript:review_edit_prop_info()"  Edit
+            /! info content
+            .info-content
+              p
+                b ADDRESS
+              p = "@address"
+            /! .info content
+            /! info content
+            .info-content
+              p
+                b AMOUNT YOU'D LIKE TO OFFER
+              span = "$ "
+              = best_in_place @offer, :amount, :as => :input, :url => "/pages/best_in_place_update"
+            /! .info content
+        /! review block
+
+        /! review block
+        .review-block.property-info
+          .white-block
+            a.edit href="javascript:review_edit_prop_info()"  Edit
+            /! info content
+            .info-content
+              p
+                b ADDRESS
+              p = "@address"
+            /! .info content
+            /! info content
+            .info-content
+              p
+                b AMOUNT YOU'D LIKE TO OFFER
+                br
+                br
+                br
+                br
+                br
+                br
+                br
+                br
+                br
+                br
+                br
+                br
+
+              span = "$ "
+              = best_in_place @offer, :amount, :as => :input, :url => "/pages/best_in_place_update"
+            /! .info content
+        /! review block
+
+
+
+
+    /! .content
+/! .steps
+
+= render 'shared/footer'
+
+javascript:
+  document.addEventListener("DOMContentLoaded", function(event) { 
+    $(".next-step.btn").click(function() {
+      var errors=false;
+      if (! errors)
+        window.location.replace('/pages/offer_6');
+      else
+        console.log("form validation failed");
+    });
+  });
+
+  function review_edit_prop_info() {
+    $(".review-block.property-info .best_in_place").best_in_place();
+    $(".review-block.property-info .best_in_place").css("border-bottom", "3px solid silver");
+  }
+
+  function review_edit_financing() {
+    $(".review-block.financing .best_in_place").best_in_place();
+    $(".review-block.financing .best_in_place").css("border-bottom", "3px solid silver");
+  }
+
+  function review_edit_order() {
+    $(".review-block.order .best_in_place").best_in_place();
+    $(".review-block.order .best_in_place").css("border-bottom", "3px solid silver");
+  }
+
+  function review_edit_account_info() {
+    $(".review-block.account-info .best_in_place").best_in_place();
+    $(".review-block.account-info .best_in_place").css("border-bottom", "3px solid silver");
+  }

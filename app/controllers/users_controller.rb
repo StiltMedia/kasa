@@ -21,6 +21,18 @@ class UsersController < ApplicationController
   def edit
   end
 
+  def create_admin
+    a = User.create(email: "example#{SecureRandom.uuid[0..4]}@example.net",
+      password: "password",
+      admin: true
+    )
+    if params[:redir_to].present?
+      redirect_to params[:redir_to], :notice => "Created #{a.email}"
+    else
+      rediret_to "/", :notice => "Created #{a.email}"
+    end
+  end
+
   # POST /users
   # POST /users.json
   def create
