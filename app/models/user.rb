@@ -28,4 +28,14 @@ class User < ActiveRecord::Base
     hits = Hit.all.select { |h| properties.include? h.property_id }
     hits.size
   end
+
+  # given a time in integer format, returns hits that
+  # happened on that day &&
+  # was for a property listed by this user
+  def hits_for_day(timestamp)
+    properties = Advert.where(user_id: self.id).pluck(:property_id)
+    beg_time = Time.zone.at(timestamp).beginning_of_day
+    end_time = Time.zone.at(timestamp).end_of_day
+    Hit.where("property_id IN (?)", properties).where(created_at: beg_time..end_time).all
+  end
 end

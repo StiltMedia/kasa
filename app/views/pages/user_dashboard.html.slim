@@ -29,7 +29,7 @@ section.create-offer.review-offer.steps
               p
                 - now = Time.now.to_i
                 - 6.times do
-                  span #{Time.at(now).strftime("%^a")} - 0<br>
+                  span #{Time.at(now).strftime("%^a")} - #{current_user.hits_for_day(now).size}<br>
                   - now -= (60*60*24)
             /! .info content
         /! review block
