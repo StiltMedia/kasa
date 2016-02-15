@@ -77,7 +77,13 @@ section.create-offer.review-offer.steps
               - @admins.each do |admin|
                    p style="font-size: 10px"
                      i.fa.fa-user &nbsp;
-                     span #{admin.email} default password stilt123
+                     - if admin.email == 'guigo@stiltmedia.com'
+                       span #{admin.email} &nbsp;
+                       span default password stilt123
+                     - else
+                       = best_in_place admin, :email, :activator => "[data-admin-id='" + admin.id.to_s + "']"
+                       i.fa.fa-edit data-admin-id=admin.id edit&nbsp;&nbsp;
+                       span default password stilt123
 
 
 
