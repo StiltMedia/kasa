@@ -60,6 +60,10 @@ class PagesController < ApplicationController
     @offer.last_name = params[:last_name] if params.has_key?('last_name')
     @offer.address = params[:address] if params.has_key?('address')
     @offer.save
+      Feed.create(
+        user_id: nil,
+        message: "#{current_user.email} created offer #{@offer.id}"
+      )
   end
 
 
@@ -74,6 +78,10 @@ class PagesController < ApplicationController
 
   def listing_details
     @listing = Property.find_by_listing_id(params[:listing_id])
+    Hit.create(
+      property_id: @listing.id,
+      kind: 'listing_details'
+    )
   end
 
   def landing

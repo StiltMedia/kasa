@@ -13,39 +13,39 @@ section.create-offer.review-offer.steps
         /! review block
         .review-block.property-info
           .white-block
-            a.edit href="javascript:review_edit_prop_info()"  Edit
+            a.edit.invisible href="javascript:review_edit_prop_info()"  Edit
             /! info content
             .info-content
               p
-                b ADDRESS
-              p = "@address"
+                b PROPERTIES LISTED ANALYTICS
+              p &nbsp;
             /! .info content
             /! info content
             .info-content
               p
-                b AMOUNT YOU'D LIKE TO OFFER
-              span = "$ "
-              = best_in_place @offer, :amount, :as => :input, :url => "/pages/best_in_place_update"
+                span Total Properties Listed #{Advert.where(user_id: current_user.id, approved: true).all.size}
+                br
+                span Total Views #{current_user.total_views}
+              p
+                - now = Time.now.to_i
+                - 6.times do
+                  span #{Time.at(now).strftime("%^a")} - 0<br>
+                  - now -= (60*60*24)
             /! .info content
         /! review block
 
         /! review block
         .review-block.property-info
           .white-block
-            a.edit href="javascript:review_edit_prop_info()"  Edit
+            a.edit.invisible href="javascript:review_edit_prop_info()"  Edit
             /! info content
             .info-content
               p
-                b ADDRESS
-              p = "@address"
+                b SUPPORT TICKETS
+              p = "-"
             /! .info content
             /! info content
-            .info-content
-              p
-                b AMOUNT YOU'D LIKE TO OFFER
-              span = "$ "
-              = best_in_place @offer, :amount, :as => :input, :url => "/pages/best_in_place_update"
-            /! .info content
+
         /! review block
 
         /! review block
@@ -92,49 +92,38 @@ section.create-offer.review-offer.steps
             /! info content
             .info-content
               p
-                b ADDRESS
-              p = "@address"
+                b Feed
+              - Feed.where(user_id: current_user.id).all.order(created_at: :desc).limit(5).each do |feed|
+                p
+                  i.fa.fa-bell-o &nbsp;&nbsp;
+                  span = feed.message[0..60]
+
             /! .info content
             /! info content
             .info-content
               p
-                b AMOUNT YOU'D LIKE TO OFFER
-              span = "$ "
-              = best_in_place @offer, :amount, :as => :input, :url => "/pages/best_in_place_update"
+                b &nbsp;
             /! .info content
         /! review block
 
         /! review block
         .review-block.property-info
           .white-block
-            a.edit href="javascript:review_edit_prop_info()"  Edit
+            span.edit.invisible href="javascript:review_edit_prop_info()" &nbsp;
             /! info content
             .info-content
               p
-                b ADDRESS
-              p = "@address"
-            /! .info content
-            /! info content
-            .info-content
-              p
-                b AMOUNT YOU'D LIKE TO OFFER
-                br
-                br
-                br
-                br
-                br
-                br
-                br
-                br
-                br
-                br
-                br
-                br
+                b OFFERS ON LISTED PROPERTIES
+                span &nbsp;&nbsp; #{current_user.pending_offers.size} Pending
+              - if current_user.offers.size == 0
+                p - None -
+              - current_user.offers.each do |offer|
+                p
+                  a href="/offers/review/#{offer.id}"
+                    i.fa.fa-user &nbsp;
+                    span = "Offerer: #{offer.user.email} Property Address: #{offer.property.address} #{distance_of_time_in_words_to_now(offer.updated_at)} ago"
 
-              span = "$ "
-              = best_in_place @offer, :amount, :as => :input, :url => "/pages/best_in_place_update"
             /! .info content
-        /! review block
 
 
 

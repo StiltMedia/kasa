@@ -10,4 +10,6 @@ class Property < ActiveRecord::Base
   def sf
     "$#{self.price/self.area}/sf" rescue ""
   end
+
+
 end

@@ -60,3 +60,4 @@ gem 'best_in_place', '~> 3.0.1'
 gem "jquery-fileupload-rails"
 gem 'jquery-ui-rails'
 gem 'jquery-timepicker-addon-rails'
+gem "faker"

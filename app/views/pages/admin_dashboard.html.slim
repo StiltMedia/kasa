@@ -1,4 +1,13 @@
 - @offer = Offer.first
+- active_properties_1 = Property.where(non_rets: nil).all.size
+- active_properties_2 = Property.where(non_rets: false).all.size
+- active_properties_3 = Advert.all.where(approved: true).all.size
+- new_listings_1 = Property.where(non_rets: nil).where("date >= ?", 1.month.ago).all.size
+- new_listings_2 = Property.where(non_rets: false).where("date >= ?", 1.month.ago).all.size
+- new_listings_3 = Advert.all.where(approved: true).where("created_at >= ?", 1.month.ago).all.size
+
+
+
 = render 'shared/topbar'
 
 = render partial: 'shared/dashboard_bars', locals: { text2: "Admin Dashboard" }
@@ -15,38 +24,36 @@ section.create-offer.review-offer.steps
         /! review block
         .review-block.property-info
           .white-block
-            a.edit href="javascript:review_edit_prop_info()"  Edit
+            a.edit.invisible href="javascript:review_edit_prop_info()"  Edit
             /! info content
             .info-content
               p
-                b ADDRESS
-              p = "@address"
+                b LISTINGS ACTIVITY
+              p = "Active Properties - #{active_properties_1+active_properties_2+active_properties_3}"
+              p = "New Listings - #{new_listings_1+new_listings_2+new_listings_3}"
+              - now = Time.now.to_i
+              - 6.times do
+                span #{Time.at(now).strftime("%^a")} - 0<br>
+                - now -= (60*60*24)
+
             /! .info content
-            /! info content
-            .info-content
-              p
-                b AMOUNT YOU'D LIKE TO OFFER
-              span = "$ "
-              = best_in_place @offer, :amount, :as => :input, :url => "/pages/best_in_place_update"
-            /! .info content
+
         /! review block
 
         /! review block
         .review-block.property-info
           .white-block
-            a.edit href="javascript:review_edit_prop_info()"  Edit
+            a.edit.invisible href="javascript:review_edit_prop_info()"  Edit
             /! info content
             .info-content
               p
-                b ADDRESS
-              p = "@address"
+                b SUPPORT TICKETS
+              p  &nbsp;
             /! .info content
             /! info content
             .info-content
               p
-                b AMOUNT YOU'D LIKE TO OFFER
-              span = "$ "
-              = best_in_place @offer, :amount, :as => :input, :url => "/pages/best_in_place_update"
+                b &nbsp;
             /! .info content
         /! review block
 
@@ -88,16 +95,13 @@ section.create-offer.review-offer.steps
             /! info content
             .info-content
               p
-                b ADDRESS
-              p = "@address"
+                b FEED
+              - Feed.where(user_id: nil).all.order(created_at: :desc).each do |feed|
+                p
+                  i.fa.fa-bell-o &nbsp;&nbsp;
+                  span = feed.message[0..60]
             /! .info content
-            /! info content
-            .info-content
-              p
-                b AMOUNT YOU'D LIKE TO OFFER
-              span = "$ "
-              = best_in_place @offer, :amount, :as => :input, :url => "/pages/best_in_place_update"
-            /! .info content
+
         /! review block
 
         /! review block
@@ -107,33 +111,18 @@ section.create-offer.review-offer.steps
             /! info content
             .info-content
               p
-                b ADDRESS
-              p = "@address"
+                b SELLER PROPERTIES FOR REVIEW
+              - (Advert.all.select { |x| x.property.non_rets == true }).each do |advert|
+                p
+                  i.fa.fa-user &nbsp&nbsp;
+                  span = "Seller: #{advert.user.email} "
+                  span = "Property: #{advert.property.address} #{advert.property.city} "
+                  span = "Time: #{}"
+                  span = "Listed #{distance_of_time_in_words_to_now(advert.property.date)} ago" rescue ""
+                  span = "Status: #{advert.approved ? 'Closed' : 'Pending'} &nbsp;&nbsp;".html_safe
+                  span = " Approve? "
+                  = best_in_place advert, :approved, :as => :checkbox , collection: {false: "<i class='fa fa-square-o'></i>".html_safe, true: "<i class='fa fa-check-square-o'></i>".html_safe}, :place_holder => "<i class='fa fa-square-o'></i>".html_safe
             /! .info content
-            /! info content
-            .info-content
-              p
-                b AMOUNT YOU'D LIKE TO OFFER
-                br
-                br
-                br
-                br
-                br
-                br
-                br
-                br
-                br
-                br
-                br
-                br
-
-              span = "$ "
-              = best_in_place @offer, :amount, :as => :input, :url => "/pages/best_in_place_update"
-            /! .info content
-        /! review block
-
-
-
 
     /! .content
 /! .steps

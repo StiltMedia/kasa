@@ -1,0 +1,233 @@
+= render 'shared/topbar'
+
+= render partial: 'shared/dashboard_bars', locals: { text2: "Review Offer" }
+
+/! steps
+section.create-offer.review-offer.steps
+  .container
+    /! title
+    .row
+      .col-md-12
+        .title.text-center
+          h2
+            span Review Offer
+            span &nbsp;&nbsp;&nbsp; 
+            = best_in_place @offer, :reviewed, :as => :checkbox , collection: {false: "<i class='fa fa-square-o'></i>".html_safe, true: "<i class='fa fa-check-square-o'></i>".html_safe}, :place_holder => "<i class='fa fa-square-o'></i>".html_safe
+            span style="font-size: 13px" &nbsp;&nbsp; reviewed? 
+
+          
+    /! .title
+    /! content
+    .row
+      .inner-content
+        .col-md-10.col-md-offset-1
+          /! review block
+          .review-block.property-info
+            .blue-title
+              h5 PROPERTY INFO
+            .white-block
+              a.edit.invisible href="javascript:review_edit_prop_info()"  Edit
+              /! info content
+              .info-content
+                p
+                  b ADDRESS
+                p = @address
+              /! .info content
+              /! info content
+              .info-content
+                p
+                  b AMOUNT YOU'D LIKE TO OFFER
+                span = "$ "
+                = best_in_place @offer, :amount, :as => :input, :url => "/pages/best_in_place_update"
+               
+              /! .info content
+          /! review block
+          /! review block
+          .review-block.financing
+            .blue-title
+              h5 FINANCING
+            .white-block
+              a.edit.invisible href="javascript:review_edit_financing()"  Edit
+              /! info content
+              .info-content
+                p
+                  b HOW WILL YOU BE PAYING FOR YOUR HOME?
+                - if @offer.funding_source == 'With Mortgage'
+                  p With Mortgage
+                - else
+                  p Cash
+              /! .info content
+              /! info content
+              .info-content
+                p
+                  b HAVE YOU BEEN PRE-APPROVED FOR A MORTGAGE?
+                = best_in_place @offer, :pre_approved, :as => :input, :url => "/pages/best_in_place_update"
+              /! .info content
+              /! info content
+              .info-content
+                p
+                  b MORTGAGE DOWN PAYMENT AMOUNT
+                = best_in_place @offer, :down_payment, :as => :input, :url => "/pages/best_in_place_update"
+                span = "%"
+              /! .info content
+          /! review block
+          /! review block
+          .review-block.order
+            .blue-title
+              h5 OFFER DETAILS
+            .white-block
+              a.edit.invisible href="javascript:review_edit_order()"  Edit
+              /! info content
+              .info-content
+                p
+                  b OFFER DETAILS AND COSTS SETTLEMENT
+                - if @offer.standard_terms == "1"
+                  p Use Standard Terms
+                - else
+                  p Customize My Terms
+              /! .info content
+              /! info content
+              .info-content
+                p
+                  b LENGTH OF ESCROW
+                span.best_in_place #{@offer.downpayment_days} 
+                span days after seller accepts your offer until close of escrow
+              /! .info content
+              /! info content
+              .info-content
+                p
+                  b PLANNING ANY INSPECTIONS?
+                - if @offer.planning_inspections == "1"
+                  span.best_in_place Yes 
+                  span = "*Your offer will be contigent on inspections"
+                - else
+                  span.best_in_place No 
+                  span = "*Your offer will be contigent on inspections"
+              /! .info content
+              /! info content
+              .info-content
+                p
+                  b REQUEST A PEST CONTROL REPORT?
+                - if @offer.request_pest_report == "0"
+                  p.best_in_place No
+                - if @offer.request_pest_report == "1"
+                  p.best_in_place You Pay
+                - if @offer.request_pest_report == "2"
+                  p.best_in_place Seller Pays
+              /! .info content
+              /! info content
+              .info-content
+                p
+                  b REQUEST A 1 YEAR HOME WARRANTY?
+                - if @offer.request_one_year_home_warranty == "0"
+                  span.best_in_place No
+                - if @offer.request_one_year_home_warranty == "1"
+                  span.best_in_place You Pay
+                - if @offer.request_one_year_home_warranty == "2"
+                  span.best_in_place Seller Pays
+              /! .info content
+              /! info content
+              .info-content
+                p
+                  b INITIAL "EARNEST MONEY" DEPOSIT
+                span.best_in_place #{@offer.initial_deposit}% 
+                |  *You must deposit this amount into escrow within 3 days of an accepted offer
+              /! .info content
+              /! info content
+              .info-content
+                p
+                  b SPECIAL INSTRUCTIONS
+                p.best_in_place = @offer.special_instructions
+              /! .info content
+              /! info content
+              .info-content
+                p
+                  b PLANNING ANY INSPECTIONS?
+                - if @offer.planning_inspections
+                  span.best_in_place Yes 
+                  span *Your offer will be contigent on inspections
+                - else
+                  span.best_in_place No
+                  |  *Your offer will be contigent on inspections
+              /! .info content
+          /! review block
+          /! review block
+          .review-block.account-info
+            .blue-title
+              h5 ACCOUNT INFO
+            .white-block
+              a.edit.invisible href="javascript:review_edit_account_info()"  Edit
+              /! info content
+              .info-content.clearfix
+                .review-inline
+                  p
+                    b NAME
+                  p.best_in_place = ( @offer.first_name.present? ? @offer.first_name : "Empty" )
+                /! .info content
+                /! info content
+                .review-inline
+                  p
+                    b LAST NAME
+                  p.best_in_place = ( @offer.last_name.present? ? @offer.last_name : "Empty" )
+                /! .info content
+                /! info content
+                .review-inline
+                  p
+                    b EMAIL
+                  p.best_in_place = current_user.email
+                /! .info content
+                /! info content
+                .review-inline.review-info
+                  p
+                    b CURRENT ADDRESS
+                  p.best_in_place = ( @offer.address.present? ? @offer.address : "Empty" )
+                /! .info content
+                /! info content
+                .review-inline.review-info
+                  p
+                    b PHONE NUMBER
+                  p.best_in_place = "222 222 2222"
+              /! .info content
+              hr/
+              /! info content
+              .info-content.clearfix.hidden
+                .blue-title
+                  h5 CO-BUYER
+                .review-inline
+                  p
+                    b NAME
+                  p Alex
+                /! .info content
+                /! info content
+                .review-inline
+                  p
+                    b LAST NAME
+                  p Gonzalez
+                /! .info content
+                /! info content
+                .review-inline
+                  p
+                    b EMAIL
+                  p lorem@imsaumasat.com
+                /! .info content
+          /! .review block
+
+    /! .content
+
+
+
+
+
+
+
+
+
+
+
+
+
+/! .steps
+
+= render 'shared/footer'
+
+

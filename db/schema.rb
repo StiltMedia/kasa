@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160215100105) do
+ActiveRecord::Schema.define(version: 20160215190723) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(version: 20160215100105) do
     t.boolean  "seed"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.boolean  "approved"
   end
 
   add_index "adverts", ["property_id"], name: "index_adverts_on_property_id", using: :btree
@@ -46,6 +47,22 @@ ActiveRecord::Schema.define(version: 20160215100105) do
 
   add_index "favourites", ["property_id"], name: "index_favourites_on_property_id", using: :btree
   add_index "favourites", ["user_id"], name: "index_favourites_on_user_id", using: :btree
+
+  create_table "feeds", force: :cascade do |t|
+    t.string   "message"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "feeds", ["user_id"], name: "index_feeds_on_user_id", using: :btree
+
+  create_table "hits", force: :cascade do |t|
+    t.string   "kind"
+    t.integer  "property_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
 
   create_table "mybkp", id: false, force: :cascade do |t|
     t.integer  "id"
@@ -95,6 +112,8 @@ ActiveRecord::Schema.define(version: 20160215100105) do
     t.datetime "created_at",                     null: false
     t.datetime "updated_at",                     null: false
     t.string   "request_one_year_home_warranty"
+    t.boolean  "reviewed"
+    t.boolean  "seed"
   end
 
   add_index "offers", ["property_id"], name: "index_offers_on_property_id", using: :btree
@@ -161,6 +180,7 @@ ActiveRecord::Schema.define(version: 20160215100105) do
   add_foreign_key "favorites", "users"
   add_foreign_key "favourites", "properties"
   add_foreign_key "favourites", "users"
+  add_foreign_key "feeds", "users"
   add_foreign_key "offers", "properties"
   add_foreign_key "offers", "users"
 end

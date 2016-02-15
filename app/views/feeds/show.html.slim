@@ -1,0 +1,12 @@
+p#notice = notice
+
+p
+  strong Message:
+  = @feed.message
+p
+  strong User:
+  = @feed.user
+
+= link_to 'Edit', edit_feed_path(@feed)
+'|
+= link_to 'Back', feeds_path

@@ -30,6 +30,10 @@ class AdvertsController < ApplicationController
       @property.save
       @advert = Advert.new(property_id: @property.id, user_id: current_user.id)
       @advert.save
+      Feed.create(
+        user_id: nil,
+        message: "#{current_user.email} started listing #{@advert.property.listing_id}"
+      )
     else
       @property = Property.find(params[:propertyid])
     end
@@ -96,6 +100,6 @@ class AdvertsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def advert_params
-      params.require(:advert).permit(:user_id, :property_id, :seed)
+      params.require(:advert).permit(:user_id, :property_id, :seed, :approved)
     end
 end

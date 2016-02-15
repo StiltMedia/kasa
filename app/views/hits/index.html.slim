@@ -1,0 +1,23 @@
+h1 Listing hits
+
+table
+  thead
+    tr
+      th Kind
+      th Property
+      th
+      th
+      th
+
+  tbody
+    - @hits.each do |hit|
+      tr
+        td = hit.kind
+        td = hit.property_id
+        td = link_to 'Show', hit
+        td = link_to 'Edit', edit_hit_path(hit)
+        td = link_to 'Destroy', hit, data: {:confirm => 'Are you sure?'}, :method => :delete
+
+br
+
+= link_to 'New Hit', new_hit_path

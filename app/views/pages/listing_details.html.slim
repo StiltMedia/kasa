@@ -59,7 +59,7 @@
                 span = @listing.garage
             p.other-features
               b Other Features:
-            p Built #{@listing.built}, #{@listing.floor.sub(' Other floor','').gsub(',',', ').titleize} floor
+            p Built #{@listing.built}, #{@listing.floor.sub(' Other floor','').gsub(',',', ').titleize rescue ""} floor
             .links
 
               - if user_signed_in?

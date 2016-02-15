@@ -1,0 +1,12 @@
+p#notice = notice
+
+p
+  strong Kind:
+  = @hit.kind
+p
+  strong Property:
+  = @hit.property_id
+
+= link_to 'Edit', edit_hit_path(@hit)
+'|
+= link_to 'Back', hits_path

@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
+  resources :hits
+  resources :feeds
   resources :adverts
+  resources :offers
+  get '/offers/review/:id' => 'offers#review'
   get '/users/create_admin'
   devise_for :users
   post '/properties/img_post' => 'properties#img_post'

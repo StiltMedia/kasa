@@ -1,0 +1,15 @@
+= form_for @hit do |f|
+  - if @hit.errors.any?
+    #error_explanation
+      h2 = "#{pluralize(@hit.errors.count, "error")} prohibited this hit from being saved:"
+      ul
+        - @hit.errors.full_messages.each do |message|
+          li = message
+
+  .field
+    = f.label :kind
+    = f.text_field :kind
+  .field
+    = f.label :property_id
+    = f.number_field :property_id
+  .actions = f.submit
