@@ -2,6 +2,11 @@
 // All this logic will automatically be available in application.js.
 
 $(document).on('ready page:load', function () {
+
+  $(".adverts-new-page").closest('body').find('.review-block .look-like-input').css("border","0px");
+  $(".adverts-new-page").closest('body').find('.review-block .best_in_place').css("pointer-events","none");
+  $(".adverts-new-page").closest('body').find('.review-block .longblue').css('visibility', 'hidden');
+
   $(".best_in_place").best_in_place();
 
   $(".edit_block").on('click', function() {
@@ -13,7 +18,7 @@ $(document).on('ready page:load', function () {
       type: "POST",
       url: '/properties/img_rm',
       data: { propertyid: $(this).data("propertyid") },
-      success: function() {  locatoin.reload();   },
+      success: function() {  location.reload();   },
       dataType: 'json'
     });
 
@@ -30,7 +35,7 @@ $(document).on('ready page:load', function () {
       // Change this to the location of your server-side upload handler:
       var url = window.location.hostname === 'blueimp.github.io' ?
                   '//jquery-file-upload.appspot.com/' : 'server/php/',
-          uploadButton = $('<button/>')
+          uploadButton = $('<button class="indiv-upload" />')
               .addClass('btn btn-primary')
               .prop('disabled', true)
               .text('Processing...')
@@ -66,11 +71,11 @@ $(document).on('ready page:load', function () {
       }).on('fileuploadadd', function (e, data) {
           data.context = $('<div/>').appendTo('#files');
           $.each(data.files, function (index, file) {
-              var node = $('<p/>')
-                      .append($('<span/>').text(file.name));
+              var node = $('<p/>');
+
               if (!index) {
                   node
-                      .append('<br>')
+
                       .append(uploadButton.clone(true).data(data));
               }
               node.appendTo(data.context);
@@ -149,5 +154,87 @@ function validate_step_4() {
   }
 }
 
+
+function validate_step_5() {
+  var errors = "";
+  var success_url = '/users/'+$(".adverts-new-page").data('user-id')+'/adverts';
+
+  var val = $('*[data-bip-attribute="address"]').text();
+  // address validations - cannot be empty
+  if ( val.indexOf('Address of Property for Sale') > -1 ) {
+    errors = errors + "  Invalid: Address\n";
+  }
+  val = $('*[data-bip-attribute="city"]').text();
+  // city validations - cannot be empty
+  if ( val == 'City' ) {
+    errors = errors + "  Invalid: City\n";
+  }
+  val = $('*[data-bip-attribute="state"]').text();
+  // state validations - cannot be empty
+  if ( val == 'State eg. FL' ) {
+    errors = errors + "  Invalid: State\n";
+  }
+  val = $('*[data-bip-attribute="price"]').text();
+  // price validations - cannot be empty
+  if ( val == 'Set your price' ) {
+    errors = errors + "  Invalid: Price\n";
+  }
+  val = $('*[data-bip-attribute="ptype"]').text();
+  // price validations - cannot be empty
+  if ( val == 'Property Type' ) {
+    errors = errors + "  Invalid: Property Type\n";
+  }
+  val = $('*[data-bip-attribute="beds"]').text();
+  // beds validations - cannot be empty
+  if ( val == '# of bedrooms' ) {
+    errors = errors + "  Invalid: # of bedrooms\n";
+  }
+  val = $('*[data-bip-attribute="baths"]').text();
+  // baths validations - cannot be empty
+  if ( val == '# of bathrooms' ) {
+    errors = errors + "  Invalid: # of bathrooms\n";
+  }
+  val = $('*[data-bip-attribute="area"]').text();
+  // area validations - cannot be empty
+  if ( val == 'Property size in Square Feet' ) {
+    errors = errors + "  Invalid: Property size in Square Feet\n";
+  }
+  val = $('*[data-bip-attribute="garage"]').text();
+  // garage validations - cannot be empty
+  if ( val == '# of garage spaces' ) {
+    errors = errors + "  Invalid: Property size in Square Feet\n";
+  }
+  if (errors.length > 0) {
+    alert('Please correct the following issues:\n' + errors);
+    return false;
+  } else {
+    alert('Listing saved.');
+    return true;
+    //window.location(success_url);
+  }
+
+}
+
+
+function toggle_review_block(elem,ndx) {
+  if ($(".adverts-new-page").closest('body').find('.review-block').eq(ndx).find('.best_in_place').eq(0).css('pointer-events') == 'none' ) {
+    $(".adverts-new-page").closest('body').find('.review-block').eq(ndx).find('.best_in_place').css('pointer-events','inherit');
+    $(".adverts-new-page").closest('body').find('.review-block').eq(ndx).find('.look-like-input').css('border','2px solid #939393');
+    $(".adverts-new-page").closest('body').find('.review-block').eq(ndx).find('.look-like-input').eq(0).click();
+  } else {
+    $(".adverts-new-page").closest('body').find('.review-block').eq(ndx).find('.best_in_place').css('pointer-events','none');
+    $(".adverts-new-page").closest('body').find('.review-block').eq(ndx).find('.look-like-input').css('border','0px');
+  }
+
+  if (ndx == 1) {
+    if ( $(".longblue").css('visibility') == "visible") {
+      //$(".longblue").css('visibility', 'hidden');
+      //$("button.indiv-upload").css('visibility','hidden');
+    } else {
+      $(".longblue").css('visibility', 'visible');
+      $("button.indiv-upload").css('visibility','visible');
+    }
+  }
+}
 
 

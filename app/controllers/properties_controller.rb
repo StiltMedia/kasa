@@ -9,7 +9,9 @@ class PropertiesController < ApplicationController
 
   def img_rm
     property = Property.find(params[:propertyid])   
+    logger.debug "DB8 images_tot waz #{property.images_tot}"
     property.images_tot -= 1
+    logger.debug "DB8 images_tot waz #{property.images_tot} after"
     property.save
     render json: { result: "ok" }
   end
