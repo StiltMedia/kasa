@@ -1,0 +1,12 @@
+p#notice = notice
+
+p
+  strong State:
+  = @ticket.state
+p
+  strong Subject:
+  = @ticket.subject
+
+= link_to 'Edit', edit_ticket_path(@ticket)
+'|
+= link_to 'Back', tickets_path

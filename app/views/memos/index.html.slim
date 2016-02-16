@@ -1,0 +1,27 @@
+h1 Listing memos
+
+table
+  thead
+    tr
+      th From
+      th To
+      th Body
+      th Ticket
+      th
+      th
+      th
+
+  tbody
+    - @memos.each do |memo|
+      tr
+        td = memo.from
+        td = memo.to
+        td = memo.body
+        td = memo.ticket
+        td = link_to 'Show', memo
+        td = link_to 'Edit', edit_memo_path(memo)
+        td = link_to 'Destroy', memo, data: {:confirm => 'Are you sure?'}, :method => :delete
+
+br
+
+= link_to 'New Memo', new_memo_path

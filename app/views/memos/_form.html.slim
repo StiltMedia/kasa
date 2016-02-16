@@ -1,0 +1,21 @@
+= form_for @memo do |f|
+  - if @memo.errors.any?
+    #error_explanation
+      h2 = "#{pluralize(@memo.errors.count, "error")} prohibited this memo from being saved:"
+      ul
+        - @memo.errors.full_messages.each do |message|
+          li = message
+
+  .field
+    = f.label :from
+    = f.text_field :from
+  .field
+    = f.label :to
+    = f.text_field :to
+  .field
+    = f.label :body
+    = f.text_field :body
+  .field
+    = f.label :ticket
+    = f.text_field :ticket
+  .actions = f.submit

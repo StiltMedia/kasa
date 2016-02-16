@@ -37,12 +37,13 @@ section.create-offer.review-offer.steps
         /! review block
         .review-block.property-info
           .white-block
-            a.edit.invisible href="javascript:review_edit_prop_info()"  Edit
+            a.edit href="javascript:review_edit_prop_info()"  Create New Ticket
             /! info content
             .info-content
               p
                 b SUPPORT TICKETS
-              p = "-"
+              p Open Support Tickets  #{ (current_user.tickets.select { |x| x.state == "open" }).size }
+              p Tickets Awaiting Your Reply  #{current_user.open_awaiting_tickets.size}
             /! .info content
             /! info content
 

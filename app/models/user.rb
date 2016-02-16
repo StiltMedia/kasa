@@ -38,4 +38,30 @@ class User < ActiveRecord::Base
     end_time = Time.zone.at(timestamp).end_of_day
     Hit.where("property_id IN (?)", properties).where(created_at: beg_time..end_time).all
   end
+
+  # participatng tickets  
+  def tickets
+    memos = Memo.where("mfrom = ? or mto = ?", self.id, self.id)
+    ticket_ids = memos.pluck(:ticket_id)
+    Ticket.where("id IN (?)",ticket_ids).all
+  end
+
+  def open_tickets
+    self.tickets.select { |x| x.state == "open" }
+  end
+
+  def open_awaiting_tickets
+    self.tickets.select { |x| x.state == "open" && x.last_sayer.id != self.id}
+  end
+
+  def self.open_tickets_admin
+    Ticket.where(state: "open").all
+  end
+
+  def self.open_awaiting_tickets_admin
+    Ticket.where(state: "open").all.select do |ticket|
+      ticket.last_sayer.admin != true
+    end
+  end
+
 end

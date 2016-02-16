@@ -1,0 +1,18 @@
+p#notice = notice
+
+p
+  strong From:
+  = @memo.from
+p
+  strong To:
+  = @memo.to
+p
+  strong Body:
+  = @memo.body
+p
+  strong Ticket:
+  = @memo.ticket
+
+= link_to 'Edit', edit_memo_path(@memo)
+'|
+= link_to 'Back', memos_path

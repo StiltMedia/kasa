@@ -48,7 +48,8 @@ section.create-offer.review-offer.steps
             .info-content
               p
                 b SUPPORT TICKETS
-              p  &nbsp;
+              p Open Support Tickets #{User.open_tickets_admin.size}
+              p Tickets Awaiting Your Reply #{User.open_awaiting_tickets_admin.size}
             /! .info content
             /! info content
             .info-content

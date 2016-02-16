@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :memos
+  resources :tickets
   resources :hits
   resources :feeds
   resources :adverts
