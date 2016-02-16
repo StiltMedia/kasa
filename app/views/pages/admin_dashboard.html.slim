@@ -48,8 +48,10 @@ section.create-offer.review-offer.steps
             .info-content
               p
                 b SUPPORT TICKETS
-              p Open Support Tickets #{User.open_tickets_admin.size}
-              p Tickets Awaiting Your Reply #{User.open_awaiting_tickets_admin.size}
+              p 
+                = link_to "Open Support Tickets #{User.open_tickets_admin.size}", "/tickets?filter=open_tickets_admin"
+              p
+                = link_to "Tickets Awaiting Your Reply #{User.open_awaiting_tickets_admin.size}", "/tickets?filter=open_awaiting_tickets_admin"
             /! .info content
             /! info content
             .info-content

@@ -4,7 +4,17 @@ class TicketsController < ApplicationController
   # GET /tickets
   # GET /tickets.json
   def index
-    @tickets = Ticket.all
+    if (params[:filter] == 'open_tickets')
+      @tickets = current_user.open_tickets 
+    elsif (params[:filter] == 'open_awaiting_tickets')
+      @tickets = current_user.open_awaiting_tickets
+    elsif (params[:filter] == 'open_tickets_admin')
+      @tickets = User.open_tickets_admin
+    elsif (params[:filter] == 'open_awaiting_tickets_admin')
+      @tickets = User.open_awaiting_tickets_admin
+    else
+      @tickets = Ticket.all
+    end
   end
 
   # GET /tickets/1

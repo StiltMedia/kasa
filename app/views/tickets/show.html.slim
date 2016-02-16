@@ -1,12 +1,57 @@
-p#notice = notice
+- @offer = Offer.first
 
-p
-  strong State:
-  = @ticket.state
-p
-  strong Subject:
-  = @ticket.subject
 
-= link_to 'Edit', edit_ticket_path(@ticket)
-'|
-= link_to 'Back', tickets_path
+= render 'shared/topbar'
+
+= render partial: 'shared/dashboard_bars', locals: { text2: "Support Tickets" }
+
+/! steps
+section.create-offer.review-offer.steps
+  .container
+    /! content
+    .row
+
+      .col-md-3.col-md-offset-1.inner-content.extra-margin
+
+        p = notice
+        /! review block
+        .review-block.property-info
+          .white-block
+            a.edit.invisible href="javascript:review_edit_prop_info()"  Edit
+            /! info content
+            .info-content class="#{current_user.admin == true ? '' : 'invisible'}"
+              p
+                b Ticket Details
+              p Ticket # #{@ticket.id}
+              p Status #{@ticket.state}
+              p Subject #{@ticket.subject[0..9]}
+              p Created #{@ticket.created_at}
+              p
+                p
+                  = link_to "Mark As Resolved", root_path
+            /! .info contens
+
+        /! review block
+
+
+
+
+      .col-md-7.inner-content
+        /! review block
+        .review-block.property-info
+          .white-block
+            a.edit.invisible href="javascript:review_edit_prop_info()"  Edit
+            /! info content
+            .info-content
+              p
+                b &nbsp;
+              p = "ID {ticket.id} Status {ticket.state} Subject {ticket.subject[0..15]} Date Created {ticket.created_at.to_s(:short)}"
+            /! .info content
+
+        /! review block
+
+
+    /! .content
+/! .steps
+
+= render 'shared/footer'

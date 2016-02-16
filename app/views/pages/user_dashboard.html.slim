@@ -42,8 +42,10 @@ section.create-offer.review-offer.steps
             .info-content
               p
                 b SUPPORT TICKETS
-              p Open Support Tickets  #{ (current_user.tickets.select { |x| x.state == "open" }).size }
-              p Tickets Awaiting Your Reply  #{current_user.open_awaiting_tickets.size}
+              p
+                = link_to "Open Support Tickets  #{ (current_user.tickets.select { |x| x.state == "open" }).size }", "/tickets?filter=open_tickets"
+              p
+                = link_to "Tickets Awaiting Your Reply  #{current_user.open_awaiting_tickets.size}", "/tickets?filter=open_awaiting_tickets"
             /! .info content
             /! info content
 

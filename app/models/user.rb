@@ -54,6 +54,7 @@ class User < ActiveRecord::Base
     self.tickets.select { |x| x.state == "open" && x.last_sayer.id != self.id}
   end
 
+
   def self.open_tickets_admin
     Ticket.where(state: "open").all
   end

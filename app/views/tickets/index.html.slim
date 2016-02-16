@@ -1,23 +1,56 @@
-h1 Listing tickets
+- @offer = Offer.first
 
-table
-  thead
-    tr
-      th State
-      th Subject
-      th
-      th
-      th
 
-  tbody
-    - @tickets.each do |ticket|
-      tr
-        td = ticket.state
-        td = ticket.subject
-        td = link_to 'Show', ticket
-        td = link_to 'Edit', edit_ticket_path(ticket)
-        td = link_to 'Destroy', ticket, data: {:confirm => 'Are you sure?'}, :method => :delete
+= render 'shared/topbar'
 
-br
+= render partial: 'shared/dashboard_bars', locals: { text2: "Support Tickets" }
 
-= link_to 'New Ticket', new_ticket_path
+/! steps
+section.create-offer.review-offer.steps
+  .container
+    /! content
+    .row
+
+      .col-md-2.col-md-offset-1.inner-content.extra-margin
+
+        p = notice
+        /! review block
+        .review-block.property-info
+          .white-block
+            a.edit.invisible href="javascript:review_edit_prop_info()"  Edit
+            /! info content
+            .info-content class="#{current_user.admin == true ? '' : 'invisible'}"
+              p
+                b &nbsp;
+              p
+                = link_to "All Tickets", "/tickets"
+              p Open Tickets
+              p Closed Tickets
+            /! .info contens
+
+        /! review block
+
+
+
+
+      .col-md-8.inner-content
+        /! review block
+        .review-block.property-info
+          .white-block
+            a.edit.invisible href="javascript:review_edit_prop_info()"  Edit
+            /! info content
+            .info-content
+              p
+                b &nbsp;
+              - @tickets.each do |ticket|
+                = link_to "ID #{ticket.id} Status #{ticket.state} Subject #{ticket.subject[0..15]} Date Created #{ticket.created_at.to_s(:short)}", ticket_path(ticket)
+                br
+            /! .info content
+
+        /! review block
+
+
+    /! .content
+/! .steps
+
+= render 'shared/footer'
