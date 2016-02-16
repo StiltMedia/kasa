@@ -23,12 +23,11 @@ section.create-offer.review-offer.steps
               p
                 b Ticket Details
               p Ticket # #{@ticket.id}
-              p Status #{@ticket.state}
-              p Subject #{@ticket.subject[0..9]}
+              p Subject #{@ticket.subject[0..9] rescue ""}
               p Created #{@ticket.created_at}
               p
                 p
-                  = link_to "Mark As Resolved", root_path
+                  = best_in_place @ticket, :state, :as => :select, :collection => {"open" => "open", "closed" => "closed"}, :class => "look-like-input"
             /! .info contens
 
         /! review block
@@ -45,7 +44,12 @@ section.create-offer.review-offer.steps
             .info-content
               p
                 b &nbsp;
-              p = "ID {ticket.id} Status {ticket.state} Subject {ticket.subject[0..15]} Date Created {ticket.created_at.to_s(:short)}"
+              - Memo.where(ticket_id: @ticket.id).all.order(created_at: :desc).each do |memo|
+                p
+                  i.fa.fa-user &nbsp;
+                  span = "From #{User.find(memo.mfrom).email}  Body #{memo.body} At #{memo.created_at}"
+              p
+                == render 'memos/form2'
             /! .info content
 
         /! review block

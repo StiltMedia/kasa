@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160215233732) do
+ActiveRecord::Schema.define(version: 20160216022943) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -66,13 +66,12 @@ ActiveRecord::Schema.define(version: 20160215233732) do
   end
 
   create_table "memos", force: :cascade do |t|
-    t.integer  "mfrom"
-    t.integer  "mto"
     t.string   "body"
     t.integer  "ticket_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean  "seed"
+    t.integer  "mfrom"
   end
 
   add_index "memos", ["ticket_id"], name: "index_memos_on_ticket_id", using: :btree
@@ -173,6 +172,7 @@ ActiveRecord::Schema.define(version: 20160215233732) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean  "seed"
+    t.integer  "tuser"
   end
 
   create_table "users", force: :cascade do |t|

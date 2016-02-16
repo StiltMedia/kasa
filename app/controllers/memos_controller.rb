@@ -28,7 +28,7 @@ class MemosController < ApplicationController
 
     respond_to do |format|
       if @memo.save
-        format.html { redirect_to @memo, notice: 'Memo was successfully created.' }
+        format.html { redirect_to "/pages/user_dashboard", notice: 'Memo was successfully created.' }
         format.json { render :show, status: :created, location: @memo }
       else
         format.html { render :new }
@@ -69,6 +69,6 @@ class MemosController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def memo_params
-      params.require(:memo).permit(:from, :to, :body, :ticket_id)
+      params.require(:memo).permit(:mfrom, :mto, :body, :ticket_id)
     end
 end

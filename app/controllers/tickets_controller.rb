@@ -20,11 +20,15 @@ class TicketsController < ApplicationController
   # GET /tickets/1
   # GET /tickets/1.json
   def show
+    mfrom = current_user.id
+    mfrom = User.find_by_email("postmaster@kasa-staging.herokuapp.com").id if current_user.admin == true
+    @new_memo = Memo.new(ticket_id: params[:id], mfrom: mfrom)
   end
 
   # GET /tickets/new
   def new
-    @ticket = Ticket.new
+    @ticket = Ticket.create(state: "open", tuser: current_user.id)
+    @memo = Memo.new(body: "Your message", ticket_id: @ticket.id, mfrom: current_user.id)
   end
 
   # GET /tickets/1/edit
@@ -38,7 +42,7 @@ class TicketsController < ApplicationController
 
     respond_to do |format|
       if @ticket.save
-        format.html { redirect_to @ticket, notice: 'Ticket was successfully created.' }
+        format.html { redirect_to "/pages/user_dashboard", notice: 'Ticket was successfully created.' }
         format.json { render :show, status: :created, location: @ticket }
       else
         format.html { render :new }

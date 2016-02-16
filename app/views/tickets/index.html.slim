@@ -43,7 +43,7 @@ section.create-offer.review-offer.steps
               p
                 b &nbsp;
               - @tickets.each do |ticket|
-                = link_to "ID #{ticket.id} Status #{ticket.state} Subject #{ticket.subject[0..15]} Date Created #{ticket.created_at.to_s(:short)}", ticket_path(ticket)
+                = link_to "ID #{ticket.id} Status #{ticket.state} Subject #{ticket.subject[0..15] rescue ""} Date Created #{ticket.created_at.to_s(:short)}", ticket_path(ticket)
                 br
             /! .info content
 

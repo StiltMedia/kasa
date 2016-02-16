@@ -41,9 +41,10 @@ class User < ActiveRecord::Base
 
   # participatng tickets  
   def tickets
-    memos = Memo.where("mfrom = ? or mto = ?", self.id, self.id)
-    ticket_ids = memos.pluck(:ticket_id)
-    Ticket.where("id IN (?)",ticket_ids).all
+    #memos = Memo.where("mfrom = ? or mto = ?", self.id, self.id)
+    #ticket_ids = memos.pluck(:ticket_id)
+    #Ticket.where("id IN (?)",ticket_ids).all
+    Ticket.where(tuser: self.id)
   end
 
   def open_tickets
@@ -51,7 +52,7 @@ class User < ActiveRecord::Base
   end
 
   def open_awaiting_tickets
-    self.tickets.select { |x| x.state == "open" && x.last_sayer.id != self.id}
+    self.tickets.select { |x| (x.state == "open" && x.last_sayer.id != self.id) rescue nil }
   end
 
 
@@ -61,7 +62,7 @@ class User < ActiveRecord::Base
 
   def self.open_awaiting_tickets_admin
     Ticket.where(state: "open").all.select do |ticket|
-      ticket.last_sayer.admin != true
+      (ticket.last_sayer.admin != true) rescue false
     end
   end
 
