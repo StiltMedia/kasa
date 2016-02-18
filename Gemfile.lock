@@ -110,6 +110,7 @@ GEM
     multi_json (1.11.2)
     nokogiri (1.6.7)
       mini_portile2 (~> 2.0.0.rc2)
+    notifyjs_rails (0.0.2)
     orm_adapter (0.5.0)
     pg (0.18.4)
     pry (0.10.3)
@@ -217,6 +218,7 @@ DEPENDENCIES
   jquery-rails
   jquery-timepicker-addon-rails
   jquery-ui-rails
+  notifyjs_rails
   pg
   pry
   puma

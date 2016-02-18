@@ -61,3 +61,4 @@ gem "jquery-fileupload-rails"
 gem 'jquery-ui-rails'
 gem 'jquery-timepicker-addon-rails'
 gem "faker"
+gem 'notifyjs_rails'
