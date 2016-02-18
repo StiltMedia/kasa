@@ -62,3 +62,4 @@ gem 'jquery-ui-rails'
 gem 'jquery-timepicker-addon-rails'
 gem "faker"
 gem 'notifyjs_rails'
+gem 'simple-line-icons-rails'

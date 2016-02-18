@@ -3,11 +3,13 @@ require 'open3'
 class PagesController < ApplicationController
   include ActionController::Live
 
-  def user_dashboard
 
+  def user_dashboard
+    redirect_to new_user_session_path if ! current_user
   end
 
   def admin_dashboard
+    redirect_to new_user_session_path if ! current_user
     @admins = User.where(admin: true).all
   end
 

@@ -10,19 +10,19 @@
             - if user_signed_in?
               a.btn.btn-alt.login.invisible href="#"  Log In
               = link_to( pages_user_dashboard_path, { :class => 'btn btn-alt' } ) do
-                .fa.fa-tasks &nbsp;
-                = "Dashboard"
+                i.icon.icon-grid &nbsp;
+                = " Dashboard"
               = link_to( root_path, { :class => 'btn btn-alt' } ) do
-                .fa.fa-user &nbsp;
+                i.icon.icon-user &nbsp;
                 = "#{current_user.email[0..4]}.."
               = link_to( destroy_user_session_path, { :class => 'btn btn-alt logout', :method => :delete } ) do
-                .fa.fa-sign-out &nbsp;
-                = "Logout"
+                i.icon.icon-logout &nbsp;
+                = " Logout"
             - else
               = link_to( new_user_session_path, { :class => 'btn btn-alt login' } ) do
-                .fa.fa-sign-in &nbsp;
-                = "Log In"
+                i.icon.icon-login &nbsp;
+                = " Log In"
 
               = link_to( new_user_session_path, { :class => 'btn btn-alt login' } ) do
-                .fa.fa-sign-in &nbsp;
-                = "Sign up"
+                i.icon.icon-user-follow &nbsp;
+                = " Sign up"

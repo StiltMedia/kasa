@@ -25,8 +25,8 @@
               - if user_signed_in?
                 a.btn.btn-alt.login.invisible href=new_user_session_path  Log In
                 a.btn.btn-alt.login href="#{pages_user_dashboard_path}" title="Dashboard"
-                  i.fa.fa-tasks &nbsp;
-                = link_to('<i class="fa fa-sign-out"></i> Logout'.html_safe, destroy_user_session_path, { :class => 'btn btn-alt', :method => :delete } )
+                  i.icon.icon-grid &nbsp;
+                = link_to('<i class="icon icon-logout"></i> &nbsp;Logout'.html_safe, destroy_user_session_path, { :class => 'btn btn-alt', :method => :delete } )
               - else
                 a.btn.btn-alt.login href=new_user_session_path  Log In
                 a.btn.btn-alt.register href=new_user_registration_path  Sign Up
