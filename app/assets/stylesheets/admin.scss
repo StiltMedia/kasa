@@ -1,0 +1,42 @@
+// Place all the styles related to the Pages controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.page-footer {
+    background: #3b434c;
+    color: #a2abb7;
+}
+.page-footer {
+    font-size: 13px;
+    font-weight: 300;
+    padding: 17px 0;
+}
+
+.scroll-to-top {
+    padding: 2px;
+    text-align: center;
+    position: fixed;
+    z-index: 10001;
+    bottom: 5px;
+    display: none;
+    right: 20px;
+    color: #333;
+
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.scroll-to-top i {
+  color: #f2f2f2;
+  font-size: 32px;
+  display: inline-block;
+  line-height: 14px;
+  -webkit-font-smoothing: antialiased;
+  font-family: Simple-Line-Icons;
+    speak: none;
+    font-style: normal;
+    font-weight: 400;
+    font-variant: normal;
+    text-transform: none;
+    opacity: 0.2;
+}

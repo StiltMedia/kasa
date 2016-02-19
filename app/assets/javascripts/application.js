@@ -42,6 +42,13 @@ if ($("#ex1").length > 0) {
 $(document).ready(function () {
 
 
+    $('.scroll-to-top').click(function(e) {
+        e.preventDefault();
+        $('html, body').animate({scrollTop: 0}, 200);
+        return false;
+    });
+    
+
     $("#owl-example").owlCarousel({
         loop: true,
         pagination: false,
@@ -238,3 +245,4 @@ $(document).ready(function () {
 function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
+

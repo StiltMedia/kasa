@@ -2,25 +2,77 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+
+
 .dashboard-bar-1 {
-  padding: 8px 0px;
+  padding: 0px 0px;
   padding-left: 55px;
   background-color: rgb(68,78,88);
   border-top: 1px solid #f2f2f2;
   color: white;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 49px;
+}
+
+.dashboard-bar-1 * {
+  font-size: 15px;
+  font-weight: 400;
+  font-family:"Open Sans",sans-serif;
+  text-decoration: none;
+}
+
+.dashboard-bar-1 *:hover {
+  text-decoration: none;
+  color: white;
+}
+
+.dashboard-bar-1 a {
+  color: #BCC2CB;
 }
 
 .dashboard-bar-1 span {
   padding-right: 20px;
 }
 
+.dashboard-bar-1 .cell {
+  outline: 0px solid yellow;
+  display: inline-block;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.dashboard-bar-1 .cell.highlight {
+  background: #4E5966;
+}
+
+.dashboard-bar-1 .cell.highlight * {
+  font-weight: 400;
+  color: white;
+}
+
 .dashboard-bar-2 {
+  line-height: 62px;
   padding: 8px 0px;
   padding-left: 50px;
   background-color: #fff;
   border-top: 1px solid #f2f2f2;
+  padding-top: 0px;
+  padding-bottom: 0px;
 }
 
+
+.dashboard-bar-2 h1 {
+  color: #697882;
+  font-size: 22px;
+  font-weight: 400;
+  margin: 0;
+  line-height: 62px;
+}
+
+.dashboard-bar-2 h1 small {
+  padding-left: 6px;
+}
 
 .extra-margin {
   margin-right: 20px;

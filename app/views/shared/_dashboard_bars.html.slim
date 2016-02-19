@@ -1,16 +1,13 @@
 section.dashboard-bar-1
   .row
     .col-md-12
-      span.cell = link_to "Your Listings", user_adverts_path(current_user)
-      span.cell = link_to "Create A Listing", "/adverts/new?step=1"
-      - if current_user.admin
-        span.cell = link_to "Admin Dashboard", "/pages/admin_dashboard"
-      - else
-        span.cell = link_to "Admin Dashboard", "javascript:alert('Restricted')"
-      span.cell = link_to "Dashboard", "/pages/user_dashboard"
-
+      div.cell.highlight = link_to "Dashboard", "/pages/user_dashboard"
+      div.cell = link_to "Your Listings", user_adverts_path(current_user)
+      div.cell = link_to "Create A Listing", "/adverts/new?step=1"
 
 section.dashboard-bar-2
   .row
     .col-md-12
-      span #{text2}
+      h1 
+        | #{text2}
+        small dashboard & statistics
