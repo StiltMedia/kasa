@@ -6,7 +6,7 @@ class PagesController < ApplicationController
 
   def user_dashboard
     redirect_to new_user_session_path if ! current_user
-    render layout: 'application_admin'
+    render layout: 'admin'
   end
 
   def admin_dashboard
