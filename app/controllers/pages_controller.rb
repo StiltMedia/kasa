@@ -6,6 +6,7 @@ class PagesController < ApplicationController
 
   def user_dashboard
     redirect_to new_user_session_path if ! current_user
+    render layout: 'metronic_layout'
   end
 
   def admin_dashboard
