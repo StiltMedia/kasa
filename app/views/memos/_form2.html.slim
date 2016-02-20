@@ -1,17 +1,14 @@
-= form_for @new_memo do |f|
+= form_for(@new_memo, remote: true) do |f|
   - if @new_memo.errors.any?
     #error_explanation
       h2 = "#{pluralize(@new_memo.errors.count, "error")} prohibited this memo from being saved:"
       ul
         - @new_memo.errors.full_messages.each do |message|
           li = message
-
   .field
     = f.hidden_field :mfrom
-
   .field
-    = f.label :body
-    = f.text_area :body
+    = f.text_area :body, cols: "80", rows: "4" 
   .field
     = f.hidden_field :ticket_id
-  .actions = f.submit "Send"
+  .actions = f.submit "Reply", class: "btn green"

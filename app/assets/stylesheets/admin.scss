@@ -2,17 +2,17 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-.page-footer {
+.admin-pages .page-footer {
     background: #3b434c;
     color: #a2abb7;
 }
-.page-footer {
+.admin-pages .page-footer {
     font-size: 13px;
     font-weight: 300;
     padding: 17px 0;
 }
 
-.scroll-to-top {
+.admin-pages .scroll-to-top {
     padding: 2px;
     text-align: center;
     position: fixed;
@@ -26,7 +26,7 @@
     cursor: pointer;
 }
 
-.scroll-to-top i {
+.admin-pages .scroll-to-top i {
   zcolor: #f2f2f2;
   color: #eff3f8 !important;
   font-size: 32px;
@@ -43,9 +43,16 @@
 }
 
 
-.btn {
+.admin-pages .btn {
   min-height: inherit !important;
   border: inherit !important;
   font-weght: inherit !important;
   text-transform: inherit !important;
+}
+
+.admin-pages .btn, .btn:focus, .btn:active {
+  padding: 7px 14px !important;
+  font-size: 14px !important;
+  font-weight: normal;
+  line-height: 20px;
 }

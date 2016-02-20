@@ -15,15 +15,17 @@ link href=asset_path("custom.css") rel="stylesheet" type="text/css" /
 
 
 
-.page-content
+.page-content.tickets-show
   .container
     br
+
 
     /! BEGIN PAGE CONTENT INNER
     .portlet.light
       .portlet-body
+        span.label.label-sm class="label-info" = @ticket.state
         .timeline
-          - Memo.where(ticket_id: @ticket.id).all.order(created_at: :desc).each do |memo|
+          - Memo.where(ticket_id: @ticket.id).all.order(created_at: :asc).each do |memo|
             /! TIMELINE ITEM
             .timeline-item
               .timeline-badge
@@ -33,7 +35,7 @@ link href=asset_path("custom.css") rel="stylesheet" type="text/css" /
                 .timeline-body-head
                   .timeline-body-head-caption
                     a.timeline-body-title.font-blue-madison href="javascript:;" = User.find(memo.mfrom).email.split('@')[0].titlecase
-                    span.timeline-body-time.font-grey-cascade Replied at #{memo.updated_at.strftime("%I:%M %p")}
+                    span.timeline-body-time.font-grey-cascade at #{memo.updated_at.strftime("%I:%M %p")}
                   .timeline-body-head-actions.invisible
                     .btn-group
                       button.btn.btn-circle.green-haze.btn-sm.dropdown-toggle data-close-others="true" data-hover="dropdown" data-toggle="dropdown" type="button" 
@@ -56,6 +58,47 @@ link href=asset_path("custom.css") rel="stylesheet" type="text/css" /
 
 
 
+
+
+          /! TIMELINE ITEM
+          .timeline-item class="#{ "hide" if @ticket.state == "closed" && current_user.admin != true }"
+            .timeline-badge
+              img.timeline-badge-userpic src=asset_url("avatar80_1.jpg") style="max-width: inherit;"
+            .timeline-body
+              .timeline-body-arrow
+              .timeline-body-head
+                .timeline-body-head-caption
+                  a.timeline-body-title.font-blue-madison href="javascript:;" &nbsp;
+                  span.timeline-body-time.font-grey-cascade &nbsp;
+                .timeline-body-head-actions.invisible
+                  .btn-group
+                    button.btn.btn-circle.green-haze.btn-sm.dropdown-toggle data-close-others="true" data-hover="dropdown" data-toggle="dropdown" type="button" 
+                      | Actions
+                      i.fa.fa-angle-down
+                    ul.dropdown-menu.pull-right role="menu" 
+                      li
+                        a href="javascript:;"  Action
+                      li
+                        a href="javascript:;"  Another action
+                      li
+                        a href="javascript:;"  Something else here
+                      li.divider
+                      li
+                        a href="javascript:;"  Separated link
+              .timeline-body-content
+                span.font-grey-cascade
+                  = render 'memos/form2'
+          /! END TIMELINE ITEM
+
+        .row class="#{ "invisible" if (! current_user.admin == true) }"
+          .col-md-3.col-md-offset-2
+            | change status to:
+            = best_in_place @ticket, :state, :as => :select, :class => 'form-control', :collection => {"open" => "Status: OPEN", "closed" => "Status: CLOSED"}
+        br
+        br
+        br
+        br
+
     /! END PAGE CONTENT INNER
     
 
@@ -67,7 +110,8 @@ link href=asset_path("custom.css") rel="stylesheet" type="text/css" /
 = render 'shared/admin_footer'
 
 javascript:
-  document.addEventListener("DOMContentLoaded", function(event) { 
+  document.addEventListener("DOMContentLoaded", function(event) {
+
     $(".next-step.btn").click(function() {
       var errors=false;
       if (! errors)
@@ -75,6 +119,8 @@ javascript:
       else
         console.log("form validation failed");
     });
+
+    $('html, body').scrollTop( $(document).height() );
   });
 
   function review_edit_prop_info() {

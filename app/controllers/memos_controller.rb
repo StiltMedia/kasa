@@ -28,8 +28,9 @@ class MemosController < ApplicationController
 
     respond_to do |format|
       if @memo.save
-        format.html { redirect_to "/pages/user_dashboard", notice: 'Memo was successfully created.' }
-        format.json { render :show, status: :created, location: @memo }
+        format.html { head :ok }
+        #format.json { render :show, status: :created, location: @memo }
+        format.json { head :ok }
       else
         format.html { render :new }
         format.json { render json: @memo.errors, status: :unprocessable_entity }

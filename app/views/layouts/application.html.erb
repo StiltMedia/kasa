@@ -14,8 +14,13 @@
 
   <%= csrf_meta_tags %>
 </head>
+<%
+is_admin_page = nil
+is_admin_page = true if params[:controller] == "tickets"
+is_admin_page = true if params[:controller] == 'pages' && params[:action] == 'user_dashboard'
+%>
 
-<body class="<%= 'map-view' if session[:browse_view]  == 'Map' && params[:action] == 'browse' %>">
+<body class="<%= 'map-view' if session[:browse_view]  == 'Map' && params[:action] == 'browse' %> <%= 'admin-pages' if is_admin_page %>">
 
 <%= yield %>
 
