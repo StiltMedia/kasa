@@ -1,61 +1,98 @@
 - @offer = Offer.first
 
+link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet" type="text/css" /
+link href=asset_path("components.css") rel="stylesheet" type="text/css" /
+link href=asset_path("timeline.css") rel="stylesheet" type="text/css" /
+link href=asset_path("plugins.css") rel="stylesheet" type="text/css" /
+link href=asset_path("layout.css") rel="stylesheet" type="text/css" /
+link href=asset_path("default.css") rel="stylesheet" type="text/css" /
+link href=asset_path("custom.css") rel="stylesheet" type="text/css" /
+
 
 = render 'shared/topbar'
 
-= render partial: 'shared/dashboard_bars', locals: { text2: "Support Tickets" }
+= render partial: 'shared/dashboard_bars', locals: { text2: "Ticket ##{@ticket.id}", text3: @ticket.subject }
 
-/! steps
-section.create-offer.review-offer.steps
+
+
+.page-content
   .container
-    /! content
-    .row
+    br
 
-      .col-md-3.col-md-offset-1.inner-content.extra-margin
-
-        p = notice
-        /! review block
-        .review-block.property-info
-          .white-block
-            a.edit.invisible href="javascript:review_edit_prop_info()"  Edit
-            /! info content
-            .info-content class="#{current_user.admin == true ? '' : 'invisible'}"
-              p
-                b Ticket Details
-              p Ticket # #{@ticket.id}
-              p Subject #{@ticket.subject[0..9] rescue ""}
-              p Created #{@ticket.created_at}
-              p
-                p
-                  = best_in_place @ticket, :state, :as => :select, :collection => {"open" => "open", "closed" => "closed"}, :class => "look-like-input"
-            /! .info contens
-
-        /! review block
-
-
-
-
-      .col-md-7.inner-content
-        /! review block
-        .review-block.property-info
-          .white-block
-            a.edit.invisible href="javascript:review_edit_prop_info()"  Edit
-            /! info content
-            .info-content
-              p
-                b &nbsp;
-              - Memo.where(ticket_id: @ticket.id).all.order(created_at: :desc).each do |memo|
-                p
-                  i.fa.fa-user &nbsp;
-                  span = "From #{User.find(memo.mfrom).email}  Body #{memo.body} At #{memo.created_at}"
-              p
-                == render 'memos/form2'
-            /! .info content
-
-        /! review block
+    /! BEGIN PAGE CONTENT INNER
+    .portlet.light
+      .portlet-body
+        .timeline
+          - Memo.where(ticket_id: @ticket.id).all.order(created_at: :desc).each do |memo|
+            /! TIMELINE ITEM
+            .timeline-item
+              .timeline-badge
+                img.timeline-badge-userpic src=asset_url("avatar80_1.jpg") style="max-width: inherit;"
+              .timeline-body
+                .timeline-body-arrow
+                .timeline-body-head
+                  .timeline-body-head-caption
+                    a.timeline-body-title.font-blue-madison href="javascript:;" = User.find(memo.mfrom).email.split('@')[0].titlecase
+                    span.timeline-body-time.font-grey-cascade Replied at #{memo.updated_at.strftime("%I:%M %p")}
+                  .timeline-body-head-actions.invisible
+                    .btn-group
+                      button.btn.btn-circle.green-haze.btn-sm.dropdown-toggle data-close-others="true" data-hover="dropdown" data-toggle="dropdown" type="button" 
+                        | Actions
+                        i.fa.fa-angle-down
+                      ul.dropdown-menu.pull-right role="menu" 
+                        li
+                          a href="javascript:;"  Action
+                        li
+                          a href="javascript:;"  Another action
+                        li
+                          a href="javascript:;"  Something else here
+                        li.divider
+                        li
+                          a href="javascript:;"  Separated link
+                .timeline-body-content
+                  span.font-grey-cascade
+                    | #{memo.body}
+            /! END TIMELINE ITEM
 
 
-    /! .content
-/! .steps
 
-= render 'shared/footer'
+    /! END PAGE CONTENT INNER
+    
+
+
+
+
+
+
+= render 'shared/admin_footer'
+
+javascript:
+  document.addEventListener("DOMContentLoaded", function(event) { 
+    $(".next-step.btn").click(function() {
+      var errors=false;
+      if (! errors)
+        window.location.replace('/pages/offer_6');
+      else
+        console.log("form validation failed");
+    });
+  });
+
+  function review_edit_prop_info() {
+    $(".review-block.property-info .best_in_place").best_in_place();
+    $(".review-block.property-info .best_in_place").css("border-bottom", "3px solid silver");
+  }
+
+  function review_edit_financing() {
+    $(".review-block.financing .best_in_place").best_in_place();
+    $(".review-block.financing .best_in_place").css("border-bottom", "3px solid silver");
+  }
+
+  function review_edit_order() {
+    $(".review-block.order .best_in_place").best_in_place();
+    $(".review-block.order .best_in_place").css("border-bottom", "3px solid silver");
+  }
+
+  function review_edit_account_info() {
+    $(".review-block.account-info .best_in_place").best_in_place();
+    $(".review-block.account-info .best_in_place").css("border-bottom", "3px solid silver");
+  }

@@ -10,7 +10,7 @@ link href=asset_path("custom.css") rel="stylesheet" type="text/css" /
 
 = render 'shared/topbar'
 
-= render partial: 'shared/dashboard_bars', locals: { text2: "Dashboard" }
+= render partial: 'shared/dashboard_bars', locals: { text2: "Dashboard", text3: "dashboard & statistics" }
 
 
 
@@ -259,50 +259,59 @@ link href=asset_path("custom.css") rel="stylesheet" type="text/css" /
               .caption
                 i.icon-share.font-green-haze.hide
                 span.caption-subject.font-green.bold.uppercase
-                  | Tasks
+                  | Support
                 span.caption-helper
-                  | &nbsp;&nbsp;tasks summary...
-
+                  | &nbsp;&nbsp;Tickets
+              .actions
+                .btn-group
+                  a.btn.green.btn-circle.btn-sm Create New Ticket
 
             .portlet-body
               .task-content
                 .slimScrollDiv[style="position: relative; overflow: hidden; width: auto; height: 312px;"]
-                  .scroller[style="height: 312px; overflow: hidden; width: auto;" data-always-visible="1" data-rail-visible1="1" data-initialized="1"]
+                  .scroller[style="height: 312px; overflow: hidden; overflow-y: auto;  width: auto;" data-always-visible="1" data-rail-visible1="1" data-initialized="1"]
                     ul.task-list
-                      li
-                      li.last-line
-                        .task-checkbox
-                          .checker
-                            span
-                              input.liChild[type="checkbox" value=""]
-                        .task-title
-                          span.task-title-sp
-                            |  KeenThemes Investment Discussion 
-                          span.label.label-sm.label-warning
-                            | KeenThemes 
-                        .task-config
-                          .task-config-btn.btn-group.dropup
-                            a.btn.btn-sm.default[href="javascript:;" data-toggle="dropdown" data-hover="dropdown" data-close-others="true"]
-                              i.fa.fa-cog
-                              i.fa.fa-angle-down
-                            ul.dropdown-menu.pull-right
-                              li
-                                a[href="javascript:;"]
-                                  i.fa.fa-check
-                                  |  Complete 
-                              li
-                                a[href="javascript:;"]
-                                  i.fa.fa-pencil
-                                  |  Edit 
-                              li
-                                a[href="javascript:;"]
-                                  i.fa.fa-trash-o
-                                  |  Cancel 
-
+                      - Ticket.all.order(updated_at: :desc).each do |ticket|
+                        - tlabels = [ ["label-info", "ticket" ] ]
+                        - tlabels.push (['label-warning','open']) if ticket.state == "open" 
+                        - tlabels.push (['label-success','closed']) if ticket.state == "closed" 
+                        - tlabels.push (['label-danger','Awaiting your reply']) if ticket.awaiting_reply(current_user)
+                        a href=url_for(ticket) style="text-decoration: none;"
+                          li
+                            .task-checkbox
+                              .checker
+                                span
+                                  input.liChild.hide type="checkbox" disabled="1" value="" /
+                            .task-title
+                              span.task-id = "##{ticket.id} "
+                              span.task-title-sp = ( ticket.subject && ticket.subject.length > 0 ? truncate(ticket.subject, length: 40) : "No Subject" )
+                              span &nbsp;
+                              - tlabels.each do |tlabel|
+                                span.label.label-sm class=tlabel[0] = tlabel[1]
+                                span &nbsp;
+                            .task-config.hide
+                              .task-config-btn.btn-group
+                                a.btn.btn-sm.default data-close-others="true" data-hover="dropdown" data-toggle="dropdown" href="javascript:;" 
+                                  i.fa.fa-cog
+                                  i.fa.fa-angle-down
+                                ul.dropdown-menu.pull-right
+                                  li
+                                    a href="javascript:;" 
+                                      i.fa.fa-check
+                                      | Complete
+                                  li
+                                    a href="javascript:;" 
+                                      i.fa.fa-pencil
+                                      | Edit
+                                  li
+                                    a href="javascript:;" 
+                                      i.fa.fa-trash-o
+                                      | Cancel
+                                   
               .task-footer
-                .btn-arrow-link.pull-right
+                .btn-arrow-link.pull-right.invisible
                   a[href="javascript:;"]
-                    | See All Records
+                    | Lorem Ipsum
 
         .col-md-6.col-sm-6
           .portlet.light
