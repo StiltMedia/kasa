@@ -11,4 +11,11 @@
 // about supported directives.
 //
 //= require jquery_ujs
+//= require best_in_place
+//= require_self
+
+
+$("document").ready( function() {
+  $(".best_in_place").best_in_place();
+});
 

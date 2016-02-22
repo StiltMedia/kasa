@@ -10,6 +10,7 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
+    render layout: "metronic_layout"
   end
 
   # GET /users/new
@@ -52,6 +53,22 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/1
   # PATCH/PUT /users/1.json
   def update
+    require 'rmagick'
+    if params[:user].keys == ["picture"]
+      @user.picture_content_type = params[:user][:picture].content_type
+      @user.picture = params[:user][:picture].read
+      @user.picture_file_name = params[:user][:picture].original_filename
+      @user.save
+      @user = User.find(@user.id)
+      picture = Magick::Image.from_blob(@user.picture)[0]
+      picture.auto_orient!
+      picture.resize_to_fit!(140, 140)
+      picture.resize_to_fill!(140, 140)
+      @user.picture = picture.to_blob
+      @user.save
+      redirect_to @user, notice: 'Image was successfully updated.' and return
+    end
+
     respond_to do |format|
       if @user.update(user_params)
         format.html { redirect_to @user, notice: 'User was successfully updated.' }
@@ -73,6 +90,16 @@ class UsersController < ApplicationController
     end
   end
 
+  def show_picture
+    user = User.find(params[:id])
+    if ! user.picture
+      user.picture = (open('app/assets/images/empty_profile_picture.jpg', 'rb') { |f| f.read })
+      send_data user.picture, :type => "image/jpeg" ,:disposition => 'inline'
+    else
+      send_data user.picture, :type => user.picture_content_type ,:disposition => 'inline'
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user
@@ -82,6 +109,7 @@ class UsersController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
       #params[:user]
-      params.require(:user).permit(:email, :password, :password_confirmation, :seed, :admin)
+      params.require(:user).permit(:email, :password, :password_confirmation, :seed, :admin,
+        :first_name, :last_name)
     end
 end

@@ -1,6 +1,127 @@
-p#notice = notice
+.page-container
+  .page-content-wrapper
+    .page-head
+      .container
+        .page-title
+          h1
+            | Profile
+
+        
+    .page-content
+      .container
+        ul.page-breadcrumb.breadcrumb.invisible
+          li
+            a[href="index.html"]
+              | Home
+            i.fa.fa-circle
+          li
+            span
+              | Layouts
+        .page-content-inner
+
+          .row
+            .col-md-6
+              /! BEGIN SAMPLE FORM PORTLET
+              .portlet.light
+                .portlet-title
+                  .caption.font-red-sunglo
+                    i.icon-settings.font-red-sunglo.invisible
+                    span.invisible.caption-subject.bold.uppercase Default Form
+                  .actions.invisible
+                    .btn-group
+                      a.btn.btn-sm.green.dropdown-toggle data-toggle="dropdown" href="javascript:;" 
+                        | Actions
+                        i.fa.fa-angle-down
+                      ul.dropdown-menu.pull-right
+                        li
+                          a href="javascript:;" 
+                            i.fa.fa-pencil
+                            | Edit
+                        li
+                          a href="javascript:;" 
+                            i.fa.fa-trash-o
+                            | Delete
+                        li
+                          a href="javascript:;" 
+                            i.fa.fa-ban
+                            | Ban
+                        li.divider
+                        li
+                          a href="javascript:;"  Make admin
+                .portlet-body.form
+                  div
+                    .form-body
+                      .form-group
+                        label Email Address
+                        .input-group
+                          span.input-group-addon
+                            i.fa.fa-envelope
+                          input.form-control placeholder=("Email Address") type="text" readonly="1" value=current_user.email / 
+                      br
+                      .form-group
+                        label First Name
+                        br
+                        = best_in_place current_user, :first_name, :inner_class => "input form-control", :place_holder => "click to edit", :class => "input"
+                        input.invisible.form-control placeholder=("First name") type="text" /
+                      .form-group
+                        label Last Name
+                        br
+                        = best_in_place current_user, :last_name, :inner_class => "input form-control", :place_holder => "click to edit", :class => "input"
+                    .form-actions
+                      button.btn.blue.hide type="submit" disabled="1" Saved
+                      button.btn.default type="button" onclick="window.location='/pages/user_dashboard'" Back to Dashboard
+              /! END SAMPLE FORM PORTLET
 
 
-= link_to 'Edit', edit_user_path(@user)
-'|
-= link_to 'Back', users_path
+
+
+
+
+            .col-md-6
+              /! BEGIN SAMPLE FORM PORTLET
+              .portlet.light
+                .portlet-title
+                  .caption.font-red-sunglo
+                    i.icon-settings.font-red-sunglo.invisible
+                    span.invisible.caption-subject.bold.uppercase Default Form
+                  .actions.invisible
+                    .btn-group
+                      a.btn.btn-sm.green.dropdown-toggle data-toggle="dropdown" href="javascript:;" 
+                        | Actions
+                        i.fa.fa-angle-down
+                      ul.dropdown-menu.pull-right
+                        li
+                          a href="javascript:;" 
+                            i.fa.fa-pencil
+                            | Edit
+                        li
+                          a href="javascript:;" 
+                            i.fa.fa-trash-o
+                            | Delete
+                        li
+                          a href="javascript:;" 
+                            i.fa.fa-ban
+                            | Ban
+                        li.divider
+                        li
+                          a href="javascript:;"  Make admin
+                .portlet-body.form
+                  div
+                    .form-body
+                      .form-group
+                        label Profile photo
+                        br
+                        = form_for("user", :url => user_path) do |f|                       
+                          .fileinput.fileinput-new data-provides="fileinput" 
+                            .fileinput-preview.thumbnail data-trigger="fileinput" style=("width: 200px; height: 150px;")
+                              img src="/users/#{current_user.id}/show_picture/#{current_user.picture_file_name}"
+                            div
+                              span.btn.btn-sm.green.btn-file
+                                span.fileinput-new Select File
+                                span.fileinput-exists Select File
+                                = f.file_field( :picture, accept: 'image/*')
+                              a.btn.btn-sm.green.default.fileinput-exists data-dismiss="fileinput" href="#"  Remove
+                              a.btn.btn-sm.green.default.fileinput-exists.upload href="javascript:;" onclick="$(this).closest('form').submit(); return false" Upload
+                 
+                      br
+              /! END SAMPLE FORM PORTLET
