@@ -5,12 +5,13 @@ Rails.application.routes.draw do
   resources :feeds
   resources :adverts
   resources :offers
+  post '/tickets/:id/add_memo' => 'tickets#add_memo'
+  devise_for :users
   post '/users/:id' => 'users#update'
-  get '/users/:id/show_picture/:picture_file_name' => 'users#show_picture'
+  get '/users/:id/show_picture' => 'users#show_picture'
   get '/offers/review/:id' => 'offers#review'
   get '/users/create_admin'
   get '/users/:id' => 'users#show'
-  devise_for :users
   post '/properties/img_post' => 'properties#img_post'
   post '/properties/img_rm' => 'properties#img_rm'
   get 'pages/more_filters'

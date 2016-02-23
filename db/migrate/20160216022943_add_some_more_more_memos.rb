@@ -1,7 +1,7 @@
 class AddSomeMoreMoreMemos < ActiveRecord::Migration
   def change
-    if ! User.find_by_email("postmaster@kasa-staging.herokuapp.com").present?
-      User.create( seed: true, email: "postmaster@kasa-staging.herokuapp.com", password: "stilt123")
+    if ! User.find_by_email("kasa@kasa-staging.herokuapp.com").present?
+      User.create( seed: true, email: "kasa@kasa-staging.herokuapp.com", password: "stilt123")
     end
     
     Memo.destroy_all
@@ -21,7 +21,7 @@ class AddSomeMoreMoreMemos < ActiveRecord::Migration
         Memo.create(
           body: Faker::Hipster.paragraph(rand(1..10)),
           ticket_id: ticket.id,
-          mfrom: [  User.find_by_email('postmaster@kasa-staging.herokuapp.com').id, ticket.tuser   ].sample(1)[0]
+          mfrom: [  User.find_by_email('kasa@kasa-staging.herokuapp.com').id, ticket.tuser   ].sample(1)[0]
         )
       end
     end

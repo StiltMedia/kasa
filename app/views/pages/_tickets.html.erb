@@ -1,0 +1,68 @@
+
+					<!-- BEGIN PORTLET-->
+					<div class="portlet light tasks-widget">
+						<div class="portlet-title">
+							<div class="caption caption-md">
+								<i class="icon-bar-chart theme-font hide"></i>
+								<span class="caption-subject theme-font bold uppercase">SUPPORT TICKETS</span>
+								<span class="caption-helper"><%= current_user.admin == true ? User.open_awaiting_tickets_admin.size : current_user.open_awaiting_tickets.size %> pending</span>
+							</div>
+							<div class="inputs">
+								<div class="portlet-input input-small input-inline invisible">
+									<div class="input-icon right">
+										<i class="icon-magnifier"></i>
+										<input type="text" class="form-control form-control-solid" placeholder="search...">
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="portlet-body">
+							<div class="task-content">
+								<div class="scroller" style="height: 282px;" data-always-visible="1" data-rail-visible1="0" data-handle-color="#D7DCE2">
+									<!-- START TASK LIST -->
+									<ul class="task-list">
+									<% tickets = Ticket.all.order(updated_at: :desc) if current_user.admin == true %>
+									<% tickets = Ticket.where(tuser: current_user.id).order(updated_at: :desc) if current_user.admin != true %>
+                                                                                <% tickets.each do |ticket| %>
+										<li>
+                                                                                        <a href="<%= url_for(ticket_path(ticket))%>" style="text-decoration: none;">
+
+											<div class="task-checkbox">
+												<!--<input type="hidden" value="1" name="test"/>
+												<input type="checkbox" class="liChild" value="2" name="test"/>-->
+											</div>
+											<div class="task-title">
+                                                                                                <i class="fa fa-ticket" style="color: #838FA1;"></i>
+												<span class="task-title-sp">
+                                                                                                  <%= ticket.subject != nil ? ticket.subject : "No Subject"  %></span>
+												<% if ticket.state == 'closed' %>
+												<span class="label label-sm label-success"><%= ticket.state %></span><% logger.debug "DB8 #{ticket.last_sayer.id}" %>
+												<% end %>
+												<% if ticket.state == 'open' %>
+												<span class="label label-sm label-warning"><%= ticket.state %></span><% logger.debug "DB8 #{ticket.last_sayer.id}" %>
+												<% end %>
+                                                                                                <% if current_user.admin == true && ticket.state != 'closed' && ticket.last_sayer.id != 11 %>
+												<span class="label label-sm label-danger">Awaiting reply</span>
+												<span class="task-bell">
+												<i class="fa fa-bell-o"></i>
+												</span>
+                                                                                                <% end %>
+
+											</div>
+											<div class="task-config invisible">
+											</div>
+                                                                                        </a>
+										</li>
+                                                                                <% end %>
+									</ul>
+									<!-- END START TASK LIST -->
+								</div>
+							</div>
+							<div class="task-footer">
+								<div class="btn-arrow-link pull-right invisible">
+									<a href="javascript:;">See All Tasks</a>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- END PORTLET-->

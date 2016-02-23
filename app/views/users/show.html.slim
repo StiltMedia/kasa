@@ -114,7 +114,7 @@
                         = form_for("user", :url => user_path) do |f|                       
                           .fileinput.fileinput-new data-provides="fileinput" 
                             .fileinput-preview.thumbnail data-trigger="fileinput" style=("width: 200px; height: 150px;")
-                              img src="/users/#{current_user.id}/show_picture/#{current_user.picture_file_name}"
+                              img src="/users/#{current_user.id}/show_picture"
                             div
                               span.btn.btn-sm.green.btn-file
                                 span.fileinput-new Select File

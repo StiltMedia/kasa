@@ -1,0 +1,32 @@
+
+                    - Memo.where(ticket_id: ticket.id).all.order(created_at: :asc).each do |memo|
+                      /! TIMELINE ITEM
+                      .timeline-item
+                        .timeline-badge
+                          img.timeline-badge-userpic src="/users/#{memo.mfrom}/show_picture" /
+                        .timeline-body
+                          .timeline-body-arrow
+                          .timeline-body-head
+                            .timeline-body-head-caption
+                              a.timeline-body-title.font-blue-madison href="javascript:;" =  User.find(memo.mfrom).email.split('@')[0].titlecase
+                              span.timeline-body-time.font-grey-cascade Replied at #{memo.updated_at.strftime("%I:%M %p")}
+                            .timeline-body-head-actions.invisible
+                              .btn-group
+                                button.btn.btn-circle.green-haze.btn-sm.dropdown-toggle data-close-others="true" data-hover="dropdown" data-toggle="dropdown" type="button" 
+                                  | Actions
+                                  i.fa.fa-angle-down
+                                ul.dropdown-menu.pull-right role="menu" 
+                                  li
+                                    a href="javascript:;"  Action
+                                  li
+                                    a href="javascript:;"  Another action
+                                  li
+                                    a href="javascript:;"  Something else here
+                                  li.divider
+                                  li
+                                    a href="javascript:;"  Separated link
+                          .timeline-body-content
+                            span.font-grey-cascade
+                              | #{memo.body}
+
+                      /! END TIMELINE ITEM

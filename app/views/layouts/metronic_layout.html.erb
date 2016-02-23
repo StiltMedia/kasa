@@ -36,6 +36,7 @@ License: You must have a valid license purchased only from themeforest(the above
 <!-- END PAGE LEVEL PLUGIN STYLES -->
 <!-- BEGIN PAGE STYLES -->
 <link href="/theme/assets/admin/pages/css/tasks.css" rel="stylesheet" type="text/css"/>
+<link href="/theme/assets/admin/pages/css/timeline.css" rel="stylesheet" type="text/css"/>
 <!-- END PAGE STYLES -->
 <!-- BEGIN THEME STYLES -->
 <!-- DOC: To use 'rounded corners' style just load 'components-rounded.css' stylesheet instead of 'components.css' in the below style tag -->
@@ -77,7 +78,7 @@ License: You must have a valid license purchased only from themeforest(the above
 			<div class="top-menu">
 				<ul class="nav navbar-nav pull-right">
 					<!-- BEGIN NOTIFICATION DROPDOWN -->
-					<li class="dropdown dropdown-extended dropdown-dark dropdown-notification" id="header_notification_bar">
+					<li class="invisible dropdown dropdown-extended dropdown-dark dropdown-notification" id="header_notification_bar">
 						<a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
 						<i class="icon-bell"></i>
 						<span class="badge badge-default">7</span>
@@ -192,7 +193,7 @@ License: You must have a valid license purchased only from themeforest(the above
 					<li class="dropdown dropdown-user dropdown-dark">
 						<a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
 						<span class="username username-hide-mobile"><%= current_user.email.split('@')[0].titleize %>&nbsp;</span>
-						<img alt="" class="img-circle" src="<%= "/users/#{current_user.id}/show_picture/#{current_user.picture_file_name}" %>">
+						<img alt="" class="img-circle" src="<%= "/users/#{current_user.id}/show_picture" %>">
 
 
 						</a>
@@ -234,7 +235,7 @@ License: You must have a valid license purchased only from themeforest(the above
 			<div class="hor-menu ">
 				<ul class="nav navbar-nav">
 					<li class="active">
-						<a href="index.html">Dashboard</a>
+						<a href="/pages/user_dashboard">Dashboard</a>
 					</li>
 					<li class="menu-dropdown mega-menu-dropdown ">
 						<a data-hover="megamenu-dropdown" data-close-others="true" data-toggle="dropdown" href="javascript:;" class="dropdown-toggle">
@@ -1005,7 +1006,7 @@ License: You must have a valid license purchased only from themeforest(the above
 					 Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam dolore.
 				</p>
 			</div>
-			<div class="col-md-3 col-sm-6 col-xs12 footer-block">
+			<div class="col-md-3 col-sm-6 col-xs12 footer-block invisible">
 				<h2>Subscribe Email</h2>
 				<div class="subscribe-form">
 					<form action="javascript:;">
@@ -1018,7 +1019,7 @@ License: You must have a valid license purchased only from themeforest(the above
 					</form>
 				</div>
 			</div>
-			<div class="col-md-3 col-sm-6 col-xs-12 footer-block">
+			<div class="col-md-3 col-sm-6 col-xs-12 footer-block invisible">
 				<h2>Follow Us On</h2>
 				<ul class="social-icons">
 					<li>

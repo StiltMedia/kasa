@@ -1,3 +1,4 @@
+# coding: utf-8
 class TicketsController < ApplicationController
   before_action :set_ticket, only: [:show, :edit, :update, :destroy]
 
@@ -20,9 +21,7 @@ class TicketsController < ApplicationController
   # GET /tickets/1
   # GET /tickets/1.json
   def show
-    mfrom = current_user.id
-    mfrom = User.find_by_email("postmaster@kasa-staging.herokuapp.com").id if current_user.admin == true
-    @new_memo = Memo.new(ticket_id: params[:id], mfrom: mfrom)
+    render layout: "metronic_layout"
   end
 
   # GET /tickets/new
@@ -73,6 +72,15 @@ class TicketsController < ApplicationController
       format.html { redirect_to tickets_url, notice: 'Ticket was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  # POST /tickets/1/add_memo
+  def add_memo
+    mfrom = current_user.id
+    mfrom = User.find_by_email("kasa@kasa-staging.herokuapp.com").id if current_user.admin == true
+    @new_memo = Memo.create(ticket_id: params[:id], mfrom: mfrom, body: params[:body])
+    rts = (render_to_string :partial => 'timeline', :locals => { :ticket => Ticket.find(params[:id])  })
+    render json: { content: rts  }, status: :ok
   end
 
   private

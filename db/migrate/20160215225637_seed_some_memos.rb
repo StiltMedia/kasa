@@ -10,7 +10,7 @@ class SeedSomeMemos < ActiveRecord::Migration
     end
     
     Ticket.all.each do |ticket|
-      participants = [ 'postmaster@kasa-staging.herokuapp.com', User.all.sample(1)[0].email ]
+      participants = [ 'kasa@kasa-staging.herokuapp.com', User.all.sample(1)[0].email ]
       rand(1..10).times do
         pair = participants.shuffle
         Memo.create(
