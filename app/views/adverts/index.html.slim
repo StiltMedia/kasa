@@ -6,7 +6,9 @@
 /! steps
 section.create-offer.review-offer.steps
   .container
-
+    - if flash[:alert].present?
+      .row
+        .col-md-5.col-md-offset-1 = flash[:alert]
     .row
       .col-md-5.col-md-offset-1.inner-content.zextra-margin
         p

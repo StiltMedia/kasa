@@ -150,7 +150,7 @@ function validate_step_4() {
   if ( $(".adverts-new-page .agree").is(":checked") == true ) {
     return true;
   } else {
-    alert('In agreement with our Terms of Use?');
+    $("input.agree").notify("In agreement with our Terms of Use?");
     return false;
   }
 }
@@ -163,57 +163,60 @@ function validate_step_5() {
   var val = $('*[data-bip-attribute="address"]').text();
   // address validations - cannot be empty
   if ( val.indexOf('Address of Property for Sale') > -1 ) {
-    errors = errors + "  Invalid: Address\n";
+    errors = errors + "  Invalid: Address<br>\n";
   }
   val = $('*[data-bip-attribute="city"]').text();
   // city validations - cannot be empty
   if ( val == 'City' ) {
-    errors = errors + "  Invalid: City\n";
+    errors = errors + "  Invalid: City<br>\n";
   }
   val = $('*[data-bip-attribute="state"]').text();
   // state validations - cannot be empty
   if ( val == 'State eg. FL' ) {
-    errors = errors + "  Invalid: State\n";
+    errors = errors + "  Invalid: State<br>\n";
   }
   val = $('*[data-bip-attribute="price"]').text();
   // price validations - cannot be empty
   if ( val == 'Set your price' ) {
-    errors = errors + "  Invalid: Price\n";
+    errors = errors + "  Invalid: Price<br>\n";
   }
   val = $('*[data-bip-attribute="ptype"]').text();
   // price validations - cannot be empty
   if ( val == 'Property Type' ) {
-    errors = errors + "  Invalid: Property Type\n";
+    errors = errors + "  Invalid: Property Type<br>\n";
   }
   val = $('*[data-bip-attribute="beds"]').text();
   // beds validations - cannot be empty
   if ( val == '# of bedrooms' ) {
-    errors = errors + "  Invalid: # of bedrooms\n";
+    errors = errors + "  Invalid: # of bedrooms<br>\n";
   }
   val = $('*[data-bip-attribute="baths"]').text();
   // baths validations - cannot be empty
   if ( val == '# of bathrooms' ) {
-    errors = errors + "  Invalid: # of bathrooms\n";
+    errors = errors + "  Invalid: # of bathrooms<br>\n";
   }
   val = $('*[data-bip-attribute="area"]').text();
   // area validations - cannot be empty
   if ( val == 'Property size in Square Feet' ) {
-    errors = errors + "  Invalid: Property size in Square Feet\n";
+    errors = errors + "  Invalid: Property size in Square Feet<br>\n";
   }
   val = $('*[data-bip-attribute="garage"]').text();
   // garage validations - cannot be empty
   if ( val == '# of garage spaces' ) {
-    errors = errors + "  Invalid: Property size in Square Feet\n";
+    errors = errors + "  Invalid: Property size in Square Feet<br>\n";
   }
   if (errors.length > 0) {
-    alert('Please correct the following issues:\n' + errors);
+    $("#myModal .modal-body p").html(errors);
+    $('#myModal').modal('show');
+    //alert('Please correct the following issues:\n' + errors);
+
     return false;
   } else {
     $.ajax({
       type: 'POST',
-      url: '/properties/' + property_id,
+      url: '/properties/' + property_id + '?mf=TGlzdGluZyBzYXZlZA==',
       data: { _method: 'PUT', property: { date: new Date().toISOString() } },
-      success: function() { alert('Listing saved.'); return true; },
+      success: function() { /*alert('Listing saved.');*/ return true; },
       dataType: 'json',
       async: false
     });

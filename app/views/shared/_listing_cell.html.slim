@@ -43,4 +43,4 @@ div class=(session[:browse_view]=='Map' ? '' : 'col-xs-8 col-xs-offset-2')
                       span &nbsp
                       span.words Favorite
                 - else
-                  a href="javascript:alert('You must be logged in to Favourite a listing')"  Favorite
+                  a onclick="$(this).notify('You must be logged in to Favourite a listing');" href="javascript:;"  Favorite

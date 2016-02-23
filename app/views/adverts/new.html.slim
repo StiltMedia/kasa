@@ -529,13 +529,23 @@
     .row
       .inner-content
         .col-md-3.col-md-offset-7.text-right
-          a.next-step.btn.btn-alt onclick='return validate_step_5()' href="/users/#{current_user.id}/adverts" Submit →
+          a.next-step.btn.btn-alt onclick='return validate_step_5()' href="/users/#{current_user.id}/adverts?mf=TGlzdGluZyBzYXZlZA==" Submit →
 
 
 
 
 
 
+/! Modal
+#myModal.modal.bs-example-modal-sm.fade role="dialog" 
+  .modal-dialog.modal-sm style="width: 650px;"
+    /! Modal content
+    .modal-content
+      .modal-header
+        button.close data-dismiss="modal" type="button"  &times;
+        h4.modal-title Please correct the following issues:
+      .modal-body
+        p Some text in the modal.
 
 
 

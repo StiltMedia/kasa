@@ -4,6 +4,7 @@ class AdvertsController < ApplicationController
   # GET /adverts
   # GET /adverts.json
   def index
+    flash[:alert] = Base64.decode64(params[:mf]) if params[:mf].present?
     if params[:keywordfilter].present?
       @adverts = current_user.adverts.select do |advert|
         advert.property.address.include? URI.unescape(params[:keywordfilter])

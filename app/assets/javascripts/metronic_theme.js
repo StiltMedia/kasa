@@ -12,6 +12,7 @@
 //
 //= require jquery_ujs
 //= require best_in_place
+//= require notifyjs_rails
 //= require_self
 
 
@@ -24,7 +25,7 @@ $("document").ready( function() {
       var url = '/tickets/'+ticket_id+'/add_memo';
       var body = $(".page-container.tickets-show .timeline-body-content:last").text().trim();
       if (body.length == 0) {
-        alert('Empty');
+        $.notify("Empty");
         return false;
       }
 

@@ -120,7 +120,7 @@ $(document).ready(function () {
     // ensure user agreed to tos
     $("section.signup form#new_user").submit(function (event) {
         if ($("form#new_user input.tos").is(':checked') == false) {
-            alert('Please agree to the Terms of Service');
+            $("input.submit").notify("Please agree to the Terms of Service");
             event.preventDefault();
         }
     });
