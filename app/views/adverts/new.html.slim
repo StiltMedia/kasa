@@ -75,9 +75,9 @@
           /! input
           .col-md-12
             .input-group
-              = best_in_place @property, :address, :place_holder => "Address of Property for Sale", :inner_class => "w300", class: "look-like-input w300"
-              = best_in_place @property, :city, :place_holder => "City", :inner_class => "w150", :class => "look-like-input w150"
-              = best_in_place @property, :state, :place_holder => "State eg. FL", :inner_class => "w100", :class => "look-like-input w100"
+              = best_in_place @property, :address_freeform, :place_holder => "Address of Property for Sale", :inner_class => "w550", class: "look-like-input w550"
+              /! = best_in_place @property, :city, :place_holder => "City", :inner_class => "w150", :class => "look-like-input w150"
+              /! = best_in_place @property, :state, :place_holder => "State eg. FL", :inner_class => "w100", :class => "look-like-input w100"
             br
             /! .input
             .input-group
@@ -331,9 +331,7 @@
                   /! input
                   .col-md-12
                     .input-group
-                      = best_in_place @property, :address, :place_holder => "Address of Property for Sale", :inner_class => "w300", class: "look-like-input w300"
-                      = best_in_place @property, :city, :place_holder => "City", :inner_class => "w150", :class => "look-like-input w150"
-                      = best_in_place @property, :state, :place_holder => "State eg. FL", :inner_class => "w100", :class => "look-like-input w100"
+                      = best_in_place @property, :address_freeform, :place_holder => "Address of Property for Sale", :inner_class => "w550", class: "look-like-input w550"
                     br
                     = best_in_place @property, :price, :place_holder => "Set your price", :inner_class => "w550", :class => "look-like-input w550", :html_attrs => { onkeyup: 'this.value=this.value.replace(/[^\d]/,"")' }
 

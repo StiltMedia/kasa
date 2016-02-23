@@ -10,6 +10,7 @@ GIT
 GEM
   remote: https://rubygems.org/
   specs:
+    StreetAddress (1.0.6)
     actionmailer (4.2.5)
       actionpack (= 4.2.5)
       actionview (= 4.2.5)
@@ -211,6 +212,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  StreetAddress
   aws-sdk (~> 2)
   best_in_place (~> 3.0.1)
   byebug

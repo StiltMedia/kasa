@@ -81,6 +81,16 @@ class PropertiesController < ApplicationController
   # PATCH/PUT /properties/1
   # PATCH/PUT /properties/1.json
   def update
+    if params[:property][:address_freeform] != nil
+      require 'street_address'
+      a = StreetAddress::US.parse_address(params[:property][:address_freeform])
+      if a
+        params[:property][:address] = "#{a.prefix} #{a.number} #{a.street} #{a.street_type} #{a.unit_prefix} #{a.unit}".strip
+        params[:property][:city] = "#{a.city}"
+        params[:property][:zip] = "#{a.postal_code}"
+        params[:property][:state] = "#{a.state}"
+      end
+    end
     respond_to do |format|
       if @property.update(property_params)
         format.html { redirect_to @property, notice: 'Property was successfully updated.' }
@@ -111,7 +121,7 @@ class PropertiesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def property_params
       #params[:property]
-      params.require(:property).permit(:address, :city, :state, :price,
+      params.require(:property).permit(:address, :address_freeform, :city, :state, :zip, :price,
         :ptype, :beds, :baths, :garage, :area, :floor, :built,
         :date, :remarks, :open_house_beg, :open_house_end)
     end

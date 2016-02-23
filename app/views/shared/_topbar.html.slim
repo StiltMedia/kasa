@@ -12,9 +12,12 @@
               = link_to( pages_user_dashboard_path, { :class => 'btn btn-alt' } ) do
                 i.icon.icon-grid &nbsp;
                 = " Dashboard"
+
               = link_to( root_path, { :class => 'btn btn-alt' } ) do
-                i.icon.icon-user &nbsp;
-                = "#{current_user.email[0..4]}.."
+                span.username.username-hide-mobile style=("color: black;")
+                img.img-circle alt="" src="/users/#{current_user.id}/show_picture" style="zmargin-top: -8px; border: 0px; margin-right: 5px; height: 40px; zfloat: left;"
+
+                = "#{current_user.email.split('@')[0].titleize}"
               = link_to( destroy_user_session_path, { :class => 'btn btn-alt logout', :method => :delete } ) do
                 i.icon.icon-logout &nbsp;
                 = " Logout"
