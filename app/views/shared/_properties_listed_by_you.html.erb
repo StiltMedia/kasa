@@ -96,12 +96,19 @@
 
 									</td>
 									<td>
-                                                                          <a href="javascript:;" class="primary-link"><%= advert.property.address %>  
+                                                                          <% if advert.completed == true && advert.approved == true %>
+                                                                           <a href="<%= "/pages/listing_details/#{advert.property.listing_id}" %>" class="primary-link"><%= advert.property.address %>  
                                                                             <br>
                                                                             <%= number_to_currency(advert.property.price, precision: 0) %></a>
                                                                           <br>
+                                                                          <% else %>
+                                                                           <span href="<%= 'javascript:;' %>" class="primary-link"><%= advert.property.address %>  
+                                                                            <br>
+                                                                            <%= number_to_currency(advert.property.price, precision: 0) %></span>
+                                                                          <br>                                                                          
+                                                                          <% end %>
 
-
+                                                                         
 
                                                                           <%= "Listed #{distance_of_time_in_words_to_now(advert.property.date)} ago" rescue "" %>
                                                                           <br>
