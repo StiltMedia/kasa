@@ -27,16 +27,18 @@ class AdvertsController < ApplicationController
   # GET /adverts/new
   def new
     if params[:step] == "1"
-      @property = Property.new(listing_id: "FE9E" + "0001", images_tot: 0)
-      @property.save
-      @advert = Advert.new(property_id: @property.id, user_id: current_user.id)
-      @advert.save
-      Feed.create(
-        user_id: nil,
-        message: "#{current_user.email} started listing #{@advert.property.listing_id}"
-      )
+      if current_user.has_unfinished_advert_creation
+        @property = current_user.last_advert.property
+        @advert = current_user.last_advert
+      else
+        @property = Property.new(listing_id: "FE9E" + "0001", images_tot: 0)
+        @property.save
+        @advert = Advert.new(property_id: @property.id, user_id: current_user.id)
+        @advert.save
+      end
     else
       @property = Property.find(params[:propertyid])
+      @advert = Advert.where(property_id: @property.id).all.last
     end
     @images_tot = @property.images_tot || 0
   end
@@ -101,6 +103,6 @@ class AdvertsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def advert_params
-      params.require(:advert).permit(:user_id, :property_id, :seed, :approved)
+      params.require(:advert).permit(:user_id, :property_id, :seed, :approved, :live)
     end
 end

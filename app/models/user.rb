@@ -66,4 +66,12 @@ class User < ActiveRecord::Base
     end
   end
 
+  def last_advert
+    Advert.where(user_id: id).order(id: :asc).last
+  end
+
+  def has_unfinished_advert_creation
+     last_advert && last_advert.completed != true
+  end
+
 end

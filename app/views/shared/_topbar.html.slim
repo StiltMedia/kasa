@@ -13,7 +13,7 @@
                 i.icon.icon-grid &nbsp;
                 = " Dashboard"
 
-              = link_to( root_path, { :class => 'btn btn-alt' } ) do
+              = link_to( user_path(current_user), { :class => 'btn btn-alt', :style => "border: 0px" } ) do
                 span.username.username-hide-mobile style=("color: black;")
                 img.img-circle alt="" src="/users/#{current_user.id}/show_picture" style="zmargin-top: -8px; border: 0px; margin-right: 5px; height: 40px; zfloat: left;"
 

@@ -34,7 +34,7 @@
 											<div class="task-title">
                                                                                                 <i class="fa fa-ticket" style="color: #838FA1;"></i>
 												<span class="task-title-sp">
-                                                                                                  <%= ticket.subject != nil ? ticket.subject : "No Subject"  %></span>
+                                                                                                  <%= ticket.subject != nil ? truncate(ticket.subject, length: rand(30..70)) : "No Subject"  %></span>
 												<% if ticket.state == 'closed' %>
 												<span class="label label-sm label-success"><%= ticket.state %></span><% logger.debug "DB8 #{ticket.last_sayer.id}" %>
 												<% end %>

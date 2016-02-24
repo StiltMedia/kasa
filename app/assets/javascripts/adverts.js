@@ -160,6 +160,7 @@ function validate_step_5() {
   var errors = "";
   var success_url = '/users/'+$(".adverts-new-page").data('user-id')+'/adverts';
   var property_id = $(".adverts-new-page").data('property-id');
+  var advert_id = $(".adverts-new-page").data('advert-id');
   var val = $('*[data-bip-attribute="address"]').text();
   // address validations - cannot be empty
   if ( val.indexOf('Address of Property for Sale') > -1 ) {
@@ -209,7 +210,6 @@ function validate_step_5() {
     $("#myModal .modal-body p").html(errors);
     $('#myModal').modal('show');
     //alert('Please correct the following issues:\n' + errors);
-
     return false;
   } else {
     $.ajax({
@@ -217,6 +217,14 @@ function validate_step_5() {
       url: '/properties/' + property_id + '?mf=TGlzdGluZyBzYXZlZA==',
       data: { _method: 'PUT', property: { date: new Date().toISOString() } },
       success: function() { /*alert('Listing saved.');*/ return true; },
+      dataType: 'json',
+      async: false
+    });
+    $.ajax({
+      type: 'POST',
+      url: '/adverts/' + advert_id,
+      data: { _method: 'PUT', advert: { completed: 't' } },
+      success: function() {  },
       dataType: 'json',
       async: false
     });

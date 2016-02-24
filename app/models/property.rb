@@ -11,5 +11,8 @@ class Property < ActiveRecord::Base
     "$#{self.price/self.area}/sf" rescue ""
   end
 
+  def combined_address
+    "#{address} #{city} #{state} #{zip}"
+  end
 
 end

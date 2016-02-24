@@ -11,8 +11,7 @@
     - @next_step = "6"
 
 
-.adverts-new-page data-user-id=current_user.id data-property-id=@property.id
-
+.adverts-new-page data-user-id=current_user.id data-property-id=@property.id data-advert-id=@advert.id
   = render 'shared/topbar'
     
   = render partial: 'shared/dashboard_bars', locals: { text2: "" }

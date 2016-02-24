@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160223185416) do
+ActiveRecord::Schema.define(version: 20160224060947) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,6 +23,8 @@ ActiveRecord::Schema.define(version: 20160223185416) do
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.boolean  "approved"
+    t.boolean  "completed"
+    t.boolean  "live"
   end
 
   add_index "adverts", ["property_id"], name: "index_adverts_on_property_id", using: :btree

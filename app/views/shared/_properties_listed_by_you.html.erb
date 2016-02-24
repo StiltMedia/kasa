@@ -1,0 +1,134 @@
+<!-- BEGIN PROPERTIES LISTED BY YOU PORTLET-->
+					<div class="portlet light ">
+						<div class="portlet-title">
+							<div class="caption caption-md">
+								<i class="icon-bar-chart theme-font hide"></i>
+								<span class="caption-subject theme-font bold uppercase">Properties Listed By You</span>
+								<span class="caption-helper hide">weekly stats...</span>
+							</div>
+							<div class="actions hide">
+								<div class="btn-group btn-group-devided" data-toggle="buttons">
+									<label class="btn btn-transparent grey-salsa btn-circle btn-sm active">
+									<input type="radio" name="options" class="toggle" id="option1">Today</label>
+									<label class="btn btn-transparent grey-salsa btn-circle btn-sm">
+									<input type="radio" name="options" class="toggle" id="option2">Week</label>
+									<label class="btn btn-transparent grey-salsa btn-circle btn-sm">
+									<input type="radio" name="options" class="toggle" id="option2">Month</label>
+								</div>
+							</div>
+						</div>
+						<div class="portlet-body">
+							<div class="row number-stats margin-bottom-30 hide">
+								<div class="col-md-6 col-sm-6 col-xs-6">
+									<div class="stat-left">
+										<div class="stat-chart">
+											<!-- do not line break "sparkline_bar" div. sparkline chart has an issue when the container div has line break -->
+											<div id="sparkline_bar"></div>
+										</div>
+										<div class="stat-number">
+											<div class="title">
+												 Total
+											</div>
+											<div class="number">
+												 2460
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="col-md-6 col-sm-6 col-xs-6">
+									<div class="stat-right">
+										<div class="stat-chart">
+											<!-- do not line break "sparkline_bar" div. sparkline chart has an issue when the container div has line break -->
+											<div id="sparkline_bar2"></div>
+										</div>
+										<div class="stat-number">
+											<div class="title">
+												 New
+											</div>
+											<div class="number">
+												 719
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="table-scrollable table-scrollable-borderless">
+								<table class="table table-hover table-light">
+								<thead>
+								<tr class="uppercase hide">
+									<th colspan="2">
+										 Address
+									</th>
+
+									<th>
+										 RATE
+									</th>
+								</tr>
+								</thead>
+
+								<% if current_user.adverts.size == 0 %> 
+								<tr>
+									<td class="fit">
+										<img class="user-pic invisible" style="border-radius: 0%; height: 58px;" src="<%= "http://kasa-staging-02.s3.amazonaws.com/#{"FE9E0000"}_#{0}.jpg" %>">
+
+									</td>
+									<td>
+										<a href="javascript:;" class="primary-link"><%= "" %><br><%= "" %></a><br>
+                                                                                - None -
+									</td>
+									<td>
+										<span class="bold theme-font invisible"></span>
+									</td>
+								</tr>
+                                                                <% end %>
+
+
+
+                                                                <% current_user.adverts.order(id: :desc).each do |advert| %>
+								<tr data-advert-id="<%=advert.id%>" data-property-id="<%=advert.property.id%>">
+									<td class="fit">
+                                                                                <% if advert.property.images_tot > 0 %>
+										<img class="user-pic" style="border-radius: 0%; height: 58px;" src="<%= "http://kasa-staging-02.s3.amazonaws.com/#{advert.property.listing_id}_#{0}.jpg" %>">
+                                                                                <% else %>
+										<img class="user-pic" style="border-radius: 0%; height: 58px;" src="<%= "http://kasa-staging-02.s3.amazonaws.com/#{"FE9E0000"}_#{0}.jpg" %>">
+                                                                                <% end %>
+
+
+									</td>
+									<td>
+                                                                          <a href="javascript:;" class="primary-link"><%= advert.property.address %>  
+                                                                            <br>
+                                                                            <%= number_to_currency(advert.property.price, precision: 0) %></a>
+                                                                          <br>
+
+
+
+                                                                          <%= "Listed #{distance_of_time_in_words_to_now(advert.property.date)} ago" rescue "" %>
+                                                                          <br>
+                                                                          <button type="button" onclick="location.href='/adverts/new?step=5&propertyid=<%=advert.property.id%>';" class="btn btn-outline green btn-xs">edit</button>
+                                                                          <br>
+									</td>
+									<td>
+                                                                          <% if advert.completed != true %>
+                                                                          <div class="label label-sm label-danger">
+                                                                            Incomplete
+                                                                          </div>
+                                                                          <br>
+                                                                          <% end %>
+                                                                          <% if advert.completed == true && advert.approved == true %>
+                                                                          <%= best_in_place advert, :live,  as: :checkbox, collection: {false: "<i class='fa fa-square-o'></i> Live".html_safe, true: "<i class='fa fa-check-square-o'></i> Live".html_safe} %> 
+                                                                          <% end %>
+                                                                          <% if advert.approved != true && advert.completed == true %>
+                                                                          <div class="label label-sm label-warning">
+                                                                            Pending Approval
+                                                                          </div>
+                                                                          <% end %>
+									</td>
+								</tr>
+                                                                <% end %>
+
+								</table>
+							</div>
+						</div>
+					</div>
+<!-- END PROPERTIES LISTED BY YOU PORTLET-->
