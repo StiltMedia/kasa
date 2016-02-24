@@ -10,7 +10,8 @@ section.dashboard-bar-1
       span.cell = link_to "Dashboard", "/pages/user_dashboard"
 
 
-section.dashboard-bar-2
-  .row
-    .col-md-12
-      span #{text2}
+- if text2.size > 0
+  section.dashboard-bar-2
+    .row
+      .col-md-12
+        span #{text2}

@@ -69,26 +69,29 @@
   - if params[:step] == "1"
     /! content
     .row
-      .inner-content
-        .col-md-8.col-md-offset-2
+      .inner-content style="padding: 25px 0"
+        .col-md-6.col-md-offset-3
           /! input
           .col-md-12
             .input-group
-              = best_in_place @property, :address_freeform, :place_holder => "Address of Property for Sale", :inner_class => "w550", class: "look-like-input w550"
+              = best_in_place @property, :address_freeform, :place_holder => "Address of Property for Sale", :inner_class => "w100pc", class: "look-like-input w100pc"
               /! = best_in_place @property, :city, :place_holder => "City", :inner_class => "w150", :class => "look-like-input w150"
               /! = best_in_place @property, :state, :place_holder => "State eg. FL", :inner_class => "w100", :class => "look-like-input w100"
             br
             /! .input
             .input-group
-              = best_in_place @property, :price, :place_holder => "Set your price", :inner_class => "w550", :class => "look-like-input w550", :html_attrs => { onkeyup: 'this.value=this.value.replace(/[^\d]/,"")' }
+              = best_in_place @property, :price, :place_holder => "Set your price", :inner_class => "w100pc", :class => "look-like-input w100pc", :html_attrs => { onkeyup: 'this.value=this.value.replace(/[^\d]/,"")' }
           /! .input
         /! btn
         .col-md-3.col-md-offset-7.text-right
     /! .content
     .row
       .inner-content
-        .col-md-3.col-md-offset-7.text-right
-          a.next-step.btn.btn-alt href="#{"/adverts/new?step="+@next_step+"&propertyid="+@property.id.to_s}" Next Step    
+        .col-md-3.col-md-offset-6.text-right
+          a.next-step.btn.btn-alt.nohover href="#{"/adverts/new?step="+@next_step+"&propertyid="+@property.id.to_s}"
+            span Next Step 
+            i.fa.fa-long-arrow-right
+            span &nbsp;&nbsp;&nbsp;
 
 
 
@@ -101,17 +104,17 @@
     /! content
     .row
       .inner-content
-        .col-md-8.col-md-offset-2
+        .col-md-6.col-md-offset-3
 
           .col-md-12
             .input-group
               p LISTINGS WITH 9+ PHOTOS GET MORE CONTACTS
 
-              .container
-                div.btn.fileinput-button.longblue style="width: 55%; height: 22px; cursor: initial"
+              .zcontainer
+                div.btn.fileinput-button.longblue style="width: 100%; height: 22px; cursor: initial"
                   
                   input#fileupload multiple="" name="files[]" type="file" data-propertyid=@property.id  data-url="/properties/img_post" / 
-                #progress.progress style="width: 55%"
+                #progress.progress style="width: 100%"
                   .progress-bar.progress-bar-success
                 #existingfiles
                 - @images_tot.times do |i|
@@ -128,67 +131,70 @@
     /! .content
     .row
       .inner-content
-        .col-md-3.col-md-offset-7.text-right
-          a.next-step.btn.btn-alt href="#{"/adverts/new?step="+@next_step+"&propertyid="+@property.id.to_s}" Next Step    
+        .col-md-3.col-md-offset-6.text-right
+          a.next-step.btn.btn-alt.nohover href="#{"/adverts/new?step="+@next_step+"&propertyid="+@property.id.to_s}"    
+            span Next Step 
+            i.fa.fa-long-arrow-right
+
 
 
 
   - if params[:step] == "3"
     /! content
     .row
-      .inner-content
-        .col-md-8.col-md-offset-2
+      .inner-content style="padding: 50px 0"
+        .col-md-6.col-md-offset-3
           /! input
           .col-md-12
             .input-group
               h5 PROPERTY TYPE
-              = best_in_place @property, :ptype, :place_holder => "Property Type", :inner_class => "w500 select-themed", class: "look-like-input w550", :as => "select", :collection => {"Single Family" => "Single Family", "Townhouse or Condo" => "Townhouse or Condo", "Commercial" => "Commercial"}
+              = best_in_place @property, :ptype, :place_holder => "Property Type", :inner_class => "w100pc select-themed", class: "look-like-input w100pc", :as => "select", :collection => {"Single Family" => "Single Family", "Townhouse or Condo" => "Townhouse or Condo", "Commercial" => "Commercial"}
             br
             .row
-              .col-md-5
+              .col-md-6
                  /! .input
                  .input-group
                    h5 BEDROOMS
-                   = best_in_place @property, :beds, :place_holder => "# of bedrooms", :inner_class => "w250", class: "look-like-input w250", :html_attrs => { onkeyup: 'this.value=this.value.replace(/[^\d]/,"")' }
-              .col-md-5
+                   = best_in_place @property, :beds, :place_holder => "# of bedrooms", :inner_class => "w100pc", class: "look-like-input w100pc", :html_attrs => { onkeyup: 'this.value=this.value.replace(/[^\d]/,"")' }
+              .col-md-6
                  /! .input
                  .input-group
                    h5 BATHROOMS
-                   = best_in_place @property, :baths, :place_holder => "# of bathrooms", :inner_class => "w250", class: "look-like-input w250", :html_attrs => { onkeyup: 'this.value=this.value.replace(/[^\d]/,"")' }
+                   = best_in_place @property, :baths, :place_holder => "# of bathrooms", :inner_class => "w100pc", class: "look-like-input w100pc", :html_attrs => { onkeyup: 'this.value=this.value.replace(/[^\d]/,"")' }
             br
             .row
-              .col-md-5
+              .col-md-6
                  /! .input
                  .input-group
                    h5 PROPERTY SQ. FT.
-                   = best_in_place @property, :area, :place_holder => "Property size in Square Feet", :inner_class => "w250", class: "look-like-input w250", :html_attrs => { onkeyup: 'this.value=this.value.replace(/[^\d]/,"")' }
-              .col-md-5
+                   = best_in_place @property, :area, :place_holder => "Property size in Square Feet", :inner_class => "w100pc", class: "look-like-input w100pc", :html_attrs => { onkeyup: 'this.value=this.value.replace(/[^\d]/,"")' }
+              .col-md-6
                  /! .input
                  .input-group
                    h5 GARAGES
-                   = best_in_place @property, :garage, :place_holder => "# of garage spaces", :inner_class => "w250", class: "look-like-input w250", :html_attrs => { onkeyup: 'this.value=this.value.replace(/[^\d]/,"")' }
+                   = best_in_place @property, :garage, :place_holder => "# of garage spaces", :inner_class => "w100pc", class: "look-like-input w100pc", :html_attrs => { onkeyup: 'this.value=this.value.replace(/[^\d]/,"")' }
             br
 
 
 
             .row
-              .col-md-5
+              .col-md-6
                  /! .input
                  .input-group
                    h5 BUILT (YEAR)
-                   = best_in_place @property, :area, :place_holder => "", :inner_class => "w250", class: "look-like-input w250"
-              .col-md-5
+                   = best_in_place @property, :area, :place_holder => "", :inner_class => "w100pc", class: "look-like-input w100pc"
+              .col-md-6
                  /! .input
                  .input-group
                    h5 FLOOR
-                   = best_in_place @property, :floor, :place_holder => "TYPE OF FLOOR", :inner_class => "w250", class: "look-like-input w250"
+                   = best_in_place @property, :floor, :place_holder => "TYPE OF FLOOR", :inner_class => "w100pc", class: "look-like-input w100pc"
             br
             .row
-              .col-md-8
+              .col-md-12
                  /! .input
                  .input-group
                    h5 REMARKS (INCL. CONTACT INFORMATION)
-                   = best_in_place @property, :remarks, :place_holder => "Include some contact information ...", :inner_class => "w500 textarea-themed", class: "look-like-textarea w550", :as => :textarea
+                   = best_in_place @property, :remarks, :place_holder => "Include some contact information ...", :inner_class => "w100pc textarea-themed", class: "look-like-textarea w100pc", :as => :textarea
             br
 
           /! .input
@@ -196,9 +202,12 @@
         .col-md-3.col-md-offset-7.text-right
     /! .content
     .row
-      .inner-content
-        .col-md-3.col-md-offset-7.text-right
-          a.next-step.btn.btn-alt href="#{"/adverts/new?step="+@next_step+"&propertyid="+@property.id.to_s}" Next Step    
+      .inner-content style="padding: 50px 0"
+        .col-md-3.col-md-offset-6.text-right
+          a.next-step.btn.btn-alt.nohover href="#{"/adverts/new?step="+@next_step+"&propertyid="+@property.id.to_s}"
+            span Next Step 
+            i.fa.fa-long-arrow-right
+
 
 
 
@@ -221,16 +230,16 @@
           /! input
           .col-md-12
             .row
-              .col-md-5
+              .col-md-6
                  /! .input
                  .input-group
                    h5 OPEN HOUSE (START)
-                   = best_in_place @property, :open_house_beg,  :inner_class => "w250", class: "look-like-input w250", :as => :datetime
-              .col-md-5
+                   = best_in_place @property, :open_house_beg,  :inner_class => "w100pc", class: "look-like-input w100pc", :as => :datetime
+              .col-md-6
                  /! .input
                  .input-group
                    h5 OPEN HOUSE (END)
-                   = best_in_place @property, :open_house_end,  :inner_class => "w250", class: "look-like-input w250", :as => :datetime
+                   = best_in_place @property, :open_house_end,  :inner_class => "w100pc", class: "look-like-input w100pc", :as => :datetime
             br
             br
             br
@@ -243,7 +252,7 @@
     .row
       .inner-content
         .col-md-3.col-md-offset-7.text-right
-          a.next-step.btn.btn-alt onclick='return validate_step_4()' href="#{"/adverts/new?step="+@next_step+"&propertyid="+@property.id.to_s}" Review Offer →  
+          a.next-step.btn.btn-alt.nohover onclick='return validate_step_4()' href="#{"/adverts/new?step="+@next_step+"&propertyid="+@property.id.to_s}" Review Offer →  
 
 
 
@@ -526,9 +535,9 @@
 
 
     .row
-      .inner-content
-        .col-md-3.col-md-offset-7.text-right
-          a.next-step.btn.btn-alt onclick='return validate_step_5()' href="/users/#{current_user.id}/adverts?mf=TGlzdGluZyBzYXZlZA==" Submit →
+      .inner-content style="padding: 40px 0"
+        .col-md-6.col-md-offset-3.text-right
+          a.next-step.btn.btn-alt.nohover onclick='return validate_step_5()' href="/users/#{current_user.id}/adverts?mf=TGlzdGluZyBzYXZlZA==" Submit →
 
 
 

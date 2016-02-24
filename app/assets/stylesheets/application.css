@@ -20,10 +20,11 @@
 .pb60 {
     padding-bottom: 60px;
 }
-nav {
+
+znav {
     outline: 1px solid red;
 }
-body * {
+zbody * {
     outline: 0px solid red;
 }
 a:focus,
@@ -281,9 +282,10 @@ section.login .btn-alt, section.signup .btn-alt {
 .browse-page .links a:hover {
     text-decoration: none;
 }
-.btn:hover,
-.btn:focus:hover,
-.btn:active:hover {
+
+.btn:not(.nohover):hover,
+.btn:not(.nohover):focus:hover,
+.btn:not(.nohover):active:hover {
     color: white;
 }
 
@@ -1100,3 +1102,16 @@ input.best_in_place {
     opacity: 1;
 }
 
+.dashboard-bar-1 a {
+  color: rgb(178,187,195);
+  text-decoration: none;
+}
+
+.dashboard-bar-1 a:hover {
+  color: white;
+  text-decoration: none;
+}
+
+div {
+  zoutline: 1px solid rgba(0,0,0,0.1);
+}
