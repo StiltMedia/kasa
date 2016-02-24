@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   resources :feeds
   resources :adverts
   resources :offers
+  get '/properties/:id/images_tot' => 'properties#images_tot'
   post '/tickets/:id/add_memo' => 'tickets#add_memo'
   devise_for :users
   post '/users/:id' => 'users#update'

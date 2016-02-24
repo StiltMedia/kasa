@@ -41,6 +41,8 @@ class AdvertsController < ApplicationController
       @advert = Advert.where(property_id: @property.id).all.last
     end
     @images_tot = @property.images_tot || 0
+    @images_deleted = JSON.parse(@property.images_deleted) rescue nil
+    @images_deleted = [] if ! @images_deleted
   end
 
   # GET /adverts/1/edit
@@ -81,7 +83,6 @@ class AdvertsController < ApplicationController
   # DELETE /adverts/1
   # DELETE /adverts/1.json
   def destroy
-    byebug
     @advert.destroy
     respond_to do |format|
       format.html {

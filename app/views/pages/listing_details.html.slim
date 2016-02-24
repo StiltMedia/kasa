@@ -15,13 +15,25 @@
   /! slider
   aside
     #owl-example.owl-carousel
-      a.item href="http://kasa-staging-02.s3.amazonaws.com/#{@listing.listing_id}_0.jpg"
-        img alt="" src="http://kasa-staging-02.s3.amazonaws.com/#{@listing.listing_id}_0.jpg" title="" /
-      - if @listing.images_tot && @listing.images_tot > 2
-        - (2..@listing.images_tot-2).each do |i|
-          .item
-            a href="http://kasa-staging-02.s3.amazonaws.com/#{@listing.listing_id}_#{i}.jpg"
-              img.img-responsive.slide-img alt="" src="http://kasa-staging-02.s3.amazonaws.com/#{@listing.listing_id}_#{i}.jpg" title="" /
+      - if @listing.non_rets
+        - if @listing.images_tot_available > 0
+          - (0..@listing.images_tot-1).each do |i|
+            - next if @listing.is_photo_deleted?(i)
+            .item
+              a href="http://kasa-staging-02.s3.amazonaws.com/#{@listing.listing_id}_#{i}.jpg"
+                img.img-responsive.slide-img alt="" src="http://kasa-staging-02.s3.amazonaws.com/#{@listing.listing_id}_#{i}.jpg" title="" /
+
+
+      - else
+        a.item href="http://kasa-staging-02.s3.amazonaws.com/#{@listing.listing_id}_0.jpg"
+          img alt="" src="http://kasa-staging-02.s3.amazonaws.com/#{@listing.listing_id}_0.jpg" title="" /
+        - if @listing.images_tot && @listing.images_tot > 2
+          - (2..@listing.images_tot-2).each do |i|
+            .item
+              a href="http://kasa-staging-02.s3.amazonaws.com/#{@listing.listing_id}_#{i}.jpg"
+                img.img-responsive.slide-img alt="" src="http://kasa-staging-02.s3.amazonaws.com/#{@listing.listing_id}_#{i}.jpg" title="" /
+  
+
 
   /! .slider
   /! property content

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160224060947) do
+ActiveRecord::Schema.define(version: 20160224193457) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -162,6 +162,7 @@ ActiveRecord::Schema.define(version: 20160224060947) do
     t.string   "open_house_beg"
     t.string   "open_house_end"
     t.string   "address_freeform"
+    t.text     "images_deleted"
   end
 
   create_table "properties_users", id: false, force: :cascade do |t|

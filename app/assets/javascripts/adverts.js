@@ -1,6 +1,22 @@
 // Place all the behaviors and hooks related to the matching controller here.
 // All this logic will automatically be available in application.js.
 
+
+//$(".image-adder #fileupload").on("changed", function(e) {
+//    console.log("here0 "+ $(".image-adder .btn.indiv-upload").length);
+//
+//    //e.stopPropagation(); 
+//    //alert();
+//    //return false;
+//});
+//
+
+$("#fileupload").on("change.bs.fileinput", function(e) {
+  setTimeout( function() {
+    $(".image-adder .btn.indiv-upload:first").click();
+  }, 500);
+});
+
 $(document).on('ready page:load', function () {
 
   $(".adverts-new-page").closest('body').find('.review-block .look-like-input').css("border","0px");
@@ -18,16 +34,22 @@ $(document).on('ready page:load', function () {
     $.ajax({
       type: "POST",
       url: '/properties/img_rm',
-      data: { propertyid: $(this).data("propertyid") },
+      data: { propertyid: $(this).data("propertyid"),
+              index: $(this).data("index")
+            },
       success: function() {  location.reload();   },
       dataType: 'json'
     });
 
   });
 
-  $(".my-close").css('visibility','hidden');
-  $(".my-close").eq(-1).css('visibility','visible');
+  //$(".my-close").css('visibility','hidden');
+  //$(".my-close").eq(-1).css('visibility','visible');
 
+
+
+  
+  
 
 
 
@@ -80,9 +102,10 @@ $(document).on('ready page:load', function () {
                       .append(uploadButton.clone(true).data(data));
               }
               node.appendTo(data.context);
+              //node.attr('data-property-id', 'aaa' );
           });
       }).on('fileuploadprocessalways', function (e, data) {
-          $(".my-close").css('visibility', 'hidden');
+          //$(".my-close").css('visibility', 'hidden');
           var index = data.index,
               file = data.files[index],
               node = $(data.context.children()[index]);
@@ -108,15 +131,15 @@ $(document).on('ready page:load', function () {
               progress + '%'
           );
       }).on('fileuploaddone', function (e, data) {
-          //$(".adverts-new-page .img-wrap .my-close").css("display","none");
-          //$( "<div class='img-wrap'><span class='my-close'>&times;</span></div>" ).insertAfter( $(".adverts-new-page canvas:last-of-type") );
           $(".adverts-new-page canvas:last-of-type").wrap("<div class='img-wrap'></div>");
           $("<span class='my-close'>&times;</span>").appendTo( $(".img-wrap:last-of-type") );
-          $(".my-close").css('visibility', 'hidden');
-          $(".my-close").eq(-1).css('visibility', 'visible');
+          //$(".my-close").css('visibility', 'hidden');
+          //$(".my-close").eq(-1).css('visibility', 'visible');
           $(".my-close").eq(-1).data('propertyid',$(this).data('propertyid'));
-          //$(a).css('display', 'none');
-          //$(a).insertAfter ( $(".my-close:last-of-type") );
+            $.getJSON("/properties/"+$(this).data('propertyid')+"/images_tot", null, function(data) {
+            console.log("wrap length was "+ ($(".img-wrap").length) + " setting last myclose index to "+ (data.images_tot-1) );
+            $(".my-close").eq(-1).data('index', (data.images_tot-1) );
+          });
           $.each(data.result.files, function (index, file) {
               if (file.url) {
                   var link = $('<a>')
@@ -130,6 +153,7 @@ $(document).on('ready page:load', function () {
                       .append('<br>')
                       .append(error);
               }
+              location.reload();
           });
       }).on('fileuploadfail', function (e, data) {
           $.each(data.files, function (index) {

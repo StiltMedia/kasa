@@ -15,4 +15,18 @@ class Property < ActiveRecord::Base
     "#{address} #{city} #{state} #{zip}"
   end
 
+  # accounts for deleted images
+  def images_tot_available
+    ret_val = images_tot
+    ret_val = 0 if ! images_tot
+    a = images_deleted
+    a = "[]" if images_deleted.blank?
+    a = JSON.parse(images_deleted) rescue []
+    ret_val = images_tot - a.size
+  end
+
+  def is_photo_deleted?(index)
+    deleteds = JSON.parse(images_deleted) rescue []
+    deleteds.include?(index.to_s)
+  end
 end

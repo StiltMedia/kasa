@@ -124,9 +124,9 @@
   background: rgba(0,0,0,0);
 }
 
-.adverts-new-page .fileinput-button {
+.adverts-new-page .image-adder .fileinput-button {
   border: 0px;
-  background: rgb(23,66,103);
+  background: rgb(242,242,242);
   font-size: 11px;
   border-radius: 0px;
 }
@@ -137,11 +137,12 @@
   padding: 6px 12px;
 }
 
-.adverts-new-page .progress {
-  background: rgb(23,66,103);
+.adverts-new-page .image-adder .progress {
+  background: rgb(242,242,242);
   border-radius: 0px;
   border: 0px;
   height: 2px;
+  zopacity: 0.1;
 }
 
 .adverts-new-page .fileinput-button * {

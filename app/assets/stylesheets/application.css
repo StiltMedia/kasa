@@ -1112,6 +1112,10 @@ input.best_in_place {
   text-decoration: none;
 }
 
+.css-undo-1:focus {
+  color: white;
+}
+
 div {
   zoutline: 1px solid rgba(0,0,0,0.1);
 }

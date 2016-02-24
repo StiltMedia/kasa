@@ -9,9 +9,10 @@ class PropertiesController < ApplicationController
 
   def img_rm
     property = Property.find(params[:propertyid])   
-    logger.debug "DB8 images_tot waz #{property.images_tot}"
-    property.images_tot -= 1
-    logger.debug "DB8 images_tot waz #{property.images_tot} after"
+    a = []
+    a = JSON.parse(property.images_deleted) if property.images_deleted.present?
+    a.push(params[:index])
+    property.images_deleted = a.to_json
     property.save
     render json: { result: "ok" }
   end
@@ -110,6 +111,11 @@ class PropertiesController < ApplicationController
       format.html { redirect_to properties_url, notice: 'Property was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+  
+  # GET /properties/:id/images_tot
+  def images_tot
+    render json: { images_tot: Property.find(params[:id]).images_tot }.to_json
   end
 
   private

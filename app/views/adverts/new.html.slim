@@ -103,23 +103,26 @@
   - if params[:step] == "2"
     /! content
     .row
-      .inner-content
+      .inner-content style="padding: 45px 0"
         .col-md-6.col-md-offset-3
 
           .col-md-12
             .input-group
               p LISTINGS WITH 9+ PHOTOS GET MORE CONTACTS
+              br
+              br
 
-              .zcontainer
+              .zcontainer.image-adder
+                button.btn.btn-sm.css-undo-1.w100pc style="background: rgb(23,66,123); font-size: 14px; height: 38px;" onclick="$('input#fileupload').click()" UPLOAD PHOTOS
                 div.btn.fileinput-button.longblue style="width: 100%; height: 22px; cursor: initial"
-                  
-                  input#fileupload multiple="" name="files[]" type="file" data-propertyid=@property.id  data-url="/properties/img_post" / 
+                  input#fileupload name="files[]" type="file" data-propertyid=@property.id data-images-tot=@property.images_tot data-url="/properties/img_post" style="opacity: 0" / 
                 #progress.progress style="width: 100%"
                   .progress-bar.progress-bar-success
                 #existingfiles
                 - @images_tot.times do |i|
+                  - next if @images_deleted.include? i.to_s
                   .img-wrap
-                    span.my-close data-propertyid=@property.id = "&times;".html_safe
+                    span.my-close data-propertyid=@property.id data-index=i = "&times;".html_safe
                     img style="width: 100px; height: 100px;" src="http://kasa-staging-02.s3.amazonaws.com/#{@property.listing_id}_#{i}.jpg"
                 #files.files
                 br/
@@ -130,7 +133,7 @@
         .col-md-3.col-md-offset-7.text-right
     /! .content
     .row
-      .inner-content
+      .inner-content style="padding: 45px 0"
         .col-md-3.col-md-offset-6.text-right
           a.next-step.btn.btn-alt.nohover href="#{"/adverts/new?step="+@next_step+"&propertyid="+@property.id.to_s}"    
             span Next Step 
@@ -241,6 +244,18 @@
                    h5 OPEN HOUSE (END)
                    = best_in_place @property, :open_house_end,  :inner_class => "w100pc", class: "look-like-input w100pc", :as => :datetime
             br
+            br
+            .row
+              .col-md-12
+                 /! .input
+                 .input-group
+                   h5 CONTACT INFORMATION
+                   = best_in_place @property, :open_house_beg,  :inner_class => "w100pc", class: "look-like-input w100pc", :as => :datetime
+                 p * Potential buyers will contact you through the email address you use to register on KASA. You can also add your phone number to the listing here.
+
+
+
+
             br
             br
             .input-group.text-center
@@ -389,7 +404,7 @@
                          .container
                            div.btn.fileinput-button.longblue style="width: 55%; height: 22px; cursor: initial"
                              
-                             input#fileupload multiple="" name="files[]" type="file" data-propertyid=@property.id  data-url="/properties/img_post" / 
+                             input#fileupload name="files[]" type="file" data-propertyid=@property.id  data-url="/properties/img_post" / 
                            #progress.progress style="width: 55%"
                              .progress-bar.progress-bar-success
                            #existingfiles
@@ -484,7 +499,7 @@
                          /! .input
                          .input-group
                            h5 REMARKS (INCL. CONTACT INFORMATION)
-                           = best_in_place @property, :remarks, :place_holder => "Include some contact information ...", :inner_class => "w500 textarea-themed", class: "look-like-textarea w550", :as => :textarea
+                           = best_in_place @property, :remarks, :place_holder => "Include some contact information ...", :inner_class => "w500 textarea-themed", class: "look-like-textarea w550", :as => :textarea, :place_holder => "Phone Number"
                     br
         
 
@@ -526,10 +541,6 @@
                        .input-group
                          h5 OPEN HOUSE (END)
                          = best_in_place @property, :open_house_end,  :inner_class => "w250", class: "look-like-input w250", :as => :datetime
-
-
-
-
 
 
 

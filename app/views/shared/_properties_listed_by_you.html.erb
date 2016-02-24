@@ -87,7 +87,7 @@
                                                                 <% current_user.adverts.order(id: :desc).each do |advert| %>
 								<tr data-advert-id="<%=advert.id%>" data-property-id="<%=advert.property.id%>">
 									<td class="fit">
-                                                                                <% if advert.property.images_tot > 0 %>
+                                                                                <% if advert.property.images_tot_available > 0 %>
 										<img class="user-pic" style="border-radius: 0%; height: 58px;" src="<%= "http://kasa-staging-02.s3.amazonaws.com/#{advert.property.listing_id}_#{0}.jpg" %>">
                                                                                 <% else %>
 										<img class="user-pic" style="border-radius: 0%; height: 58px;" src="<%= "http://kasa-staging-02.s3.amazonaws.com/#{"FE9E0000"}_#{0}.jpg" %>">
