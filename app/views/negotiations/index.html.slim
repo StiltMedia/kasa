@@ -1,0 +1,27 @@
+h1 Listing negotiations
+
+table
+  thead
+    tr
+      th Src
+      th Dst
+      th Details
+      th Ndate
+      th
+      th
+      th
+
+  tbody
+    - @negotiations.each do |negotiation|
+      tr
+        td = negotiation.src
+        td = negotiation.dst
+        td = negotiation.details
+        td = negotiation.ndate
+        td = link_to 'Show', negotiation
+        td = link_to 'Edit', edit_negotiation_path(negotiation)
+        td = link_to 'Destroy', negotiation, data: {:confirm => 'Are you sure?'}, :method => :delete
+
+br
+
+= link_to 'New Negotiation', new_negotiation_path

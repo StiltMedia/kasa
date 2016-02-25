@@ -1,0 +1,18 @@
+p#notice = notice
+
+p
+  strong Src:
+  = @negotiation.src
+p
+  strong Dst:
+  = @negotiation.dst
+p
+  strong Details:
+  = @negotiation.details
+p
+  strong Ndate:
+  = @negotiation.ndate
+
+= link_to 'Edit', edit_negotiation_path(@negotiation)
+'|
+= link_to 'Back', negotiations_path

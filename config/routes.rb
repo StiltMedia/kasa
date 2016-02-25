@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :negotiations
   resources :open_house_times
   resources :memos
   resources :tickets

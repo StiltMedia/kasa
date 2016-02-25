@@ -84,7 +84,7 @@ class PagesController < ApplicationController
     Hit.create(
       property_id: @listing.id,
       htime: Time.now(),
-      user_id: Advert.where(property_id: @listing.id).last.user_id
+      user_id: (Advert.where(property_id: @listing.id).last.user_id rescue nil)
     )
   end
 

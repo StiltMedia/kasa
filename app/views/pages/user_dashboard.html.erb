@@ -935,85 +935,47 @@
 							</div>
 						</div>
 						<div class="portlet-body">
-							<div class="row number-stats margin-bottom-30">
-								<div class="col-md-12 col-sm-12 col-xs-12 hide">
-									<div class="stat-left">
-										<div class="stat-chart" style="float: none">
-											<!-- do not line break "sparkline_bar" div. sparkline chart has an issue when the container div has line break -->
-											<div id="sparkline_bar"></div>
-										</div>
-										<div class="stat-number">
-											<div class="title">
-												 Total
-											</div>
-											<div class="number">
-                                                                                          <% if current_user.admin %>
-												 <%= Hit.last_30_days(nil).inject(0){|sum,x| sum + x } %>
-                                                                                          <% else %>
-                                                                                                 <%= Hit.last_30_days(current_user).inject(0){|sum,x| sum + x } %>
-                                                                                          <% end %>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="col-md-6 col-sm-6 col-xs-6 hide">
-									<div class="stat-right">
-										<div class="stat-chart">
-											<!-- do not line break "sparkline_bar" div. sparkline chart has an issue when the container div has line break -->
-											<div id="sparkline_bar2"></div>
-										</div>
-										<div class="stat-number">
-											<div class="title">
-												 New
-											</div>
-											<div class="number">
-												 719
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
 							<div class="table-scrollable table-scrollable-borderless">
 								<table class="table table-hover table-light">
 								<thead>
 								<tr class="uppercase">
-									<th colspan="2">
-										 MEMBER
+									<th colspan="1">
+										 FROM
 									</th>
 									<th>
-										 Earnings
+										 TO
 									</th>
 									<th>
-										 CASES
+										 &nbsp;
 									</th>
+
 									<th>
-										 CLOSED
-									</th>
-									<th>
-										 RATE
+										 DATE
 									</th>
 								</tr>
 								</thead>
+                                                                <% items = Negotiation.all.order(ndate: :asc) if current_user.admin %>
+                                                                <% items = Negotiation.where("src = ? OR dst = ?", current_user.id, current_user.id).all.order(ndate: :asc) %>
+                                                                <% items.each do |item| %>
 								<tr>
 									<td class="fit">
-										<img class="user-pic" src="/theme/assets/admin/layout3/img/avatar4.jpg">
+										<img class="user-pic" src="/users/<%= item.src %>/show_picture"><br>
+										<a href="<%= url_for(User.find(item.src))%>" class="primary-link"><%= User.find(item.src).email.split('@')[0].titleize %></a>
 									</td>
 									<td>
-										<a href="javascript:;" class="primary-link">Brain</a>
+									  <img class="user-pic" src="/users/<%= item.dst %>/show_picture"><br>
+										<a href="<%= url_for(User.find(item.dst))%>" class="primary-link"><%= User.find(item.dst).email.split('@')[0].titleize %></a>
+									</td>
+
+
+									<td>
+										 <%= item.details %>
 									</td>
 									<td>
-										 $345
-									</td>
-									<td>
-										 45
-									</td>
-									<td>
-										 124
-									</td>
-									<td>
-										<span class="bold theme-font">80%</span>
+										<span class="bold theme-font"><%= item.ndate.strftime('%m-%d-%y') %></span>
 									</td>
 								</tr>
+                                                                <% end %>
 								</table>
 							</div>
 						</div>

@@ -3,8 +3,7 @@
     .page-head
       .container
         .page-title
-          h1
-            | Profile
+          h1 = 'Profile' if current_user.id.to_s == params[:id]
 
         
     .page-content
@@ -51,7 +50,7 @@
                 .portlet-body.form
                   div
                     .form-body
-                      .form-group
+                      .form-group class=(params[:id] == current_user.id.to_s ? "" : "hide")
                         label Email Address
                         .input-group
                           span.input-group-addon
@@ -61,12 +60,18 @@
                       .form-group
                         label First Name
                         br
-                        = best_in_place current_user, :first_name, :inner_class => "input form-control", :place_holder => "click to edit", :class => "input"
+                        - if current_user.id.to_s == params[:id]
+                          = best_in_place current_user, :first_name, :inner_class => "input form-control", :place_holder => "click to edit", :class => "input"
+                        - else
+                          span = current_user.first_name
                         input.invisible.form-control placeholder=("First name") type="text" /
                       .form-group
                         label Last Name
                         br
-                        = best_in_place current_user, :last_name, :inner_class => "input form-control", :place_holder => "click to edit", :class => "input"
+                        - if current_user.id.to_s == params[:id]
+                          = best_in_place current_user, :last_name, :inner_class => "input form-control", :place_holder => "click to edit", :class => "input"
+                        - else
+                          span = current_user.last_name
                     .form-actions
                       button.btn.blue.hide type="submit" disabled="1" Saved
                       button.btn.default type="button" onclick="window.location='/pages/user_dashboard'" Back to Dashboard
@@ -108,20 +113,23 @@
                 .portlet-body.form
                   div
                     .form-body
-                      .form-group
-                        label Profile photo
+                      - if current_user.id.to_s != params[:id]
+                        img src="/users/#{current_user.id}/show_picture"
+                      - else
+                        .form-group
+                          label Profile photo
+                          br
+                          = form_for("user", :url => user_path) do |f|                       
+                            .fileinput.fileinput-new data-provides="fileinput" 
+                              .fileinput-preview.thumbnail data-trigger="fileinput" style=("width: 200px; height: 150px;")
+                                img src="/users/#{current_user.id}/show_picture"
+                              div
+                                span.btn.btn-sm.green.btn-file
+                                  span.fileinput-new Select File
+                                  span.fileinput-exists Select File
+                                  = f.file_field( :picture, accept: 'image/*')
+                                a.btn.btn-sm.green.default.fileinput-exists data-dismiss="fileinput" href="#"  Remove
+                                a.btn.btn-sm.green.default.fileinput-exists.upload href="javascript:;" onclick="$(this).closest('form').submit(); return false" Upload
+                        
                         br
-                        = form_for("user", :url => user_path) do |f|                       
-                          .fileinput.fileinput-new data-provides="fileinput" 
-                            .fileinput-preview.thumbnail data-trigger="fileinput" style=("width: 200px; height: 150px;")
-                              img src="/users/#{current_user.id}/show_picture"
-                            div
-                              span.btn.btn-sm.green.btn-file
-                                span.fileinput-new Select File
-                                span.fileinput-exists Select File
-                                = f.file_field( :picture, accept: 'image/*')
-                              a.btn.btn-sm.green.default.fileinput-exists data-dismiss="fileinput" href="#"  Remove
-                              a.btn.btn-sm.green.default.fileinput-exists.upload href="javascript:;" onclick="$(this).closest('form').submit(); return false" Upload
-                 
-                      br
               /! END SAMPLE FORM PORTLET
