@@ -1,0 +1,35 @@
+
+- if advert.open_house_times.all.size == 0
+  - OpenHouseTime.create(advert_id: advert.id )
+
+/! OPEN HOUSE WIDGET
+.row.open-house-times-edit-widget
+  /! input
+  .col-md-12
+    - advert.open_house_times.all.each do |oht|
+      .row
+        .col-md-6
+           /! .input
+           .input-group
+             h5 OPEN HOUSE DATE
+             = best_in_place oht, :odate,  :inner_class => "w100pc", class: "look-like-input w100pc wsnw", :as => :date, :plac_holder => "Select Date"
+        .col-md-3
+           /! .input
+           .input-group
+             h5 START TIME
+             = best_in_place oht, :start_time,  :inner_class => "w100pc", class: "look-like-input w100pc zwsnw",:as => :select, :place_holder => "Select Time", :collection => OpenHouseTime.times_collection
+        .col-md-3
+           /! .input
+           .input-group
+             h5 END TIME
+             = best_in_place oht, :end_time,  :inner_class => "w100pc", class: "look-like-input w100pc zwsnw",:as => :select, :place_holder => "Select Time", :collection => OpenHouseTime.times_collection
+
+  
+
+
+    .row
+      .col-md-3.col-md-offset-9
+         .input-group
+           h5
+             a.add-another-day class=(review_mode ? "hide" : "") data-advertid=advert.id href="javascript:;" +  &nbsp;&nbsp;Add Another Day
+  /! END OPEN HOUSE WIDGET

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160224193457) do
+ActiveRecord::Schema.define(version: 20160225003041) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -133,6 +133,17 @@ ActiveRecord::Schema.define(version: 20160224193457) do
   add_index "offers", ["property_id"], name: "index_offers_on_property_id", using: :btree
   add_index "offers", ["user_id"], name: "index_offers_on_user_id", using: :btree
 
+  create_table "open_house_times", force: :cascade do |t|
+    t.datetime "odate"
+    t.datetime "start_time"
+    t.datetime "end_time"
+    t.integer  "advert_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "open_house_times", ["advert_id"], name: "index_open_house_times_on_advert_id", using: :btree
+
   create_table "properties", force: :cascade do |t|
     t.datetime "created_at",          null: false
     t.datetime "updated_at",          null: false
@@ -163,6 +174,7 @@ ActiveRecord::Schema.define(version: 20160224193457) do
     t.string   "open_house_end"
     t.string   "address_freeform"
     t.text     "images_deleted"
+    t.string   "contact_information"
   end
 
   create_table "properties_users", id: false, force: :cascade do |t|
@@ -214,4 +226,5 @@ ActiveRecord::Schema.define(version: 20160224193457) do
   add_foreign_key "memos", "tickets"
   add_foreign_key "offers", "properties"
   add_foreign_key "offers", "users"
+  add_foreign_key "open_house_times", "adverts"
 end

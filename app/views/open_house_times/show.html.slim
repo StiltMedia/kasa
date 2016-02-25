@@ -1,0 +1,18 @@
+p#notice = notice
+
+p
+  strong Odate:
+  = @open_house_time.odate
+p
+  strong Start time:
+  = @open_house_time.start_time
+p
+  strong End time:
+  = @open_house_time.end_time
+p
+  strong Advert:
+  = @open_house_time.advert
+
+= link_to 'Edit', edit_open_house_time_path(@open_house_time)
+'|
+= link_to 'Back', open_house_times_path

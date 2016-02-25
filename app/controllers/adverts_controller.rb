@@ -96,6 +96,15 @@ class AdvertsController < ApplicationController
     end
   end
 
+
+  # POST /adverts/:id/add_another_day
+  def add_another_day
+    OpenHouseTime.create(advert_id: params[:id] )
+
+    a = (render_to_string :partial => '/shared/open_house_times_edit', :locals => { :advert => Advert.find(params[:id])  })
+    render json: { html: a  }.to_json
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_advert

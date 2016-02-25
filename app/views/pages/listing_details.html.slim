@@ -47,6 +47,9 @@
             | #{@listing.city.titleize} #{@listing.state}
           .text-box
             p = @listing.remarks.humanize rescue ""
+            - if @listing.non_rets && @listing.contact_information.present?
+              br
+              span = @listing.contact_information
             p.invisible
               | Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.
               | Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus

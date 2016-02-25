@@ -17,7 +17,21 @@ $("#fileupload").on("change.bs.fileinput", function(e) {
   }, 500);
 });
 
+
 $(document).on('ready page:load', function () {
+
+  $(document).on('click', '.add-another-day', function() {
+    $.ajax({
+      type: "POST",
+      url: '/adverts/'+$(this).data('advertid')+'/add_another_day',
+      data: { 
+            },
+      success: function(data) {  console.log("here"); $(".open-house-times-edit-widget").html(data.html); $(".best_in_place").best_in_place();   },
+      dataType: 'json'
+    });
+
+
+  });
 
   $(".adverts-new-page").closest('body').find('.review-block .look-like-input').css("border","0px");
   $(".adverts-new-page").closest('body').find('.review-block .look-like-textarea').css("border","0px");
@@ -280,6 +294,10 @@ function toggle_review_block(elem,ndx) {
       $(".longblue").css('visibility', 'visible');
       $("button.indiv-upload").css('visibility','visible');
     }
+  }
+
+  if (ndx == 3) {
+    $("a.add-another-day").removeClass("hide");
   }
 }
 

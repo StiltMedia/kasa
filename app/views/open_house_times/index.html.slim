@@ -1,0 +1,27 @@
+h1 Listing open_house_times
+
+table
+  thead
+    tr
+      th Odate
+      th Start time
+      th End time
+      th Advert
+      th
+      th
+      th
+
+  tbody
+    - @open_house_times.each do |open_house_time|
+      tr
+        td = open_house_time.odate
+        td = open_house_time.start_time
+        td = open_house_time.end_time
+        td = open_house_time.advert
+        td = link_to 'Show', open_house_time
+        td = link_to 'Edit', edit_open_house_time_path(open_house_time)
+        td = link_to 'Destroy', open_house_time, data: {:confirm => 'Are you sure?'}, :method => :delete
+
+br
+
+= link_to 'New Open house time', new_open_house_time_path

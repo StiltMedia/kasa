@@ -1,8 +1,10 @@
 Rails.application.routes.draw do
+  resources :open_house_times
   resources :memos
   resources :tickets
   resources :hits
   resources :feeds
+  post '/adverts/:id/add_another_day' => 'adverts#add_another_day'
   resources :adverts
   resources :offers
   get '/properties/:id/images_tot' => 'properties#images_tot'

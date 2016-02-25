@@ -1,0 +1,21 @@
+= form_for @open_house_time do |f|
+  - if @open_house_time.errors.any?
+    #error_explanation
+      h2 = "#{pluralize(@open_house_time.errors.count, "error")} prohibited this open_house_time from being saved:"
+      ul
+        - @open_house_time.errors.full_messages.each do |message|
+          li = message
+
+  .field
+    = f.label :odate
+    = f.datetime_select :odate
+  .field
+    = f.label :start_time
+    = f.datetime_select :start_time
+  .field
+    = f.label :end_time
+    = f.datetime_select :end_time
+  .field
+    = f.label :advert
+    = f.text_field :advert
+  .actions = f.submit

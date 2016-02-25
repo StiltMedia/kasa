@@ -1116,6 +1116,11 @@ input.best_in_place {
   color: white;
 }
 
-div {
-  zoutline: 1px solid rgba(0,0,0,0.1);
+.wsnw {
+  white-space: nowrap;
 }
+
+div {
+  outline: 0px solid rgba(0,0,0,0.1);
+}
+

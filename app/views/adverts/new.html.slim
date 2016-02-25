@@ -196,8 +196,8 @@
               .col-md-12
                  /! .input
                  .input-group
-                   h5 REMARKS (INCL. CONTACT INFORMATION)
-                   = best_in_place @property, :remarks, :place_holder => "Include some contact information ...", :inner_class => "w100pc textarea-themed", class: "look-like-textarea w100pc", :as => :textarea
+                   h5 REMARKS
+                   = best_in_place @property, :remarks, :place_holder => "Remarks", :inner_class => "w100pc textarea-themed", class: "look-like-textarea w100pc", :as => :textarea
             br
 
           /! .input
@@ -230,19 +230,7 @@
     .row
       .inner-content
         .col-md-8.col-md-offset-2
-          /! input
-          .col-md-12
-            .row
-              .col-md-6
-                 /! .input
-                 .input-group
-                   h5 OPEN HOUSE (START)
-                   = best_in_place @property, :open_house_beg,  :inner_class => "w100pc", class: "look-like-input w100pc", :as => :datetime
-              .col-md-6
-                 /! .input
-                 .input-group
-                   h5 OPEN HOUSE (END)
-                   = best_in_place @property, :open_house_end,  :inner_class => "w100pc", class: "look-like-input w100pc", :as => :datetime
+            = render partial: 'shared/open_house_times_edit', locals: { property: Property.last, advert: @advert, review_mode: false }
             br
             br
             .row
@@ -250,8 +238,8 @@
                  /! .input
                  .input-group
                    h5 CONTACT INFORMATION
-                   = best_in_place @property, :open_house_beg,  :inner_class => "w100pc", class: "look-like-input w100pc", :as => :datetime
-                 p * Potential buyers will contact you through the email address you use to register on KASA. You can also add your phone number to the listing here.
+                   = best_in_place @property, :contact_information,  :inner_class => "w100pc", class: "look-like-input w100pc", :place_holder => "Phone Number"
+                 p = "*Potential buyers will contact you through the email address you use to register on KASA. You can also add your phone number to the listing here."
 
 
 
@@ -267,7 +255,7 @@
     .row
       .inner-content
         .col-md-3.col-md-offset-7.text-right
-          a.next-step.btn.btn-alt.nohover onclick='return validate_step_4()' href="#{"/adverts/new?step="+@next_step+"&propertyid="+@property.id.to_s}" Review Offer →  
+          a.next-step.btn.btn-alt.nohover onclick='return validate_step_4()' href="#{"/adverts/new?step="+@next_step+"&propertyid="+@property.id.to_s}" Review →  
 
 
 
@@ -498,8 +486,8 @@
                       .col-md-8
                          /! .input
                          .input-group
-                           h5 REMARKS (INCL. CONTACT INFORMATION)
-                           = best_in_place @property, :remarks, :place_holder => "Include some contact information ...", :inner_class => "w500 textarea-themed", class: "look-like-textarea w550", :as => :textarea, :place_holder => "Phone Number"
+                           h5 REMARKS
+                           = best_in_place @property, :remarks, :place_holder => "Remarks", :inner_class => "w500 textarea-themed", class: "look-like-textarea w550", :as => :textarea, :place_holder => "Phone Number"
                     br
         
 
@@ -530,23 +518,22 @@
                   a.edit onclick='toggle_review_block(this,3)' href="javascript:void(0)"  Edit
 
 
+                  br
+                  br
+                  = render partial: 'shared/open_house_times_edit', locals: { property: Property.last, advert: @advert, review_mode: true }
+                  br
+
                   .row
-                    .col-md-5
+                    .col-md-12
                        /! .input
                        .input-group
-                         h5 OPEN HOUSE (START)
-                         = best_in_place @property, :open_house_beg,  :inner_class => "w250", class: "look-like-input w250", :as => :datetime
-                    .col-md-5
-                       /! .input
-                       .input-group
-                         h5 OPEN HOUSE (END)
-                         = best_in_place @property, :open_house_end,  :inner_class => "w250", class: "look-like-input w250", :as => :datetime
-
-
-
+                         h5 CONTACT INFORMATION
+                         = best_in_place @property, :contact_information,  :inner_class => "w550", class: "look-like-input w550", :place_holder => "Phone Number"
+                         br
+                         br
 
     .row
-      .inner-content style="padding: 40px 0"
+      .inner-content style="padding: 30px 0"
         .col-md-6.col-md-offset-3.text-right
           a.next-step.btn.btn-alt.nohover onclick='return validate_step_5()' href="/users/#{current_user.id}/adverts?mf=TGlzdGluZyBzYXZlZA==" Submit →
 
