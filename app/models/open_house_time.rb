@@ -2,7 +2,7 @@ class OpenHouseTime < ActiveRecord::Base
   belongs_to :advert
 
   def self.times_collection
-    %w( 6am 7am 8am 9am 10am 11am 12noon 1pm 2pm 3pm 4pm 5pm 6pm 7pm 8pm 9pm)
+    %w( 06:00 07:00 08:00 09:00 10:00 11:00 12:00 13:00 14:00 15:00 16:00 17:00 18:00 19:00 20:00 21:00)
   end
 
 end

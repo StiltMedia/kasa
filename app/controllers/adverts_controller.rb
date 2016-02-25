@@ -113,6 +113,6 @@ class AdvertsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def advert_params
-      params.require(:advert).permit(:user_id, :property_id, :seed, :approved, :live)
+      params.require(:advert).permit(:user_id, :property_id, :seed, :approved, :live, :completed)
     end
 end

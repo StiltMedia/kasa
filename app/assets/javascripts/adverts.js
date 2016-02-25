@@ -305,11 +305,13 @@ function toggle_review_block(elem,ndx) {
       $(".longblue").css('visibility', 'visible');
       $("button.indiv-upload").css('visibility','visible');
     }
+    window.location.replace('/adverts/new?step=2&propertyid=' + $(".adverts-new-page").data('property-id') );
   }
 
   if (ndx == 3) {
     $("a.add-another-day").removeClass("hide");
   }
+
 }
 
 

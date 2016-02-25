@@ -40,7 +40,7 @@ if ($("#ex1").length > 0) {
 
 
 $(document).ready(function () {
-
+    $.datepicker.setDefaults({ dateFormat: 'mm-dd-yy' });
     $("#owl-example").owlCarousel({
         loop: true,
         pagination: false,
