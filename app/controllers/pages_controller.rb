@@ -83,7 +83,8 @@ class PagesController < ApplicationController
     @listing = Property.find_by_listing_id(params[:listing_id])
     Hit.create(
       property_id: @listing.id,
-      kind: 'listing_details'
+      htime: Time.now(),
+      user_id: Advert.where(property_id: @listing.id).last.user_id
     )
   end
 

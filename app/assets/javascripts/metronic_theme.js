@@ -17,6 +17,12 @@
 
 
 $("document").ready( function() {
+
+  if ( $(".page-container.user-dashboard").length > 0 ) {
+    //$("#sparkline_bar").sparkline([8,9,10,11,10,10,12,10,10,11,8,9,10,11,10,10,12,10,10,11,8,9,10,11,10,10,12,10,10,11],{type:"bar",width:"400",barWidth:10,height:"220",barColor:"#35aa47",negBarColor:"#e02222"})
+    $("#sparkline_bar").sparkline($(".page-container").data("stats"),{type:"bar",width:"400",barWidth:10,height:"220",barColor:"#35aa47",negBarColor:"#e02222"})
+  }
+
   $(".best_in_place").best_in_place();
 
   $(".page-container.tickets-show .btn.reply").on('click', function() {
