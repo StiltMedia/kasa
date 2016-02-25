@@ -21,12 +21,23 @@ $("#fileupload").on("change.bs.fileinput", function(e) {
 $(document).on('ready page:load', function () {
 
   $(document).on('click', '.add-another-day', function() {
+    var review_mode;
+    if ( $(".review-block").length > 1 ) {
+      review_mode = true;
+    }
     $.ajax({
       type: "POST",
       url: '/adverts/'+$(this).data('advertid')+'/add_another_day',
-      data: { 
+      data: {
+              review_mode: review_mode
             },
-      success: function(data) {  console.log("here"); $(".open-house-times-edit-widget").html(data.html); $(".best_in_place").best_in_place();   },
+      success: function(data) {
+        console.log("here");
+        $(".open-house-times-edit-widget").html(data.html);
+        $(".best_in_place").best_in_place();
+        if (review_mode == true)
+          $(".adverts-new-page").closest('body').find('.review-block').eq(3).find('.look-like-input, .look-like-textarea').css('border','2px solid #939393');
+      },
       dataType: 'json'
     });
 

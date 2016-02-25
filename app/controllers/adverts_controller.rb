@@ -101,7 +101,7 @@ class AdvertsController < ApplicationController
   def add_another_day
     OpenHouseTime.create(advert_id: params[:id] )
 
-    a = (render_to_string :partial => '/shared/open_house_times_edit', :locals => { :advert => Advert.find(params[:id])  })
+    a = (render_to_string :partial => '/shared/open_house_times_edit', :locals => { :advert => Advert.find(params[:id]), :review_mode => (params[:review_mode] == "true" ? true : false)  })
     render json: { html: a  }.to_json
   end
 
