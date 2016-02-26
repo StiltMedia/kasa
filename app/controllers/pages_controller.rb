@@ -8,6 +8,10 @@ class PagesController < ApplicationController
     @feeds = Feed.all.order(created_at: :desc) if current_user.admin
     @feeds = Feed.where(user_id: current_user.id).all.order(created_at: :desc) if current_user.admin != true
 
+    who = request.remote_ip
+    who = current_user.email if current_user
+    Feed.create(message: "visited dashboard (#{who})", user_id: 4, icon: 'fa fa-dashboard')
+
     redirect_to new_user_session_path if ! current_user
     render layout: 'metronic_layout'
   end
@@ -98,6 +102,13 @@ class PagesController < ApplicationController
   def listing_details
     @listing = Property.find_by_listing_id(params[:listing_id])
     raise "403 Forbidden" if ( @listing.non_rets && Advert.where(property_id: @listing.id).last.live != true )
+    who = request.remote_ip
+    who = current_user.email if current_user
+    owner = 4
+    if Advert.where(property_id: @listing.id).all > 0
+      owner = Advert.where(property_id: @listing.id).all.last.user_id
+    end
+    Feed.create(message: "viewed property #{@listing.address} (#{who})", user_id: owner, icon: 'fa fa-flag')
     Hit.create(
       property_id: @listing.id,
       htime: Time.now(),
@@ -112,6 +123,11 @@ class PagesController < ApplicationController
   end
 
   def browse
+    who = request.remote_ip
+    who = current_user.email if current_user
+    Feed.create(message: "browsed properties (#{who})", user_id: 4, icon: 'fa fa-reorder')
+
+
     # remove commas, dollars and dots
     params[:min_price].gsub!(/[,\.\$\s]/,'') rescue nil
     params[:max_price].gsub!(/[,\.\$\s]/,'') rescue nil
