@@ -3,7 +3,7 @@
 						<div class="portlet-title">
 							<div class="caption caption-md">
 								<i class="icon-bar-chart theme-font hide"></i>
-								<span class="caption-subject theme-font bold uppercase">Properties Listed By You</span>
+								<span class="caption-subject theme-font bold uppercase">Properties Listed <%= current_user.admin ? "" : "By You" %></span>
 								<span class="caption-helper hide">weekly stats...</span>
 							</div>
 							<div class="actions hide">
@@ -123,12 +123,16 @@
                                                                           <br>
                                                                           <% end %>
                                                                           <% if advert.completed == true && advert.approved == true %>
-                                                                          <%= best_in_place advert, :live,  as: :checkbox, collection: {false: "<i class='fa fa-square-o'></i> Live".html_safe, true: "<i class='fa fa-check-square-o'></i> Live".html_safe} %> 
+                                                                          <%= best_in_place advert, :live,  as: :checkbox, :place_holder => "<i class='fa fa-square-o'></i> Live".html_safe, collection: {false: "<i class='fa fa-square-o'></i> Live".html_safe, true: "<i class='fa fa-check-square-o'></i> Live".html_safe} %> 
                                                                           <% end %>
                                                                           <% if advert.approved != true && advert.completed == true %>
                                                                           <div class="label label-sm label-warning">
                                                                             Pending Approval
-                                                                          </div>
+                                                                          </div><br>
+                                                                          <%= best_in_place advert, :approved,  as: :checkbox, collection: {false: "<i class='fa fa-square-o'></i> Approve".html_safe, true: "<i class='fa fa-check-square-o'></i> Approve".html_safe} %> 
+
+
+
                                                                           <% end %>
 									</td>
 								</tr>

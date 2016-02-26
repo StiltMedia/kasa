@@ -2,7 +2,7 @@ require 'open3'
 
 class PagesController < ApplicationController
   include ActionController::Live
-
+    include ActionView::Helpers::NumberHelper
 
   def user_dashboard
     redirect_to new_user_session_path if ! current_user
@@ -63,14 +63,27 @@ class PagesController < ApplicationController
     @offer.last_name = params[:last_name] if params.has_key?('last_name')
     @offer.address = params[:address] if params.has_key?('address')
     @offer.save
-      Feed.create(
-        user_id: nil,
-        message: "#{current_user.email} created offer #{@offer.id}"
-      )
+
   end
 
 
   def offer_6
+    @offer = Offer.find(params[:offer_id])
+    dst = Advert.find_by_property_id(@offer.property_id).last.user_id rescue nil
+    dst = 11 if !dst
+
+    Negotiation.create(
+      src: current_user.id,
+      dst: dst,
+      ndate: Time.now(),
+      details: "Made Offer (#{number_to_currency(@offer.amount, precision: 0)})",
+      ntype: "offer",
+      property_id: @offer.property_id
+    )
+    Feed.create(
+      user_id: nil,
+      message: "#{current_user.email} created offer #{@offer.id}"
+    )
   end
 
   def search
@@ -81,6 +94,7 @@ class PagesController < ApplicationController
 
   def listing_details
     @listing = Property.find_by_listing_id(params[:listing_id])
+    raise "403 Forbidden" if ( @listing.non_rets && Advert.where(property_id: @listing.id).last.live != true )
     Hit.create(
       property_id: @listing.id,
       htime: Time.now(),

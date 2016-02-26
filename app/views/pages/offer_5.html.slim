@@ -1,7 +1,7 @@
 = render 'shared/topbar'
 
 /! steps
-section.create-offer.review-offer.steps
+section.create-offer.review-offer.steps data-offer-id=@offer.id
   .container
     /! title
     .row
@@ -237,7 +237,7 @@ javascript:
     $(".next-step.btn").click(function() {
       var errors=false;
       if (! errors)
-        window.location.replace('/pages/offer_6');
+        window.location.replace('/pages/offer_6?offer_id='+$("section.create-offer").data('offer-id'));
       else
         console.log("form validation failed");
     });

@@ -74,4 +74,7 @@ class User < ActiveRecord::Base
      last_advert && last_advert.completed != true
   end
 
+  def nick
+    self.email.split('@')[0].titleize
+  end
 end
