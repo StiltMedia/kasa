@@ -5,6 +5,9 @@ class PagesController < ApplicationController
     include ActionView::Helpers::NumberHelper
 
   def user_dashboard
+    @feeds = Feed.all.order(created_at: :desc) if current_user.admin
+    @feeds = Feed.where(user_id: current_user.id).all.order(created_at: :desc) if current_user.admin != true
+
     redirect_to new_user_session_path if ! current_user
     render layout: 'metronic_layout'
   end
@@ -103,6 +106,9 @@ class PagesController < ApplicationController
   end
 
   def landing
+    who = request.remote_ip
+    who = current_user.email if current_user
+    Feed.create(message: "visited landing page (#{who})", user_id: 4, icon: 'fa fa-flash')
   end
 
   def browse
