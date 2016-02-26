@@ -27,6 +27,9 @@ class AdvertsController < ApplicationController
   # GET /adverts/new
   def new
     if params[:step] == "1"
+      who = request.remote_ip
+      who = current_user.email if current_user
+      Feed.create(message: "visited /advert/new (#{who})", user_id: 4, icon: 'fa fa-flash')
       if current_user.has_unfinished_advert_creation
         @property = current_user.last_advert.property
         @advert = current_user.last_advert

@@ -52,7 +52,7 @@ class User < ActiveRecord::Base
   end
 
   def open_awaiting_tickets
-    self.tickets.select { |x| (x.state == "open" && x.last_sayer.id != self.id) rescue nil }
+    self.tickets.select { |x| (x.state == "open" && x.last_sayer_id != self.id) rescue nil }
   end
 
 
