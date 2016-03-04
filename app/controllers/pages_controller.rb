@@ -5,14 +5,17 @@ class PagesController < ApplicationController
     include ActionView::Helpers::NumberHelper
 
   def user_dashboard
-    @feeds = Feed.all.order(created_at: :desc) if current_user.admin
-    @feeds = Feed.where(user_id: current_user.id).all.order(created_at: :desc) if current_user.admin != true
+    @feeds = if current_user.admin?
+               Feed
+             else
+               current_user.feeds
+             end.order(created_at: :desc)
 
-    who = request.remote_ip
-    who = current_user.email if current_user
+    who = current_user.try(:email) || request.remote_ip
+
     Feed.create(message: "visited dashboard (#{who})", user_id: 4, icon: 'fa fa-dashboard')
 
-    redirect_to new_user_session_path if ! current_user
+    redirect_to new_user_session_path unless current_user
     render layout: 'metronic_layout'
   end
 

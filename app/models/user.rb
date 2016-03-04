@@ -7,6 +7,7 @@ class User < ActiveRecord::Base
   has_many :properties, through: :favorites
   has_many :adverts
   has_many :properties, through: :adverts
+  has_many :feeds
 
   def offers
     all_offers = Offer.all
