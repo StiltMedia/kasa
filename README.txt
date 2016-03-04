@@ -14,7 +14,9 @@ To download photos, do
 
   bundle exec rake kasa:fetch LISTINGS=0 PHOTOS=1
 
-Admin user is
+Preconfigured users are
 
   guigo@stiltmedia.com password: stilt123
+  info@stiltmedia.com password: stilt123
+  The first one is an admin.
 
