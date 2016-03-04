@@ -104,10 +104,9 @@ class PagesController < ApplicationController
     raise "403 Forbidden" if ( @listing.non_rets && Advert.where(property_id: @listing.id).last.live != true )
     who = request.remote_ip
     who = current_user.email if current_user
-    owner = 4
-    if Advert.where(property_id: @listing.id).all > 0
-      owner = Advert.where(property_id: @listing.id).all.last.user_id
-    end
+
+    owner = @listing.adverts.pluck(:user_id).last || 4
+
     Feed.create(message: "viewed property #{@listing.address} (#{who})", user_id: owner, icon: 'fa fa-flag')
     Hit.create(
       property_id: @listing.id,

@@ -1,5 +1,6 @@
 class Property < ActiveRecord::Base
   has_many :favorites
+  has_many :adverts
   has_many :users, through: :favorites
   has_many :users, through: :adverts
 

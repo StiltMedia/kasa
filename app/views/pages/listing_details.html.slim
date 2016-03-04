@@ -9,7 +9,7 @@
         .col-md-12
           /! property title
           .property-title
-            h2 #{@listing.address.titleize} #{@listing.city.titleize} #{@listing.state}
+            h2 #{@listing.try(:address).try(:titleize) || ""} #{@listing.try(:city).try(:titleize) || ""} #{@listing.try(:state) || ""}
   /! .property title
   /! .inside listing
   /! slider
@@ -42,9 +42,9 @@
       .row
         .col-md-8
           h3
-            | #{@listing.address.titleize},
+            | #{@listing.try(:address).try(:titleize) || ""},
             br/
-            | #{@listing.city.titleize} #{@listing.state}
+            | #{@listing.try(:city).try(:titleize) || ""} #{@listing.try(:state) || ""}
           .text-box
             p = @listing.remarks.humanize rescue ""
             - if @listing.non_rets && @listing.contact_information.present?
@@ -146,7 +146,7 @@
               .col-md-6
                 .listing-box-content
                   h5
-                    a href="/pages/listing_details/#{l.listing_id}" = "#{l.address.titleize} #{l.city.titleize}"
+                    a href="/pages/listing_details/#{l.listing_id}" = "#{l.try(:address).try(:titleize) || ""} #{l.try(:city).try(:titleize)}"
                   p.listing-price
                     | #{number_to_currency(l.price, precision: 0)}
                     span = "Listed #{distance_of_time_in_words_to_now(l.date)} ago"
