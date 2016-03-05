@@ -9,22 +9,12 @@
 							<div class="actions">
  
                                                           <div class="btn-group">
-                                                            <a class="btn green btn-circle btn-sm accept-offer" href="javascript:;" data-toggle="dropdown" data-hover="dropdown" data-close-others="true"> Accept (Offer)
+                                                            <a class="btn btn-transparent grey-salsa btn-outline btn-circle btn-sm" href="javascript:;" data-toggle="dropdown" data-hover="dropdown" data-close-others="true"> Expand All
                                                             <i class="fa zfa-thumbs-o-up"></i>
                                                             </a>
-                                                            <a class="btn green btn-circle btn-sm accept-counter" href="javascript:;" data-toggle="dropdown" data-hover="dropdown" data-close-others="true"> Accept (Counter)
+                                                            <a class="btn btn-transparent grey-salsa btn-outline btn-circle btn-sm" href="javascript:;" data-toggle="dropdown" data-hover="dropdown" data-close-others="true"> Collapse All
                                                             <i class="fa zfa-thumbs-o-up"></i>
                                                             </a>
-                                                            <a class="btn green btn-circle btn-sm counter" href="javascript:;" data-toggle="dropdown" data-hover="dropdown" data-close-others="true"> Counter
-                                                            <i class="fa zfa-mail-reply"></i>
-                                                            </a>
-                                                            <a class="btn green btn-circle btn-sm decline-counter" href="javascript:;" data-toggle="dropdown" data-hover="dropdown" data-close-others="true"> Decline Counter
-                                                            <i class="fa zfa-shield"></i>
-                                                            </a>
-                                                            <a class="btn green btn-circle btn-sm decline-offer" href="javascript:;" data-toggle="dropdown" data-hover="dropdown" data-close-others="true"> Decline Offer
-                                                            <i class="fa zfa-shield"></i>
-                                                            </a>
-
 
                                                 </div>
 
@@ -34,59 +24,44 @@
 							</div>
 						</div>
 						<div class="portlet-body">
-							<div class="table-scrollable table-scrollable-borderless">
-								<table class="table table-hover table-light">
-								<thead>
-								<tr class="uppercase">
-									<th>
-										 &nbsp;
-									</th>
-									<th>
-										 FROM
-									</th>
-									<th>
-										 TO
-									</th>
-									<th>
-										 &nbsp;
-									</th>
-									<th>
-										 Property
-									</th>
-
-									<th>
-										 DATE
-									</th>
-								</tr>
-								</thead>
-                                                                <% items = Negotiation.all.order(ndate: :desc) if current_user.admin %>
-                                                                <% items = Negotiation.where("src = ? OR dst = ?", current_user.id, current_user.id).all.order(ndate: :desc) %>
-                                                                <% items.each do |item| %>
-								<tr data-ntype="<%=item.ntype%>" data-src="<%=item.src%>" data-dst="<%=item.dst%>" data-property-id="<%=item.property_id%>">
-                                                                        <td><input type="checkbox" class="zliChild" value=""></td>
-									<td class="fit">
-										<img class="user-pic" src="/users/<%= item.src %>/show_picture"><br>
-										<a href="<%= url_for(User.find(item.src))%>" class="primary-link"><%= User.find(item.src).email.split('@')[0].titleize %></a>
-									</td>
-									<td>
-									  <img class="user-pic" src="/users/<%= item.dst %>/show_picture"><br>
-										<a href="<%= url_for(User.find(item.dst))%>" class="primary-link"><%= User.find(item.dst).email.split('@')[0].titleize %></a>
-									</td>
+						  <% current_user.adverts.order(id: :desc).each do |advert| %>
+						     <div class="dd">
+						       <ol class="dd-list">
+                                                         <% if advert.completed == true && advert.approved == true %>
+							 <li class="dd-item">
+                                                           <div class="dd-handle" style="height: 40px">
+							     &nbsp;&nbsp;
+                                                             <% if advert.property.images_tot_available > 0 %>
+                                                               <img class="user-pic" style="border-radius: 0%; height: 29px;" src="<%= "http://kasa-staging-02.s3.amazonaws.com/#{advert.property.listing_id}_#{0}.jpg" %>">
+                                                             <% else %>
+                                                               <img class="user-pic" style="border-radius: 0%; height: 29px;" src="<%= "http://kasa-staging-02.s3.amazonaws.com/#{"FE9E0000"}_#{0}.jpg" %>">
+							      <% end %>
+							      &nbsp;&nbsp;
+                                                              <span href="<%= "/pages/listing_details/#{advert.property.listing_id}" %>" class="primary-link"><%= truncate(advert.property.address, length: 10) %>
+                                                              </span>
+							      &nbsp;&nbsp;&nbsp;&nbsp;
+							      <div class="label label-sm label-danger">No offers</div>
 
 
-									<td>
-										 <%= item.details %>
-									</td>
-                                                                        <td>
-                                                                          <%= Property.find(item.property_id).address[0..15] %>
-                                                                        </td>
-									<td>
-										<span class="bold theme-font"><%= item.ndate.strftime('%m-%d') %></span>
-									</td>
-								</tr>
-                                                                <% end %>
-								</table>
-							</div>
+
+							   </div>
+
+                                                               
+
+                                                              <ol class="dd-list">
+                                                                <li class="dd-item" data-id="4">
+                                                                   <div class="dd-handle">Item 4</div>
+                                                                </li>
+                                                                <li class="dd-item" data-id="5">
+                                                                  <div class="dd-handle">Item 5</div>
+                                                                </li>
+                                                              </ol>
+                                                        <% end %>
+						       </ol>
+						     </div>
+						  <% end %>
+
 						</div>
 					</div>
 					<!-- END PORTLET-->
+                                                                          

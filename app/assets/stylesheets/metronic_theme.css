@@ -11,6 +11,13 @@ div {
   outline: 0px solid yellow;
 }
 
+.portlet .dd-handle {
+  border: 0px;
+  background: transparent;
+  border-right: 1px solid silver;
+  
+}
+
 debug {
   outline: 1px solid yellow;
 }

@@ -19,6 +19,7 @@
 
 $("document").ready( function() {
 
+  $('.dd').nestable();
   offers_bindings();
 
 
