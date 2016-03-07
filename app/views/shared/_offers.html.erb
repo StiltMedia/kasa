@@ -4,14 +4,19 @@
     <div class="portlet-title">
         <div class="caption caption-md">
 	    <span class="caption-subject theme-font bold uppercase">Offers / Activity</span>
+            <% if current_user.admin == true %>
+            <span class="caption-helper">Offers by Kasa users</span>
+            <% else %>
+            <span class="caption-helper">Activity related to offers by/to you</span>
+            <% end %>
         </div>
         <div class="actions">
             <div class="btn-group">
-                <a class="btn btn-transparent grey-salsa btn-outline btn-circle btn-sm" href="javascript:;" onclick="$('.jstree_demo_div').jstree('open_all');" data-toggle="dropdown" data-hover="dropdown" data-close-others="true"> Expand All
+                <a class="btn btn-transparent grey-salsa btn-outline btn-circle btn-sm" href="javascript:;" onclick="$('.jstree_demo_div').jstree('open_all');" data-toggle="dropdown" data-hover="dropdown" data-close-others="true"> <i class="fa fa-angle-double-down"></i>
                                                             
                     <i class="fa zfa-thumbs-o-up"></i>
                 </a>
-                <a class="btn btn-transparent grey-salsa btn-outline btn-circle btn-sm" href="javascript:;" onclick="$('.jstree_demo_div').jstree('close_all');" data-toggle="dropdown" data-hover="dropdown" data-close-others="true"> Collapse All
+                <a class="btn btn-transparent grey-salsa btn-outline btn-circle btn-sm" href="javascript:;" onclick="$('.jstree_demo_div').jstree('close_all');" data-toggle="dropdown" data-hover="dropdown" data-close-others="true"> <i class="fa fa-angle-up"></i>
                                                             
                     <i class="fa zfa-thumbs-o-up"></i>
                 </a>

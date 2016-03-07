@@ -4,6 +4,13 @@
 							<div class="caption caption-md">
 								<i class="icon-bar-chart theme-font hide"></i>
 								<span class="caption-subject theme-font bold uppercase">Properties Listed <%= current_user.admin ? "" : "By You" %></span>
+                                                                <% if current_user.admin == true %>
+                                                                <span class="caption-helper">Properties listed by users</span>
+                                                                <% else %>
+                                                                <span class="caption-helper">Properties listed by you</span>
+                                                                <% end %>
+
+
 							</div>
 							<div class="actions hide">
 								<div class="btn-group btn-group-devided" data-toggle="buttons">

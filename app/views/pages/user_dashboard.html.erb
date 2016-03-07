@@ -17,7 +17,7 @@
 			<div class="page-toolbar">
 				<!-- BEGIN THEME PANEL -->
 				<div class="btn-group btn-theme-panel">
-					<a href="/users/<%=current_user.id%>" class="btn zdropdown-toggle" zdata-toggle="dropdown">
+					<a title="My Profile" href="/users/<%=current_user.id%>" class="btn zdropdown-toggle" zdata-toggle="dropdown">
 					<i class="icon-settings"></i>
 					</a>
 					<div class="dropdown-menu theme-panel pull-right dropdown-custom hold-on-click">
@@ -155,7 +155,7 @@
 							<div class="caption caption-md">
 								<i class="icon-bar-chart theme-font hide"></i>
 								<span class="caption-subject theme-font bold uppercase">Properties Listed Analytics (last 30 days)</span>
-								<span class="caption-helper hide">weekly stats...</span>
+								<span class="caption-helper">popularity of your property listings</span>
 							</div>
 							<div class="actions hide">
 								<div class="btn-group btn-group-devided" data-toggle="buttons">
@@ -241,6 +241,7 @@
 							<div class="caption caption-md">
 								<i class="icon-globe theme-font hide"></i>
 								<span class="caption-subject theme-font bold uppercase">Feeds</span>
+								<span class="caption-helper">Latest happenings</span>
 							</div>
 							<ul class="nav nav-tabs hide">
 								<li class="active">
