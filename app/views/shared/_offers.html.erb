@@ -9,10 +9,10 @@
 							<div class="actions">
  
                                                           <div class="btn-group">
-                                                            <a class="btn btn-transparent grey-salsa btn-outline btn-circle btn-sm" href="javascript:;" data-toggle="dropdown" data-hover="dropdown" data-close-others="true"> Expand All
+                                                            <a class="btn btn-transparent grey-salsa btn-outline btn-circle btn-sm" href="javascript:;" onclick="$('.dd').nestable('expandAll')" data-toggle="dropdown" data-hover="dropdown" data-close-others="true"> Expand All
                                                             <i class="fa zfa-thumbs-o-up"></i>
                                                             </a>
-                                                            <a class="btn btn-transparent grey-salsa btn-outline btn-circle btn-sm" href="javascript:;" data-toggle="dropdown" data-hover="dropdown" data-close-others="true"> Collapse All
+                                                            <a class="btn btn-transparent grey-salsa btn-outline btn-circle btn-sm" href="javascript:;" onclick="$('.dd').nestable('collapseAll')" data-toggle="dropdown" data-hover="dropdown" data-close-others="true"> Collapse All
                                                             <i class="fa zfa-thumbs-o-up"></i>
                                                             </a>
 
@@ -24,23 +24,29 @@
 							</div>
 						</div>
 						<div class="portlet-body">
-						  <% current_user.adverts.order(id: :desc).each do |advert| %>
+                                                  <% plist = []
+						     #if the user is a regular user, plist is all properties I advertised + all properties I am a part of in the negotiations table
+						     #if the user is admin, plist is all properties that appear in the negotiations table
+						     plist = Negotiation.pluck(:property_id)
+                                                  %>
+						  <% plist.each do |p| %>
+						     <% property = Property.find(p) %>
 						     <div class="dd">
 						       <ol class="dd-list">
-                                                         <% if advert.completed == true && advert.approved == true %>
+
 							 <li class="dd-item">
                                                            <div class="dd-handle" style="height: 40px">
 							     &nbsp;&nbsp;
-                                                             <% if advert.property.images_tot_available > 0 %>
-                                                               <img class="user-pic" style="border-radius: 0%; height: 29px;" src="<%= "http://kasa-staging-02.s3.amazonaws.com/#{advert.property.listing_id}_#{0}.jpg" %>">
+                                                             <% if property.images_tot_available > 0 %>
+                                                               <img class="user-pic" style="border-radius: 0%; height: 29px;" src="<%= "http://kasa-staging-02.s3.amazonaws.com/#{property.listing_id}_#{0}.jpg" %>">
                                                              <% else %>
                                                                <img class="user-pic" style="border-radius: 0%; height: 29px;" src="<%= "http://kasa-staging-02.s3.amazonaws.com/#{"FE9E0000"}_#{0}.jpg" %>">
 							      <% end %>
 							      &nbsp;&nbsp;
-                                                              <span href="<%= "/pages/listing_details/#{advert.property.listing_id}" %>" class="primary-link"><%= truncate(advert.property.address, length: 10) %>
+                                                              <span href="<%= "/pages/listing_details/#{property.listing_id}" %>" class="primary-link"><%= truncate(property.address, length: 17) %>
                                                               </span>
 							      &nbsp;&nbsp;&nbsp;&nbsp;
-							      <div class="label label-sm label-danger">No offers</div>
+							      <div class="label label-sm label-danger">No offers </div>
 
 
 
@@ -50,14 +56,22 @@
 
                                                               <ol class="dd-list">
                                                                 <li class="dd-item" data-id="4">
-                                                                   <div class="dd-handle">Item 4</div>
-                                                                </li>
-                                                                <li class="dd-item" data-id="5">
-                                                                  <div class="dd-handle">Item 5</div>
+                                                                   <div class="dd-handle">
+                                                                      <div id="jstree_demo_div" class="jstree_demo_div">
+                                                                        <ul>
+									  <% cnt = Negotiation.where(property_id: property.id).order(ndate: :desc).all.count %>
+									  <% (Negotiation.all.group_by { |x| [x.seller_id, x.buyer_id, x.property_id] }).each do |neg| %>
+									    <% neg[1].each do |n| %>
+                                                                              <li data-jstree='{"icon":"fa fa-wechat"}'><%= n.ntype %>  </li>
+									    <% end %>
+									  <% end %>
+
+                                                                        </ul>
+                                                                      </div>
+                                                                   </div>
                                                                 </li>
                                                               </ol>
-                                                        <% end %>
-						       </ol>
+						       </ol><br><br>
 						     </div>
 						  <% end %>
 

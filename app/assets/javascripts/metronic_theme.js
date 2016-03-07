@@ -19,7 +19,10 @@
 
 $("document").ready( function() {
 
-  $('.dd').nestable();
+  if ( ! ($('.dd').nestable == undefined) )
+    $('.dd').nestable();
+  if ( ! ($('.jstree_demo_div').jstree == undefined) )
+    $('.jstree_demo_div').jstree();
   offers_bindings();
 
 
@@ -64,7 +67,10 @@ $("document").ready( function() {
   });
 });
 
+
+
 function offers_bindings() {
+
   $(".btn.accept-offer, .btn.accept-counter, .btn.counter,.btn.decline-counter,.btn.decline-offer").on("click", function() {
    if ($(this).closest(".portlet").find("input:checked").length == 0) {
      $(this).notify("None selected",{arrowShow: false,autoHideDelay: 2000});
