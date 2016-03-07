@@ -21,8 +21,9 @@ $("document").ready( function() {
 
   if ( ! ($('.dd').nestable == undefined) )
     $('.dd').nestable();
-  if ( ! ($('.jstree_demo_div').jstree == undefined) )
-    $('.jstree_demo_div').jstree();
+  if ( ! ($('.jstree_demo_div').jstree == undefined) ) {
+    $('.jstree_demo_div').jstree({}).on('ready.jstree', function() { console.log("loaded"); $(this).jstree('open_all'); } );
+  }
   offers_bindings();
 
 
