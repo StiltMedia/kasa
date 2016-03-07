@@ -221,16 +221,14 @@ License: You must have a valid license purchased only from themeforest(the above
 	<!-- BEGIN HEADER MENU -->
 	<div class="page-header-menu">
 		<div class="container">
+                        <% if current_user.admin == true %>
 			<!-- BEGIN HEADER SEARCH BOX -->
-			<form class="search-form invisible" action="extra_search.html" method="GET">
-				<div class="input-group">
-					<input type="text" class="form-control" placeholder="Search" name="query">
-					<span class="input-group-btn">
-					<a href="javascript:;" class="btn submit"><i class="icon-magnifier"></i></a>
-					</span>
-				</div>
+			<form class="search-form" style="pointer-events: none; " action="extra_search.html" method="GET">
+                                        <input class="form-control" type="text" value="Administrator" zdisabled="1" zreadonly="1" style="background: transparent; border: none; color: rgba(225,255,255,0.3)">
+
 			</form>
 			<!-- END HEADER SEARCH BOX -->
+                        <% end %>
 			<!-- BEGIN MEGA MENU -->
 			<!-- DOC: Apply "hor-menu-light" class after the "hor-menu" class below to have a horizontal menu with white background -->
 			<!-- DOC: Remove data-hover="dropdown" and data-close-others="true" attributes below to disable the dropdown opening on mouse hover -->
