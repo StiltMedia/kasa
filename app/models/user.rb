@@ -78,4 +78,13 @@ class User < ActiveRecord::Base
   def nick
     self.email.split('@')[0].titleize
   end
+
+  # given a negotiation, returns "s" if user is a seller in that negotiation,
+  # "b" if buyer
+  # "z" if neither
+  def neg_role(n)
+    ret_val = "z"
+    ret_val = "b" if n.buyer_id == self.id
+    ret_val = "s" if n.seller_id == self.id
+  end
 end

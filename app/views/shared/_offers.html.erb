@@ -1,9 +1,9 @@
 
-					
 <!-- BEGIN PORTLET-->
-<div class="portlet light">
+<div class="portlet light offers">
     <div class="portlet-title">
         <div class="caption caption-md">
+	    <span class="caption-subject theme-font bold uppercase">Offers / Activity</span>
         </div>
         <div class="actions">
             <div class="btn-group">
@@ -24,8 +24,12 @@
         <% nlist = Negotiation.all.group_by { |x| [x.seller_id, x.buyer_id, x.property_id] } %>
         <div id="jstree_demo_div_#{rand(1..10000)}" class="jstree_demo_div">
             <ul>
-                <% nlist.each do |neg| %><% property = Property.find(neg[0][2]) %>
-                    <li>
+                <% nlist.each do |neg| %>
+		    <%  #if user is not admin and
+                        #user is not a party in the negotiation, then skip
+                        next if ( current_user.admin != true && neg[0][0]!= current_user.id && neg[0][1]!=current_user.id ) %>
+                    <% property = Property.find(neg[0][2]) %>
+                    <li class="nego-row">
                         &nbsp;&nbsp;
                         <% if property.images_tot_available > 0 %>
                             <img class="user-pic"  src="<%= "http://kasa-staging-02.s3.amazonaws.com/#{property.listing_id}_#{0}.jpg" %>" style="border-radius: 0%; height: 29px; cursor: pointer" onclick="location='<%="/pages/listing_details/#{property.listing_id}"%>'">
@@ -41,28 +45,65 @@
                         <img alt="" class="img-circle" src="/users/<%= neg[0][0]%>/show_picture" height="25" style="cursor: pointer" onclick="location='/users/<%=neg[0][0]%>'">
                         <img alt="" class="img-circle" src="/users/<%= neg[0][1]%>/show_picture" height="25" style="cursor: pointer" onclick="location='/users/<%=neg[0][1]%>'">
                         <ul>
-		            <% neg[1].each do |n| %>
+                            <% sorted = neg[1].sort_by { |k| k.ndate } %>
+                            <% tot = sorted.size %>
+		            <% sorted.each_with_index do |n, index| %>
+                                
                                 <% if n.ntype == "offered" %>
                                     <li data-jstree='{"icon":"fa fa-money"}'>
-                                        <span onclick="location='/users/<%=n.buyer_id%>'" style="pointer-events: auto; border-bottom: 1px dotted silver; cursor: pointer;"><%= User.find(n.buyer_id).nick %></span>
-			                Offered  <%= number_to_currency(n.amount, precision: 0) %>
+                                        <span onclick="location='/users/<%=n.buyer_id%>'" style="pointer-events: auto; border-bottom: 1px dotted silver; cursor: pointer;"><%= User.find(n.buyer_id).nick %></span>:
+			                <span style="cursor: pointer; border-bottom: 1px dotted silver;" onclick="location='/pages/view_offer/<%=n.offer_id%>'">Offered</span>
+					<%= number_to_currency(n.amount, precision: 0) %>
 			                to
 					<span onclick="location='/users/<%=n.seller_id%>'" style="pointer-events: auto; border-bottom: 1px dotted silver; cursor: pointer;"><%= User.find(n.seller_id).nick %></span>
-                                    </li>
-                                <% elsif n.ntype == "declined" %>
+                                    
+                                <% elsif n.ntype == "bdeclined" %>
                                     <li data-jstree='{"icon":"fa fa-times-circle-o"}'>
-                                      <span onclick="location='/users/<%=n.seller_id%>'" style="pointer-events: auto; border-bottom: 1px dotted silver; cursor: pointer;"><%= User.find(n.seller_id).nick %></span> Declined </li>
+                                      <span onclick="location='/users/<%=n.seller_id%>'" style="pointer-events: auto; border-bottom: 1px dotted silver; cursor: pointer;"><%= User.find(n.buyer_id).nick %></span> Declined 
+                                <% elsif n.ntype == "sdeclined" %>
+                                    <li data-jstree='{"icon":"fa fa-times-circle-o"}'>
+                                      <span onclick="location='/users/<%=n.seller_id%>'" style="pointer-events: auto; border-bottom: 1px dotted silver; cursor: pointer;"><%= User.find(n.seller_id).nick %></span> Declined 
                                 <% elsif n.ntype == "baccepted" %>
-                                    <li data-jstree='{"icon":"fa fa-flag-checkered"}'><span onclick="location='/users/<%=n.buyer_id%>'" style="pointer-events: auto; border-bottom: 1px dotted silver; cursor: pointer;"><%= User.find(n.buyer_id).nick %></span> Accepted</li>
+                                    <li data-jstree='{"icon":"fa fa-flag-checkered"}'><span onclick="location='/users/<%=n.buyer_id%>'" style="pointer-events: auto; border-bottom: 1px dotted silver; cursor: pointer;"><%= User.find(n.buyer_id).nick %></span> Accepted
                                 <% elsif n.ntype == "saccepted" %>
-                                    <li data-jstree='{"icon":"fa fa-flag-checkered"}'><span onclick="location='/users/<%=n.seller_id%>'" style="pointer-events: auto; border-bottom: 1px dotted silver; cursor: pointer;"><%= User.find(n.seller_id).nick %></span> Accepted</li>
+                                    <li data-jstree='{"icon":"fa fa-flag-checkered"}'><span onclick="location='/users/<%=n.seller_id%>'" style="pointer-events: auto; border-bottom: 1px dotted silver; cursor: pointer;"><%= User.find(n.seller_id).nick %></span> Accepted
                                 <% elsif n.ntype == "scountered" %>
-                                    <li data-jstree='{"icon":"fa fa-mail-forward"}'><span onclick="location='/users/<%=n.seller_id%>'" style="pointer-events: auto; border-bottom: 1px dotted silver; cursor: pointer;"><%= User.find(n.seller_id).nick %></span> Countered with <%= number_to_currency(n.amount, precision: 0) %></li>
+                                    <li data-jstree='{"icon":"fa fa-mail-forward"}'><span onclick="location='/users/<%=n.seller_id%>'" style="pointer-events: auto; border-bottom: 1px dotted silver; cursor: pointer;"><%= User.find(n.seller_id).nick %></span> Countered with <%= number_to_currency(n.amount, precision: 0) %>
                                 <% elsif n.ntype == "bcountered" %>
-                                    <li data-jstree='{"icon":"fa fa-mail-forward"}'><span onclick="location='/users/<%=n.buyer_id%>'" style="pointer-events: auto; border-bottom: 1px dotted silver; cursor: pointer;"><%= User.find(n.buyer_id).nick %></span> Countered with <%= number_to_currency(n.amount, precision: 0) %></li>
+                                    <li data-jstree='{"icon":"fa fa-mail-forward"}'><span onclick="location='/users/<%=n.buyer_id%>'" style="pointer-events: auto; border-bottom: 1px dotted silver; cursor: pointer;"><%= User.find(n.buyer_id).nick %></span> Countered with <%= number_to_currency(n.amount, precision: 0) %>
                                 <% else %>
-                                    <li data-jstree='{"icon":"fa fa-wechat"}'><%= n.ntype %></li>
+                                    <li data-jstree='{"icon":"fa fa-wechat"}'><%= n.ntype %>
                                 <% end %>
+
+                                <% if index+1 == tot %>
+                                  <% if n.ntype == "offered" && current_user.neg_role(n) == 's' %>
+                                    - 
+                                    <%= "&nbsp;&nbsp;&nbsp;<button title='accept' type='button' class='btn accept btn-outline green btn-xs' data-property-id='#{n.property_id}' data-buyer-id='#{n.buyer_id}' data-seller-id='#{n.seller_id}' data-ntype='#{current_user.neg_role(n)}accepted'><i class='fa fa-flag-checkered'></i></button>".html_safe %>
+                                    <%= "&nbsp;&nbsp;&nbsp;<button title='decline' type='button' class='btn decline btn-outline green btn-xs' data-property-id='#{n.property_id}' data-buyer-id='#{n.buyer_id}' data-seller-id='#{n.seller_id}' data-ntype='#{current_user.neg_role(n)}declined'><i class='fa fa-times-circle-o'></i></button>".html_safe %>
+                                    <%= "&nbsp;&nbsp;&nbsp;<button title='counter' type='button' class='btn counter btn-outline green btn-xs' data-property-id='#{n.property_id}' data-buyer-id='#{n.buyer_id}' data-seller-id='#{n.seller_id}' data-ntype='#{current_user.neg_role(n)}countered'><i class='fa fa-mail-forward'></i></button>".html_safe %>
+                                  <% end %>
+                                  <% if n.ntype == "bdeclined" || "sdeclined" || n.ntype == "saccepted" || n.ntype == "baccepted" %>
+                                    <% # no buttons shown %>
+                                  <% end %>
+                                  <% if n.ntype == "scountered" && current_user.neg_role(n) == 'b' %>
+                                    - 
+                                    <%= "&nbsp;&nbsp;&nbsp;<button title='accept' type='button' class='btn accept btn-outline green btn-xs' data-property-id='#{n.property_id}' data-buyer-id='#{n.buyer_id}' data-seller-id='#{n.seller_id}' data-ntype='#{current_user.neg_role(n)}countered'><i class='fa fa-flag-checkered'></i></button>".html_safe %>
+                                    <%= "&nbsp;&nbsp;&nbsp;<button title='decline' type='button' class='btn decline btn-outline green btn-xs' data-property-id='#{n.property_id}' data-buyer-id='#{n.buyer_id}' data-seller-id='#{n.seller_id}' data-ntype='#{current_user.neg_role(n)}countered'><i class='fa fa-times-circle-o'></i></button>".html_safe %>
+                                    <%= "&nbsp;&nbsp;&nbsp;<button title='counter' type='button'  class='btn counter btn-outline green btn-xs' data-property-id='#{n.property_id}' data-buyer-id='#{n.buyer_id}' data-seller-id='#{n.seller_id}' data-ntype='#{current_user.neg_role(n)}countered'><i class='fa fa-mail-forward'></i></button>".html_safe %>
+                                  <% end %>
+
+                                  <% if n.ntype == "bcountered" && current_user.neg_role(n) == 's' %>
+                                    - 
+                                    <%= "&nbsp;&nbsp;&nbsp;<button title='accept' type='button' class='btn accept btn-outline green btn-xs' data-property-id='#{n.property_id}' data-buyer-id='#{n.buyer_id}' data-seller-id='#{n.seller_id}' data-ntype='#{current_user.neg_role(n)}countered'><i class='fa fa-flag-checkered'></i></button>".html_safe %>
+                                    <%= "&nbsp;&nbsp;&nbsp;<button title='decline' type='button' class='btn decline btn-outline green btn-xs' data-property-id='#{n.property_id}' data-buyer-id='#{n.buyer_id}' data-seller-id='#{n.seller_id}' data-ntype='#{current_user.neg_role(n)}countered'><i class='fa fa-times-circle-o'></i></button>".html_safe %>
+                                    <%= "&nbsp;&nbsp;&nbsp;<button title='counter' type='button'  class='btn counter btn-outline green btn-xs' data-property-id='#{n.property_id}' data-buyer-id='#{n.buyer_id}' data-seller-id='#{n.seller_id}' data-ntype='#{current_user.neg_role(n)}countered'><i class='fa fa-mail-forward'></i></button>".html_safe %>
+                                  <% end %>
+
+
+                                <% end %>
+                                </li>
+
+
 			    <% end %>
                         </ul>
                     </li>

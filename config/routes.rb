@@ -8,12 +8,14 @@ Rails.application.routes.draw do
   post '/adverts/:id/add_another_day' => 'adverts#add_another_day'
   resources :adverts
   resources :offers
+  get '/pages/refresh_offers_portlet' => 'pages#refresh_offers_portlet'
   get '/properties/:id/images_tot' => 'properties#images_tot'
   post '/tickets/:id/add_memo' => 'tickets#add_memo'
   devise_for :users
   post '/users/:id' => 'users#update'
   get '/users/:id/show_picture' => 'users#show_picture'
   get '/offers/review/:id' => 'offers#review'
+  get '/pages/view_offer/:id' => 'pages#view_offer'
   get '/users/create_admin'
   get '/users/:id' => 'users#show'
   post '/properties/img_post' => 'properties#img_post'

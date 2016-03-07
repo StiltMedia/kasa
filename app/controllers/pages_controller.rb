@@ -88,12 +88,22 @@ class PagesController < ApplicationController
       ndate: Time.now(),
       details: "Made Offer (#{number_to_currency(@offer.amount, precision: 0)})",
       ntype: "offer",
-      property_id: @offer.property_id
+      property_id: @offer.property_id,
+      offer_id: @offer.id
     )
     Feed.create(
       user_id: nil,
       message: "#{current_user.email} created offer #{@offer.id}"
     )
+  end
+
+  def view_offer
+    @offer = Offer.find(params[:id])
+  end
+
+  def refresh_offers_portlet
+    a = (render_to_string :partial => '/shared/offers', :locals => {   })
+    render json: { content: a }
   end
 
   def search
