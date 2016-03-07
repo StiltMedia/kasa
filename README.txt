@@ -4,6 +4,7 @@ README
 
 To start server locally, run
 
+  rake assets:precompile; rails s -p 3001 # or
   PORT=3000 foreman start #assuming you have foreman installed
 
 To download listings, run

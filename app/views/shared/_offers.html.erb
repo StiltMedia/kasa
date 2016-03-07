@@ -24,13 +24,11 @@
 							</div>
 						</div>
 						<div class="portlet-body">
-                                                  <% plist = []
-						     #if the user is a regular user, plist is all properties I advertised + all properties I am a part of in the negotiations table
-						     #if the user is admin, plist is all properties that appear in the negotiations table
-						     plist = Negotiation.pluck(:property_id)
+                                                  <% 
+                                                     nlist = Negotiation.all.group_by { |x| [x.seller_id, x.buyer_id, x.property_id] }
                                                   %>
-						  <% plist.each do |p| %>
-						     <% property = Property.find(p) %>
+						  <% nlist.each do |neg| %>
+						     <% property = Property.find(neg[0][2]) %>
 						     <div class="dd">
 						       <ol class="dd-list">
 
@@ -46,7 +44,9 @@
                                                               <span href="<%= "/pages/listing_details/#{property.listing_id}" %>" class="primary-link"><%= truncate(property.address, length: 17) %>
                                                               </span>
 							      &nbsp;&nbsp;&nbsp;&nbsp;
-							      <div class="label label-sm label-danger">No offers </div>
+							      <div class="label label-sm label-danger invisible">No offers </div>
+							      <img alt="" class="img-circle" src="/users/<%= neg[0][0]%>/show_picture" height="25">
+							      <img alt="" class="img-circle" src="/users/<%= neg[0][1]%>/show_picture" height="25">
 
 
 
@@ -59,21 +59,33 @@
                                                                    <div class="dd-handle">
                                                                       <div id="jstree_demo_div" class="jstree_demo_div">
                                                                         <ul>
-									  <% cnt = Negotiation.where(property_id: property.id).order(ndate: :desc).all.count %>
-									  <% (Negotiation.all.group_by { |x| [x.seller_id, x.buyer_id, x.property_id] }).each do |neg| %>
 									    <% neg[1].each do |n| %>
-                                                                              <li data-jstree='{"icon":"fa fa-wechat"}'><%= n.ntype %>  </li>
+									      <% if n.ntype == "offered" %>
+                                                                                <li data-jstree='{"icon":"fa fa-money"}'><span onclick="location='http://www.google.com/'" style="pointer-events: auto; border-bottom: 1px dotted silver; cursor: pointer;"><%= User.find(n.buyer_id).nick %></span> Offered  <%= number_to_currency(n.amount, precision: 0) %> to <%= User.find(n.seller_id).nick %></li>
+                                                                              <% elsif n.ntype == "declined" %>
+                                                                                <li data-jstree='{"icon":"fa fa-times-circle-o"}'><%= User.find(n.seller_id).nick %> Declined </li>
+                                                                              <% elsif n.ntype == "baccepted" %>
+                                                                                <li data-jstree='{"icon":"fa fa-flag-checkered"}'><%= User.find(n.buyer_id).nick %> Accepted </li>
+                                                                              <% elsif n.ntype == "saccepted" %>
+                                                                                <li data-jstree='{"icon":"fa fa-flag-checkered"}'><%= User.find(n.seller_id).nick %> Accepted </li>
+                                                                              <% elsif n.ntype == "scountered" %>
+                                                                                <li data-jstree='{"icon":"fa fa-mail-forward"}'><%= User.find(n.seller_id).nick %> Countered with <%= number_to_currency(n.amount, precision: 0) %> </li>
+                                                                              <% elsif n.ntype == "bcountered" %>
+                                                                                <li data-jstree='{"icon":"fa fa-flag-checkered"}'><%= User.find(n.buyer_id).nick %> Countered with <%= number_to_currency(n.amount, precision: 0) %></li>
+									      <% else %>
+                                                                                <li data-jstree='{"icon":"fa fa-wechat"}'><%= n.ntype %>  </li>
+									      <% end %>
 									    <% end %>
-									  <% end %>
 
                                                                         </ul>
                                                                       </div>
-                                                                   </div>
+                                                                   </div><br>
                                                                 </li>
                                                               </ol>
-						       </ol><br><br>
+						       </ol>
 						     </div>
 						  <% end %>
+						  <br>
 
 						</div>
 					</div>
