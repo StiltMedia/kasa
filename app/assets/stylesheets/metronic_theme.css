@@ -22,6 +22,31 @@ div {
   cursor: text;
 }
 
+.metronic_layout .page-header .page-header-menu {
+  background: black;
+}
+
+
+.metronic_layout .page-header .page-header-menu .hor-menu .navbar-nav > li.active > a, .metronic_layout .page-header .page-header-menu .hor-menu .navbar-nav > li.active > a:hover, .metronic_layout .page-header .page-header-menu .hor-menu .navbar-nav > li.current > a, .metronic_layout .page-header .page-header-menu .hor-menu .navbar-nav > li.current > a:hover {
+  background: rgba(0,0,0,0.2);
+}
+
+.metronic_layout .page-head .page-title > h1 > small {
+  color: purple;
+}
+
+.metronic_layout .page-head .page-title > h1 {
+  color: black;
+}
+
+.metronic_layout .portlet > .portlet-title > .caption > .caption-helper {
+  color: plum !important;
+}
+
+.metronic_layout .portlet.light > .portlet-title > .caption.caption-md > .caption-subject {
+  color: purple !important;
+}
+
 
 debug {
   outline: 1px solid yellow;
