@@ -107,9 +107,8 @@ function offers_bindings() {
                   ndate: new Date().toUTCString(),
                   amount: -1
               }
-          };
+        };
 
- 
         if ( $(this).hasClass('counter') == true ) {
             bootbox.prompt("Enter amount (digits only)", function(result) {                
               if (result === null) {
@@ -132,35 +131,25 @@ function offers_bindings() {
                     alert('Error');
                   }
                 });
-
               }
             });
-
-        }
-        //$.ajax({
-        //  type: 'POST',
-        //  dataType: "json",
-        //  url: '/negotiations',
-        //  data: { 
-        //      negotiation: { 
-        //          property_id: $(this).data('property-id'),
-        //          buyer_id: $(this).data('buyer-id'),
-        //          seller_id: $(this).data('seller-id'),
-        //          ntype: $(this).data('ntype'),
-        //          ndate: new Date().toUTCString(),
-        //          amount: amount
-        //      }
-        //  },
-        //  beforeSend:function(){
-        //  },
-        //  success:function(data){
-        //    refresh_offers_portlet();
-        //  },
-        //  error:function(){
-        //    alert('Error');
-        //  }
-        //});
-        
+        } else {
+              data.negotiation.amount = null;
+              $.ajax({
+                type: 'POST',
+                dataType: "json",
+                url: '/negotiations',
+                data: data,
+                beforeSend:function(){
+                },
+                success:function(data){
+                  refresh_offers_portlet();
+                },
+                error:function(){
+                  alert('Error');
+                }
+              });
+        } 
     }); 
 
     $(".portlet .btn.decline").on("click", function() {
