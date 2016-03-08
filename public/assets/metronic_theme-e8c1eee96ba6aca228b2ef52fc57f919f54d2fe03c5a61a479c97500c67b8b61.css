@@ -1,0 +1,41 @@
+
+span.best_in_place {
+  border-bottom: 1px dotted silver;
+}
+
+.metronic_layout .page-logo img {
+  height: 23px;
+}
+
+div {
+  outline: 0px solid yellow;
+}
+
+.portlet .dd-handle {
+  border: 0px;
+  background: transparent;
+  cursor: inherit;
+}
+
+.portlet a.jstree-anchor {
+  height: 40px !important;
+  cursor: text;
+}
+
+.metronic_layout .page-header .page-header-menu {
+  background: black;
+}
+
+
+.metronic_layout .page-header .page-header-menu .hor-menu .navbar-nav > li.active > a, .metronic_layout .page-header .page-header-menu .hor-menu .navbar-nav > li.active > a:hover, .metronic_layout .page-header .page-header-menu .hor-menu .navbar-nav > li.current > a, .metronic_layout .page-header .page-header-menu .hor-menu .navbar-nav > li.current > a:hover {
+  background: rgba(0,0,0,0.2);
+}
+
+.metronic_layout .page-head .page-title > h1 > small {
+  color: purple;
+}
+
+debug {
+  outline: 1px solid yellow;
+}
+
