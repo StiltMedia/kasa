@@ -103,14 +103,14 @@
 									</td>
 									<td>
                                                                           <% if advert.completed == true && advert.approved == true %>
-                                                                           <a href="<%= "/pages/listing_details/#{advert.property.listing_id}" %>" class="primary-link"><%= advert.property.address %>  
+                                                                           <a href="/adverts/new?step=5&propertyid=<%=advert.property.id%>" class="primary-link"><%= advert.property.address %>  
                                                                             <br>
                                                                             <%= number_to_currency(advert.property.price, precision: 0) %></a>
                                                                           <br>
                                                                           <% else %>
-                                                                           <span href="<%= 'javascript:;' %>" class="primary-link"><%= advert.property.address %>  
+                                                                           <a href="/adverts/new?step=5&propertyid=<%=advert.property.id%>" class="primary-link"><%= advert.property.address %>  
                                                                             <br>
-                                                                            <%= number_to_currency(advert.property.price, precision: 0) %></span>
+                                                                            <%= number_to_currency(advert.property.price, precision: 0) %></a>
                                                                           <br>                                                                          
                                                                           <% end %>
 
@@ -118,7 +118,9 @@
 
                                                                           <%= "Listed #{distance_of_time_in_words_to_now(advert.property.date)} ago" rescue "" %>
                                                                           <br>
-                                                                          <button type="button" onclick="location.href='/adverts/new?step=5&propertyid=<%=advert.property.id%>';" class="btn btn-outline green btn-xs">edit</button>
+                                                                          <% if advert.completed == true && advert.approved == true %>
+                                                                          <button type="button" onclick="<%= "location.href='/pages/listing_details/#{advert.property.listing_id}';"%>" class="btn btn-outline green btn-xs">view</button>
+									  <% end %>
                                                                           <br>
 									</td>
 									<td>
