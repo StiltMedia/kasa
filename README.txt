@@ -34,3 +34,8 @@ To dump heroku db to a local file
 To import dump in to local db
 
   pg_restore --verbose --clean --no-acl --no-owner -h localhost -d kasa_dev db/latest.dump
+
+To push local db to heroku app
+
+  heroku pg:reset DATABASE --confirm kasa-staging --app kasa-staging
+  heroku pg:push kasa_dev DATABASE --app kasa-staging
